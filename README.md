@@ -1,2 +1,3 @@
 # grantmcdermott.github.io
-Grant's GitHub user page
+
+Please find the live site here: <http://grantmcdermott.github.io/>

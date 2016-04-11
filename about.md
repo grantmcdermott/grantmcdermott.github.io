@@ -1,17 +1,27 @@
 ---
 layout: page
 title: About
-permalink: /about/
+tags: [about, bio]
+modified: 2016-04-09T19:50:01.573882-04:00
+comments: false
+image:
+  feature: zanzi1-crop.jpg
+  credit: Matt Eb
+  creditlink: https://www.instagram.com/boomereb/
 ---
 
-I was born in Zimbabwe in the early 1980s. My family moved to South Africa shortly thereafter and I have since called the Cape Winelands of South Africa home. I went on to attend the University of Cape Town for my Bachelor studies, graduating with double honours degrees in economics and business science in 2005. 
+I originally hail from the Cape Winelands of South Africa. I attended the University of Cape Town for my Bachelor studies, graduating with double honours degrees in economics and business science in 2005. 
 
-The next several years were spent working in the financial and economic sectors of South Africa and the UK, punctuated by extended periods of travel. Most notable of these was a seven-month unsupported bicycle journey from Cairo to Cape Town, which raised $200,000 for a development project in Tanzania. (Here are [two](http://www.youtube.com/watch?v=BOFWtnCMnJw) [promo](http://www.youtube.com/watch?v=fL4JsEH_CJU) videos of the expedition that were made as part of a pitch to Irish television companies.) 
+The next several years were spent working in the financial and economic sectors of South Africa and the UK, punctuated by extended periods of travel. Most notable of these was a seven-month unsupported bicycle journey from Cairo to Cape Town, which raised $200,000 for a development project in Tanzania. (Here are [two](http://www.youtube.com/watch?v=BOFWtnCMnJw){:target="_blank"} [promo](http://www.youtube.com/watch?v=fL4JsEH_CJU){:target="_blank"} videos of the expedition that were made as part of a pitch to Irish television companies.) 
 
-My experiences during these travels, as well as being witness to the global economic unrest of 2008/09, were key motivating factors in my decision to pursue further studies. I enrolled for an MSc at the Norwegian School of Economics (NHH) in 2009, specialising in energy and environmental economics. Encouraged by my supervisor, [Professor Øivind A. Nilsen[(http://www.nhh.no/en/research-faculty/department-of-economics/sam/cv/nilsen--%C3%B8ivind-anti.aspx), I would continue on to a PhD with the school's Department of Economics. I successfully defended my dissertation in 2015, where my examination committee consisted of Professors [Linda Nøstbakken](http://www.nhh.no/cv/nostbakken) (chair), [Timo Goeschl](http://www.marsilius-kolleg.uni-heidelberg.de/fellows_en/goeschl_en.html) (external), and [Corbett Grainger](http://www.aae.wisc.edu/cagrainger/) (external).
+My experiences during this period, as well as being witness to the global economic unrest of 2008/09, were key motivating factors in my decision to pursue further studies. My preference was to study abroad and specialise in energy economics and natural resource management. Norway seemed an ideal fit and I thus went on to complete an MSc and PhD at the Norwegian School of Economics (NHH). My direct supervisor was [Professor Øivind A. Nilsen](http://www.nhh.no/en/research-faculty/department-of-economics/sam/cv/nilsen--%C3%B8ivind-anti.aspx), while my PhD examination committee consisted of Professors [Linda Nøstbakken](http://www.nhh.no/cv/nostbakken){:target="_blank"} (chair), [Timo Goeschl](http://www.marsilius-kolleg.uni-heidelberg.de/fellows_en/goeschl_en.html){:target="_blank"} (external), and [Corbett Grainger](http://www.aae.wisc.edu/cagrainger/){:target="_blank"} (external).
 
-I am presently employed at UC Santa Barbara's [Bren School of Environmental Science and Management](http://www.bren.ucsb.edu/) as a postdoctoral scholar under [Professor Christopher Costello](http://christopherjcostello.com/). 
+I am presently employed at UC Santa Barbara's [Bren School of Environmental Science and Management](http://www.bren.ucsb.edu/){:target="_blank"} as a postdoctoral scholar, working under [Professor Christopher Costello](http://christopherjcostello.com/){:target="_blank"}. 
 
 My research interests are rooted in the fields of environmental and resource economics, and informed by an overarching empirical approach. While I come from a strong background of classical (frequentist) econometrics, I have become increasingly interested in Bayesian methods of late. This dovetails with a large part of my current research brief at UCSB, which involves Bayesian updating and learning under uncertainty.
 
-On a personal note, I am married to [Lorraine McDermott](http://lorrainemcdermott.net/). We welcomed the first child to our family in 2015.
+On a personal note, I am married to [Lorraine McDermott](http://lorrainemcdermott.net/){:target="_blank"}. We welcomed our first child to the family in 2015.
+
+*P.S. This site was built using GitHub pages, Jekyll and the awesome Minimal Mistakes theme. You can download the theme by hitting the button below.*
+
+<a markdown="0" href="{{ site.url }}/theme-setup" class="btn">Install Minimal Mistakes Theme</a>

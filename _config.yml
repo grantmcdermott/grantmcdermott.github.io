@@ -1,21 +1,76 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
+# Site wide configuration
 
-# Site settings
 title: Grant R. McDermott
-email: gmcdermott@ucsb.edu
-description: > # this means to ignore newlines until "baseurl:"
-  Postdoctoral scholar
-  Bren School of Environmental Science and Management
-  University of California Santa Barbara
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://grantmcdermott.github.io/" # the base hostname & protocol for your site
-twitter_username: grant_mcdermott
-github_username:  grantmcdermott
+locale: en_US
+url: http://grantmcdermott.github.io/
 
-# Build settings
-markdown: kramdown
+
+# Jekyll configuration
+
+permalink:   /:categories/:title/
+markdown:    kramdown
+highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: compressed
+gems:
+  - jekyll-sitemap
+  - jekyll-gist
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  enable_coderay: false
+
+
+# Octopress
+
+# Default extensions
+post_ext: md
+page_ext: md
+
+# Found in _templates/
+post_layout: post
+page_layout: page
+
+# Format titles with titlecase?
+titlecase: true
+
+
+# Site owner
+owner:
+  name: Grant McDermott
+  avatar: mcdermott400sq.jpg
+  bio: "Economist. Postdoctoral scholar at UC Santa Barbara."
+  email: gmcdermott@ucsb.edu
+  disqus-shortname:
+  twitter: grant_mcdermott
+  facebook: #username
+  google:
+    plus: #username
+    analytics:
+    verify:
+    ad-client:
+    ad-slot:
+  bing-verify:
+  github: grantmcdermott
+  stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
+  linkedin: grant-mcdermott-b8637419
+  xing: #username
+  instagram: #username
+  lastfm: #username
+  tumblr: #username
+  pinterest: #username
+  foursquare: #username
+  steam: #username
+  dribbble: #username
+  youtube: #username
+  soundcloud: #username
+  weibo: #username
+  flickr: #username
+  codepen: #username
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]

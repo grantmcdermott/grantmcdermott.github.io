@@ -1,7 +1,11 @@
 # Site navigation links
 
 - title: Home
+<<<<<<< HEAD
   url: 
+=======
+  url: /
+>>>>>>> 929f4fc8933d5ddf1fa3be24294caf440b88ac9d
 
 - title: About
   url: /about/

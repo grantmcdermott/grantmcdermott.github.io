@@ -2,7 +2,7 @@
 
 title: Grant R. McDermott
 locale: en_US
-url: http://grantmcdermott.github.io/
+url: http://grantmcdermott.github.io
 
 
 # Jekyll configuration
@@ -43,7 +43,7 @@ titlecase: true
 owner:
   name: Grant McDermott
   avatar: mcdermott400sq.jpg
-  bio: "Economist. Postdoctoral scholar at UC Santa Barbara."
+  bio: "Economics. Environment. Data. Postdoctoral scholar at UC Santa Barbara."
   email: gmcdermott@ucsb.edu
   disqus-shortname:
   twitter: grant_mcdermott

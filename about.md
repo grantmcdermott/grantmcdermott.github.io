@@ -21,7 +21,3 @@ I am presently employed at UC Santa Barbara's [Bren School of Environmental Scie
 My research interests are rooted in the fields of environmental and resource economics, and informed by an overarching empirical approach. While I come from a strong background of classical (frequentist) econometrics, I have become increasingly interested in Bayesian methods of late. This dovetails with a large part of my current research brief at UCSB, which involves Bayesian updating and learning under uncertainty.
 
 On a personal note, I am married to [Lorraine McDermott](http://lorrainemcdermott.net/){:target="_blank"}. We welcomed our first child to the family in 2015.
-
-*P.S. This site was built using GitHub pages, Jekyll and the awesome Minimal Mistakes theme. You can download the theme by hitting the button below.*
-
-<a markdown="0" href="{{ site.url }}/theme-setup" class="btn">Install Minimal Mistakes Theme</a>

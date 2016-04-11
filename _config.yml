@@ -43,11 +43,12 @@ titlecase: true
 owner:
   name: Grant McDermott
   avatar: mcdermott400sq.jpg
-  bio: "Economics. Environment. Data. Postdoctoral scholar at UC Santa Barbara."
+  bio: "Economics. Environment. Data science. Postdoctoral scholar at UC Santa Barbara."
   email: gmcdermott@ucsb.edu
   disqus-shortname:
   twitter: grant_mcdermott
   facebook: #username
+  google_scholar: EruWDMwAAAAJ
   google:
     plus: #username
     analytics:

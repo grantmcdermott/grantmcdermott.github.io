@@ -6,7 +6,7 @@ modified: 2016-04-09T20:17:00.523882-04:00
 comments: false
 ---
 
-**Fields:** Environmental and resource economics. Applied econometrics. Bayesian econometrics.
+**Fields:** Environmental and resource economics. Applied econometrics. Bayesian data analysis.
 
 **Interests:** Energy and climate policy. Uncertainty and Bayesian learning. The impact of environmental quality on market outcomes
 

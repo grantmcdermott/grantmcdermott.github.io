@@ -8,7 +8,7 @@ comments: false
 
 **Fields:** Environmental and resource economics. Applied econometrics. Bayesian data analysis.
 
-**Interests:** Energy and climate policy. Uncertainty and Bayesian learning. The impact of environmental quality on market outcomes
+**Interests:** Energy and climate policy. Uncertainty and Bayesian learning. The impact of environmental quality on market outcomes.
 
 ## Working papers
 

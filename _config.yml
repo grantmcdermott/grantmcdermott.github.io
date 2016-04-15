@@ -2,7 +2,7 @@
 
 title: Grant R. McDermott
 locale: en_US
-url: http://grantmcdermott.github.io
+url: #http://grantmcdermott.github.io
 
 
 # Jekyll configuration
@@ -10,6 +10,8 @@ url: http://grantmcdermott.github.io
 permalink:   /:categories/:year/:month/:day/:title/
 markdown:    kramdown
 highlighter: rouge
+#paginate: 10
+#paginate_path: "_site/index/blog/page:num/"
 sass:
   sass_dir: _sass
   style: compressed
@@ -23,7 +25,6 @@ kramdown:
   entity_output: as_char
   toc_levels: 1..6
   enable_coderay: false
-
 
 # Octopress
 

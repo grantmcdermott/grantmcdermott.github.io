@@ -10,8 +10,8 @@ image:
 
 ## Welcome
 
-I am an economist, specialising in environmental and natural resource economics. My applied skill set emphasises econometrics, Bayesian analysis and data vizualisation. I am presently employed at UC Santa Barbara's [Bren School of Environmental Science and Management](http://www.bren.ucsb.edu/){:target="_blank"} as a postdoctoral scholar, working under [Professor Christopher Costello](http://christopherjcostello.com/){:target="_blank"}. 
+I am an economist, specialising in environmental and natural resource economics. My applied skill set emphasises econometrics, Bayesian analysis and data vizualisation. I am presently employed at UC Santa Barbara's [Bren School of Environmental Science and Management](http://www.bren.ucsb.edu/){:target="_blank"} as a postdoctoral scholar. 
 
-Please feel free to contact me at the links provided on the left of the page, or at the following address: Bren Hall 4508, University of California Santa Barbara, Santa Barbara, CA 93106-5131, USA
+Please feel free to contact me at the links provided on this website, or at the following address: Bren Hall 4508, University of California Santa Barbara, Santa Barbara, CA 93106-5131, USA
 
 <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}" target="_blank">via RSS</a>.</p>

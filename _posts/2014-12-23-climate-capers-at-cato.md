@@ -2,7 +2,7 @@
 layout: post
 title: "Climate capers at Cato"
 excerpt: "Dodgy statistics at the Cato Institute"
-tags: [Cato Institute, Climate Change, Econometrics, Fail]
+tags: [Cato Institute, Climate Change, Econometrics, Facepalm]
 comments: true
 modified_time: '2014-12-30T20:35:55.984+01:00'
 thumbnail: http://2.bp.blogspot.com/-4Vz-R-g08ZY/VJkeKNZMVdI/AAAAAAAAArk/rGNZ3CnmNfg/s72-c/knappenberger%26michaels2014.png

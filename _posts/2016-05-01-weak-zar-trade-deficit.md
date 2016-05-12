@@ -6,7 +6,7 @@ tags: [BizNews, Economics, Econometrics, Trade, Currencies, Facepalm]
 comments: true
 ---
 
-*Below is a recent article that I [wrote for BizNews](http://www.biznews.com/sa-investing/2016/04/04/debate-not-so-fast-maynard-weak-rand-causing-bad-trade-ac-isnt-logical/). The tl;dr version is that -- surprise! -- correlation doesn't imply causation. Unfortunately, this simple rule continues to be ignored by many economic and financial pundits in the popular press.*
+*Below is a recent article that I [wrote for BizNews](http://www.biznews.com/sa-investing/2016/04/04/debate-not-so-fast-maynard-weak-rand-causing-bad-trade-ac-isnt-logical/){:target="_blank"}. The tl;dr version is that -- surprise! -- correlation doesn't imply causation. Unfortunately, this simple rule continues to be ignored by many economic and financial pundits in the popular press.*
 
 Imagine that you are interested in determining the effect that policing has on crime. Say, does deploying more police officers lead to less crime? You might be tempted to answer this question as follows: 1) Gather up all the data that you can find on police numbers and crime statistics from different parts of the country. 2) Do some formal test (calculate a correlation coefficient, run a regression, etc.) and see what comes out of it.
 

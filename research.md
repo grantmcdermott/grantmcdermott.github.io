@@ -34,7 +34,7 @@ comments: false
 
 "Protecting bycatch species by rebuilding target fisheries" (with Matthew G. Burgess *et al.*)
 
-"Five rules for pragmatism in managing blue growth" (with Matthew G. Burgess *et al.*)
+"Five rules for pragmatic blue growth" (with Matthew G. Burgess *et al.*). **Submitted.**
 
 ## Publications
 

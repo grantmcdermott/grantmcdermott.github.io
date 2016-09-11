@@ -20,21 +20,23 @@ comments: false
 
 **Abstract:** How much evidence would it take to convince climate sceptics that they are wrong about global warming? I explore this question within a Bayesian framework. I consider a group of stylised sceptics and examine how these individuals update their beliefs in light of the available evidence for climate change. I find that all but the most extreme priors are overwhelmed by the historical data. The resulting posterior distributions of climate sensitivity correspond closely to existing estimates from the literature. I show further that the updated sceptic beliefs are consistent with a social cost of carbon that is substantially greater than zero. I conclude by discussing the general conditions for consensus formation under Bayesian learning, its relevance to our current policy impasse, and offer some remarks about finding common ground in the future.
 
+"Five rules for pragmatic blue growth." (With Matthew G. Burgess *et al.*.) **Under revision.**
+
 ## Works in progress
 
-"Market might. Hydro power."
+"Hydro power. Market might."
 <!---
 **Abstract:** I test for evidence of strategic behaviour in the Norwegian electricity sector using a uniquely detailed dataset of hydropower reservoirs. Consistent with theory, I find that market power leads to an intertemporal reallocation of water resources across periods. An increase in market power causes firms to withhold production when demand is at its most inelastic. This would permit dominant firms to recoup higher profits while consumers are least responsive to price changes. The effects are modest next to other factors governing reservoir management, such as annual snow-melt. Yet, they may still cause the production profile of hydropower firms to diverge in meaningful ways if the differences in market share are large enough, and particularly when regional transmission constraints are binding.
 -->
 
-"What would Thomas Edison have paid for Google?" (with Christopher J. Costello and Michael B. Ward)
+"What would Thomas Edison have paid for Google?" (With Christopher J. Costello and Michael B. Ward.)
 <!---
 **Abstract:** A broad class of economic decision problems involves search over a collection of uncertain research leads. Existing search theory informs the efficient search over this pool using available information. But in many cases, the researcher has the opportunity to collect additional information, e.g. with a search engine or scientific framework, that will benefit the search. We derive the value of this information, determine the general properties that render it large or small, and calculate the implications of information gathering on economic innovation. We show that changes to the underlying characteristics of search problems often yield surprising results. For example, more lucrative end-prizes can actually reduce the value of information, while the possibility of better information can lead to less innovation.
 -->
 
-"Protecting bycatch species by rebuilding target fisheries" (with Matthew G. Burgess *et al.*)
+"Protecting bycatch species by rebuilding target fisheries." (With Matthew G. Burgess *et al.*.)
 
-"Five rules for pragmatic blue growth" (with Matthew G. Burgess *et al.*). **Submitted.**
+"The blue paradox: Preemptive overfishing and marine protected areas." (With Christopher J. Costello and Kyle C. Meng.)
 
 ## Publications
 

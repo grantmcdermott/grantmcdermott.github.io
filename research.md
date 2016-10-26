@@ -33,9 +33,9 @@ comments: false
 *How much evidence would it take to convince climate sceptics that they are wrong about global warming? I explore this question within a Bayesian framework. I consider a group of stylised sceptics and examine how these individuals update their beliefs in light of the available evidence for climate change. I find that all but the most extreme priors are overwhelmed by the historical data. The resulting posterior distributions of climate sensitivity correspond closely to existing estimates from the literature. I show further that the updated sceptic beliefs are consistent with a social cost of carbon that is substantially greater than zero. I conclude by discussing the general conditions for consensus formation under Bayesian learning, its relevance to our current policy impasse, and offer some remarks about finding common ground in the future.*
 
 
-#### Five rules for pragmatic blue growth.
+#### Five rules for pragmatic blue growth
 
-With Matthew G. Burgess *et al.* Revise and resubmit at *Marine Policy*.
+With Matthew G. Burgess and others. Revise and resubmit at *Marine Policy*.
 
 *The concept of blue growth is the newest of many recent calls for more holistic management of complex marine social-ecological systems. The complexity of ocean systems, combined with limitations on data and capacity, demands an approach to management that is pragmatic — meaning goal- and solution-oriented, realistic, and practical. Here we propose and discuss five rules of thumb upon which to build such an approach. <!-- 1) Define objectives, quantify tradeoffs, and strive for efficiency. Understanding stakeholders’ objectives, and if and how they trade off with one another, keeps management goal-oriented, aware of its full range of options, and maximizes the likelihood of finding win-win solutions. 2) The data you have can do more than you think. Cross-system similarity, within-system complexity, and general first principles all add informational value to data collected both within and outside the system being managed. 3) Engage stakeholders, but do it right. Co-management and citizen science can be important tools in the science and management toolbox, especially in data- and capacity-limited regions. 4) Measure your impact and learn as you go. This can increase short-term start-up costs but can prevent larger wastes of resources in the long-term. 5) Design institutions, not behaviors. Management does not directly control fishing efforts, pollution rates or other behaviors, but instead controls institutions under which stakeholders make choices. -->Each of these rules of thumb is inspired by real-world successes and case studies. We provide concrete examples to illustrate the key concepts and aim to provide a digestible set of guidelines that any manager can follow.*
 
@@ -48,17 +48,17 @@ With Christopher J. Costello and Michael B. Ward.
 
 *A broad class of economic decision problems involves searching over a collection of uncertain research leads. Existing search theory informs the efficient search over this pool using available information. But in many cases, the researcher has the opportunity to collect new information en masse, e.g. with a search engine or scientific framework, that will benefit the search. We derive the value of this type of bulk information, determine the general properties that render it large or small, and calculate its implications for economic innovation. We show that changes to the underlying characteristics of different search problems can yield surprising results. For example, more lucrative end-prizes can actually reduce the value of information, while the possibility of better information often suppresses innovation.*
 
-#### Protecting bycatch species by rebuilding target fisheries.
+#### Protecting bycatch species by rebuilding global target fisheries
 
-With Matthew G. Burgess *et al.*
+With Matthew G. Burgess and others.
 
-*Rebuilding global target fisheries to boost production and protecting threatened bycatch species are two central foci of marine conservation efforts. Here, we assess the tradeoffs between these objectives by comparing: (i) recent projections of changes in fishing pressure needed to achieve maximum yield or profit from 4,713 target fish stocks — accounting for &gt;75% of global catch — to (ii) estimates of changes in fishing pressure needed to reverse the ongoing population declines of 4 sea turtle, 5 marine mammal, and 4 seabird populations threatened by fisheries bycatch. We project little-to-no tradeoff between halting the declines of 6 of these populations and maximizing fishery yields or profits; tradeoff severity varies among the others. Our results suggest that ending global overfishing would have substantial side-benefits for threatened species.*
+*Rebuilding global target fisheries and protecting threatened bycatch species are central pillars of marine conservation efforts. Here, we assess the tradeoffs between these two objectives by comparing: (i) recent projections of changes in fishing pressure needed to achieve maximum yield or profit from 4,713 target fish stocks — accounting for &gt;75% of global catch — with (ii) estimates of changes in fishing pressure needed to reverse the ongoing declines of various sea turtle, marine mammal, and seabird populations threatened by fisheries bycatch. We project little-to-no tradeoff between maximizing fishery yields or profits and halting the declines in at least half of the bycatch populations in our sample. Tradeoff severity among the reminaing populations varies. Our results suggest that ending global overfishing would have substantial side-benefits for threatened bycatch species.*
 
-#### The blue paradox: Preemptive overfishing in marine protected areas.
+#### The blue paradox: Preemptive overfishing in marine protected areas
 
 With Christopher J. Costello and Kyle C. Meng.
 
-*Abstract coming soon.*
+*More information coming soon.*
 
 
 ## Publications

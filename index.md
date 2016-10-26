@@ -10,8 +10,12 @@ image:
 
 ## Welcome
 
-I am an economist, specialising in environmental and natural resource economics. My applied skill set emphasises econometrics, Bayesian analysis and data vizualisation. I am presently employed at UC Santa Barbara's [Bren School of Environmental Science and Management](http://www.bren.ucsb.edu/){:target="_blank"} as a postdoctoral scholar. 
+I am an economist, specialising in environmental and natural resource economics. My applied skill set emphasises econometrics, Bayesian analysis and data vizualisation. I am presently employed at UC Santa Barbara's Bren School of Environmental Science and Management as a postdoctoral scholar.
+
+**I will be available for interviews at the ASSA Meetings in Chicago, January 6-8, 2017. Please find links to my CV [here](https://drive.google.com/file/d/0B6AgOxtQA9dTa25tZm9GNkZxNWc/edit?usp=sharing){:target="_blank"} and my job market paper [here](https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing){:target="_blank"}.**
 
 Please feel free to contact me at the links provided on this website, or at the following address: Bren Hall 4508, University of California Santa Barbara, Santa Barbara, CA 93106-5131, USA
 
+<!--
 <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}" target="_blank">via RSS</a>.</p>
+-->

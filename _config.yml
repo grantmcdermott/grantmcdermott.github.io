@@ -2,7 +2,10 @@
 
 title: Grant R. McDermott
 locale: en_US
-url: http://grantmcdermott.github.io
+#url: http://grantmcdermott.github.io
+## To build the website locally, comment out the previous line and run
+## in terminal: 'bundle ex jekyll serve'. The website will be hosted at
+## 'localhost:4000'.
 
 
 # Jekyll configuration
@@ -44,7 +47,7 @@ titlecase: true
 owner:
   name: Grant McDermott
   avatar: mcdermott400sq.jpg
-  bio: "Economics. Environment. Data science. Postdoctoral scholar at UC Santa Barbara."
+  bio: "Data. Economics. Environment."
   email: gmcdermott@ucsb.edu
   disqus-shortname: grantmcdermott-blog
   twitter: grant_mcdermott

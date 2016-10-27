@@ -63,15 +63,17 @@ With Christopher J. Costello and Kyle C. Meng.
 
 ## Publications
 
-#### [Resolving disputes over ocean calamities](http://bioscience.oxfordjournals.org/content/65/12/1115){:target="_blank"}.
+#### [Resolving disputes over ocean calamities](http://bioscience.oxfordjournals.org/content/65/12/1115){:target="_blank"}
 With Matthew G. Burgess. Published in *BioScience*, 65(12), 1115-1116, 2015.
 
-#### [Electricity prices, river temperatures and cooling water scarcity](http://le.uwpress.org/content/90/1/131.abstract){:target="_blank"}.
-With Øivind A. Nilsen. Published in *Land Economics*, 90(1), 131-148, 2014. (Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post [here](http://blogg.nhh.no/reconhub/?p=753){:target="_blank"}.)
+#### [Electricity prices, river temperatures and cooling water scarcity](http://le.uwpress.org/content/90/1/131.abstract){:target="_blank"}
+With Øivind A. Nilsen. Published in *Land Economics*, 90(1), 131-148, 2014. (Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post [here]({{ site.url }}/2013/01/14/electricity-prices-river-temperatures-water-scarcity/){:target="_blank"}.)
 
 
 ## Report chapters
 
-South Africa Compliance Analysis. With James Morrissey and Davina Mendelsohn, in “[Governing Global Climate Change: St Petersburg Compliance Report for the ‘G8 Plus Five’ Countries](http://www.g8.utoronto.ca/oxford/2006compliance-ox.pdf){:target="_blank"}”, Maria Banda and Joanna Langille (eds.), G8 Final Compliance Report 2007, Oxford: G8 Research Group Oxford, 1 June 2007. xiii + 190 pp.
+#### [South Africa Compliance Analysis](http://www.g8.utoronto.ca/oxford/2006compliance-ox.pdf){:target="_blank"}
+With James Morrissey and Davina Mendelsohn, in “Governing Global Climate Change: St Petersburg Compliance Report for the ‘G8 Plus Five’ Countries”, Maria Banda and Joanna Langille (eds.), G8 Final Compliance Report 2007, Oxford: G8 Research Group Oxford, 1 June 2007. xiii + 190 pp.
 
-“[The Current Status of the EPWP (Infrastructure) in the Western Cape](http://www.saldru.uct.ac.za/documentation/reports-and-studies-1/147-the-current-status-of-the-epwp-infrastructure-in-the-western-cape-1){:target="_blank"}”. With Anna McCord, Kim Adonis and Lisa van Dongen. Prepared for the Western Cape Provincial Treasury & Department of Transport And Public Works CAPE. Public Works Research Project, SALDRU, UCT, 24 March 2006.
+#### [The Current Status of the EPWP (Infrastructure) in the Western Cape](http://www.saldru.uct.ac.za/documentation/reports-and-studies-1/147-the-current-status-of-the-epwp-infrastructure-in-the-western-cape-1){:target="_blank"}
+With Anna McCord, Kim Adonis and Lisa van Dongen. Prepared for the Western Cape Provincial Treasury & Department of Transport And Public Works CAPE. Public Works Research Project, SALDRU, UCT, 24 March 2006.

@@ -1,7 +1,7 @@
 # Site navigation links
 
 - title: Home
-  url: 
+  url:
 
 - title: About
   url: /about/
@@ -10,7 +10,8 @@
   url: /research/
 
 - title: CV
-  url: https://drive.google.com/file/d/0B6AgOxtQA9dTa25tZm9GNkZxNWc/edit?usp=sharing #/cv/
+  url: https://drive.google.com/file/d/0B6AgOxtQA9dTa25tZm9GNkZxNWc/edit?usp=sharing
+  #url: /cv/ ## For the markdown version 
 
 - title: Blog
   url: /blog/

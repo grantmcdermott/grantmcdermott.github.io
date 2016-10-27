@@ -18,7 +18,7 @@ comments: false
 
 #### [Hydro power. Market might.](https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing){:target="_blank"} (Job market paper)
 
-*I test for evidence of strategic behaviour in an advanced power market using a rich and uniquely detailed dataset of Norwegian hydropower firms, reservoirs and electricity data. Changes to local bidding area divisions and binding transmission constraints provide the additional layers of exogenous variation that allow me to cleanly identify the causal effect of market power on firm behaviour over time. Consistent with theory, I find that increased market power leads to an intertemporal reallocation of water resources across periods. Dominant firms will tend to withhold production when demand is at its most inelastic. <!--This would permit dominant firms to recoup higher profits while consumers are least responsive to price changes. -->The effects are modest next to other factors governing reservoir management, such as annual snow-melt. Yet, they may still cause the production profile of hydropower firms to diverge in meaningful ways if the differences in market share are large enough, and particularly when transmission constraints are binding.*
+*I test for evidence of strategic behaviour in an advanced power market using a rich and uniquely detailed dataset of Norwegian hydropower firms, reservoirs and electricity data. Changes to local bidding area divisions and binding transmission constraints provide the additional layers of exogenous variation that allow me to cleanly identify the causal effect of market power on firm behaviour over time. Consistent with theory, I find that increased market power leads to an intertemporal reallocation of water resources across periods. Dominant firms will tend to withhold production when demand is at its most inelastic. <!--This would permit dominant firms to recoup higher profits while consumers are least responsive to price changes. -->The effects are modest next to other factors governing reservoir management, such as annual snow-melt. Yet, they may still cause the production profile of hydropower firms to diverge in meaningful ways if the differences in market share are large enough, and particularly when transmission constraints are binding.* ([Link to paper](https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing){:target="_blank"}.)
 
 <!-- Example of show/hide toggle for abstract:
 <details>
@@ -30,7 +30,7 @@ comments: false
 
 #### [Sceptic priors and climate policy](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}
 
-*How much evidence would it take to convince climate sceptics that they are wrong about global warming? I explore this question within a Bayesian framework. I consider a group of stylised sceptics and examine how these individuals update their beliefs in light of the available evidence for climate change. I find that all but the most extreme priors are overwhelmed by the historical data. The resulting posterior distributions of climate sensitivity correspond closely to existing estimates from the literature. I show further that the updated sceptic beliefs are consistent with a social cost of carbon that is substantially greater than zero. I conclude by discussing the general conditions for consensus formation under Bayesian learning, its relevance to our current policy impasse, and offer some remarks about finding common ground in the future.*
+*How much evidence would it take to convince climate sceptics that they are wrong about global warming? I explore this question within a Bayesian framework. I consider a group of stylised sceptics and examine how these individuals update their beliefs in light of the available evidence for climate change. I find that all but the most extreme priors are overwhelmed by the historical data. The resulting posterior distributions of climate sensitivity correspond closely to existing estimates from the literature. I show further that the updated sceptic beliefs are consistent with a social cost of carbon that is substantially greater than zero. I conclude by discussing the general conditions for consensus formation under Bayesian learning, its relevance to our current policy impasse, and offer some remarks about finding common ground in the future.* ([Link to paper.](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}.)
 
 
 #### Five rules for pragmatic blue growth
@@ -64,16 +64,16 @@ With Christopher J. Costello and Kyle C. Meng.
 ## Publications
 
 #### [Resolving disputes over ocean calamities](http://bioscience.oxfordjournals.org/content/65/12/1115){:target="_blank"}
-With Matthew G. Burgess. Published in *BioScience*, 65(12), 1115-1116, 2015.
+With Matthew G. Burgess. Published in *BioScience*, 65(12), 1115-1116, 2015. ([Link to paper](http://bioscience.oxfordjournals.org/content/65/12/1115){:target="_blank"}.)
 
 #### [Electricity prices, river temperatures and cooling water scarcity](http://le.uwpress.org/content/90/1/131.abstract){:target="_blank"}
-With Øivind A. Nilsen. Published in *Land Economics*, 90(1), 131-148, 2014. (Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post [here]({{ site.url }}/2013/01/14/electricity-prices-river-temperatures-water-scarcity/){:target="_blank"}.)
+With Øivind A. Nilsen. Published in *Land Economics*, 90(1), 131-148, 2014. ([Link to paper](http://le.uwpress.org/content/90/1/131.abstract){:target="_blank"}. Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post [here]({{ site.url }}/2013/01/14/electricity-prices-river-temperatures-water-scarcity/){:target="_blank"}.)
 
 
 ## Report chapters
 
 #### [South Africa Compliance Analysis](http://www.g8.utoronto.ca/oxford/2006compliance-ox.pdf){:target="_blank"}
-With James Morrissey and Davina Mendelsohn, in “Governing Global Climate Change: St Petersburg Compliance Report for the ‘G8 Plus Five’ Countries”, Maria Banda and Joanna Langille (eds.), G8 Final Compliance Report 2007, Oxford: G8 Research Group Oxford, 1 June 2007. xiii + 190 pp.
+With James Morrissey and Davina Mendelsohn, in “Governing Global Climate Change: St Petersburg Compliance Report for the ‘G8 Plus Five’ Countries”, Maria Banda and Joanna Langille (eds.), G8 Final Compliance Report 2007, Oxford: G8 Research Group Oxford, 1 June 2007. xiii + 190 pp. ([Link to report](http://www.g8.utoronto.ca/oxford/2006compliance-ox.pdf){:target="_blank"}.)
 
 #### [The Current Status of the EPWP (Infrastructure) in the Western Cape](http://www.saldru.uct.ac.za/documentation/reports-and-studies-1/147-the-current-status-of-the-epwp-infrastructure-in-the-western-cape-1){:target="_blank"}
-With Anna McCord, Kim Adonis and Lisa van Dongen. Prepared for the Western Cape Provincial Treasury & Department of Transport And Public Works CAPE. Public Works Research Project, SALDRU, UCT, 24 March 2006.
+With Anna McCord, Kim Adonis and Lisa van Dongen. Prepared for the Western Cape Provincial Treasury & Department of Transport And Public Works CAPE. Public Works Research Project, SALDRU, UCT, 24 March 2006. ([Link to report](http://www.saldru.uct.ac.za/documentation/reports-and-studies-1/147-the-current-status-of-the-epwp-infrastructure-in-the-western-cape-1){:target="_blank"}.)

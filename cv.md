@@ -14,7 +14,7 @@ comments: false
 <br>
 <i class="fa fa-envelope"></i> [gmcdermott@ucsb.edu](mailto:gmcdermott@ucsb.edu){:target="_blank"}
 <br>
-<i class="fa fa-globe"></i> [grantmcdermott.github.io](http://grantmcdermott.github.io/){:target="_blank"}
+<i class="fa fa-globe"></i> [www.grantmcdermott.com](http://grantmcdermott.github.io/){:target="_blank"}
 <br>
 <i class="fa fa-address-card"></i> Bren Hall 4508, University of California at Santa Barbara, Santa Barbara, CA 93106
 

@@ -6,7 +6,9 @@ tags: [Economics, Trade, Currencies, Brexit, Norway]
 comments: true
 ---
 
-It's amusing to see how many in the Leave contingent are invoking Norway as a model for the way forward post-Brexit... apparently without having a clue as to the rules governing Norway's relationship with the Eurozone. Briefly:
+It's amusing to see how many in the Leave contingent are invoking Norway as a model for the way forward post-Brexit... apparently without having a clue as to the rules governing Norway's relationship with the Eurozone. 
+
+Briefly:
 
 1. Norway is a member of the Schengen area. Unfettered movement across borders, etc. Per capita migration rates are consequently *higher* in Norway than they are in the UK. (Never mind that roughly half of the UK's migration originates from countries outside the EU. You know, ex-colonies and the like, but then what have immigrants from Australia, New Zealand, India and South Africa ever done for the British economy?)
 

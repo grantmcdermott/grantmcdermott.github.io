@@ -30,6 +30,8 @@ comments: false
 
 #### [Sceptic priors and climate policy](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}
 
+Under review.
+
 *How much evidence would it take to convince climate sceptics that they are wrong about global warming? I explore this question within a Bayesian framework. I consider a group of stylised sceptics and examine how these individuals update their beliefs in light of the available evidence for climate change. I find that all but the most extreme priors are overwhelmed by the historical data. The resulting posterior distributions of climate sensitivity correspond closely to existing estimates from the literature. I show further that the updated sceptic beliefs are consistent with a social cost of carbon that is substantially greater than zero. I conclude by discussing the general conditions for consensus formation under Bayesian learning, its relevance to our current policy impasse, and offer some remarks about finding common ground in the future.* ([Link to paper](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/sceptic-priors){:target="_blank"}.)
 
 

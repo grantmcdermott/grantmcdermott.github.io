@@ -60,6 +60,7 @@ owner:
     ad-client:
     ad-slot:
   bing-verify:
+  #orcid: 0000-0001-7883-8573
   github: grantmcdermott
   stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
   linkedin: grant-mcdermott-b8637419

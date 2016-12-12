@@ -35,13 +35,6 @@ Under review.
 *How much evidence would it take to convince climate sceptics that they are wrong about global warming? I explore this question within a Bayesian framework. I consider a group of stylised sceptics and examine how these individuals update their beliefs in light of the available evidence for climate change. I find that all but the most extreme priors are overwhelmed by the historical data. The resulting posterior distributions of climate sensitivity correspond closely to existing estimates from the literature. I show further that the updated sceptic beliefs are consistent with a social cost of carbon that is substantially greater than zero. I conclude by discussing the general conditions for consensus formation under Bayesian learning, its relevance to our current policy impasse, and offer some remarks about finding common ground in the future.* ([Link to paper](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/sceptic-priors){:target="_blank"}.)
 
 
-#### Five rules for pragmatic blue growth
-
-With Matthew G. Burgess and others. Revise and resubmit at *Marine Policy*.
-
-*The concept of blue growth is the newest of many recent calls for more holistic management of complex marine social-ecological systems. The complexity of ocean systems, combined with limitations on data and capacity, demands an approach to management that is pragmatic — meaning goal- and solution-oriented, realistic, and practical. Here we propose and discuss five rules of thumb upon which to build such an approach. <!-- 1) Define objectives, quantify tradeoffs, and strive for efficiency. Understanding stakeholders’ objectives, and if and how they trade off with one another, keeps management goal-oriented, aware of its full range of options, and maximizes the likelihood of finding win-win solutions. 2) The data you have can do more than you think. Cross-system similarity, within-system complexity, and general first principles all add informational value to data collected both within and outside the system being managed. 3) Engage stakeholders, but do it right. Co-management and citizen science can be important tools in the science and management toolbox, especially in data- and capacity-limited regions. 4) Measure your impact and learn as you go. This can increase short-term start-up costs but can prevent larger wastes of resources in the long-term. 5) Design institutions, not behaviors. Management does not directly control fishing efforts, pollution rates or other behaviors, but instead controls institutions under which stakeholders make choices. -->Each of these rules of thumb is inspired by real-world successes and case studies. We provide concrete examples to illustrate the key concepts and aim to provide a digestible set of guidelines that any manager can follow.*
-
-
 ## Works in progress
 
 #### What would Thomas Edison have paid for Google?
@@ -64,6 +57,13 @@ With Christopher J. Costello and Kyle C. Meng.
 
 
 ## Publications
+
+#### Five rules for pragmatic blue growth
+With Matthew G. Burgess and others. Forthcoming at *Marine Policy*.
+<!--
+*The concept of blue growth is the newest of many recent calls for more holistic management of complex marine social-ecological systems. The complexity of ocean systems, combined with limitations on data and capacity, demands an approach to management that is pragmatic — meaning goal- and solution-oriented, realistic, and practical. Here we propose and discuss five rules of thumb upon which to build such an approach. 1) Define objectives, quantify tradeoffs, and strive for efficiency. Understanding stakeholders’ objectives, and if and how they trade off with one another, keeps management goal-oriented, aware of its full range of options, and maximizes the likelihood of finding win-win solutions. 2) The data you have can do more than you think. Cross-system similarity, within-system complexity, and general first principles all add informational value to data collected both within and outside the system being managed. 3) Engage stakeholders, but do it right. Co-management and citizen science can be important tools in the science and management toolbox, especially in data- and capacity-limited regions. 4) Measure your impact and learn as you go. This can increase short-term start-up costs but can prevent larger wastes of resources in the long-term. 5) Design institutions, not behaviors. Management does not directly control fishing efforts, pollution rates or other behaviors, but instead controls institutions under which stakeholders make choices. Each of these rules of thumb is inspired by real-world successes and case studies. We provide concrete examples to illustrate the key concepts and aim to provide a digestible set of guidelines that any manager can follow.*
+-->
+
 
 #### [Resolving disputes over ocean calamities](http://bioscience.oxfordjournals.org/content/65/12/1115){:target="_blank"}
 With Matthew G. Burgess. Published in *BioScience*, 65(12), 1115-1116, 2015. ([Link to paper](http://bioscience.oxfordjournals.org/content/65/12/1115){:target="_blank"}.)

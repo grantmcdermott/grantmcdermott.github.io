@@ -58,18 +58,18 @@ With Christopher J. Costello and Kyle C. Meng.
 
 ## Publications
 
-#### Five rules for pragmatic blue growth
-With Matthew G. Burgess and others. Forthcoming at *Marine Policy*. ([Link to paper](http://www.sciencedirect.com/science/article/pii/S0308597X16307916){:target="_blank"}.)
+#### [Five rules for pragmatic blue growth](http://dx.doi.org/10.1016/j.marpol.2016.12.005){:target="_blank"}
+With Matthew G. Burgess and others. Forthcoming at *Marine Policy*. ([Link to paper](http://dx.doi.org/10.1016/j.marpol.2016.12.005){:target="_blank"}.)
 <!--
 *The concept of blue growth is the newest of many recent calls for more holistic management of complex marine social-ecological systems. The complexity of ocean systems, combined with limitations on data and capacity, demands an approach to management that is pragmatic — meaning goal- and solution-oriented, realistic, and practical. Here we propose and discuss five rules of thumb upon which to build such an approach. 1) Define objectives, quantify tradeoffs, and strive for efficiency. Understanding stakeholders’ objectives, and if and how they trade off with one another, keeps management goal-oriented, aware of its full range of options, and maximizes the likelihood of finding win-win solutions. 2) The data you have can do more than you think. Cross-system similarity, within-system complexity, and general first principles all add informational value to data collected both within and outside the system being managed. 3) Engage stakeholders, but do it right. Co-management and citizen science can be important tools in the science and management toolbox, especially in data- and capacity-limited regions. 4) Measure your impact and learn as you go. This can increase short-term start-up costs but can prevent larger wastes of resources in the long-term. 5) Design institutions, not behaviors. Management does not directly control fishing efforts, pollution rates or other behaviors, but instead controls institutions under which stakeholders make choices. Each of these rules of thumb is inspired by real-world successes and case studies. We provide concrete examples to illustrate the key concepts and aim to provide a digestible set of guidelines that any manager can follow.*
 -->
 
 
-#### [Resolving disputes over ocean calamities](http://bioscience.oxfordjournals.org/content/65/12/1115){:target="_blank"}
-With Matthew G. Burgess. Published in *BioScience*, 65(12), 1115-1116, 2015. ([Link to paper](http://bioscience.oxfordjournals.org/content/65/12/1115){:target="_blank"}.)
+#### [Resolving disputes over ocean calamities](http://dx.doi.org/10.1093/biosci/biv147){:target="_blank"}
+With Matthew G. Burgess. Published in *BioScience*, 65(12), 1115-1116, 2015. ([Link to paper](http://dx.doi.org/10.1093/biosci/biv147){:target="_blank"}.)
 
-#### [Electricity prices, river temperatures and cooling water scarcity](http://le.uwpress.org/content/90/1/131.abstract){:target="_blank"}
-With Øivind A. Nilsen. Published in *Land Economics*, 90(1), 131-148, 2014. ([Link to paper](http://le.uwpress.org/content/90/1/131.abstract){:target="_blank"}. Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post [here]({{ site.url }}/2013/01/14/electricity-prices-river-temperatures-water-scarcity/){:target="_blank"}.)
+#### [Electricity prices, river temperatures and cooling water scarcity](http://dx.doi.org/10.3368/le.90.1.131){:target="_blank"}
+With Øivind A. Nilsen. Published in *Land Economics*, 90(1), 131-148, 2014. ([Link to paper](http://dx.doi.org/10.3368/le.90.1.131){:target="_blank"}. Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post [here]({{ site.url }}/2013/01/14/electricity-prices-river-temperatures-water-scarcity/){:target="_blank"}.)
 
 
 ## Report chapters

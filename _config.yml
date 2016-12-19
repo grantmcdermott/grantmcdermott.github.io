@@ -59,6 +59,7 @@ owner:
     verify:
     ad-client:
     ad-slot:
+  orcid: 0000-0001-7883-8573
   bing-verify:
   github: grantmcdermott
   stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link

@@ -103,7 +103,7 @@ root@rstudio:~# apt install r-base r-base-dev
 
 In addition to the above, a number of important *R* packages require external Linux libraries that must first be installed separately on your VM. For example, the `curl` *R* package, which in turn is a dependency for many other packages. In Ubuntu (or other Debian-based distros), run the below commands in your VM's terminal:
 
-1) For the "tidyverse" suite of packages (i.e. `install.packages("tidyverse")`:
+1) For the "[tidyverse](http://tidyverse.org/){:target="_blank"}" suite of packages:
 ```
 root@rstudio:~# apt install libcurl4-openssl-dev libssl-dev libxml2-dev
 ```

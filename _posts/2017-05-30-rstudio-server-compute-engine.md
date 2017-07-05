@@ -139,17 +139,17 @@ root@rstudio:~# adduser elvis
 ```
 You will then be prompted to specify a password for this user (and confirm various bits of biographical information which you can largely ignore).
 
-> **Tip:** Once you've created a user, you can log into their account on the VM directly via SSH, e.g. `sudo gcloud compute ssh elvis@rstudio --zone us-west1-a`
+> **Tip:** Once created, you can now log into a user's account on the VM directly via SSH, e.g. `sudo gcloud compute ssh elvis@rstudio --zone us-west1-a`
 
-### Navigate to your RStudio Server instance in your browser
+### Navigate to the RStudio Server instance in your browser
 
-You are now ready to open up RStudio Server by navigating to the default 8787 port of your VM's External IP address. (You remember writing this down earlier, right?) If you forgot to write the IP address down, don't worry: You can find it by logging into your Google Cloud console and looking at your [VM instances](https://console.cloud.google.com/compute/instances){:target="_blank"}, or by opening up a new terminal window (<u>not</u> the one currently connected to your VM) and typing:
+You are now ready to open up RStudio Server by navigating to the default 8787 port of your VM's External IP address. (You remember writing this down earlier, right?) If you forgot to write the IP address down, don't worry: You can find it by logging into your Google Cloud console and looking at your [VM instances](https://console.cloud.google.com/compute/instances){:target="_blank"}, or by opening up a new terminal window (*not* the one currently connected to your VM) and typing:
 ```
 ~$ sudo gcloud compute instances describe rstudio  --zone us-west1-a
 ```
 Either way, once you have the address, open up your preferred web browser and navigate to:
 ```
-http://<external-ip-address>:8787
+http://EXTERNAL-IP-ADDRESS:8787
 ```
 You will be presented with the following web page. Log in using the username/password that you created earlier.
 
@@ -243,7 +243,8 @@ priscilla@rstudio:~$ exit
 Remember to keep your VM system up to date (just like you would a normal computer).
 ```
 root@rstudio:~# gcloud components update
-root@rstudio:~# apt-get upgrade
+root@rstudio:~# apt update
+root@rstudio:~# apt upgrade
 ```
 
 ## Summary

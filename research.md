@@ -16,6 +16,18 @@ comments: false
 
 ## Working papers
 
+#### [Sceptic priors and climate policy](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}
+
+Under review.
+
+*How much evidence would it take to convince climate sceptics that they are wrong about global warming? I explore this question within a Bayesian framework. I consider a group of stylised sceptics and examine how these individuals update their beliefs in the face of current and continuing climate change. I find that available evidence in the form of instrumental climate data already tends to overwhelm all but the most extreme priors. The resulting posterior distributions of climate sensitivity correspond closely to existing estimates from the scientific literature. The updated beliefs of most sceptics are thus consistent with a carbon price that is substantially greater than zero. However, belief convergence is a non-linear function of prior strength, so that it become increasingly difficult to convince the marginal sceptic. I conclude by discussing the general conditions for consensus formation under Bayesian learning, its relevance to our current policy impasse, and offer some remarks about finding common ground in the future.* ([Link to paper](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/sceptic-priors){:target="_blank"}.)
+
+#### Protecting marine turtles, mammals and birds by rebuilding global fisheries
+
+Submitted. With Matthew G. Burgess and others.
+
+*If global fishing pressure were reduced sufficiently to rebuild target stocks, how many species threatened by bycatch would be saved in the process? Here, we compare: (i) changes in fishing pressure needed to maximize profit from 4,713 target fish stocks—accounting for &gt;75% of global catch—to (ii) changes in fishing pressure needed to reverse the ongoing declines of 20 sea turtle, marine mammal and seabird populations threatened by bycatch. We project that maximizing fishery profits alone would also halt or reverse the declines of more than half of these threatened populations. Recovering the other populations would require further effort reductions or targeting improvements. Our analysis suggests that improved management of commercial fisheries could yield substantial collateral benefits for threatened bycatch species across the globe.* (Links to paper and code available soon.)
+
 #### [Hydro power. Market might.](https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing){:target="_blank"}
 
 *Hydropower is the world's foremost source of non-fossil fuel energy. It is also characterised by a unique set of production features that greatly simplify economic questions related to firm behaviour and output. Here I exploit these characteristics, together with quasi-experimental variation in market power and rich firm-level data, to identify evidence of noncompetitive behaviour in the Nordic electricity market. Consistent with theory, I find that increased market power leads to a dynamic pattern of resource shifting. Dominant firms tend to withhold production during inelastic demand periods, which would enable them to secure higher profits. My results suggest that even our most advanced electricity markets may be susceptible to manipulation under relatively common conditions.* ([Link to paper](https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing){:target="_blank"}.)
@@ -28,12 +40,6 @@ comments: false
 <br>
 -->
 
-#### [Sceptic priors and climate policy](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}
-
-Under review.
-
-*How much evidence would it take to convince climate sceptics that they are wrong about global warming? I explore this question within a Bayesian framework. I consider a group of stylised sceptics and examine how these individuals update their beliefs in the face of current and continuing climate change. I find that available evidence in the form of instrumental climate data already tends to overwhelm all but the most extreme priors. The resulting posterior distributions of climate sensitivity correspond closely to existing estimates from the scientific literature. The updated beliefs of most sceptics are thus consistent with a carbon price that is substantially greater than zero. However, belief convergence is a non-linear function of prior strength, so that it become increasingly difficult to convince the marginal sceptic. I conclude by discussing the general conditions for consensus formation under Bayesian learning, its relevance to our current policy impasse, and offer some remarks about finding common ground in the future.* ([Link to paper](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/sceptic-priors){:target="_blank"}.)
-
 
 ## Works in progress
 
@@ -42,13 +48,6 @@ Under review.
 With Christopher J. Costello and Michael B. Ward.
 
 *A broad class of economic decision problems involves searching over a collection of uncertain research leads. Existing search theory informs the efficient search over this pool using available information. But in many cases, the researcher has the opportunity to collect new information en masse, e.g. with a search engine or scientific framework, that will benefit the search. We derive the value of this type of bulk information, determine the general properties that render it large or small, and calculate its implications for economic innovation. We show that changes to the underlying characteristics of different search problems can yield surprising results. For example, more lucrative end-prizes can actually reduce the value of information, while the possibility of better information often suppresses innovation.*
-
-#### Protecting marine turtles, mammals and birds by rebuilding global fisheries
-
-With Matthew G. Burgess and others.
-
-*Rebuilding target fisheries and protecting threatened bycatch species are central goals of marine conservation efforts. Here, we assess global tradeoffs and synergies between these two objectives. We compare: (i) changes in fishing pressure needed to achieve maximum profit from 4,713 target fish stocks—accounting for &gt;75% of global catch—to (ii) estimates of changes in fishing pressure needed to reverse the ongoing declines of 20 sea turtle, marine mammal, and seabird populations threatened by fisheries bycatch. We project negligible tradeoffs between maximizing fishery profits and halting the declines in at least half of the bycatch populations in our sample. Tradeoff severity varies for the other populations. Our analysis suggests that improved management of commercial fisheries will yield substantial collateral benefits for threatened bycatch species.*
-
 
 #### The blue paradox: Preemptive overfishing in marine protected areas
 

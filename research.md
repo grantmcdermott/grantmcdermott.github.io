@@ -24,7 +24,7 @@ Under review.
 
 #### Protecting marine turtles, mammals and birds by rebuilding global fisheries
 
-Submitted. With Matthew G. Burgess and others.
+Under review. With Matthew G. Burgess and others.
 
 *If global fishing pressure were reduced sufficiently to rebuild target stocks, how many species threatened by bycatch would be saved in the process? Here, we compare: (i) changes in fishing pressure needed to maximize profit from 4,713 target fish stocks—accounting for &gt;75% of global catch—to (ii) changes in fishing pressure needed to reverse the ongoing declines of 20 sea turtle, marine mammal and seabird populations threatened by bycatch. We project that maximizing fishery profits alone would also halt or reverse the declines of more than half of these threatened populations. Recovering the other populations would require further effort reductions or targeting improvements. Our analysis suggests that improved management of commercial fisheries could yield substantial collateral benefits for threatened bycatch species across the globe.* (Links to paper and code available soon.)
 

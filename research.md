@@ -16,7 +16,7 @@ comments: false
 
 ## Working papers
 
-#### Protecting marine mammals turtles and birds by rebuilding global fisheries
+#### Protecting marine mammals, turtles and birds by rebuilding global fisheries
 
 Revise and resubmit, *Science*. With Matthew G. Burgess and others.
 

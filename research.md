@@ -16,11 +16,11 @@ comments: false
 
 ## Working papers
 
-#### Protecting marine turtles, mammals and birds by rebuilding global fisheries
+#### Protecting marine mammals turtles and birds by rebuilding global fisheries
 
 Revise and resubmit, *Science*. With Matthew G. Burgess and others.
 
-*If global fishing pressure were reduced sufficiently to rebuild target stocks, how many species threatened by bycatch would be saved in the process? Here, we compare: (i) changes in fishing pressure needed to maximize profit from 4,713 target fish stocks—accounting for &gt;75% of global catch—to (ii) changes in fishing pressure needed to reverse the ongoing declines of 20 sea turtle, marine mammal and seabird populations threatened by bycatch. We project that maximizing fishery profits alone would also halt or reverse the declines of more than half of these threatened populations. Recovering the other populations would require further effort reductions or targeting improvements. Our analysis suggests that improved management of commercial fisheries could yield substantial collateral benefits for threatened bycatch species across the globe.* (Links to paper and code available soon.)
+*Rebuilding target fish stocks requires reducing global fishing pressure. We ask whether such reductions would be sufficient to protect species threatened by bycatch. To do this, we compare the changes in fishing pressure needed to maximize profits from 4,713 target fish stocks—accounting for &gt;75% of global catch—to the changes in fishing pressure needed to reverse the ongoing declines of 20 marine mammal, sea turtle, and seabird populations threatened by bycatch. We project that maximizing fishery profits alone would also halt or reverse the declines of more than half these threatened populations. Recovering other populations would require substantially greater effort reductions or targeting improvements. Our analysis suggests that improved management of commercial fisheries could yield important collateral benefits for threatened bycatch species globally.* (Links to paper and code available soon.)
 
 #### [Sceptic priors and climate policy](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}
 

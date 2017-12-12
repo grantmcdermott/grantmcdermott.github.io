@@ -6,7 +6,7 @@ tags: [Data Science, R, GCE]
 comments: true
 ---
 
-*Note: The below tutorial has been on my GitHub](https://github.com/grantmcdermott/rstudio-compute-engine){:target="_blank"} for a while. I don't have a good reason for turning it into a blog post too (and at this stage), but I'll aim to keep this post as up-to-date as possible and reflect any changes in the setup requirements.*
+*Note: The below tutorial has been on my [GitHub](https://github.com/grantmcdermott/rstudio-compute-engine){:target="_blank"} account for a while. I don't have a good reason for turning it into a blog post too (and at this stage), but I'll try to keep this post as up-to-date as possible and reflect any changes in the setup requirements.*
 
 This is a how-to guide for setting up a server or virtual machine (VM) with [Google Compute Engine](https://cloud.google.com/compute/){:target="_blank"}. In addition, I'll also show you how to install [RStudio Server](https://www.rstudio.com/products/rstudio/download-server/){:target="_blank"} on your VM, so that you can perform your analysis in almost exactly the same user environment as you're used to, but now with the full power of cloud-based computation at your disposal. Trust me, it will be awesome.
 

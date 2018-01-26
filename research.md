@@ -16,12 +16,6 @@ comments: false
 
 ## Working papers
 
-#### Protecting marine mammals, turtles and birds by rebuilding global fisheries
-
-Revised and resubmitted, *Science*. With Matthew G. Burgess and others.
-
-*Reductions in global fishing pressure are needed to end overfishing of target species and maximize the value of fisheries. We ask whether such reductions would also be sufficient to protect non-target species threatened as bycatch. We compare changes in fishing pressure needed to maximize profits from 4,713 target fish stocks—accounting for &gt;75% of global catch—to changes in fishing pressure needed to reverse ongoing declines of 20 marine mammal, sea turtle, and seabird populations threatened by bycatch. We project that maximizing fishery profits would halt or reverse declines of approximately half of these threatened populations. Recovering the other populations would require substantially greater effort reductions or targeting improvements. Improving commercial fishery management could thus yield important collateral benefits for threatened bycatch species globally.*
-
 #### [Sceptic priors and climate policy](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}
 
 Under review.
@@ -30,12 +24,12 @@ Under review.
 
 #### [Hydro power. Market might.](https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing){:target="_blank"}
 
-*Hydropower is the world's foremost source of non-fossil fuel energy. It is also characterised by a unique set of production features that greatly simplify economic questions related to firm behaviour and output. Here I exploit these characteristics, together with quasi-experimental variation in market power and rich firm-level data, to identify evidence of noncompetitive behaviour in the Nordic electricity market. Consistent with theory, I find that increased market power leads to a dynamic pattern of resource shifting. Dominant firms tend to withhold production during inelastic demand periods, which would enable them to secure higher profits. My results suggest that even our most advanced electricity markets may be susceptible to manipulation under relatively common conditions.* ([Link to paper](https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing){:target="_blank"}. New version available soon.)
+*Hydropower is the world's foremost source of non-fossil fuel energy. It is also characterised by a unique set of production features that have the potential to greatly simplify economic questions related to firm behaviour and output. I demonstrate this principle using a novel data set of Norwegian hydropower firms, reservoirs and electricity flows. Pairing these data with quasi-experimental variation in local market power---due to market reconfiguration and binding transmission constraints---my empirical setting is sufficiently detailed to derive generalizable insights about firm behaviour without the need for additional structure or model restrictions. I show that increased market power causes firms to withhold production during inelastic demand periods, thereby yielding higher profits and driving up consumer prices. A larger takeaway is that even our most advanced markets may be susceptible to price distortions and welfare losses under fairly common conditions.* (New version available soon.)<!-- ([Link to paper](https://drive.google.com/file/d/0B6AgOxtQA9dTaWcxdHpsNE5wdjA/view?usp=sharing){:target="_blank"}.)-->
 
 <!-- Example of show/hide toggle for abstract:
 <details>
   <summary>Abstract</summary>
-   <i>Hydropower is the world's foremost source of non-fossil fuel energy. It is also characterised by a unique set of production features that greatly simplify economic questions related to firm behaviour and output. Here I exploit these characteristics, together with quasi-experimental variation in market power and rich firm-level data, to identify evidence of noncompetitive behaviour in the Nordic electricity market. Consistent with theory, I find that increased market power leads to a dynamic pattern of resource shifting. Dominant firms tend to withhold production during inelastic demand periods, which would enable them to secure higher profits. My results suggest that even our most advanced electricity markets may be susceptible to manipulation under relatively common conditions.</i>
+   <i>Hydropower is the world's foremost source of non-fossil fuel energy. It is also characterised by a unique set of production features that have the potential to greatly simplify economic questions related to firm behaviour and output. I exploit these characteristics, together with plant-level data and exogenous variation in market power, to identify evidence of noncompetitive behaviour in the Nordic electricity sector. Consistent with economic theory, I show that increased market power causes firms to withhold production during inelastic demand periods, thereby yielding higher profits and driving up consumer prices. The larger takeaway is that even our most advanced markets are susceptible to price distortions and welfare losses under fairly common conditions.</i>
 </details>
 <br>
 -->
@@ -57,6 +51,9 @@ With Christopher J. Costello and Kyle C. Meng.
 
 
 ## Publications
+
+#### Protecting marine mammals, turtles and birds by rebuilding global fisheries 
+With Matthew G. Burgess and others. Accepted at *Science*. ([Link to code](https://github.com/grantmcdermott/bycatch){:target="_blank"}.)
 
 #### [Five rules for pragmatic blue growth](http://dx.doi.org/10.1016/j.marpol.2016.12.005){:target="_blank"}
 With Matthew G. Burgess and others. Published in *Marine Policy*, 87 (2018) 331–339, 2018. ([Link to paper](http://dx.doi.org/10.1016/j.marpol.2016.12.005){:target="_blank"}.)

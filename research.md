@@ -10,9 +10,9 @@ image:
 comments: false
 ---
 
-**Fields:** Environmental and resource economics. Applied econometrics. Bayesian data analysis.
+**Fields:** Environmental and natural resource economics. Applied econometrics and data science. Uncertainty and Bayesian learning.
 
-**Interests:** Energy markets and climate change. Water management. Fisheries policy. Uncertainty and Bayesian learning. The impact of environmental quality on market outcomes.
+**Interests:** Energy markets and climate change. Water management. Fisheries policy. The impact of environmental quality on market outcomes.
 
 ## Working papers
 
@@ -46,13 +46,13 @@ comments: false
 
 ## Publications
 
-"Protecting marine mammals, turtles and birds by rebuilding global fisheries." With Matthew G. Burgess and others. Accepted at **Science**. (Links to paper and code forthcoming.)
+"Protecting marine mammals, turtles and birds by rebuilding global fisheries." With Matthew G. Burgess and others. Accepted at **<i>Science</i>**. (Links to paper and code forthcoming.)
 
-"Five rules for pragmatic blue growth." With Matthew G. Burgess and others. Published in **Marine Policy**, 87 (2018) 331–339, 2018. ([Link to paper](http://dx.doi.org/10.1016/j.marpol.2016.12.005){:target="_blank"}.)
+"Five rules for pragmatic blue growth." With Matthew G. Burgess and others. Published in **<i>Marine Policy</i>**, 87 (2018) 331–339, 2018. ([Link to paper](http://dx.doi.org/10.1016/j.marpol.2016.12.005){:target="_blank"}.)
 
-"Resolving disputes over ocean calamities." With Matthew G. Burgess. Published in **BioScience**, 65(12), 1115-1116, 2015. ([Link to paper](http://dx.doi.org/10.1093/biosci/biv147){:target="_blank"}.)
+"Resolving disputes over ocean calamities." With Matthew G. Burgess. Published in **<i>BioScience</i>**, 65(12), 1115-1116, 2015. ([Link to paper](http://dx.doi.org/10.1093/biosci/biv147){:target="_blank"}.)
 
-"Electricity prices, river temperatures and cooling water scarcity." With Øivind A. Nilsen. Published in **Land Economics**, 90(1), 131-148, 2014. ([Link to paper](http://dx.doi.org/10.3368/le.90.1.131){:target="_blank"}. Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post [here]({{ site.url }}/2013/01/14/electricity-prices-river-temperatures-water-scarcity/){:target="_blank"}.)
+"Electricity prices, river temperatures and cooling water scarcity." With Øivind A. Nilsen. Published in **<i>Land Economics</i>**, 90(1), 131-148, 2014. ([Link to paper](http://dx.doi.org/10.3368/le.90.1.131){:target="_blank"}. Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post [here]({{ site.url }}/2013/01/14/electricity-prices-river-temperatures-water-scarcity/){:target="_blank"}.)
 
 
 ## Report chapters

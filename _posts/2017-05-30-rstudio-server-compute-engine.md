@@ -111,7 +111,7 @@ root@rstudio:~# apt install libcurl4-openssl-dev libssl-dev libxml2-dev
 ```
 root@rstudio:~# add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
 root@rstudio:~# apt update && apt upgrade
-root@rstudio:~# apt install libgeos-dev libproj-dev libgdal-dev
+root@rstudio:~# apt install libgeos-dev libproj-dev libgdal-dev libudunits2-dev
 ```
 
 *R* is now ready to go your on VM directly from terminal:

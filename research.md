@@ -16,6 +16,10 @@ comments: false
 
 ## Working papers
 
+"The Blue Paradox: Preemptive Overfishing in Marine Protected Areas." With Kyle C. Meng, Gavin G. McDonald and Christopher J. Costello. Submitted.
+
+*Most large-scale conservation policies are anticipated or announced in advance. This risks the possibility of preemptive resource extraction before the conservation intervention goes into force. We use a novel high-resolution dataset of satellite-based fishing activity to show that anticipation of an impending marine protected area (MPA) undermines the policy by triggering an unintended race-to-fish. We study one of the world's largest MPAs, the Phoenix Islands Protected Area (PIPA), and find that fishers more than doubled their fishing effort once this area was earmarked for eventual protected status. The additional fishing effort resulted in an impoverished starting point for PIPA equivalent to 1.5 years of banned fishing. Extrapolating this behavior globally, we estimate that if other MPA announcements were to trigger similar preemptive fishing, this could temporarily increase the share of over-extracted fisheries from 65% to 72%. Our findings have implications for general conservation efforts, as well as the methods that scientists use to monitor and evaluate policy efficacy.*
+
 "Sceptic priors and climate policy." Under review.
 
 *How much evidence would it take to convince climate sceptics that they are wrong about global warming? I explore this question within a Bayesian framework. I consider a group of stylised sceptics and examine how these individuals update their beliefs in the face of current and continuing climate change. I find that available evidence in the form of instrumental climate data already tends to overwhelm all but the most extreme priors. The resulting posterior distributions of climate sensitivity correspond closely to existing estimates from the scientific literature. The updated beliefs of most sceptics are thus consistent with a carbon price that is substantially greater than zero. However, belief convergence is a non-linear function of prior strength, so that it become increasingly difficult to convince the marginal sceptic. I conclude by discussing the general conditions for consensus formation under Bayesian learning, its relevance to our current policy impasse, and offer some remarks about finding common ground in the future.* ([Link to paper](https://drive.google.com/file/d/0B6AgOxtQA9dTcjRmZkNjMVhuVFU/view?usp=sharing){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/sceptic-priors){:target="_blank"}.)
@@ -40,8 +44,6 @@ comments: false
 <!--
 *A broad class of economic decision problems involves searching over a collection of uncertain research leads. Existing search theory informs the efficient search over this pool using available information. But in many cases, the researcher has the opportunity to collect new information en masse, e.g. with a search engine or scientific framework, that will benefit the search. We derive the value of this type of bulk information, determine the general properties that render it large or small, and calculate its implications for economic innovation. We show that changes to the underlying characteristics of different search problems can yield surprising results. For example, more lucrative end-prizes can actually reduce the value of information, while the possibility of better information often suppresses innovation.*
 -->
-
-"The blue paradox: Preemptive overfishing in marine protected areas." With Christopher J. Costello, Kyle C. Meng and Gavin McDonald.
 
 
 ## Publications

@@ -48,7 +48,7 @@ comments: false
 
 ## Publications
 
-"Protecting marine mammals, turtles and birds by rebuilding global fisheries." With Matthew G. Burgess and others. Accepted at **<i>Science</i>**. (Links to paper and code forthcoming.)
+"Protecting marine mammals, turtles and birds by rebuilding global fisheries." With Matthew G. Burgess and others. Accepted at **<i>Science</i>**. ([Link to paper](http://science.sciencemag.org/content/359/6381/1255){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/bycatch){:target="_blank"}.)
 
 "Five rules for pragmatic blue growth." With Matthew G. Burgess and others. Published in **<i>Marine Policy</i>**, 87 (2018) 331–339, 2018. ([Link to paper](http://dx.doi.org/10.1016/j.marpol.2016.12.005){:target="_blank"}.)
 

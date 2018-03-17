@@ -29,6 +29,8 @@ These are the issues that my coauthor, [Øivind A. Nilsen](https://www.nhh.no/en
 
 There is a growing interest in this particular topic, as well as the important interactions between water and energy generally. Climate change, the issue that I started this post with, obviously brings added implications all of its own (e.g. [here](http://www.nature.com/nclimate/journal/v2/n9/full/nclimate1546.html){:target="_blank"}). While I believe our paper provides a good first insight into the electricity price effects of water scarcity, one limitation is that it probably doesn’t capture some of the more systematic dangers that are involved when entire regions are subject to drought and heat waves. Either way, expect to see water making the headlines in coming years for reasons related to power production.
 
+PS -- Coverage of our paper in the [*NHH Bulletin*](https://www.nhh.no/en/nhh-bulletin/article-archive/older-articles/2015/april/powerplants-and-climate/){:target="_blank"}. 
+
 
 [^1]: Two points. (i) Water vapour is a powerful GHG in its own right, but it’s influence on current warming is largely a secondary effect due to rising CO<sub>2</sub>. See [here](http://www.skepticalscience.com/water-vapor-greenhouse-gas-basic.htm){:target="_blank"}. (ii) Don’t feel too bad if you made the mistake of thinking that CO<sub>2</sub> is coming out of the cooling towers. Judging by the cover of the eminent energy economist, Dieter Helm’s [new book](http://www.amazon.co.uk/The-Carbon-Crunch-Getting-Climate/dp/0300186592){:target="_blank"}, you’re in good company. To be fair, I’ve no doubt that he is fully aware of the difference but he should at least speak to his publicist...
 

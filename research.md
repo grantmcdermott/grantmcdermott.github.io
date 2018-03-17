@@ -48,13 +48,13 @@ comments: false
 
 ## Publications
 
-"Protecting marine mammals, turtles and birds by rebuilding global fisheries." With Matthew G. Burgess and others. Published in **<i>Science</i>**, 359 (6381) 1255–31258, 2018. ([Link to paper](http://dx.doi.org/10.1126/science.aao4248){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/bycatch){:target="_blank"}. Blog post [here]({{ site.url }}/2018/03/16/science-bycatch/){:target="_blank"}.)
+"Protecting marine mammals, turtles and birds by rebuilding global fisheries." With Matthew G. Burgess and others. Published in **<i>Science</i>**, 359 (6381) 1255–31258, 2018. ([Link to paper](http://dx.doi.org/10.1126/science.aao4248){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/bycatch){:target="_blank"}. Blog post and media coverage [here]({{ site.url }}/2018/03/16/science-bycatch/){:target="_blank"}.)
 
 "Five rules for pragmatic blue growth." With Matthew G. Burgess and others. Published in **<i>Marine Policy</i>**, 87 (2018) 331–339, 2018. ([Link to paper](http://dx.doi.org/10.1016/j.marpol.2016.12.005){:target="_blank"}.)
 
 "Resolving disputes over ocean calamities." With Matthew G. Burgess. Published in **<i>BioScience</i>**, 65(12), 1115-1116, 2015. ([Link to paper](http://dx.doi.org/10.1093/biosci/biv147){:target="_blank"}.)
 
-"Electricity prices, river temperatures and cooling water scarcity." With Øivind A. Nilsen. Published in **<i>Land Economics</i>**, 90(1), 131-148, 2014. ([Link to paper](http://dx.doi.org/10.3368/le.90.1.131){:target="_blank"}. Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post [here]({{ site.url }}/2013/01/14/electricity-prices-river-temperatures-water-scarcity/){:target="_blank"}.)
+"Electricity prices, river temperatures and cooling water scarcity." With Øivind A. Nilsen. Published in **<i>Land Economics</i>**, 90(1), 131-148, 2014. ([Link to paper](http://dx.doi.org/10.3368/le.90.1.131){:target="_blank"}. Ungated version [here](https://drive.google.com/file/d/0B6AgOxtQA9dTM09ZbU5WRFVfQUk/view?usp=sharing){:target="_blank"}. Blog post and media coverage [here]({{ site.url }}/2013/01/14/electricity-prices-river-temperatures-water-scarcity/){:target="_blank"}.)
 
 
 ## Report chapters

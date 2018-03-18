@@ -12,7 +12,7 @@ A paper that I co-led with my good friend and frequent collaborator, [Matt Burge
 
 This is the culmination of a lot of work over the last 18+ months. It was also a true interdisciplinary effort, involving a great team from a variety of backgrounds (economists, ecologists, conservation scientists, etc.). I've already tried to summarise the main contribution of the paper on [Twitter](https://twitter.com/grant_mcdermott/status/974388061457997825){:target="_blank"} and highlighted some of my favourite aspects. But here's a blog post for those of you aren't <strike>masochists</strike> on social media.
 
-(A quick clarification on definitions for anyone who isn't familiar with this literature: "Target stocks" refers to economically valuable fish stocks, like tuna, that are typically caught for human consumption. "Bycatch", on the other hand, refers to unintended fisheries catch, like turtles or dolphins getting caught in tuna nets.)
+*(A quick clarification on definitions first for anyone who isn't familiar with this literature: "Target stocks" refers to economically valuable fish stocks, like tuna, that are typically caught for human consumption. "Bycatch", on the other hand, refers to unintended fisheries catch, like turtles or dolphins getting caught in tuna nets.)*
 
 The paper is about an important collateral benefit of reforming global fisheries. Namely, how many threatened bycatch species would we save in the process?
 

@@ -39,4 +39,4 @@ That about covers it. I hope you enjoy reading the [paper](http://dx.doi.org/10.
 </center>
 <br>
 
-PS -- Some nice coverage of our paper in [*Science Daily*](https://www.sciencedaily.com/releases/2018/03/180315155449.htm){:target="_blank"} and [*Around the O*](https://around.uoregon.edu/content/changes-ocean-fishing-could-save-some-species-extinction){:target="_blank"}.
+PS -- Some nice coverage of our paper in [*Science Daily*](https://www.sciencedaily.com/releases/2018/03/180315155449.htm){:target="_blank"}, [*Around the O*](https://around.uoregon.edu/content/changes-ocean-fishing-could-save-some-species-extinction){:target="_blank"} and the [*EDF blog*](http://blogs.edf.org/edfish/2018/04/03/how-getting-fishing-right-can-help-protect-threatened-ocean-wildlife/){:target="_blank"}.

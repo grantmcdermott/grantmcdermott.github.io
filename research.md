@@ -44,7 +44,7 @@ comments: false
 
 ## Publications
 
-"The Blue Paradox: Preemptive Overfishing in Marine Reserves." With Kyle C. Meng, Gavin G. McDonald and Christopher J. Costello. Forthcoming, <i>**Proceedings of the National Academy of Sciences**</i>.
+"The Blue Paradox: Preemptive Overfishing in Marine Reserves." With Kyle C. Meng, Gavin G. McDonald and Christopher J. Costello. Published in **<i>Proceedings of the National Academy of Sciences</i>**. ([Link to paper](http://www.pnas.org/content/early/2018/08/21/1802862115){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/blueparadox){:target="_blank"}.)
 
 "Protecting marine mammals, turtles and birds by rebuilding global fisheries." With Matthew G. Burgess and others. Published in **<i>Science</i>**, 359 (6381) 1255–31258, 2018. ([Link to paper](http://dx.doi.org/10.1126/science.aao4248){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/bycatch){:target="_blank"}. Blog post and media coverage [here]({{ site.url }}/2018/03/16/science-bycatch/){:target="_blank"}.)
 

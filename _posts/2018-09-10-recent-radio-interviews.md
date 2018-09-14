@@ -6,7 +6,7 @@ tags: [media, blue paradox, fisheries, marine reserves, MPAs]
 comments: true
 ---
 
-Here are two radio interviews that I did recently, covering the [blue paradox](https://doi.org/10.1073/pnas.1802862115){:target="_blank"} and related topics. It's like reading the actual paper, except quicker and with a ~~weird~~ cool accent.
+Here are two radio interviews that I did recently, covering the [blue paradox](https://doi.org/10.1073/pnas.1802862115){:target="_blank"} and related topics. It's like reading the actual paper, except quicker and with an accent.
 
 - **NPR interview on OBP's "Think Out Loud" with Dave Miller.**
 

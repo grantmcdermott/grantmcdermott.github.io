@@ -1,4 +1,4 @@
-—-
+---
 layout: post
 title: "RStudio Server on Google Compute Engine"
 excerpt: "Say hello to cloud computing"
@@ -288,7 +288,7 @@ echo 'export PATH="R_LIBS_USER=/usr/lib/R/library"' >> ~/.Renviron
 ```
 The *R* packages that Elvis installs should now be immediately available to Priscilla and vice versa.
 
-> **Tip:** If you've already installed some packages in a local (i.e. this-user-only) library path before creating the system-wide setup, you can just move them across with the ['mv'](https://linuxjourney.com/lesson/move-mv-command){:target="_blank"} command. Something like `root@rstudio:~# mv "/home/elvis/R/x86_64-pc-linux-gnu-library/3.5/*" /usr/lib/R/library` should work, but you'll need to check the appropriate paths yourself.
+> **Tip:** If you've already installed some packages in a local (i.e. this-user-only) library path before creating the system-wide setup, you can just move them across with the ['mv'](https://linuxjourney.com/lesson/move-mv-command){:target="_blank"} command. Something like the following should work, but you'll need to check the appropriate paths yourself: `root@rstudio:~# mv "/home/elvis/R/x86_64-pc-linux-gnu-library/3.5/*" /usr/lib/R/library`.
 
 
 ### Other tips

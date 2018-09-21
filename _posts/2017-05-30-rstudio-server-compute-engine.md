@@ -70,7 +70,7 @@ On a similar note, RStudio Server will run on port 8787 of the External IP, whic
 ```
 Congratulations: Set-up for your Compute Engine VM instance is complete! Easy, wasn't it?
 
-Not only have you successfully created your VM, but it should now be running on the Compute Engine cloud in the background. If not, see [here](#stopping-and-restarting-your-vm-instance) for instructions on how to start it up.
+Not only have you successfully created your VM, but it should now be running on the Compute Engine cloud in the background. If not, see [below](#stopping-and-restarting-your-vm-instance) for instructions on how to start it up.
 
 The next step is to log in via [SSH](https://en.wikipedia.org/wiki/Secure_Shell){:target="_blank"}. This is a simple matter of providing your VM's name and zone (if you forget to specify the zone or haven't assigned a default, you'll be prompted):
 
@@ -277,14 +277,14 @@ The first thing to do is determine where your exisiting system-wide R library is
 ```
 This will likely return several library paths. The system-wide library path should hopefully be pretty obvious (e.g. no usernames) and will probably be one of `/usr/lib/R/library` or `/usr/local/lib/R/library`. In my case, it was the former, but adjust as necessary.
 
-Next, we assign read, write and execute permissions to this directory for all members of our group. Here, I'm actually using the parent directory (i.e. `.../R` rather than `.../R/library`), but it should work regardless. Go back to your terminal and type:
+Next, we recursively assign read, write and execute permissions to this directory for all members of our group. Here, I'm actually using the parent directory (i.e. `.../R` rather than `.../R/library`), but it should work regardless. Go back to your terminal and type:
 ```
 root@rstudio:~# chown elvis:projectgrp -R /usr/lib/R/ ## Get location by typing ".libPaths()" in your R console
 root@rstudio:~# chmod -R 775 R/
 ```
 Once that's done, tell *R* to make this shared library path the default for your user, by adding it to their `~/.Renviron` file:
 ```
-echo 'export PATH="R_LIBS_USER=/usr/lib/R/library"' >> ~/.Renviron
+root@rstudio:~# echo 'export PATH="R_LIBS_USER=/usr/lib/R/library"' >> ~/.Renviron
 ```
 The *R* packages that Elvis installs should now be immediately available to Priscilla and vice versa.
 

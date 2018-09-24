@@ -37,7 +37,7 @@ Okay, introduction out of the way. Let's get up a running.
 
 ## Setup and log-in
 
-You'll need to choose an operating system for your VM, as well as the server zone (region). To see the available options, first open up the terminal ([Windows](http://www.digitalcitizen.life/7-ways-launch-command-prompt-windows-7-windows-8){:target="_blank"}, [Mac](https://www.techwalla.com/articles/how-to-open-terminal-on-a-macbook){:target="_blank"}, [Linux](http://www.wikihow.com/Open-a-Terminal-Window-in-Ubuntu){:target="_blank"}). Then enter
+You'll need to choose an operating system for your VM, as well as the server zone (region). To see the available options, first open up the terminal ([Windows](http://www.digitalcitizen.life/7-ways-launch-command-prompt-windows-7-windows-8){:target="_blank"}, [Mac](https://www.techwalla.com/articles/how-to-open-terminal-on-a-macbook){:target="_blank"}, [Linux](http://www.wikihow.com/Open-a-Terminal-Window-in-Ubuntu){:target="_blank"}). Then enter (without the `~$` cursor prompt):
 ```
 ~$ sudo gcloud compute images list
 ~$ sudo gcloud compute zones list
@@ -86,7 +86,7 @@ Passphrase successfully created and entered, you should now be connected to your
 ```
 root@rstudio:~#
 ```
-> **Tip:** Don't worry if you're logged in under a different username instead of "root" like I have here. Again, this is just a reflection of your OS security defaults and/or user preferences. However, it does mean that you will probably have to *add* "sudo" to the beginning of the remaining terminal commands while you are connected to your VM. In other words, reverse the earlier tweak that I suggested in this tutorial!
+> **Tip:** Don't worry if you're logged in under a different username instead of "root" like I have here. Again, this is just a reflection of your OS security defaults and/or user preferences. However, it does mean that you will probably have to *add* "sudo" to the beginning of the remaining terminal commands while you are connected to your VM. In other words, reverse the earlier tweak that I suggested in this tutorial...
 
 Next, we'll install *R*.
 
@@ -133,11 +133,11 @@ root@rstudio:~# gdebi rstudio-server-1.0.143-amd64.deb
 
 ### Add a user
 
-Now that you're logged into your VM, you might notice that you haven't actually signed in as a specific user. In fact, like me you may be automatically signed into the "rstudio" VM as root. (Fun fact: You can tell because the command line has a hashtag instead of a dollar sign.) This doesn't matter for most applications, but RStudio Server specifically requires a username/password combination. So we first need to create a new user before continuing. For example, to create a new user called "elvis" enter the follow command in terminal.
+Now that you're connected to your VM, you might notice that you never actually logged in as a specific user. (More discussion [here](https://groups.google.com/forum/#!msg/gce-discussion/DYfDOndtRTU/u_3kzNPqDAAJ)){:target="_blank"}.) In fact, like me you may be automatically logged into your VM as root. (Fun fact: You can tell because the command prompt is a `#` instead of a `$`.) This doesn't matter for most applications, but RStudio Server specifically requires a username/password combination. So we must first create a new user and give them a password before continuing. For example, we can create a new user called "elvis" like so:
 ```
 root@rstudio:~# adduser elvis
 ```
-You will then be prompted to specify a password for this user (and confirm various bits of biographical information which you can largely ignore).
+You will then be prompted to specify a user password (and confirm various bits of biographical information which you can largely ignore).
 
 > **Tip:** Once created, you can now log into a user's account on the VM directly via SSH, e.g. `sudo gcloud compute ssh elvis@rstudio --zone us-west1-a`
 
@@ -235,32 +235,34 @@ The default configuration that I have described above works perfectly well in ca
 
 However, there's a slight wrinkle in cases where you want to share information between *multiple* users on the same VM. (Which may well be necessary on a big group project.) In particular, RStudio Server is only going to be able to look for files in each individual user's home directory (e.g. `/home/elvis`.) Similarly, by default on Linux, the *R* libraries that one user installs [won't necessarily](https://stackoverflow.com/a/44903158){:target="_blank"} be available to other users.
 
-The reason has to do with user permissions; since Elvis is not a "super user", RStudio Server doesn't know that he is allowed to access other user's files and packages in our VM, and vice versa. Thankfully, there's a fairly easy workaround, involving standard Linux commands for adding [user and group](https://linuxjourney.com/lesson/users-and-groups){:target="_blank"} [privileges](https://linuxjourney.com/lesson/file-permissions){:target="_blank"}. I won't explain these in depth here, but here's an example solution that should cover most cases:
+The reason has to do with user permissions; since Elvis is not a "super user", RStudio Server doesn't know that he is allowed to access other users' files and packages in our VM, and vice versa. Thankfully, there's a fairly easy workaround, involving standard Linux commands for adding [user and group](https://linuxjourney.com/lesson/users-and-groups){:target="_blank"} [privileges](https://linuxjourney.com/lesson/file-permissions){:target="_blank"}. I won't explain these in depth here, but here's an example solution that should cover most cases:
 
 #### Sharing files across users
 
-Let's say that Elvis is working on a joint project together with a colleague called Priscilla. (Although, some say they are more than colleagues...) They have decided to keep all of their shared analysis in a new directory called "TeamProject", hosted on Elvis's home directory. We first need to give Priscilla her own user profile. Then, we create the new shared directory under Elvis's home directory:
+Let's say that Elvis is working on a joint project together with a colleague called Priscilla. (Although, some say they are more than colleagues...) They have decided to keep all of their shared analysis in a new directory called `TeamProject`, located within Elvis's home directory. Start by creating this new shared directory:
 ```
-root@rstudio:~# adduser priscilla
 root@rstudio:~# mkdir /home/elvis/TeamProject
 ```
-Next, create a group — call it "projectgrp" — whose members should all have full read, write and execute access to files within the Papers directory. Then add both a default user (i.e. Elvis although the order is unimportant) and other members (i.e. Priscilla) to this group:
+Presumably, a real-life Priscilla would already have a user profile at this point. But let's quickly create one too for our fictional version.
+```
+root@rstudio:~# adduser priscilla
+```
+Next, we create a user group. I'm going to call it "projectgrp", but as you wish. The group setup is useful because once we assign a set of permissions to a group, any members of that group will automatically receive those permissions too. With that in mind, we should add Elvis and Priscilla to "projectgrp" once it is created:
 ```
 root@rstudio:~# groupadd projectgrp
 root@rstudio:~# gpasswd -a elvis projectgrp
 root@rstudio:~# gpasswd -a priscilla projectgrp
 ```
-Next, set our default user (i.e. "elvis") and the other projectgrp members as owners of this directory as well as all of its children directories (`chown -R`). Grant them all read, write and execute access (`chmod -R 770`):
+Now we can set the necessary ownership permissions to the shared `TeamProject` directory. First, we use the `chown` command to assign ownership of this directory to a default user (in this case, "elvis") and the other "projectgrp" members. Second, we use the `chmod 770` command to grant them all read, write and execute access to the directory. In both both cases, we'll use the `-R` flag to recursively set permissions to all children directories of `TeamProject/` too.
 ```
 root@rstudio:~# chown -R elvis:projectgrp /home/elvis/TeamProject
 root@rstudio:~# chmod -R 770 /home/elvis/TeamProject
 ```
-
-The next two commands are optional, but advised if Priscilla is only going to be working on this VM through the TeamProject directory. First, you can change her primary group ID to projectgrp, so that all the files she creates are automatically assigned to that group:
+The next two commands are optional, but advised if Priscilla is only going to be working on this VM through the `TeamProject` directory. First, you can change her primary group ID to "projectgrp", so that all the files she creates are automatically assigned to that group:
 ```
 root@rstudio:~# usermod -g projectgrp priscilla
 ```
-Second, you can add a symbolic link to the TeamProject directory in Priscilla's home directory, so that it is immediately visible when she logs into RStudio Server. (Making sure that you switch to her account before running this command):
+Second, you can add a symbolic link to the `TeamProject` directory in Priscilla's home directory, so that it is immediately visible when she logs into RStudio Server. (Making sure that you switch to her account before running this command):
 ```
 root@rstudio:~# su - priscilla
 priscilla@rstudio:~$ ln -s /home/elvis/TeamProject /home/priscilla/TeamProject
@@ -269,15 +271,15 @@ priscilla@rstudio:~$ exit
 
 ##### Sharing *R* libraries (packages) across users
 
-Sharing *R* libraries across users is less critical than being able to share files. However, its still annoying having to install, say, `ggplot2` when your colleague has already installed it under her user account. Luckily, the solution to this annoyance very closely mimics the solution to file sharing that we've just seen above: We're going to set a default system-wide R library path and give all of our users access to that library via a group. For convenience I'm just going to contine with the "projectgrp" group that we created above. However, you could also create a new group (say, "rusers"), add individual users to it, etc. and proceed that way if you wanted to.
+Sharing *R* libraries across users is less critical than being able to share files. However, it's still annoying having to install, say, `ggplot2` when your colleague has already installed it under her user account. Luckily, the solution to this annoyance very closely mimics the solution to file sharing that we've just seen above: We're going to set a default system-wide *R* library path and give all of our users access to that library via a group. For convenience I'm just going to contine with the "projectgrp" group that we created above. However, you could also create a new group (say, "rusers"), add individual users to it, and proceed that way if you wanted to.
 
-The first thing to do is determine where your exisiting system-wide R library is located; i.e. where the base R packages are installed. Open up your R console and type (without the ">" prompt):
+The first thing to do is determine where your exisiting system-wide R library is located. Open up your *R* console and type (without the ">" prompt):
 ```
 > .libPaths()
 ```
-This will likely return several library paths. The system-wide library path should hopefully be pretty obvious (e.g. no usernames) and will probably be one of `/usr/lib/R/library` or `/usr/local/lib/R/library`. In my case, it was the former, but adjust as necessary.
+This will likely return several library paths. The system-wide library path should hopefully be pretty obvious (e.g. no usernames) and will probably be one of `/usr/lib/R/library` or `/usr/local/lib/R/site-library`. In my case, it was the former, but adjust as necessary.
 
-Next, we recursively assign read, write and execute permissions to this directory for all members of our group. Here, I'm actually using the parent directory (i.e. `.../R` rather than `.../R/library`), but it should work regardless. Go back to your terminal and type:
+Once we have determined the location of our system-wide library directory, we can recursively assign read, write and execute permissions to it for all members of our group. Here, I'm actually using the parent directory (i.e. `.../R` rather than `.../R/library`), but it should work regardless. Go back to your terminal and type:
 ```
 root@rstudio:~# chown elvis:projectgrp -R /usr/lib/R/ ## Get location by typing ".libPaths()" in your R console
 root@rstudio:~# chmod -R 775 R/
@@ -294,10 +296,14 @@ The *R* packages that Elvis installs should now be immediately available to Pris
 ### Other tips
 Remember to keep your VM system up to date (just like you would a normal computer).
 ```
-root@rstudio:~# gcloud components update
 root@rstudio:~# apt update
 root@rstudio:~# apt upgrade
 ```
+You can also update the `gcloud` utility components on your local computer (i.e. not your VM) with the following command:
+```
+~$ sudo gcloud components update
+```
+
 
 ## Additional resources
 

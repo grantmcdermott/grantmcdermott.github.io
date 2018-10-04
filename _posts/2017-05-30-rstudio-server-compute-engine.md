@@ -42,7 +42,7 @@ You'll need to choose an operating system for your VM, as well as the server zon
 ~$ sudo gcloud compute images list
 ~$ sudo gcloud compute zones list
 ```
-> **Tip:** If you get an error message running the above commands, try re-running them without the "sudo" bit at the beginning. This stands for "[superuser do](https://en.wikipedia.org/wiki/Sudo){:target="_blank"}", which invokes special user privileges as a security check, but may be redundant on your system. Clearly, if this applies to you, then you will need to do the same for any other commands invoking "sudo" for the rest of this tutorial.
+> **Tip:** If you get an error message running the above commands, try re-running them without the "sudo" bit at the beginning. This stands for "[<b>su</b>peruser <b>do</b>](https://en.wikipedia.org/wiki/Sudo){:target="_blank"}", which invokes special user privileges as a security check, but may be redundant on your system. Clearly, if this applies to you, then you will need to do the same for any other commands invoking "sudo" for the rest of this tutorial.
 
 We'll go with Ubuntu 18.04 and set our zone to the U.S. west coast.
 
@@ -137,7 +137,10 @@ Now that you're connected to your VM, you might notice that you never actually l
 ```
 root@rstudio:~# adduser elvis
 ```
-You will then be prompted to specify a user password (and confirm various bits of biographical information which you can largely ignore).
+You will then be prompted to specify a user password (and confirm various bits of biographical information which you can largely ignore). An optional, but recommended step is to add your new user to the `sudo` group. We'll cover this in more depth later in the tutorial, but being part of the `sudo` group will allow Elvis to temporarily invoke superuser priviledges when needed.
+```
+root@rstudio:~# usermod -aG sudo elvis
+```
 
 > **Tip:** Once created, you can now log into a user's account on the VM directly via SSH, e.g. `sudo gcloud compute ssh elvis@rstudio --zone us-west1-a`
 
@@ -235,7 +238,7 @@ The default configuration that I have described above works perfectly well in ca
 
 However, there's a slight wrinkle in cases where you want to share information between *multiple* users on the same VM. (Which may well be necessary on a big group project.) In particular, RStudio Server is only going to be able to look for files in each individual user's home directory (e.g. `/home/elvis`.) Similarly, by default on Linux, the *R* libraries that one user installs [won't necessarily](https://stackoverflow.com/a/44903158){:target="_blank"} be available to other users.
 
-The reason has to do with user permissions; since Elvis is not a "super user", RStudio Server doesn't know that he is allowed to access other users' files and packages in our VM, and vice versa. Thankfully, there's a fairly easy workaround, involving standard Linux commands for adding [user and group](https://linuxjourney.com/lesson/users-and-groups){:target="_blank"} [privileges](https://linuxjourney.com/lesson/file-permissions){:target="_blank"}. I won't explain these in depth here, but here's an example solution that should cover most cases:
+The reason has to do with user permissions; since Elvis is not an automatic "superuser", RStudio Server doesn't know that he is allowed to access other users' files and packages in our VM, and vice versa. Thankfully, there's a fairly easy workaround, involving standard Linux commands for adding [user and group](https://linuxjourney.com/lesson/users-and-groups){:target="_blank"} [privileges](https://linuxjourney.com/lesson/file-permissions){:target="_blank"}. I won't explain these in depth here, but here's an example solution that should cover most cases:
 
 #### Sharing files across users
 

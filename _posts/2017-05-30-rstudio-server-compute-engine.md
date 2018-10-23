@@ -6,7 +6,7 @@ tags: [Data Science, R, GCE]
 comments: true
 ---
 
-*Note: This post has been updated occasionally to reflect changes in the setup requirements. The most recent update was September 20, 2018.*
+*Note: This tutorial has been updated occasionally to reflect changes in the setup requirements. The most recent update was October 23, 2018. Skip to [here](#summary) if you just want the post-setup summary.*
 
 This is a how-to guide for setting up a server or virtual machine (VM) with [Google Compute Engine](https://cloud.google.com/compute/){:target="_blank"}. In addition, I'll also show you how to install [RStudio Server](https://www.rstudio.com/products/rstudio/download-server/){:target="_blank"} on your VM, so that you can perform your analysis in almost exactly the same user environment as you're used to, but now with the full power of cloud-based computation at your disposal. Trust me, it will be awesome.
 
@@ -201,7 +201,23 @@ In one sense, this tutorial could end right now. You have successfully installed
 
 ## BONUS: Getting the most out of your Compute Engine + RStudio Server setup
 
-### Transferring and syncing files between your VM and your local computer
+
+### Install the Intel Math Kernel Library (MKL) or OpenBLAS/LAPACK
+
+*R* ships with its own libraries for performing the BLAS (Basic Linear Algebra Suprograms) and LACPACK (Linear Algenra PACKage) numerical routines that are the backbone of statistical and computational programming. Things like matrix operations and so on. While this default works well enough, you can get *significant* speedups by switching to more optimized libraries such as the [Intel Math Kernel Library (MKL)](https://software.intel.com/en-us/mkl){:target="_blank"} or [OpenBLAS](https://www.openblas.net/){:target="_blank"}, which support multi-threading. The former is slightly faster according to the benchmark tests that I've seen, but was historically harder to install. However, thanks to [Dirk Eddelbuettel](https://github.com/eddelbuettel/mkl4deb){:target="_blank"}, this is now very easily done:
+```
+~$ git clone https://github.com/eddelbuettel/mkl4deb.git
+~$ sudo bash mkl4deb/script.sh
+```
+Wait for the script to finish running. Once it's done, your *R* session should automatically be configured to use MKL by default. You can check yourself by opening up *R* and checking the `sessionInfo()` output, which should return something like:
+```
+Matrix products: default
+BLAS/LAPACK: /opt/intel/compilers_and_libraries_2018.2.199/linux/mkl/lib/intel64_lin/libmkl_rt.so
+```
+(NOTE: Dirk's script only works for Ubuntu and other Debian-based Linux distros. If you decided to spin up a different OS for your VM than we did in this tutorial, then you are probably better off installing OpenBLAS.)
+
+
+### Transfer and sync files between your VM and your local computer
 
 You have three main options.
 
@@ -216,7 +232,7 @@ This is arguably the simplest option and works well for copying files from your 
 Manually transferring files or folders across systems is done fairly easily using the command line:
 
 ```
-~$ sudo gcloud compute copy-files rstudio:/home/elvis/Papers/MyAwesomePaper/amazingresults.csv ~/local-directory/amazingresults-copy.csv --zone us-west1-a
+~$ sudo gcloud compute scp rstudio:/home/elvis/Papers/MyAwesomePaper/amazingresults.csv ~/local-directory/amazingresults-copy.csv --zone us-west1-a
 ```
 It's also possible to transfer files using your regular desktop file browser thanks to SCP. (On Linus and Mac OSX at least. Windows users first need to install a program call WinSCP.) See [here](https://cloud.google.com/compute/docs/instances/transfer-files){:target="_blank"}.
 
@@ -232,7 +248,7 @@ While I haven't tried it myself, you should also be able to install [Box](http:/
 
 Last, but not least, Google themselves encourage data synchronisation on Compute Engine VMs using another product within their Cloud Platform, i.e. [Google Storage](https://cloud.google.com/storage/){:target="_blank"}. This is especially useful for really big data files and folders, but beyond the scope of this tutorial. (If you're interested in learning more, see [here](https://cloud.google.com/solutions/filers-on-compute-engine){:target="_blank"} and [here](https://cloud.google.com/compute/docs/disks/gcs-buckets){:target="_blank"}.)
 
-### Sharing files and libraries between multiple users on the same VM
+### Share files and libraries between multiple users on the same VM
 
 The default configuration that I have described above works perfectly well in cases where you are a single user and don't venture outside of your home directory (and its sub directories). Indeed, you can just add new folders within this user's home directory using [standard Linux commands](https://linuxjourney.com/lesson/make-directory-mkdir-command){:target="_blank"} and you will be able to access these from within RStudio Server when you log in as that user.
 
@@ -240,7 +256,7 @@ However, there's a slight wrinkle in cases where you want to share information b
 
 The reason has to do with user permissions; since Elvis is not an automatic "superuser", RStudio Server doesn't know that he is allowed to access other users' files and packages in our VM, and vice versa. Thankfully, there's a fairly easy workaround, involving standard Linux commands for adding [user and group](https://linuxjourney.com/lesson/users-and-groups){:target="_blank"} [privileges](https://linuxjourney.com/lesson/file-permissions){:target="_blank"}. I won't explain these in depth here, but here's an example solution that should cover most cases:
 
-#### Sharing files across users
+#### Share files across users
 
 Let's say that Elvis is working on a joint project together with a colleague called Priscilla. (Although, some say they are more than colleagues...) They have decided to keep all of their shared analysis in a new directory called `TeamProject`, located within Elvis's home directory. Start by creating this new shared directory:
 ```
@@ -272,7 +288,7 @@ priscilla@rstudio:~$ ln -s /home/elvis/TeamProject /home/priscilla/TeamProject
 priscilla@rstudio:~$ exit
 ```
 
-##### Sharing *R* libraries (packages) across users
+##### Share *R* libraries (packages) across users
 
 Sharing *R* libraries across users is less critical than being able to share files. However, it's still annoying having to install, say, `ggplot2` when your colleague has already installed it under her user account. Luckily, the solution to this annoyance very closely mimics the solution to file sharing that we've just seen above: We're going to set a default system-wide *R* library path and give all of our users access to that library via a group. For convenience I'm just going to contine with the "projectgrp" group that we created above. However, you could also create a new group (say, "rusers"), add individual users to it, and proceed that way if you wanted to.
 

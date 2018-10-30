@@ -128,7 +128,7 @@ You should check what the latest available version of Rstudio Server is [here](h
 ```
 root@rstudio:~# apt install gdebi-core
 root@rstudio:~# wget https://download2.rstudio.org/rstudio-server-1.1.456-amd64.deb
-root@rstudio:~# gdebi rstudio-server-1.0.143-amd64.deb
+root@rstudio:~# gdebi rstudio-server-1.1.456-amd64.deb
 ```
 
 ### Add a user

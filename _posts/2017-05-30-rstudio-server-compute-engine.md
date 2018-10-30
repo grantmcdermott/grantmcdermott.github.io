@@ -6,7 +6,7 @@ tags: [Data Science, R, GCE]
 comments: true
 ---
 
-*Note: This tutorial has been updated occasionally to reflect changes in the setup requirements. The most recent update was October 23, 2018. Skip to [here](#summary) if you just want the post-setup summary.*
+*Note: This tutorial has been updated occasionally to reflect changes in the setup requirements. The most recent update was October 30, 2018. Skip to [here](#summary) if you just want the post-setup summary.*
 
 This is a how-to guide for setting up a server or virtual machine (VM) with [Google Compute Engine](https://cloud.google.com/compute/){:target="_blank"}. In addition, I'll also show you how to install [RStudio Server](https://www.rstudio.com/products/rstudio/download-server/){:target="_blank"} on your VM, so that you can perform your analysis in almost exactly the same user environment as you're used to, but now with the full power of cloud-based computation at your disposal. Trust me, it will be awesome.
 
@@ -15,7 +15,7 @@ This is a how-to guide for setting up a server or virtual machine (VM) with [Goo
 1. Sign up for a [12-month ($300 credit) free trial](https://console.cloud.google.com/freetrial){:target="_blank"} with the Google Cloud Platform. This requires an existing Google/Gmail acount. During the course of sign-up, you should [create a project](https://cloud.google.com/resource-manager/docs/creating-managing-projects){:target="_blank"} that will be associated with billing. This is purely ceremonial at present — we're using the free trial period after all — but a billable project ID is required before gaining access to the platform.
 2. Download and follow the installation instructions for the Google Cloud SDK command line utility, `gcloud` [here](https://cloud.google.com/sdk/){:target="_blank"}.
 
-> **Tip:** Please pay proper attention to the Google/Gmail account that you use to sign up for the Cloud Platform in Step 1. (E.g. You might have two Gmail accounts, where one is your personal Gmail and the other is linked to your university email.) Needless to say, you'll want to make sure that you use the *same* account when setting up the gloud utility in Step 2. This might all sound obvious, but it has been the primary sticking point during class tutorials, where people encounter a bunch of puzzling authentication errors simply because they aren't using a consistent account.
+> **Tip:** Please pay proper attention to the Google/Gmail account that you use to sign up for the Cloud Platform in Step 1. (E.g. You might have two Gmail accounts, where one is your personal Gmail and the other is linked to your university email.) Needless to say, you'll want to make sure that you use the *same* account when setting up the gloud utility in Step 2. This might all sound obvious, but it has been the primary sticking point during live tutorials, where people encounter a bunch of puzzling authentication errors simply because they aren't using a consistent account.
 
 ## Introduction
 
@@ -58,7 +58,7 @@ This should generate something like:
 Created [https://www.googleapis.com/compute/v1/projects/YOUR-PROJECT/zones/us-west1-a/instances/rstudio].
 NAME      ZONE        MACHINE_TYPE  PREEMPTIBLE  INTERNAL_IP  EXTERNAL_IP      STATUS
 rstudio  us-west1-a  n1-standard-8               10.138.0.2   104.198.7.157  RUNNING
-````
+```
 
 Write down the External IP address, as we'll need it for running RStudio Server later.
 
@@ -68,9 +68,12 @@ On a similar note, RStudio Server will run on port 8787 of the External IP, whic
 ```
 ~$ sudo gcloud compute firewall-rules create allow-rstudio --allow=tcp:8787
 ```
-Congratulations: Set-up for your Compute Engine VM instance is complete! Easy, wasn't it?
 
-Not only have you successfully created your VM, but it should now be running on the Compute Engine cloud in the background. If not, see [below](#stopping-and-restarting-your-vm-instance) for instructions on how to start it up.
+> **Tip:** While I don't cover it in this tutorial, anyone looking to install and run [Jupyter Notebooks](http://jupyter.org/){:target="_blank"} on their VM should follow a similar step. Just amend the above command to Jupyter's default port of 8888.
+
+Congratulations: Set-up for your Compute Engine VM instance is complete! 
+
+Easy, wasn't it?
 
 The next step is to log in via [SSH](https://en.wikipedia.org/wiki/Secure_Shell){:target="_blank"}. This is a simple matter of providing your VM's name and zone (if you forget to specify the zone or haven't assigned a default, you'll be prompted):
 
@@ -199,6 +202,8 @@ And, remember, if you really want to avoid the command line, then you can always
 
 In one sense, this tutorial could end right now. You have successfully installed all the programs and components that you'll need for high-performance statistical analysis and computing. Your VM will be ready to go with RStudio Server whenever you want it. However, there are still a few more tweaks and tips that we can use to really improve our user experience and reduce complications when interacting with these VMs from our local computers. The rest of this tutorial covers my main tips and recommendations.
 
+---
+
 ## BONUS: Getting the most out of your Compute Engine + RStudio Server setup
 
 
@@ -214,7 +219,7 @@ Wait for the script to finish running. Once it's done, your *R* session should a
 Matrix products: default
 BLAS/LAPACK: /opt/intel/compilers_and_libraries_2018.2.199/linux/mkl/lib/intel64_lin/libmkl_rt.so
 ```
-(NOTE: Dirk's script only works for Ubuntu and other Debian-based Linux distros. If you decided to spin up a different OS for your VM than we did in this tutorial, then you are probably better off installing OpenBLAS.)
+(NOTE: Dirk's script only works for Ubuntu and other Debian-based Linux distros. If you decided to spin up a different OS for your VM than we did in this tutorial, then you are probably better off [installing OpenBLAS](https://github.com/xianyi/OpenBLAS/wiki/Precompiled-installation-packages){:target="_blank"}.)
 
 
 ### Transfer and sync files between your VM and your local computer
@@ -234,13 +239,13 @@ Manually transferring files or folders across systems is done fairly easily usin
 ```
 ~$ sudo gcloud compute scp rstudio:/home/elvis/Papers/MyAwesomePaper/amazingresults.csv ~/local-directory/amazingresults-copy.csv --zone us-west1-a
 ```
-It's also possible to transfer files using your regular desktop file browser thanks to SCP. (On Linus and Mac OSX at least. Windows users first need to install a program call WinSCP.) See [here](https://cloud.google.com/compute/docs/instances/transfer-files){:target="_blank"}.
+It's also possible to transfer files using your regular desktop file browser thanks to SCP. (On Linux and Mac OSX at least. Windows users first need to install a program call WinSCP.) See [here](https://cloud.google.com/compute/docs/instances/transfer-files){:target="_blank"}.
 
-> **Tip:** The SCP solution is much more efficient when you have assigned a static IP address to your VM instance — otherwise you have to set it up each time you restart your VM instance and are assigned a new ephemeral IP address — so I'd advise doing that [first](https://cloud.google.com/compute/docs/configure-instance-ip-addresses#assign_new_instance){:target="_blank"}.
+> **Tip:** The file browser-based SCP solution is much more efficient when you have assigned a static IP address to your VM instance — otherwise you have to set it up each time you restart your VM instance and are assigned a new ephemeral IP address — so I'd advise doing that [first](https://cloud.google.com/compute/docs/configure-instance-ip-addresses#assign_new_instance){:target="_blank"}.
 
 #### 3. Sync with Git(Hub), Box, Dropbox, or Google Drive
 
-This is my own preferred option. Ubuntu, like all Linux distros, comes with Git preinstalled. You should thus be able to sync your results across systems using Git(Hub) in the [usual fashion](http://happygitwithr.com/){:target="_blank"}. I tend to use the command line for all my Git operations (committing, pulling, pushing, etc.) and this works exactly as expected once you've SSH'd into your VM. However, Rstudio Server's built-in Git UI also works well and comes with some nice added functionality (highlighted diff. sections and so forth).
+This is my own preferred option. Ubuntu, like all virtually Linux distros, comes with Git preinstalled. You should thus be able to sync your results across systems using Git(Hub) in the [usual fashion](http://happygitwithr.com/){:target="_blank"}. I tend to use the command line for all my Git operations (committing, pulling, pushing, etc.) and this works exactly as expected once you've SSH'd into your VM. However, Rstudio Server's built-in Git UI also works well and comes with some nice added functionality (highlighted diff. sections and so forth).
 
 While I haven't tried it myself, you should also be able to install [Box](http://xmodulo.com/how-to-mount-box-com-cloud-storage-on-linux.html){:target="_blank"}, [Dropbox](https://www.linuxbabe.com/cloud-storage/install-dropbox-ubuntu-16-04){:target="_blank"} or [Google Drive](http://www.techrepublic.com/article/how-to-mount-your-google-drive-on-linux-with-google-drive-ocamlfuse/){:target="_blank"} on your VM and sync across systems that way. If you go this route, then I'd advise installing these programs as sub-directories of the user's "home" directory. Even then you may run into problems related to user permissions. However, just follow the instructions for linking to the hypothetical "TeamProject" folder that I describe below (except that you must obviously point towards the relevant Box/Dropbox/GDrive folder location instead) and you should be fine.
 

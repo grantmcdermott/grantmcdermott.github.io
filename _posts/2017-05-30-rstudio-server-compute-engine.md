@@ -44,7 +44,7 @@ You'll need to choose an operating system for your VM, as well as the server zon
 ```
 > **Tip:** If you get an error message running the above commands, try re-running them without the "sudo" bit at the beginning. This stands for "[<b>su</b>peruser <b>do</b>](https://en.wikipedia.org/wiki/Sudo){:target="_blank"}", which invokes special user privileges as a security check, but may be redundant on your system. Clearly, if this applies to you, then you will need to do the same for any other commands invoking "sudo" for the rest of this tutorial.
 
-We'll go with Ubuntu 18.04 and set our zone to the U.S. west coast.
+I'll go with Ubuntu 18.04 and set my zone to the U.S. west coast, because that's closest to me (although it shouldn't really matter).
 
 > **Tip:** You can set the default zone in your local client so that you don't need to specify it every time. See [here](https://cloud.google.com/compute/docs/gcloud-compute/#set_default_zone_and_region_in_your_local_client){:target="_blank"}.
 
@@ -71,7 +71,7 @@ On a similar note, RStudio Server will run on port 8787 of the External IP, whic
 
 > **Tip:** While I don't cover it in this tutorial, anyone looking to install and run [Jupyter Notebooks](http://jupyter.org/){:target="_blank"} on their VM should follow a similar step. Just amend the above command to Jupyter's default port of 8888.
 
-Congratulations: Set-up for your Compute Engine VM instance is complete! 
+Congratulations: Set-up for your Compute Engine VM instance is complete!
 
 Easy, wasn't it?
 
@@ -136,7 +136,7 @@ root@rstudio:~# gdebi rstudio-server-1.1.456-amd64.deb
 
 ### Add a user
 
-Now that you're connected to your VM, you might notice that you never actually logged in as a specific user. (More discussion [here](https://groups.google.com/forum/#!msg/gce-discussion/DYfDOndtRTU/u_3kzNPqDAAJ)){:target="_blank"}.) In fact, like me you may be automatically logged into your VM as root. (Fun fact: You can tell because the command prompt is a `#` instead of a `$`.) This doesn't matter for most applications, but RStudio Server specifically requires a username/password combination. So we must first create a new user and give them a password before continuing. For example, we can create a new user called "elvis" like so:
+Now that you're connected to your VM, you might notice that you never actually logged in as a specific user. (More discussion [here](https://groups.google.com/forum/#!msg/gce-discussion/DYfDOndtRTU/u_3kzNPqDAAJ){:target="_blank"}.) In fact, like me you may be automatically logged into your VM as root. (Fun fact: You can tell because the command prompt is a `#` instead of a `$`.) This doesn't matter for most applications, but RStudio Server specifically requires a username/password combination. So we must first create a new user and give them a password before continuing. For example, we can create a new user called "elvis" like so:
 ```
 root@rstudio:~# adduser elvis
 ```

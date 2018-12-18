@@ -35,7 +35,7 @@ comments: false
 
 ## Selected works in progress
 
-"The value of *bulk information* in the age of search engines." With Christopher J. Costello and Michael B. Ward.
+"The value of mass information: Search in the Google era." With Christopher J. Costello and Michael B. Ward.
 
 <!--
 *A broad class of economic decision problems involves searching over a collection of uncertain research leads. Existing search theory informs the efficient search over this pool using available information. But in many cases, the researcher has the opportunity to collect new information en masse, e.g. with a search engine or scientific framework, that will benefit the search. We derive the value of this type of bulk information, determine the general properties that render it large or small, and calculate its implications for economic innovation. We show that changes to the underlying characteristics of different search problems can yield surprising results. For example, more lucrative end-prizes can actually reduce the value of information, while the possibility of better information often suppresses innovation.*
@@ -43,6 +43,8 @@ comments: false
 
 
 ## Publications
+
+"Alternate explanations for the blue paradox do not withstand statistical scrutiny." With Kyle C. Meng, Gavin G. McDonald and Christopher J. Costello. Published in **<i>Proceedings of the National Academy of Sciences</i>**. ([Link to paper](https://doi.org/10.1073/pnas.1818687115){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/blueparadox){:target="_blank"}.)
 
 "The Blue Paradox: Preemptive Overfishing in Marine Reserves." With Kyle C. Meng, Gavin G. McDonald and Christopher J. Costello. Published in **<i>Proceedings of the National Academy of Sciences</i>**. ([Link to paper](http://dx.doi.org/10.1073/pnas.1802862115){:target="_blank"}. [Link to code](https://github.com/grantmcdermott/blueparadox){:target="_blank"}.)
 

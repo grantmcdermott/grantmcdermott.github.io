@@ -12,7 +12,7 @@ Can you actually make a problem worse by promising to solve it?
 
 That’s a conundrum that policymakers face — often unwittingly — on a variety of issues. A famous, if controversial, example comes from the gun control debate in the United States, where calls for tougher legislation in the wake of the 2012 Sandy Hook school massacre were followed by a [surge in](http://science.sciencemag.org/content/358/6368/1324){:target="_blank"} [firearm sales](https://www.ft.com/content/9fb20eea-6407-11e3-b70d-00144feabdc0){:target="_blank"}. The reason? Gun enthusiasts tried to stockpile firearms before it became harder to purchase them.
 
-In a [new paper](https://doi.org/10.1073/pnas.1802862115){:target="_blank"} published in PNAS, we ask whether the same thing can happen with environmental conservation.
+In a [**new paper**](https://doi.org/10.1073/pnas.1802862115){:target="_blank"} published in PNAS, we ask whether the same thing can happen with environmental conservation.
 
 The short answer is “yes”. Using data from [Global Fishing Watch (GFW)](http://globalfishingwatch.org/){:target="_blank"}, we show that efforts to ban fishing in a large, ecologically sensitive, part of the ocean paradoxically led to more fishing before the ban could be enforced.
 

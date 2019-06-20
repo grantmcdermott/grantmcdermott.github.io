@@ -18,4 +18,4 @@ Unless otherwise noted, all courses are currently being taught at the University
 
 ### Undergraduate
 
-*Environmental Economics*, EC 434:434. ([Syllabus](https://drive.google.com/file/d/1Ut5_qRwkKr_PsLNyUYG9ttKZdbiBhqAs/view?usp=sharing).)
+*Intermediate Microeconomic Theory*, EC 311. *Environmental Economics*, EC 434:434. ([Syllabus](https://drive.google.com/file/d/1Ut5_qRwkKr_PsLNyUYG9ttKZdbiBhqAs/view?usp=sharing).)

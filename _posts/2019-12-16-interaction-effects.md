@@ -6,7 +6,7 @@ tags: [interaction terms, marginal effects]
 comments: true
 ---
 
-Last week, I [tweeted](https://twitter.com/grant_mcdermott/status/1202084676439085056?s=20){:target="_blank"} one of my favourite tricks for getting the full marginal effect of interaction terms in R. The short version is instead of writing your model as `lm(y ~ f1 * x2)`, you write it as `lm(y ~ f1 / x2)`. Here's an example using everyone's favourite mtcars dataset.
+Last week, I [tweeted](https://twitter.com/grant_mcdermott/status/1202084676439085056?s=20){:target="_blank"} one of my favourite R tricks for getting the full marginal effect of interaction terms. The short version is that, instead of writing your model as `lm(y ~ f1 * x2)`, you write it as `lm(y ~ f1 / x2)`. Here's an example using everyone's favourite mtcars dataset.
 
 ```r
 ## Partial marginal effects 
@@ -56,11 +56,11 @@ summary(lm(mpg ~ factor(am) / wt, data = mtcars))
 #> F-statistic: 46.57 on 3 and 28 DF,  p-value: 5.209e-11
 ```
 
-To get the full marginal effect of `factor(am)1:wt` in the first case, I have to manually sum up the coefficients on the constituent parts (i.e. `factor(am)1=14.8784` + `factor(am)1:wt=-5.2984`). In the second case, I get the full marginal effect of **&minus;9.0843** immediately in the model summary. Not only that, but the correct standard errors, p-values, etc. are also automatically calculated for me. (If you don't remember, manually calculating SEs for multiplicative interaction terms is a [real](http://mattgolder.com/wp-content/uploads/2015/05/standarderrors1.png){:target="_blank"} [pain](http://mattgolder.com/wp-content/uploads/2015/05/standarderrors2.png){:target="_blank"}. And that's before we get to additional complications like standard error clustering, etc...)
+To get the full marginal effect of `factor(am)1:wt` in the first case, I have to manually sum up the coefficients on the constituent parts (i.e. `factor(am)1=14.8784` + `factor(am)1:wt=-5.2984`). In the second case, I get the full marginal effect of **&minus;9.0843** immediately in the model summary. Not only that, but the correct standard errors, p-values, etc. are also automatically calculated for me. (If you don't remember, manually calculating SEs for multiplicative interaction terms is a [real](http://mattgolder.com/wp-content/uploads/2015/05/standarderrors1.png){:target="_blank"} [pain](http://mattgolder.com/wp-content/uploads/2015/05/standarderrors2.png){:target="_blank"}. And that's before we get to additional complications like standard error clustering.)
 
-Note that the `lm(y ~ f1 / x2)` syntax is actually shorthand for the more verbose `lm(y ~ f1 + f1:x2)`. I'll get back to this point further below, but I wanted to flag the expanded syntax as important because it demonstrates why this trick "works". The key idea is to drop the continuous variable parent term (here: `x2`) from the regression. This forces all the remaining child terms relative to the same base. It's also why the same idea works in, say, Stata (see [here](https://twitter.com/paulgp/status/1202085605116665856){:target="_blank"}).
+Note that the `lm(y ~ f1 / x2)` syntax is actually shorthand for the more verbose `lm(y ~ f1 + f1:x2)`. I'll get back to this point further below, but I wanted to flag the expanded syntax as important because it demonstrates why this trick "works". The key idea is to drop the continuous variable parent term (here: `x2`) from the regression. This forces all of the remaining child terms relative to the same base. It's also why this trick can easily be adapted to work in, say, Julia or Stata too (see [here](https://twitter.com/paulgp/status/1202085605116665856){:target="_blank"}).
 
-So far so good. It's a great trick that has saved me a bunch of time (say nothing of likely user-error) that I recommend everyone use. Yet, I was prompted to write a separate blog post after being asked questions like whether this trick a) works for higher-order interactions, and b) other non-linear models types (e.g. logit)? The answer in both cases is a happy "Yes!".
+So far so good. It's a great trick that has saved me a bunch of time (say nothing of likely user-error) that I recommend everyone use. Yet, I was prompted to write a separate blog post after being asked whether this trick a) works for higher-order interactions, and b) other non-linear models like logit? The answer in both cases is a happy "Yes!".
 
 ## Dealing with higher-order interactions
 
@@ -107,7 +107,7 @@ summary(fit1)
 
 Say we are interested in the full marginal effect of the threeway interaction `vs1:am1:wt`. Even summing the correct parent coefficients is a potentially error-prone process of thinking through the underlying math (which terms are excluded from the partial derivative, etc.) And don't even get me started on the standard errors...
 
-Now, it should be said that there _are_ several existing tools for obtaining this number that don't require us working through everything by hand. Here I'll demonstrate using my favourite such tool &mdash; the [**margins**](https://cran.r-project.org/web/packages/margins/vignettes/Introduction.html){:target="_blank"} package &mdash; to save me the mental arithmetic.
+Now, it should be said that there _are_ several existing tools for obtaining this number that don't require us working through everything by hand. Here I'll use my favourite such tool &mdash; the [**margins**](https://cran.r-project.org/web/packages/margins/vignettes/Introduction.html){:target="_blank"} package &mdash; to save me the mental arithmetic.
 ```r
 library(margins)
 ## Evaluate the marginal effect of `wt` at vs = 1 and am = 1
@@ -121,7 +121,7 @@ fit1 %>%
 #>      wt 1.0000 1.0000 -7.7676 2.2903 -3.3916 0.0007 -12.2565 -3.2788
 ```
 
-While this works well here, we can also begin to see some downsides. It requires several extra coding steps and comes with its own specialised syntax. Moreover, underneath the hood, **margins** relies on a numerical delta method that can dramatically increase computation time and memory use for even moderately sized real-world problems. (Is your dataset bigger than 1 GB? [Good luck](https://github.com/leeper/margins/issues/130){:target="_blank"} with that.) Another problem is that margins does not support all model classes. (See [here](https://github.com/leeper/margins/issues/101){:target="_blank"}.)
+While this works well in the present example, we can also begin to see some downsides. It requires several extra coding steps and comes with its own specialised syntax. Moreover, underneath the hood, **margins** relies on a numerical delta method that can dramatically increase computation time and memory use for even moderately sized real-world problems. (Is your dataset bigger than 1 GB? [Good luck](https://github.com/leeper/margins/issues/130){:target="_blank"}.) Another problem is that margins does not support all model classes. (See [here](https://github.com/leeper/margins/issues/101){:target="_blank"}.)
 
 So, what about the alternative? Does our little syntax trick work here too? The good news is that, yes, it's just as simple as it was before.
 
@@ -158,7 +158,7 @@ Again, we get the full marginal effect of **&minus;7.7676** (and correct SE of 2
 
 ## Aside: Specifying (parent) terms as fixed effects
 
-On the subject of speed, recall that the `lm(y ~ f1 / x2)` syntax is equivalent to the more verbose `lm(y ~ f1 + f1:x2)`. The more verbose syntax provides a clue for greatly reducing computation time for large models &mdash; namely, specifying the parent factor terms as fixed effects (using a specialised libraries like [**lfe**](https://cran.r-project.org/web/packages/lfe/index.html) or [**fixest**](https://github.com/lrberge/fixest/wiki)). Going back to our introductory twoway interaction example, you need simple write the model as follows. 
+On the subject of speed, recall that the `lm(y ~ f1 / x2)` syntax is equivalent to the more verbose `lm(y ~ f1 + f1:x2)`. This verbose syntax provides a clue for greatly reducing computation time for large models; particularly those with factor variables that contain many levels. We simply need specify the parent factor terms as _fixed effects_ (using a specialised libraries like [**lfe**](https://cran.r-project.org/web/packages/lfe/index.html) or [**fixest**](https://github.com/lrberge/fixest/wiki)). Going back to our introductory twoway interaction example, you would thus write the model as follows. 
 
 ```r
 library(fixest)
@@ -169,7 +169,7 @@ library(lfe)
 felm(mpg ~ am:wt | am, data = df)
 ``` 
 
-(I'll let you confirm for yourself that running either of the above models gives the correct &minus;9.0843 figure.)
+(I'll let you confirm for yourself that running either of the above models gives the correct &minus;9.0843 figure from before.)
 
 In case you're wondering, the verbose equivalent for the `f1 / f2 / x3` threeway interaction is `f1 + f2 + f1:f2 + f1:f2:x3`. So we can use the same FE approach for this more complicated case as follows:
 
@@ -199,11 +199,11 @@ feols(mpg ~ vs:am:wt | vs + am + vs^am, data = df)
 
 There's our desired &minus;7.7676 coefficient again. This time, however, we also get the added bonus of clustered standard errors (switched on by default in `fixest::feols()`'s print method).
 
-**Caveat:** The above implicitly presumes that you don't really care about the coefficients on the parent term(s), since these are swept away by the underlying fixed-effect procedures. That is clearly not going to be desireable in every case. But, in practice, I often find that it is a perfectly acceptable traed-off for models that I am running. (For example, when I am trying to remove general calender artefacts like monthly effects.)
+**Caveat:** The above implicitly presumes that you don't really care about the coefficients on the parent term(s), since these are swept away by the underlying fixed-effect procedures. That is clearly not going to be desireable in every case. But, in practice, I often find that it is a perfectly acceptable trade-off for models that I am running. (For example, when I am trying to remove general calender artefacts like monthly effects.)
 
 ## Other model classes
 
-The last thing that I want to demonstrate quickly is that our little trick carries over to other model classes to. Say, that ~~old workhorse of non-linear stats~~ hot! new! machine learning classifier: logit models. Again, I'll let you run these to confirm for yourself:
+The last thing I want to demonstrate quickly is that our little trick carries over neatly to other model classes to. Say, that ~~old workhorse of non-linear stats~~ hot! new! machine learning classifier: logit models. Again, I'll let you run these to confirm for yourself:
 
 ```r
 ## Tired
@@ -212,7 +212,7 @@ summary(glm(am ~ vs * wt, family = binomial, data = df))
 summary(glm(am ~ vs / wt, family = binomial, data = df))
 ```
 
-Okay, I confess: That last code chunk was a trick to see who was staying awake during statistics class. I mean, it will correctly sum the coefficient values. But we all know that the raw coefficient values on generalised linear models like logit cannot be interepreted as marginal effects, regardless of whether there are interactions or not. Instead, we need to convert them with an appropriate link function. In R, the [**mfx**](https://cran.r-project.org/web/packages/mfx/index.html){:target="_blank"} package will do this for us automatically. My real point, then, is to say that we can combine the link function (via **mfx**) and our syntax trick (in the case of interaction terms). This makes a suprisingly complicated problem much easier to handle.
+Okay, I confess: That last code chunk was a trick to see who was staying awake during statistics class. I mean, it will correctly sum the coefficient values. But we all know that the raw coefficient values on generalised linear models like logit cannot be interepreted as marginal effects, regardless of whether there are interactions or not. Instead, we need to convert them via an appropriate link function. In R, the [**mfx**](https://cran.r-project.org/web/packages/mfx/index.html){:target="_blank"} package will do this for us automatically. My real point, then, is to say that we can combine the link function (via **mfx**) and our syntax trick (in the case of interaction terms). This makes a suprisingly complicated problem much easier to handle.
 
 ``` r
 library(mfx)
@@ -255,3 +255,5 @@ mfx::logitmfx(am ~ vs / wt, data = df)
 ## Conclusion
 
 We don't always want the full marginal effect of an interaction term. Indeed, there are times where we are specifically interested in evaluating the partial marginal effect. (Does conditioning on gender, say, meaningfully change the slope coeffient of school years on wage earnings?) But in many other cases, the full marginal effect of the interaction terms is _exactly_ what we want. The `lm(y ~ f1 / x2)` syntax trick (and its equivalents) is a really useful shortcut to remember in these cases.
+
+PS. In case, I didn't make it clear: This trick works best when your interaction contains at most one continuous variable. (This is the parent "x" term that gets left out in all of the above examples.) You can still use it when you have more that one continuous variable, but it will implicitly force one of them to zero. Factor variables, on the other hand, get forced relative to the same base (here: the intercept), which is what we want.

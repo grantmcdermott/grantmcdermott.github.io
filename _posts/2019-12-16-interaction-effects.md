@@ -156,6 +156,27 @@ summary(fit2)
 
 Again, we get the full marginal effect of **&minus;7.7676** (and correct SE of 2.2903) directly in the model object. Much easier, isn't it?
 
+Where this approach really shines is in combination with plotting, say after extracting the coefficients with `broom::tidy()`. Model results are usually much easier to interpret visually, but this is precisely where we want to depict full marginal effects to our reader. In the below example, we immediately get a sense of how automatic cars (am = 1) exacerbate the impact of vehicle weight on MPG, and similarly for v-shaped engines (vs = 0). Of course, I could tidy up the plot a bit more and use some regexp to make things more explicit, but you get the idea. In contrast, I invite you to try the same plot on the `fit1` object and see if you can easily make sense of it. I certainly can't.
+
+```r
+library(broom)
+library(hrbrthemes) ## theme(s) I like
+
+tidy(fit2, conf.int = T) %>%
+  filter(grepl("wt", term)) %>%
+  ggplot(aes(x=term, y=estimate, ymin=conf.low, ymax=conf.high)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 0, col = "orange") +
+  labs(
+    title = " Marginal effect of vehicle weight on MPG", 
+    subtitle = "Conditional on engine type (vm) and transmisison (am)"
+    ) +
+  theme_ipsum() 
+```
+
+![](https://i.imgur.com/ovIWyTz.png)
+
+
 ## Aside: Specifying (parent) terms as fixed effects
 
 On the subject of speed, recall that the `lm(y ~ f1 / x2)` syntax is equivalent to the more verbose `lm(y ~ f1 + f1:x2)`. This verbose syntax provides a clue for greatly reducing computation time for large models; particularly those with factor variables that contain many levels. We simply need specify the parent factor terms as _fixed effects_ (using a specialised libraries like [**lfe**](https://cran.r-project.org/web/packages/lfe/index.html) or [**fixest**](https://github.com/lrberge/fixest/wiki)). Going back to our introductory twoway interaction example, you would thus write the model as follows. 

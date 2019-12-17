@@ -105,7 +105,7 @@ summary(fit1)
 #> F-statistic: 22.96 on 7 and 24 DF,  p-value: 3.533e-09
 ```
 
-Say we are interested in the full marginal effect of threeway interaction `vs1:am1:wt`. Even summing the correct parent coefficients is a non-trivial matter of thinking through the underlying math (which terms are exluded from the partial derivative, etc.) Now, there _are_ several existing tools available for obtaining this number that don't require us working everything out by hand. Here I'll demonstrate using my favourite such tool &mdash; the [**margins**](https://cran.r-project.org/web/packages/margins/vignettes/Introduction.html){:target="_blank"} package &mdash; to save me the mental arithmetic.
+Say we are interested in the full marginal effect of the threeway interaction `vs1:am1:wt`. Even summing the correct parent coefficients is a potentially error-prone process of thinking through the underlying math (which terms are excluded from the partial derivative, etc.) Now, it should be said that there _are_ several existing tools for obtaining this number that don't require us working through everything by hand. Here I'll demonstrate using my favourite such tool &mdash; the [**margins**](https://cran.r-project.org/web/packages/margins/vignettes/Introduction.html){:target="_blank"} package &mdash; to save me the mental arithmetic.
 ```r
 library(margins)
 ## Evaluate the marginal effect of `wt` at vs = 1 and am = 1
@@ -156,7 +156,7 @@ Again, we get the full marginal effect of **&minus;7.7676** (and correct SE of 2
 
 ## Aside: Specifying (parent) terms as fixed effects
 
-On the subject of speed, recall that the `lm(y ~ f1 / x2)` syntax is equivalent to the more verbose `lm(y ~ f1 + f1:x2)`. The more verbose syntax provides a clue for greatly reducing computation time for large models; specify the parent factors as fixed effects (using a specialised libraries like [**lfe**](https://cran.r-project.org/web/packages/lfe/index.html) or [**fixest**](https://github.com/lrberge/fixest/wiki)). Going back to our introductory twoway interaction, you need simple write the model as follows. 
+On the subject of speed, recall that the `lm(y ~ f1 / x2)` syntax is equivalent to the more verbose `lm(y ~ f1 + f1:x2)`. The more verbose syntax provides a clue for greatly reducing computation time for large models &mdash; namely, specifying the parent factor terms as fixed effects (using a specialised libraries like [**lfe**](https://cran.r-project.org/web/packages/lfe/index.html) or [**fixest**](https://github.com/lrberge/fixest/wiki)). Going back to our introductory twoway interaction example, you need simple write the model as follows. 
 
 ```r
 library(fixest)
@@ -169,7 +169,7 @@ felm(mpg ~ am:wt | am, data = df)
 
 (I'll let you confirm for yourself that running either of the above models gives the correct &minus;9.0843 figure.)
 
-In case you're wondering, verbose equivalent for the `f1 / f2 / x3` threeway interaction is `f1 + f2 + f1:f2 + f1:f2:x3`. So we can use the same FE approach for this more complicated case as follows:
+In case you're wondering, the verbose equivalent for the `f1 / f2 / x3` threeway interaction is `f1 + f2 + f1:f2 + f1:f2:x3`. So we can use the same FE approach for this more complicated case as follows:
 
 ```r
 ## Option 1 using verbose base lm(). Not run.
@@ -197,11 +197,11 @@ feols(mpg ~ vs:am:wt | vs + am + vs^am, data = df)
 
 There's our desired &minus;7.7676 coefficient again. This time, however, we also get the added bonus of clustered standard errors (switched on by default in `fixest::feols()`'s print method).
 
-**Caveat:** The above implicitly presumes that you don't really care about the coefficients on the parent term, since these are swept away by the fixed-effect procedures. That is clearly not going to be desireable in every case. But in I often find that it is a perfectly acceptable traed-off for models that I am running. (For example, when I am trying to remove general calender artefacts like monthly effects.)
+**Caveat:** The above implicitly presumes that you don't really care about the coefficients on the parent term(s), since these are swept away by the underlying fixed-effect procedures. That is clearly not going to be desireable in every case. But, in practice, I often find that it is a perfectly acceptable traed-off for models that I am running. (For example, when I am trying to remove general calender artefacts like monthly effects.)
 
 ## Other model classes
 
-The last thing I want to demonstrate quickly is that our little trick carries over to other model classes to. Say, that ~~old workhorse of non-linear stats~~ hot! new! machine learning classifier: logit models. Again, I'll let you run these to confirm for yourself:
+The last thing that I want to demonstrate quickly is that our little trick carries over to other model classes to. Say, that ~~old workhorse of non-linear stats~~ hot! new! machine learning classifier: logit models. Again, I'll let you run these to confirm for yourself:
 
 ```r
 ## Tired

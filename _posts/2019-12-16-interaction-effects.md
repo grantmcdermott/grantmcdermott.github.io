@@ -105,7 +105,9 @@ summary(fit1)
 #> F-statistic: 22.96 on 7 and 24 DF,  p-value: 3.533e-09
 ```
 
-Say we are interested in the full marginal effect of the threeway interaction `vs1:am1:wt`. Even summing the correct parent coefficients is a potentially error-prone process of thinking through the underlying math (which terms are excluded from the partial derivative, etc.) Now, it should be said that there _are_ several existing tools for obtaining this number that don't require us working through everything by hand. Here I'll demonstrate using my favourite such tool &mdash; the [**margins**](https://cran.r-project.org/web/packages/margins/vignettes/Introduction.html){:target="_blank"} package &mdash; to save me the mental arithmetic.
+Say we are interested in the full marginal effect of the threeway interaction `vs1:am1:wt`. Even summing the correct parent coefficients is a potentially error-prone process of thinking through the underlying math (which terms are excluded from the partial derivative, etc.) And don't even get me started on the standard errors...
+
+Now, it should be said that there _are_ several existing tools for obtaining this number that don't require us working through everything by hand. Here I'll demonstrate using my favourite such tool &mdash; the [**margins**](https://cran.r-project.org/web/packages/margins/vignettes/Introduction.html){:target="_blank"} package &mdash; to save me the mental arithmetic.
 ```r
 library(margins)
 ## Evaluate the marginal effect of `wt` at vs = 1 and am = 1

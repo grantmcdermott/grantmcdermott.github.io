@@ -58,9 +58,9 @@ summary(lm(mpg ~ factor(am) / wt, data = mtcars))
 
 To get the full marginal effect of `factor(am)1:wt` in the first case, I have to manually sum up the coefficients on the constituent parts (i.e. `factor(am)1=14.8784` + `factor(am)1:wt=-5.2984`). In the second case, I get the full marginal effect of **&minus;9.0843** immediately in the model summary. Not only that, but the correct standard errors, p-values, etc. are also automatically calculated for me. (If you don't remember, manually calculating SEs for multiplicative interaction terms is a [real](http://mattgolder.com/wp-content/uploads/2015/05/standarderrors1.png){:target="_blank"} [pain](http://mattgolder.com/wp-content/uploads/2015/05/standarderrors2.png){:target="_blank"}. And that's before we get to additional complications like standard error clustering.)
 
-Note that the `lm(y ~ f1 / x2)` syntax is actually shorthand for the more verbose `lm(y ~ f1 + f1:x2)`. I'll get back to this point further below, but I wanted to flag the expanded syntax as important because it demonstrates why this trick "works". The key idea is to drop the continuous variable parent term (here: `x2`) from the regression. This forces all of the remaining child terms relative to the same base. It's also why this trick can easily be adapted to work in, say, Julia or Stata too (see [here](https://twitter.com/paulgp/status/1202085605116665856){:target="_blank"}).
+Note that the `lm(y ~ f1 / x2)` syntax is actually shorthand for the more verbose `lm(y ~ f1 + f1:x2)`. I'll get back to this point further below, but I wanted to flag the expanded syntax as important because it demonstrates why this trick "works". The key idea is to drop the continuous variable parent term (here: `x2`) from the regression. This forces all of the remaining child terms relative to the same base. It's also why this trick can easily be adapted to, say, Julia or Stata (see [here](https://twitter.com/paulgp/status/1202085605116665856){:target="_blank"}).
 
-So far so good. It's a great trick that has saved me a bunch of time (say nothing of likely user-error) that I recommend everyone use. Yet, I was prompted to write a separate blog post after being asked whether this trick a) works for higher-order interactions, and b) other non-linear models like logit? The answer in both cases is a happy "Yes!".
+So far, so good. It's a great trick that has saved me a bunch of time (say nothing of likely user-error) that I recommend to everyone. Yet, I was prompted to write a separate blog post after being asked whether this trick a) works for higher-order interactions, and b) other non-linear models like logit? The answer in both cases is a happy "Yes!".
 
 ## Dealing with higher-order interactions
 
@@ -121,7 +121,7 @@ fit1 %>%
 #>      wt 1.0000 1.0000 -7.7676 2.2903 -3.3916 0.0007 -12.2565 -3.2788
 ```
 
-While this works well in the present example, we can also begin to see some downsides. It requires several extra coding steps and comes with its own specialised syntax. Moreover, underneath the hood, **margins** relies on a numerical delta method that can dramatically increase computation time and memory use for even moderately sized real-world problems. (Is your dataset bigger than 1 GB? [Good luck](https://github.com/leeper/margins/issues/130){:target="_blank"}.) Another problem is that margins does not support all model classes. (See [here](https://github.com/leeper/margins/issues/101){:target="_blank"}.)
+We now at least see that the full (average) marginal effect is **&minus;7.7676**. Still, while this approach works well in the present example, we can also begin to see some downsides. It requires extra coding steps and comes with its own specialised syntax. Moreover, underneath the hood, **margins** relies on a numerical delta method that can dramatically increase computation time and memory use for even moderately sized real-world problems. (Is your dataset bigger than 1 GB? [Good luck](https://github.com/leeper/margins/issues/130){:target="_blank"}.) Another practical problem is that margins may not even support your model class. (See [here](https://github.com/leeper/margins/issues/101){:target="_blank"}.)
 
 So, what about the alternative? Does our little syntax trick work here too? The good news is that, yes, it's just as simple as it was before.
 
@@ -156,7 +156,7 @@ summary(fit2)
 
 Again, we get the full marginal effect of **&minus;7.7676** (and correct SE of 2.2903) directly in the model object. Much easier, isn't it?
 
-Where this approach really shines is in combination with plotting, say after extracting the coefficients with `broom::tidy()`. Model results are usually much easier to interpret visually, but this is precisely where we want to depict full marginal effects to our reader. In the below example, we immediately get a sense of how automatic cars (am = 1) exacerbate the impact of vehicle weight on MPG, and similarly for v-shaped engines (vs = 0). Of course, I could tidy up the plot a bit more and use some regexp to make things more explicit, but you get the idea. In contrast, I invite you to try the same plot on the `fit1` object and see if you can easily make sense of it. I certainly can't.
+Where this approach really shines is in combination with plotting. Say, after extracting the coefficients with `broom::tidy()`. Model results are usually much easier to interpret visually, but this is precisely where we want to depict full marginal effects to our reader. In the below example, we immediately get a sense of how automatic transmission exacerbates the impact of vehicle weight on MPG, while the conditional impact of engine shape is more ambiguous. In contrast, I invite you to try the same plot on the `fit1` object and see if you can easily make sense of it. I certainly can't.
 
 ```r
 library(broom)
@@ -164,22 +164,29 @@ library(hrbrthemes) ## theme(s) I like
 
 tidy(fit2, conf.int = T) %>%
   filter(grepl("wt", term)) %>%
-  ggplot(aes(x=term, y=estimate, ymin=conf.low, ymax=conf.high)) +
+  ## Optional regexp work to make plot look nicier  
+  mutate(
+    am = ifelse(grepl("am1", term), "Automatic", "Manual"),
+    vs = ifelse(grepl("vs1", term), "V-shaped", "Straight"),
+    x_lab = paste(am, vs, sep="\n")
+    ) %>%
+  ggplot(aes(x=x_lab, y=estimate, ymin=conf.low, ymax=conf.high)) +
   geom_pointrange() +
   geom_hline(yintercept = 0, col = "orange") +
   labs(
+    x = NULL, y = "Marginal effect (Δ in MPG : Δ in '000 lbs)",
     title = " Marginal effect of vehicle weight on MPG", 
-    subtitle = "Conditional on engine type (vm) and transmisison (am)"
+    subtitle = "Conditional on transmission type and engine shape"
     ) +
   theme_ipsum() 
 ```
 
-![](https://i.imgur.com/ovIWyTz.png)
+![](https://i.imgur.com/0aFoZcy.png)
 
 
 ## Aside: Specifying (parent) terms as fixed effects
 
-On the subject of speed, recall that the `lm(y ~ f1 / x2)` syntax is equivalent to the more verbose `lm(y ~ f1 + f1:x2)`. This verbose syntax provides a clue for greatly reducing computation time for large models; particularly those with factor variables that contain many levels. We simply need specify the parent factor terms as _fixed effects_ (using a specialised libraries like [**lfe**](https://cran.r-project.org/web/packages/lfe/index.html) or [**fixest**](https://github.com/lrberge/fixest/wiki)). Going back to our introductory twoway interaction example, you would thus write the model as follows. 
+On the subject of speed, recall that the `lm(y ~ f1 / x2)` syntax is equivalent to the more verbose `lm(y ~ f1 + f1:x2)`. This verbose syntax provides a clue for greatly reducing computation time for large models; particularly those with factor variables that contain many levels. We simply need specify the parent factor terms as _fixed effects_ (using a specialised library like [**lfe**](https://cran.r-project.org/web/packages/lfe/index.html) or [**fixest**](https://github.com/lrberge/fixest/wiki)). Going back to our introductory twoway interaction example, you would thus write the model as follows. 
 
 ```r
 library(fixest)
@@ -199,7 +206,7 @@ In case you're wondering, the verbose equivalent for the `f1 / f2 / x3` threeway
 # summary(lm(mpg ~ vs + am + vs:am + vs:am:wt, data = df))
 
 ## Option 2 using lfe::felm(). Also not run.
-# summaryfelm(mpg ~ vs:am:wt | vs + am + vs:am, data = df))
+# summary(felm(mpg ~ vs:am:wt | vs + am + vs:am, data = df))
 
 ## Option 3 using fixest::feols()
 feols(mpg ~ vs:am:wt | vs + am + vs^am, data = df)
@@ -218,13 +225,13 @@ feols(mpg ~ vs:am:wt | vs + am + vs^am, data = df)
 #>                        R2-Within: 0.56653
 ```
 
-There's our desired &minus;7.7676 coefficient again. This time, however, we also get the added bonus of clustered standard errors (switched on by default in `fixest::feols()`'s print method).
+There's our desired **&minus;7.7676** coefficient again. This time, however, we also get the added bonus of clustered standard errors (which are switched on by default in `fixest::feols()`'s print method).
 
-**Caveat:** The above implicitly presumes that you don't really care about the coefficients on the parent term(s), since these are swept away by the underlying fixed-effect procedures. That is clearly not going to be desireable in every case. But, in practice, I often find that it is a perfectly acceptable trade-off for models that I am running. (For example, when I am trying to remove general calender artefacts like monthly effects.)
+**Caveat:** The above example implicitly presumes that you don't really care about the coefficients on the parent term(s), since these are swept away by the underlying fixed-effect procedures. That is clearly not going to be desireable in every case. But, in practice, I often find that it is a perfectly acceptable trade-off for models that I am running. (For example, when I am trying to remove general calender artefacts like monthly effects.)
 
 ## Other model classes
 
-The last thing I want to demonstrate quickly is that our little trick carries over neatly to other model classes to. Say, that ~~old workhorse of non-linear stats~~ hot! new! machine learning classifier: logit models. Again, I'll let you run these to confirm for yourself:
+The last thing I want to demonstrate quickly is that our little trick carries over neatly to other model classes to. Say, that ~~old workhorse of non-linear stats~~ hot! new! machine! learning! classifier: logit models. Again, I'll let you run these to confirm for yourself:
 
 ```r
 ## Tired
@@ -275,6 +282,6 @@ mfx::logitmfx(am ~ vs / wt, data = df)
 
 ## Conclusion
 
-We don't always want the full marginal effect of an interaction term. Indeed, there are times where we are specifically interested in evaluating the partial marginal effect. (Does conditioning on gender, say, meaningfully change the slope coeffient of school years on wage earnings?) But in many other cases, the full marginal effect of the interaction terms is _exactly_ what we want. The `lm(y ~ f1 / x2)` syntax trick (and its equivalents) is a really useful shortcut to remember in these cases.
+We don't always want the full marginal effect of an interaction term. Indeed, there are times where we are specifically interested in evaluating the partial marginal effect. (In a difference-in-differences model, for example.) But in many other cases, the full marginal effect of the interaction terms is _exactly_ what we want. The `lm(y ~ f1 / x2)` syntax trick (and its equivalents) is a really useful shortcut to remember in these cases.
 
-**PS.** In case, I didn't make it clear: This trick works best when your interaction contains at most one continuous variable. (This is the parent "x" term that gets left out in all of the above examples.) You can still use it when you have more that one continuous variable, but it will implicitly force one of them to zero. Factor variables, on the other hand, get forced relative to the same base (here: the intercept), which is what we want.
+**PS.** In case, I didn't make it clear: This trick works best when your interaction contains at most one continuous variable. (This is the parent "x" term that gets left out in all of the above examples.) You can still use it when you have more than one continuous variable, but it will implicitly force one of them to zero. Factor variables, on the other hand, get forced relative to the same base (here: the intercept), which is what we want.

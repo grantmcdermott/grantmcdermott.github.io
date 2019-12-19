@@ -121,7 +121,7 @@ fit1 %>%
 #>      wt 1.0000 1.0000 -7.7676 2.2903 -3.3916 0.0007 -12.2565 -3.2788
 ```
 
-We now at least see that the full (average) marginal effect is **&minus;7.7676**. Still, while this approach works well in the present example, we can also begin to see some downsides. It requires extra coding steps and comes with its own specialised syntax. Moreover, underneath the hood, **margins** relies on a numerical delta method that can dramatically increase computation time and memory use for even moderately sized real-world problems. (Is your dataset bigger than 1 GB? [Good luck](https://github.com/leeper/margins/issues/130){:target="_blank"}.) Another practical problem is that margins may not even support your model class. (See [here](https://github.com/leeper/margins/issues/101){:target="_blank"}.)
+We now at least see that the full (average) marginal effect is **&minus;7.7676**. Still, while this approach works well in the present example, we can also begin to see some downsides. It requires extra coding steps and comes with its own specialised syntax. Moreover, underneath the hood, **margins** relies on a numerical delta method that can dramatically increase computation time and memory use for even moderately sized real-world problems. (Is your dataset bigger than 1 GB? [Good luck](https://github.com/leeper/margins/issues/130){:target="_blank"}.) Another practical problem is that **margins** may not even support your model class. (See [here](https://github.com/leeper/margins/issues/101){:target="_blank"}.)
 
 So, what about the alternative? Does our little syntax trick work here too? The good news is that, yes, it's just as simple as it was before.
 

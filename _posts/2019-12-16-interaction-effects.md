@@ -8,8 +8,9 @@ comments: true
 
 Last week, I [tweeted](https://twitter.com/grant_mcdermott/status/1202084676439085056?s=20){:target="_blank"} one of my favourite R tricks for getting the full marginal effect of interaction terms. The short version is that, instead of writing your model as `lm(y ~ f1 * x2)`, you write it as `lm(y ~ f1 / x2)`. Here's an example using everyone's favourite mtcars dataset.
 
+First, partial marginal effects with the standard `f1 * x2` interaction syntax.
+
 ```r
-## Partial marginal effects 
 summary(lm(mpg ~ factor(am) * wt, data = mtcars))
 #> 
 #> Call:
@@ -31,8 +32,11 @@ summary(lm(mpg ~ factor(am) * wt, data = mtcars))
 #> Residual standard error: 2.591 on 28 degrees of freedom
 #> Multiple R-squared:  0.833,  Adjusted R-squared:  0.8151 
 #> F-statistic: 46.57 on 3 and 28 DF,  p-value: 5.209e-11
+```
 
-## Full marginal effects
+Second, full marginal effects with the trick `f1 / x2` interaction syntax.
+
+```r
 summary(lm(mpg ~ factor(am) / wt, data = mtcars))
 #> 
 #> Call:
@@ -278,3 +282,5 @@ mfx::logitmfx(am ~ vs / wt, data = df)
 We don't always want the full marginal effect of an interaction term. Indeed, there are times where we are specifically interested in evaluating the partial marginal effect. (Does conditioning on gender, say, meaningfully change the slope coeffient of school years on wage earnings?) But in many other cases, the full marginal effect of the interaction terms is _exactly_ what we want. The `lm(y ~ f1 / x2)` syntax trick (and its equivalents) is a really useful shortcut to remember in these cases.
 
 **PS.** In case, I didn't make it clear: This trick works best when your interaction contains at most one continuous variable. (This is the parent "x" term that gets left out in all of the above examples.) You can still use it when you have more that one continuous variable, but it will implicitly force one of them to zero. Factor variables, on the other hand, get forced relative to the same base (here: the intercept), which is what we want.
+
+**Update.** Subsequent to posting this, I was made aware of this nice [SO answer](https://stackoverflow.com/questions/32616762/defining-an-infix-operator-for-use-within-a-formula/32682826#32682826){:target="_blank"} that treads similar ground. I like the definitional contrast between factors that are "crossed" versus those that are "nested".

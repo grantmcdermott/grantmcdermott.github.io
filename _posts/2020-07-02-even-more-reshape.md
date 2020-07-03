@@ -38,7 +38,7 @@ Without further ado, here are the results. Note that I'm dropping the slowest me
 
 ![]({{ site.url }}/images/post-images/reshape-benchmarks2-big.png)
 
-Reassuringly, everything stays pretty much the same from a rankings perspective. The ratios between the different methods are very close to the small data benchmarks. The most notable thing is that **gtools** manages to claw back time (suggesting some initial overhead penalty), although it is still lagging the other methods. For reference, the default **data.table** `melt()` method completes in just over a second on my [laptop](https://wiki.archlinux.org/index.php?title=Dell_Precision_5530){:target="_blank"}, which is just crazy fast. All of these methods are very impressive to be honest.
+Reassuringly, everything stays pretty much the same from a rankings perspective. The ratios between the different methods are very close to the small data benchmarks. The most notable thing is that **gtools** manages to claw back time (suggesting some initial overhead penalty), although it still lags the other methods. For reference, the default **data.table** `melt()` method completes in just over a second on my [laptop](https://wiki.archlinux.org/index.php?title=Dell_Precision_5530){:target="_blank"}, which is just crazy fast. All of the methods here are impressively quick, to be honest.
 
 Summarizing, here is each language represented by its fastest method.
 

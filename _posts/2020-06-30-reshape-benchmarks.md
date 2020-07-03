@@ -8,19 +8,21 @@ comments: true
 
 Over on Twitter, I was reply-tagged in a [tweet thread](https://twitter.com/RyanReedHill/status/1277004562285555712){:target="_blank"} by Ryan Hill. Ryan shows how he overcomes a problem that arises when reshaping a sparse (i.e. unbalanced) dataset in Stata. Namely, how can you cut down on the computation time that Stata wastes with all the missing values, especially when reshaping really wide data? Ryan's clever solution is very much in the [split-apply-combine](https://www.jstatsoft.org/article/view/v040i01){:target="_blank"} mould. Manually split the data into like groups (i.e. sharing the same columns), drop any missing observations, and then reshape on those before recombining everything at the end. It turns out that this is a *lot* faster than Stata's default reshape command... and there is even a package (**sreshape**) that implements this for you.
 
-So far so good. But [I was asked](https://twitter.com/p_purushottam/status/1277141715938205700) what the R equivalent of this approach would be. It's pretty easy to implement &mdash; more on that in a moment &mdash; but I expressed scepticism that it would yield the same kind of benefits as the Stata case. There are various reasons for my scepticism, including the fact that R's reshaping libraries are already highly optimised for this kind of thing and R generally does a better job of handling missing values. (As good as Stata is at handling rectangular data, it's somewhat notorious for how it handles missing observations. But that's a subject for another day.)  
+So far so good. But [I was asked](https://twitter.com/p_purushottam/status/1277141715938205700) what the R equivalent of this approach would be. It's pretty easy to implement &mdash; more on that in a moment &mdash; but I expressed scepticism that it would yield the same kind of benefits as the Stata case. There are various reasons for my scepticism, including the fact that R's reshaping libraries are already highly optimised for this kind of thing and R generally does a better job of handling missing values.[^1] 
+
+[^1]: As good as Stata is at handling rectangular data, it's somewhat notorious for how it handles missing observations. But that's a subject for another day.
 
 Sounds like we need a good reshape horserace up in here!
 
-*Insert obligatory joke about time spent reading reshape help files here.*
+*Insert obligatory joke about time spent reading reshape help files.*
 
 Similar to Ryan, our task will be to reshape wide data (1000 non-index columns) with a lot of missing observations. I'll leave my scripts at the bottom of this post, but first a comparison of the "default" reshaping methods. For Stata, that includes the vanilla `reshape` command and the aforementioned `sreshape` command, as well as `greshape` from [**gtools**](https://gtools.readthedocs.io/){:target="_blank"}. For R, we'll use `pivot_longer()` from the tidyverse (i.e. [**tidyr**](https://tidyr.tidyverse.org/){:target="_blank"}) and `melt()` from [**data.table**](https://rdatatable.gitlab.io/data.table){:target="_blank"}. Note the log scale and the fact that I've rebased everything relative to the fastest option.
 
 ![]({{ site.url }}/images/post-images/reshape-benchmarks-defaults.png)
 
-Unsuprisingly, `data.table::melt()` is easily the fastest method. However, `tidyr::pivot_longer()` gives a really decent account of itself and is about three times as fast as **gtools**' `greshape`. The base Stata `reshape` option is hopelessly slow for this particular task, again demonstrating (I think) the difficulty it has with missing values.
+Unsuprisingly, `data.table::melt()` is easily the fastest method. However, `tidyr::pivot_longer()` gives a really decent account of itself and is about three times as fast as **gtools**' `greshape`. The base Stata `reshape` option is hopelessly slow for this particular task, again demonstrating (among other things) the difficulty it has with missing values.
 
-Defaults out of the way, let's implement the manual split-combine-apply approach in R. Again, I'll leave my scripts at the bottom of the post for you to look at, but I'm essentially just following (variants of) the approach that Ryan adroitly lays out. Note that both `tidyr::pivot_longer()` and `data.table::melt()` provide options to drop missing values, so I'm going to try those out too.
+Defaults out of the way, let's implement the manual split-apply-combine approach in R. Again, I'll leave my scripts at the bottom of the post for you to look at, but I'm essentially just following (variants of) the approach that Ryan adroitly lays out. Note that both `tidyr::pivot_longer()` and `data.table::melt()` provide options to drop missing values, so I'm going to try those out too.
 
 ![]({{ site.url }}/images/post-images/reshape-benchmarks-all.png)
 

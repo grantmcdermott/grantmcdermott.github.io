@@ -16,6 +16,10 @@ Unless otherwise noted, all courses are currently being taught at the University
 
 *Data Science for Economists*, EC 607. ([Syllabus](https://github.com/uo-ec607/syllabus/blob/master/syllabus.pdf). [Lectures](https://github.com/uo-ec607/lectures).)
 
+*Big Data in Economics*, EC 510. ([Syllabus](https://github.com/uo-ec510-2020-spring/syllabus/blob/master/syllabus.pdf). [Lectures](https://github.com/uo-ec510-2020-spring/lectures).)
+
 ### Undergraduate
 
-*Intermediate Microeconomic Theory*, EC 311. *Environmental Economics*, EC 434:434. ([Syllabus](https://drive.google.com/file/d/1Ut5_qRwkKr_PsLNyUYG9ttKZdbiBhqAs/view?usp=sharing).)
+*Environmental Economics*, EC 434. ([Syllabus](https://drive.google.com/file/d/1Ut5_qRwkKr_PsLNyUYG9ttKZdbiBhqAs/view?usp=sharing).)
+
+*Intermediate Microeconomic Theory*, EC 311. 

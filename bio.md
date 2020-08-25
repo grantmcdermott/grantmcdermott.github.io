@@ -17,6 +17,6 @@ My experiences during these travels, as well as bearing close witness to the glo
 
 In Fall 2017, I joined the [Department of Economics](http://economics.uoregon.edu/){:target="_blank"} at the University of Oregon as an assistant professor.
 
-My research interests are rooted in the fields of environmental and resource economics, and are informed by an overarching empirical approach. Alongside traditional econometrics, my research utilises economic theory, Bayesian methods and some newer data science tools. I am particularly excited by the prospects of big data and associated tools like machine learning for addressing longstanding environmental and social questions. This excitement dovetails with my current research focus, which is largely aimed at deriving meaningful policy insights from vast and unprecedented data sources like [Global Fishing Watch](http://globalfishingwatch.org/){:target="_blank"}.
+My research interests are rooted in the fields of environmental and resource economics, and are informed by an overarching empirical approach. Alongside traditional econometrics, my research utilises economic theory, Bayesian methods, and a variety of newer data science tools. I am particularly excited by the prospects of big data and associated tools like machine learning for addressing longstanding environmental and social questions. 
 
 On a personal note, I am married to [Lorraine McDermott](http://lorrainemcdermott.net/){:target="_blank"}. We welcomed our first child to the family in 2015.

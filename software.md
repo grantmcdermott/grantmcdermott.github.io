@@ -21,4 +21,4 @@ In addition to the above, I am a fairly active contributor to various open-sourc
 - [**hidpi.sh**](https://gist.github.com/grantmcdermott/fa3c90179f7b5613dcf267745bf07081) Shell script for fixing HiDPI scaling issues on Linux. Good for automating an otherwise laborious process following system or library updates.
 - [**open-access-fishery**](https://grantmcdermott.shinyapps.io/open-access-fishery/) An interactive Shiny app for exploring open-access fishery dynamics. Good for an introductory resource economics class.
 - [**renv-rspm**](https://github.com/grantmcdermott/renv-rspm) An example repo that demonstrates my recommonded approach to creating reproducible environments in R. Includes a video link.
-- [**tiz-examples**](https://github.com/grantmcdermott/tikzexamples) Some examples of how to draw TikZ and PGFPlots figures in LaTeX, with a focus on environmental economics topics (e.g. externality with deadweight loss).
+- [**tikz-examples**](https://github.com/grantmcdermott/tikzexamples) Some examples of how to draw TikZ and PGFPlots figures in LaTeX, with a focus on environmental economics topics (e.g. a negative externality with deadweight loss).

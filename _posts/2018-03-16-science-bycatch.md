@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Bycatch paper published in Science"
 excerpt: "Reforming global fisheries has important collateral benefits"
 tags: [research, bycatch, fisheries, Science, R, reproducibility]
@@ -20,7 +19,7 @@ It turns out that the answer to this question is "quite a lot!"
 
 We estimate that approximately half of these threatened bycatch species could be saved by reforming target fisheries in a way that maximizes long-term profits. Below is the key summary figure from the paper. The left-hand panel shows the fraction of threatened bycatch populations recovering at different cost levels (defined in terms of foregone profit in the relevant target fisheries). The solid green line denotes our mean estimate and the shaded green region denotes a 95% probability interval. Again, we can see that approximately half of the threatened bycatch populations start recovering at minor (&lt;5%) loss to the maximum profits of target fisheries. The right-hand panel shows the same thing, expressed in terms of targeting improvement (e.g. how much better tuna vessels need to get at catching only tuna instead of turtles or dolphins).
 
-![Fig. 4]({{ site.url }}/images/post-images/bycatch-fig-4.png)
+![Fig. 4]({{ site.url }}/assets/images/post-images/bycatch-fig-4.png)
 
 At its heart, this paper is really a classic environmental economics question about negative externalities and spillover effects. If we fix one problem (unsustainable fishing), can we solve another (threatened bycatch species)? And, while the paper would have been impossible to complete without pulling in experts from a variety of fields, that core idea is what appealed to me as an environmental economist when Matt first proposed it.
 
@@ -35,7 +34,7 @@ Second, I'm proud of the efforts that we've taken to scrupulously document our w
 That about covers it. I hope you enjoy reading the [paper](http://dx.doi.org/10.1126/science.aao4248){:target="_blank"}. Please feel free to play around with the [code](https://github.com/grantmcdermott/bycatch){:target="_blank"} too. And a final caveat: One person's bycatch might be another person's lunch. As I discovered in an Egyptian supermarket some years ago...
 
 <center>
- <img src="{{ site.url }}/images/post-images/dolphin.png" title="Tuna friendly?" style="width:400px" class="center">
+ <img src="{{ site.url }}/assets/images/post-images/dolphin.png" title="Tuna friendly?" style="width:400px" class="center">
 </center>
 <br>
 

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Natural monopoly and the electricity sector"
 excerpt: "Are there limits to market liberalization?"
 tags: [Electricity, Natural monopoly]

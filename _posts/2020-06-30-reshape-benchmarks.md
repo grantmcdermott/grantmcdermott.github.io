@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Reshape benchmarks"
 excerpt: "Going wide to long with sparse data"
 tags: [reshape, r, stata, data.table, tidyverse, gtools]
@@ -18,13 +17,13 @@ Sounds like we need a good reshape horserace up in here!
 
 Similar to Ryan, our task will be to reshape wide data (1000 non-index columns) with a lot of missing observations. I'll leave my scripts at the bottom of this post, but first a comparison of the "default" reshaping methods. For Stata, that includes the vanilla `reshape` command and the aforementioned `sreshape` command, as well as `greshape` from [**gtools**](https://gtools.readthedocs.io/){:target="_blank"}. For R, we'll use `pivot_longer()` from the tidyverse (i.e. [**tidyr**](https://tidyr.tidyverse.org/){:target="_blank"}) and `melt()` from [**data.table**](https://rdatatable.gitlab.io/data.table){:target="_blank"}. Note the log scale and the fact that I've rebased everything relative to the fastest option.
 
-![]({{ site.url }}/images/post-images/reshape-benchmarks-defaults.png)
+![]({{ site.url }}/assets/images/post-images/reshape-benchmarks-defaults.png)
 
 Unsuprisingly, `data.table::melt()` is easily the fastest method. However, `tidyr::pivot_longer()` gives a really decent account of itself and is about three times as fast as **gtools**' `greshape`. The base Stata `reshape` option is hopelessly slow for this particular task, again demonstrating (among other things) the difficulty it has with missing values.
 
 Defaults out of the way, let's implement the manual split-apply-combine approach in R. Again, I'll leave my scripts at the bottom of the post for you to look at, but I'm essentially just following (variants of) the approach that Ryan adroitly lays out. Note that both `tidyr::pivot_longer()` and `data.table::melt()` provide options to drop missing values, so I'm going to try those out too.
 
-![]({{ site.url }}/images/post-images/reshape-benchmarks-all.png)
+![]({{ site.url }}/assets/images/post-images/reshape-benchmarks-all.png)
 
 As expected, the manual split-apply-combine approach(es) don't yield any benefits in the R case. In fact, quite the opposite, with it resulting in a rather sizeable performance loss. (Yes, I know that I could try running things in parallel but I can already tell you that the extra overhead won't be worth it for this particular example.)
 
@@ -80,7 +79,7 @@ fwrite(d, '~/sparse-wide.csv')
 
 Next, run the Stata benchmarks.
 
-```stata
+```
 clear
 clear matrix
 timer clear

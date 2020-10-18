@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Some recent radio interviews"
 excerpt: "Yes I have an accent"
 tags: [media, blue paradox, fisheries, marine reserves, MPAs]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "The blue paradox published in PNAS"
 excerpt: "Fishers go all in while the going's good"
 tags: [research, blue paradox, fisheries, marine reserves, MPAs, PNAS, R, STATA, reproducibility]
@@ -20,7 +19,7 @@ We focus on the [Phoenix Islands Protected Area (PIPA)](https://en.wikipedia.org
 
 However, it turns out that the story is more complicated than that. We show that there was a dramatic spike in fishing effort in the period leading up to the ban, as fishermen preemptively clamored to harvest resources while they still could. Here’s the key figure from the paper:
 
-![Fig. 3]({{ site.url }}/images/post-images/blueparadox-figure3.png)
+![Fig. 3]({{ site.url }}/assets/assets/images/post-images/blueparadox-figure3.png)
 
 Focus on the red and blue lines in the top panel. The red line shows fishing effort in PIPA. The blue line shows fishing effort over a control region that serves as our counterfactual (i.e. it is very similar to PIPA but no ban was ever implemented there). The dashed vertical line shows the date when the fishing ban was enforced, on January 1, 2015. The earlier solid vertical line shows the earliest mention of an eventual PIPA ban that we could find in the news media, on September 1, 2013.
 

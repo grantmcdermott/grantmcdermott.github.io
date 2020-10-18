@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Climate capers at Cato"
 excerpt: "Dodgy statistics at the Cato Institute"
 tags: [Cato Institute, Climate Change, Econometrics, Facepalm]

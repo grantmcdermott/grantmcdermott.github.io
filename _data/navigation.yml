@@ -1,26 +1,15 @@
-# Site navigation links
-
-- title: Home
-  url:
-
-- title: Bio
-  url: /bio/
-
-- title: Research
-  url: /research/
-
-- title: Teaching
-  url: /teaching/
-
-- title: Vita
-  url: /vita/mcdermott-vita.pdf
-  #url: /vita/
-
-- title: Software
-  url: /software/
-
-- title: Blog
-  url: /blog/
-
-- title: TWEEDS
-  url: https://tweeds.io/
+main:
+  - title: "Home"
+    url: /
+  - title: "Bio"
+    url: /bio/
+  - title: "Research"
+    url: /research/
+  - title: "Teaching"
+    url: /teaching/
+  - title: "Vita"
+    url: https://grantmcdermott.com/vita/mcdermott-vita.pdf
+  - title: "Software"
+    url: /software/
+  - title: "Blog"
+    url: /blog/

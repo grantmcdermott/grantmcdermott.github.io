@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Intro to Global Fishing Watch and Google Earth Engine"
 excerpt: "My slides from AERE2017"
 tags: [GFW, GEE]

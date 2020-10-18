@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "RStudio Server on Google Compute Engine"
 excerpt: "Say hello to cloud computing"
 tags: [Data Science, R, GCE]
@@ -159,13 +158,13 @@ http://EXTERNAL-IP-ADDRESS:8787
 ```
 You will be presented with the following web page. Log in using the username/password that you created earlier.
 
-![]({{ site.url }}/images/post-images/rstudio-server-login.png)
+![]({{ site.url }}/assets/images/post-images/rstudio-server-login.png)
 
 And we're all set. Here is RStudio Server running on my laptop via Google Chrome. (It's a slightly older version of R in this image, but that just reflects when I first wrote this post.)
 
 > **Tip:** Hit F11 to go full screen in your browser. The server version of RStudio is then almost indistinguishable from the desktop version.
 
-![]({{ site.url }}/images/post-images/rstudio-server-open.png)
+![]({{ site.url }}/assets/images/post-images/rstudio-server-open.png)
 
 ## Stopping and (re)starting your VM instance
 Stopping and (re)starting your VM instance is very simple, so you don't have to worry about getting billed for times when you aren't using it. In a new terminal (not the one currently synced to your VM instance):
@@ -230,7 +229,7 @@ You have three main options.
 
 This is arguably the simplest option and works well for copying files from your VM to your local computer. However, I can't guarantee that it will work as well going the other way; you may need to adjust some user privileges first.
 
-![]({{ site.url }}/images/post-images/rstudio-move-cropped.png)
+![]({{ site.url }}/assets/images/post-images/rstudio-move-cropped.png)
 
 #### 2. Manually transfer files and folders using the command line or SCP
 

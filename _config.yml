@@ -1,82 +1,148 @@
-# Site wide configuration
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
 title: Grant R. McDermott
-locale: en_US
 url: https://grantmcdermott.com
 ## To build the website locally, comment out the previous line and run
 ## in terminal: 'bundle ex jekyll serve'. The website will be hosted at
 ## 'localhost:4000'.
 
+# repository: grantmcdermott/grantmcdermott.github.io
+github: [metadata]
+email: grantmcd@uoregon.edu
+description: >- # this means to ignore newlines in the text below
+  Grant McDermott's personal website.
+twitter_username: grant_mcdermott
+github_username: grantmcdermott
+minimal_mistakes_skin: "default" #"default" "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
+search: true
 
-# Jekyll configuration
+# Build settings
+markdown: kramdown
+remote_theme: mmistakes/minimal-mistakes
+# Outputting
+permalink: /:categories/:title/
+paginate: 5 # amount of posts to show
+paginate_path: /blog/page:num
+timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
-permalink:   /:categories/:year/:month/:day/:title/
-markdown:    kramdown
-highlighter: rouge
-#paginate: 10
-#paginate_path: "_site/index/blog/page:num/"
-sass:
-  sass_dir: _sass
-  style: compressed
+include:
+  - _pages
+
+# Exclude from processing.
+# The following items will not be processed, by default. Create a custom list
+# to override the default setting.
+# exclude:
+#   - Gemfile
+#   - Gemfile.lock
+#   - node_modules
+#   - vendor/bundle/
+#   - vendor/cache/
+#   - vendor/gems/
+#   - vendor/ruby/
+
+# Plugins (previously gems:)
 plugins:
+  - jekyll-paginate
   - jekyll-sitemap
   - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
 
-kramdown:
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  enable_coderay: false
+author:
+  name   : "Grant McDermott"
+  avatar : "/assets/images/mcdermott400sq-s.jpg"
+  bio    : 
+    Assistant Prof. at the University of Oregon. 
+    Interested in environmental economics & data science.
+  links:
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://grantmcdermott.com"
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope"
+      url: "mailto:grantmcd@uoregon.edu"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/grant_mcdermott"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/grantmcdermott"
+    - label: "Scholar"
+      icon: "ai ai-google-scholar"
+      url: "http://scholar.google.com/citations?user=EruWDMwAAAAJ"
+    - label: "ORCID"
+      icon: "ai ai-orcid"
+      url: "http://orcid.org/0000-0001-7883-8573"
+      
+footer:
+  links:
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/grant_mcdermott"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/grantmcdermott"
 
-# Octopress
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      classes: wide
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  # _pages
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      classes: wide
+      author_profile: true
 
-# Default extensions
-post_ext: md
-page_ext: md
+# Social
+# https://mmistakes.github.io/minimal-mistakes/docs/configuration/#twitter-cards-and-facebook-open-graph
+og_image: /assets/images/default-thumb.png
 
-# Found in _templates/
-post_layout: post
-page_layout: page
-
-# Format titles with titlecase?
-titlecase: true
-
-
-# Site owner
-owner:
-  name: Grant McDermott
-  avatar: mcdermott400sq-s.jpg
-  bio: "Assistant Professor</br>Dept. of Economics</br>University of Oregon"
-  email: grantmcd@uoregon.edu
-  disqus-shortname: grantmcdermott-blog
-  twitter: grant_mcdermott
-  facebook: #username
-  google_scholar: EruWDMwAAAAJ
+# Analytics
+# https://mmistakes.github.io/minimal-mistakes/docs/configuration/#analytics
+analytics:
+  provider: "google-gtag"
   google:
-    plus: #username
-    analytics: UA-76482472-1
-    verify:
-    ad-client:
-    ad-slot:
-  orcid: 0000-0001-7883-8573
-  bing-verify:
-  github: grantmcdermott
-  stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
-  linkedin: grant-mcdermott-b8637419
-  xing: #username
-  instagram: #username
-  lastfm: #username
-  tumblr: #username
-  pinterest: #username
-  foursquare: #username
-  steam: #username
-  dribbble: #username
-  youtube: #username
-  soundcloud: #username
-  weibo: #username
-  flickr: #username
-  codepen: #username
+    tracking_id: "UA-76482472-1"
+    anonymize_ip: false # default
 
-include: [".htaccess"]
-exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
+# Comments
+# https://mmistakes.github.io/minimal-mistakes/docs/configuration/#disqus
+comments:
+  provider: "disqus"
+  disqus:
+    shortname: "grantmcdermott-blog"
+
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /blog/tag-archive/
+
+exclude: ['*.Rmd']

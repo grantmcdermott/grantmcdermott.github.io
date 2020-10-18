@@ -1,8 +1,9 @@
 ---
-layout: post
 title: "Marginal effects and interaction terms"
 excerpt: "Quickly get the full marginal effect of interaction terms in R (and other software)"
 tags: [interaction terms, marginal effects]
+# toc: true
+# toc_label: "Jump to:"
 comments: true
 ---
 

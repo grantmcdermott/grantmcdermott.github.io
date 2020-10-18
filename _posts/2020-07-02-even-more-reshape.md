@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Even more reshape benchmarks"
 excerpt: "Giving the people what they want"
 tags: [reshape, r, stata, julia, python]
@@ -26,7 +25,7 @@ I'll divide the results into two sections.
 
 Our first task will be to reshape the same (sparse) 1,000 by 1,002 dataset from wide to long. Here are the results and I'll remind you that the x-axis has been log-transformed to handle scaling.
 
-![]({{ site.url }}/images/post-images/reshape-benchmarks2-all.png)
+![]({{ site.url }}/assets/images/post-images/reshape-benchmarks2-all.png)
 
 Once more, we see that [**data.table**](https://rdatatable.gitlab.io/data.table) rules the roost. However, the newly-added [**DataFrames**](https://juliadata.github.io/DataFrames.jl/stable/){:target="_blank"} (Julia) and [**pandas**](https://pandas.pydata.org/){:target="_blank"} (Python) implementations certainly put in a good shout, coming in second and third, respectively. Interestingly enough, my two [**tidyr**](https://tidyr.tidyverse.org/){:target="_blank"}) benchmarks seemed to have shuffled slightly this time around, but that's only to be expected for very quick operations like this. (We'll test again in a moment on a larger dataset.) Adding options to [**gtools**](https://gtools.readthedocs.io/){:target="_blank"} yields a fairly modest if noticeable difference, while the base R `reshape()` command doesn't totally discrace itself. Certainly much faster than the Stata equivalent.
 
@@ -36,13 +35,13 @@ Another thing to ponder is whether the results are sensitive to the relatively s
 
 Without further ado, here are the results. Note that I'm dropping the slowest methods (because I'm not a masochist) and this also means that I won't need to log-transform the x-axis anymore.
 
-![]({{ site.url }}/images/post-images/reshape-benchmarks2-big.png)
+![]({{ site.url }}/assets/images/post-images/reshape-benchmarks2-big.png)
 
 Reassuringly, everything stays pretty much the same from a rankings perspective. The ratios between the different methods are very close to the small data benchmarks. The most notable thing is that **gtools** manages to claw back time (suggesting some initial overhead penalty), although it still lags the other methods. For reference, the default **data.table** `melt()` method completes in just over a second on my [laptop](https://wiki.archlinux.org/index.php?title=Dell_Precision_5530){:target="_blank"}, which is just crazy fast. All of the methods here are impressively quick, to be honest.
 
 Summarizing, here is each language represented by its fastest method.
 
-![]({{ site.url }}/images/post-images/reshape-benchmarks2-big-fastest.png)
+![]({{ site.url }}/assets/images/post-images/reshape-benchmarks2-big-fastest.png)
 
 [^1]: Note that I'm dropping the manual split-apply-combine benchmarks from last time, since we've already seen that they are inefficient.
 
@@ -52,7 +51,7 @@ Summarizing, here is each language represented by its fastest method.
 
 See my [previous post]({{ site.url }}/2020/06/30/reshape-benchmarks/) for the data generation and plotting code. (Remember to set `n = 1e8` for the large data benchmark.) For the sake of brevity, here is quick recap of the main reshaping functions that I use across the different languages and how I record timing.
 
-R
+### R
 
 ```r
 # Libraries ---------------------------------------------------------------
@@ -91,9 +90,9 @@ b = microbenchmark(base_reshape(),
                    times = 5)
 ```
 
-Stata
+### Stata
 
-```stata
+```
 clear
 clear matrix
 timer clear
@@ -150,7 +149,7 @@ forval j = 1/5{
 outsheet using "reshape-results-stata.csv", replace
 ```
 
-Python
+### Python
 
 ```py
 import pandas as pd
@@ -162,7 +161,7 @@ result_df = pd.DataFrame({'result':[np.median(result.timings)]})
 result_df.to_csv('reshape-results-python.csv')
 ```
 
-Julia
+### Julia
 
 ```jl
 using CSV, DataFrames, BenchmarkTools

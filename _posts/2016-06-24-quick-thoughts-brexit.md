@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Quick thoughts on Brexit"
 excerpt: "How relevant is the Norwegian experience?"
 tags: [Economics, Trade, Currencies, Brexit, Norway]

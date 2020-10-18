@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "Do weak currencies lead to trade deficits?"
 excerpt: "Spoiler: Correlation != causation"
 tags: [BizNews, Economics, Econometrics, Trade, Currencies, Facepalm]

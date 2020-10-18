@@ -1,14 +1,13 @@
 ---
-layout: post
 title: "Electricity prices, river temperatures and cooling water scarcity"
 excerpt: "My paper on the water-energy nexus now forthcoming"
 tags: [Academics, Water, Electricity, Energy, Climate Change, Econometrics]
 comments: true
 modified_time: '2013-01-14T20:35:55.984+01:00'
-#thumbnail: {{ site.url }}/images/post-images/cottbus.jpg
+#thumbnail: {{ site.url }}/assets/images/post-images/cottbus.jpg
 ---
 
-<img src="{{ site.url }}/images/post-images/cottbus.jpg" title="" alt="" style="display: block; margin: auto;" />
+<img src="{{ site.url }}/assets/images/post-images/cottbus.jpg" title="" alt="" style="display: block; margin: auto;" />
 <br />
 
 We’ve all seen pictures like the one above: The massive towers of a power station stand out ominously against the skyline, as thick plumes of CO<sub>2</sub> pour into the atmosphere. One might even say that this kind of imagery has achieved an iconic status in framing the climate change debate. Except, of course, that those are just cooling towers. And that "smoke" billowing out at the top isn’t CO<sub>2</sub>, which is invisible after all. (You don’t see anything when you breathe out, do you?) No, what we’re actually seeing here is water vapour. [^1]
@@ -17,7 +16,7 @@ However, what if images like this are still illustrative of another problem rela
 
 Not everyone is aware of this, but power stations are incredibly thirsty beasts. That’s because they are basically giant kettles that convert heat energy into electricity by using steam to drive turbines. The steam must then be cooled and condensed back into a liquid state, so that it can be recycled and begin the process all over again. The best way to achieve this cooling process is via a basic heat exchange where the steam is left to pass over (cold) water taken from a nearby river or lake. That’s what we see happening in the “Condenser” at the bottom right-hand corner of the below figure. ([Source](http://www.nrc.gov/){:target="_blank"}.)
 
-<img src="{{ site.url }}/images/post-images/student-pwr.gif" title="" alt="" style="display: block; margin: auto;" />
+<img src="{{ site.url }}/assets/images/post-images/student-pwr.gif" title="" alt="" style="display: block; margin: auto;" />
 
 As I said, all of this requires a lot of water. A statistic that always drives the message home for me is that the thermal power industry — gas, coal and nuclear — accounts for a full *forty percent* of all freshwater withdrawals in the U.S. [^2] Remarkably, that figure places it alongside the notoriously thirsty agricultural sector.
 

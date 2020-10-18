@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "QuackChat slides"
 excerpt: "If it talks like a duck..."
 tags: [blue paradox, fisheries, marine reserves, MPAs]

@@ -31,7 +31,7 @@ As expected, the manual split-apply-combine approach(es) don't yield any benefit
 
 For reshaping sparse data, you can't really do much better than sticking with the defaults in R. **data.table** remains a speed marvel, although **tidyr** gives very good account of itself too. Stata users should definitely switch to **gtools** if they aren't using it already.
 
-<i>**Update:**</i> Follow-up post [here]({{ site.url }}/2020/07/02/even-more-reshape/) with additional benchmarks, including other SW languages and a larger dataset.
+<i>**Update:**</i> Follow-up post [here]({{ site.baseurl }}{% post_url 2020-07-02-even-more-reshape %}) with additional benchmarks, including other SW languages and a larger dataset.
 
 ## Code
 

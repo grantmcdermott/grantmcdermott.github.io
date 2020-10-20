@@ -322,9 +322,9 @@ air
 ## 1844067:        30        -5     am2
 {% endhighlight %}
 
-The actual regression that I'm going to run on these data is somewhat uninspired: Namely, how does arrival delay depend on departure delay, conditional on the time of day?[^3] I'll throw in a bunch of fixed effects to make the computation a bit more interesting/intensive, but its fairly standard stuff. Note that I am running a linear fixed effect model by calling `fixest::feols()`.
+The actual regression that I'm going to run on these data is somewhat uninspired: Namely, how does arrival delay depend on departure delay, conditional on the time of day?[^3] I'll throw in a bunch of fixed effects to make the computation a bit more interesting/intensive, but it's fairly standard stuff. Note that I am running a linear fixed effect model by calling `fixest::feols()`.
 
-But, really, I don't want you to get sidetrack by the regression details. The main thing I want to focus your attention on is the fact that I'm only going run the base model **once**, i.e. for `mod1`. Then, I'm going to adjust the SE for two more models, `mod2` and `mod3`, on the fly via respective `summary()` calls.
+But, really, I don't want you to get sidetrack by the regression details. The main thing I want to focus your attention on is the fact that I'm only going run the base model *once*, i.e. for `mod1`. Then, I'm going to adjust the SE for two more models, `mod2` and `mod3`, on the fly via respective `summary()` calls.
 
 
 {% highlight r %}
@@ -379,7 +379,7 @@ Great, it worked. But did it save time? To answer this question I've benchmarked
 **Note:** I'm benchmarking against **lfe** and **reghdfe** because these two excellent packages have long set the standard for estimating high-dimensional fixed effects models in the social sciences. In other words, I'm trying to convince you of the benefits of on-the-fly SE adjustment by benchmarking against the industry standard.
 {: .notice--info}
 
-You can find the benchmarking code for these other methods in the [appendix](benchmark-other). (Please let me know if you spot any errors.) In the interests of brevity, here are the results.
+You can find the benchmarking code for these other methods in the [appendix](#benchmark-other). (Please let me know if you spot any errors.) In the interests of brevity, here are the results.
 
 
 

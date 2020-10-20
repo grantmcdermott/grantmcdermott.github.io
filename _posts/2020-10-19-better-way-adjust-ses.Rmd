@@ -232,7 +232,7 @@ ggplot(bm, aes(rel_time, method, fill = otf)) +
   hrbrthemes::theme_ipsum(grid = 'X') +
   scale_fill_brewer(name = 'On the fly?', palette = 'Set1') +
   labs(x = 'Relative time', y = 'Method',
-       caption = paste0('Note: Results relative to fastest method, i.e. feols() at ', sprintf('%.2f', time_felm), ' seconds.'))
+       caption = paste0('Note: Results relative to fastest method, i.e. feols() at ', sprintf('%.2f', time_feols), ' seconds.'))
 ```
 
 There are several takeaways from this exercise, e.g.`fixest::feols()` is the fastest method even if you are (inefficiently) re-running the models separately. But --- yet again and once more, dear friends --- the key thing that I want to emphasise is the *additional* time savings brought on by adjusting the SEs on the fly. Indeed, we can see that the on-the-fly `feols` approach only takes a third of the time (approximately) that it does to run the models separately. This means that **fixest** is recomputing the SEs for models 2 and 3 pretty much instantaneously. 

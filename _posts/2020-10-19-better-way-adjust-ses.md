@@ -27,13 +27,13 @@ Confronted by this task, I'm willing to bet that most people do the following:
 - Re-run their model a third time under yet another SE specification (e.g. clustered).
 - Etc.
 
-While this is fine as far as it goes, I'm here to tell you that there's a better way. Rather than re-running your model multiple times, I'm going to advocate that you run your model only **once** and then adjust SEs on the backend as needed. This approach --- what I'll call *on-the-fly* SE adjustment --- is not only much faster, it's safer too. 
+While this is fine as far as it goes, I'm here to tell you that there's a better way. Rather than re-running your model multiple times, I'm going to advocate that you run your model only **once** and then adjust SEs on the backend as needed. This approach --- what I'll call "on-the-fly" SE adjustment --- is not only much faster, it's safer too. 
 
 Let's see some examples.
 
 ## Example 1: **sandwich**
 
-To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the [**sandwich**](http://sandwich.r-forge.r-project.org/) package ([@Achim Zeilles](https://twitter.com/AchimZeileis) et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators &mdash; and thus SEs &mdash; for a wide array of model objects and classes. At the same time, **sandwich** very recently got its [own website](http://sandwich.r-forge.r-project.org/) to coincide with some cool new features. So its worth exploring what that means for modern empirical research. In the code that follows, I'm going to borrow liberally from the [introductory vignette](http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1). But I'll also tack on a few additional tips and tricks that I include in my own workflow.
+To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the [**sandwich**](http://sandwich.r-forge.r-project.org/) package ([@Achim Zeilles](https://twitter.com/AchimZeileis) et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators &mdash; and thus SEs &mdash; for a wide array of model objects and classes. At the same time, **sandwich** very recently got its [own website](http://sandwich.r-forge.r-project.org/) to coincide with some cool new features. So it's worth exploring what that means for modern empirical research. In the code that follows, I'm going to borrow liberally from the [introductory vignette](http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1). But I'll also tack on a few additional tips and tricks that I include in my own workflow.
 
 Let's start by running a simple linear regression on some sample data; namely, the "PetersenCL" dataset that comes bundled with the package.
 
@@ -69,7 +69,7 @@ summary(m)
 ## F-statistic: 1.31e+03 on 1 and 4998 DF,  p-value: <2e-16
 {% endhighlight %}
 
-Our simple model above assumes that the errors are [iid](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables). We can use one of the many alternate VCOV estimators provided by **sandwich** to adjust these SEs. For example, a heteroscedasticity-robust ("HC3") VCOV matrix:
+Our simple model above assumes that the errors are [iid](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables). But we can adjust these SEs by calling one of the many alternate VCOV estimators provided by **sandwich**. For example, to get a robust, or heteroscedasticity-consistent ("HC3"), VCOV matrix we'd use:
 
 
 {% highlight r %}
@@ -108,7 +108,7 @@ coeftest(m, vcov = vcovHC)
 
 To recap: We ran our base `m` model just the once and then adjusted for robust SEs on the backend using **sandwich** (and **coeftest**). 
 
-Now, I'll admit that doesn't seem like much of a benefit for this simple example; though, the fact that we cut down on copying-and-pasting duplicate code automatically helps to minimize user error. (Remember: [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)!) But we can easily scale things up to get a better sense of the power of this approach. For instance, we could imagine calling a whole host of alternate VCOVs to our base model.
+Now, I'll admit that the benefits from this workflow aren't super clear yet from this simple example. Though, we did cut down on copying-and-pasting of duplicate code and this automatically helps to minimize user error. (Remember: [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)!) But we can easily scale things up to get a better sense of the power of this approach. For instance, we could imagine calling a whole host of alternate VCOVs to our base model.
 
 
 {% highlight r %}
@@ -126,7 +126,7 @@ vc = list(
   )
 {% endhighlight %}
 
-You could, of course, print the `vc` list to screen now if you so wanted. But I want to go one small step further by showing you how easy it is to create a regression table that encapsulates all of these different models. In the next code chunk, I'm going to generate a list of models by passing the `vc` list to an `lapply()` call.[^1] I'm then going to generate a regression table using `msummary()` from the excellent [**modelsummary**](https://vincentarelbundock.github.io/modelsummary) package ([@Vincent Arel-Bundock](https://twitter.com/VincentAB)).
+You could, of course, print the `vc` list to screen now if you so wanted. But I want to go one small step further by showing you how easy it is to create a regression table that encapsulates all of these different models. In the next code chunk, I'm going to create a list of models by passing the `vc` list to an `lapply()` call.[^1] I'm then going to generate a regression table using `msummary()` from the excellent [**modelsummary**](https://vincentarelbundock.github.io/modelsummary) package ([@Vincent Arel-Bundock](https://twitter.com/VincentAB)).
 
 
 {% highlight r %}
@@ -254,7 +254,7 @@ msummary(lm_mods)
 </tbody>
 </table>
 
-If you're the type of person that prefers visual representation --- like me --- then printing a coefficient plot is equally easy with `modelsummary::modelplot()`. This creates a **ggplot2** object that can be further manipulated as needed. In the code chunk below, I'll demonstrate fairly simply by flipping the plot orientation.
+If you're the type of person that prefers visual representation --- like me --- then printing a coefficient plot is equally easy with `modelsummary::modelplot()`. This creates a **ggplot2** object that can be further manipulated as needed. In the code chunk below, I'll demonstrate this fairly simply by flipping the plot orientation.
 
 
 {% highlight r %}
@@ -264,25 +264,17 @@ modelplot(lm_mods, coef_omit = 'Interc') +
   coord_flip()
 {% endhighlight %}
 
-
-
-{% highlight text %}
-## Original model not retained as part of coeftest object. For additional model summary information (r.squared, df, etc.), consider passing `glance.coeftest()` an object where the underlying model has been saved, i.e.`lmtest::coeftest(..., save = TRUE)`.
-## 
-## This message is displayed once per session.
-{% endhighlight %}
-
 ![plot of chunk sandwich_coefplot](/figure/posts/2020-10-19-better-way-adjust-ses/sandwich_coefplot-1.png)
 
 And there you have it: An intuitive and helpful comparison across a host of specifications, even though we only "ran" the underlying model once. Simple!
 
 ## Example 2: fixest
 
-While **sandwich** covers a wide range of model classes in R, it's important to emphasise that a number of libraries provide their own specialised methods for on-the-fly SE adjustment. The one that I want to show you for this second example is the [**fixest**](https://github.com/lrberge/fixest) package ([@Laurent Bergé](https://twitter.com/lrberge)). 
+While **sandwich** covers a wide range of model classes in R, it's important to know that a number of libraries provide their own specialised methods for on-the-fly SE adjustment. The one that I want to show you for this second example is the [**fixest**](https://github.com/lrberge/fixest) package ([@Laurent Bergé](https://twitter.com/lrberge)). 
 
-If you follow me on Twitter or have read my lecture notes, you already know that I am a huge fan of this package. It's very elegantly designed and provides an insanely fast way to estimate high-dimensional fixed effects models. More importantly for today's post, **fixest** offers automatic support for on-the-fly SE adjustment. Specifically, we only need to run our model once and can then adjust the SEs on the backend via a call to either `summary(..., se = 'se_type')` or `summary(..., cluster = c('cluster_vars')`.[^2]
+If you follow me on Twitter or have read my lecture notes, you already know that I am a huge fan of this package. It's very elegantly designed and provides an insanely fast way to estimate high-dimensional fixed effects models. More importantly for today's post, **fixest** offers automatic support for on-the-fly SE adjustment. We only need to run our model once and can then adjust the SEs on the backend via a call to either `summary(..., se = 'se_type')` or `summary(..., cluster = c('cluster_vars')`.[^2]
 
-To demonstrate this feature, I'm going to run some regressions on a subsample of
+To demonstrate, I'm going to run some regressions on a subsample of
 the well-known RITA air traffic data. I've already downloaded the dataset from [Revolution Analytics](https://packages.revolutionanalytics.com/datasets/) and prepped it for the narrow purposes of this blog post. (See the [data appendix](#data) below for code.) All told we're looking at 9 variables extending over approximately 1.8 million rows. So, not "big" data by any stretch of the imagination, but my regressions should take at least a few seconds to run on most computers.
 
 
@@ -350,7 +342,7 @@ mod3 = summary(mod1, cluster = c('month', 'origin_airport_id', 'tail_num'))
 time_feols = (proc.time() - pt)[3]
 {% endhighlight %}
 
-Before continuing, how about a quick coefficient plot? I'll use `modelsummary::modelplot()` again, focusing only on the key "time of day × departure delay" interaction terms.
+Before I get to benchmarking, how about a quick coefficient plot? I'll use `modelsummary::modelplot()` again, focusing only on the key "time of day × departure delay" interaction terms.
 
 
 {% highlight r %}
@@ -389,7 +381,7 @@ You can find the benchmarking code for these other methods in the [appendix](#be
 
 There are several takeaways from this exercise, e.g.`fixest::feols()` is the fastest method even if you are (inefficiently) re-running the models separately. But --- yet again and once more, dear friends --- the key thing that I want to emphasise is the *additional* time savings brought on by adjusting the SEs on the fly. Indeed, we can see that the on-the-fly `feols` approach only takes a third of the time (approximately) that it does to run the models separately. This means that **fixest** is recomputing the SEs for models 2 and 3 pretty much instantaneously. 
 
-To add one last thing about benchmarking, the absolute difference in model run times was not *that* huge for this particular exercise. Maybe two minutes at most. (Then again, not trivial either...) But if you are like me and find yourself estimating models where each run takes many minutes or hours, or even days and weeks, then the time savings are literally exponential.
+To add one last thing about benchmarking, the absolute difference in model run times was not *that* huge for this particular exercise. There's maybe two minutes separating the fastest and slowest methods. (Then again, not trivial either...) But if you are like me and find yourself estimating models where each run takes many minutes or hours, or even days and weeks, then the time savings are literally exponential.
 
 
 ## Conclusion
@@ -400,7 +392,8 @@ The goal of this blog post has been to show you that there is often a better app
 
 What's not to like?
 
-**P.S.** There are a couple of other R libraries with support for on-the-fly SE adjustment. Since I've used it as a counterfoil in the benchmark, I should add that `lfe::felm()` provides its own method for swapping out different SEs post-estimation. See [here](https://broom.tidymodels.org/reference/tidy.felm.html#examples). Similarly, I've focused on R here because it's the software language that I know best and --- as far as I am aware --- is the only one to provide methods for on-the-fly SE adjustment across a wide range of models. If anyone knows of equivalent methods or canned routines in other languages, please let me know if the comments.
+</br>
+**P.S.** There are a couple of other R libraries with support for on-the-fly SE adjustment. Since I've used it as a counterfoil in the benchmark, I should add that `lfe::felm()` provides its own method for swapping out different SEs post-estimation; see [here](https://broom.tidymodels.org/reference/tidy.felm.html#examples). Similarly, I've focused on R in this post because it's the software language that I know best and --- as far as I am aware --- is the only one to provide methods for on-the-fly SE adjustment across a wide range of models. If anyone knows of equivalent methods or canned routines in other languages, please let me know in the comments.
 
 [^1]: You can substitute with a regular *for* loop or `purrr::map()` if you prefer.
 

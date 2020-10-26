@@ -29,13 +29,13 @@ Confronted by this task, I'm willing to bet that most people do the following:
 - Re-run their model a third time under yet another SE specification (e.g. clustered).
 - Etc.
 
-While this is fine as far as it goes, I'm here to tell you that there's a better way. Rather than re-running your model multiple times, I'm going to advocate that you run your model only **once** and then adjust SEs on the backend as needed. This approach --- what I'll call "on-the-fly" SE adjustment --- is not only much faster, it's safer too. 
+While this is fine as far as it goes, I'm here to tell you that there's a better way. Rather than re-running your model multiple times, I'm going to advocate that you run your model only **once** and then adjust SEs on the backend as needed. This approach --- what I'll call "on-the-fly" SE adjustment --- is not only safer, but is much faster too.
 
 Let's see some examples.
 
 ## Example 1: **sandwich**
 
-To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the [**sandwich**](http://sandwich.r-forge.r-project.org/) package ([@Achim Zeilles](https://twitter.com/AchimZeileis) et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators &mdash; and thus SEs &mdash; for a wide array of model objects and classes. At the same time, **sandwich** just recently got its [own website](http://sandwich.r-forge.r-project.org/) to coincide with some cool new features. So it's worth exploring what that means for a modern empirical workflow. In the code that follows, I'm going to borrow liberally from the [introductory vignette](http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1). But I'll also tack on some additional tips and tricks that I use in my own workflow.
+To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the [**sandwich**](http://sandwich.r-forge.r-project.org/) package ([@Achim Zeilles](https://twitter.com/AchimZeileis) et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators &mdash; and thus SEs &mdash; for a wide array of model objects and classes. At the same time, **sandwich** just recently got its [own website](http://sandwich.r-forge.r-project.org/) to coincide with some cool new features. So it's worth exploring what that means for a modern empirical workflow. In the code that follows, I'm going to borrow liberally from the [introductory vignette](http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1). But I'll also tack on some additional tips and tricks that I use in my own workflow. (**UPDATE:** The vignette has now been [updated](http://sandwich.r-forge.r-project.org/news/#sandwich-3-0-1-unreleased) to include some of the suggestions from this post. Thanks Achim!)
 
 Let's start by running a simple linear regression on some sample data; namely, the "PetersenCL" dataset that comes bundled with the package.
 

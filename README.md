@@ -1,6 +1,6 @@
 # Website for Grant McDermott
 
-Built using the [remote theme template](https://github.com/mmistakes/mm-github-pages-starter/generate) for the [Minimal Mistakes Jekyll theme](https://github.com/mmistakes/minimal-mistakes).
+Built using the [remote theme template](https://github.com/mmistakes/mm-github-pages-starter) for the [Minimal Mistakes Jekyll theme](https://github.com/mmistakes/minimal-mistakes).
 
 I've made the follow custom adjustments:
 

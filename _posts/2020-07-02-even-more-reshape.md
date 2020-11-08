@@ -5,9 +5,9 @@ tags: [reshape, r, stata, julia, python]
 comments: true
 ---
 
-Various people have asked me to add some additional benchmarks to my [data reshaping post]({{ site.url }}/2020/06/30/reshape-benchmarks/) from earlier this week. I've been hesitant to add these as an update, since I didn't want to distract from the major point I was trying to make in that previous post. (Namely: A manual split-apply-combine reshaping approach doesn't yield the same kind of benefits in R as it does in Stata. You're much better off sticking to the already-optimised defaults.) However, I'm happy to put these additional benchmarks in a new blog post here.
+Various people have asked me to add some additional benchmarks to my [data reshaping post]({{ site.url }}/reshape-benchmarks/) from earlier this week. I've been hesitant to add these as an update, since I didn't want to distract from the major point I was trying to make in that previous post.[^1] However, I'm happy to put these additional benchmarks in a new blog post here.
 
-So, alongside the methods[^1] from [last time]({{ site.url }}/2020/06/30/reshape-benchmarks/)... 
+So, alongside the main methods from [last time]({{ site.url }}/reshape-benchmarks/)... 
 
 - R: `data.table::melt` and `tidyr::pivot_longer`
 - Stata: `reshape`, `sreshape` (shreshape), and  `greshape` (gtools)
@@ -43,7 +43,7 @@ Summarizing, here is each language represented by its fastest method.
 
 ![]({{ site.url }}/assets/images/post-images/reshape-benchmarks2-big-fastest.png)
 
-[^1]: Note that I'm dropping the manual split-apply-combine benchmarks from last time, since we've already seen that they are inefficient.
+[^1]: Namely: A manual split-apply-combine reshaping approach doesn't yield the same kind of benefits in R as it does in Stata. You're much better off sticking to the already-optimised defaults.
 
 [^2]: Let the record show that I tried running one additional order of magnitude (i.e. a billion rows), but **data.table** was the only method that reliably completed its benchmark runs without completely swamping my memory (32 GB) and crashing everything. As I said last time, it truly is a marvel for big data work.
 

@@ -18,7 +18,7 @@ knitr::opts_chunk$set(cache = TRUE, dpi = 300, fig.width = 8, fig.height = 5)
 
 ## Motivation
 
-*A researcher has to adjust the standard errors (SEs) for a regression model that she has already run. Maybe this is to appease the editor or referees at a scientific journal. She needs to convince readers that she hasn't cherry-picked her results, after all. Or, maybe it's because she is busy iterating through the early stages of a project. She's still getting to grips with her data and wants to understand how sensitive her results are to different modeling assumptions.*
+*A researcher has to adjust the standard errors (SEs) for a regression model that she has already run. Maybe this is to appease a journal referee. She needs to convince readers that she hasn't cherry-picked her results, after all. Or, maybe it's because she is busy iterating through the early stages of a project. She's still getting to grips with her data and wants to understand how sensitive her results are to different modeling assumptions.*
 
 Does that sound familiar? I believe it should, because something like that has happened to me on every single one of my empirical projects. I end up estimating multiple versions of the *same* underlying regression model &mdash; even putting them side-by-side in a regression table, where the only difference across columns is slight tweaks to the way that the SEs were calculated.
 
@@ -29,7 +29,7 @@ Confronted by this task, I'm willing to bet that most people do the following:
 - Re-run their model a third time under yet another SE specification (e.g. clustered).
 - Etc.
 
-While this is fine as far as it goes, I'm here to tell you that there's a better way. Rather than re-running your model multiple times, I'm going to advocate that you run your model only **once** and then adjust SEs on the backend as needed. This approach --- what I'll call "on-the-fly" SE adjustment --- is not only safer, but is much faster too.
+While this is fine as far as it goes, I'm here to tell you that there's a better way. Rather than re-running your model multiple times, I'm going to advocate that you run your model only **once** and then adjust SEs on the backend as needed. This approach --- what I'll call "on-the-fly" SE adjustment --- is not only safer, it's much faster too.
 
 Let's see some examples.
 
@@ -61,9 +61,9 @@ library(lmtest)
 coeftest(m, vcov = vcovHC)
 ```
 
-To recap: We ran our base `m` model just the once and then adjusted for robust SEs on the backend using **sandwich** (and **coeftest**). 
+To recap: We ran our base `m` model just the once and then adjusted for robust SEs on the backend using **sandwich**/**coeftest**. 
 
-Now, I'll admit that the benefits of this workflow aren't super clear from this simple example yet. (Though, we did cut down on copying-and-pasting of duplicate code and this automatically helps to minimize user error. Remember: [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)!) But we can easily scale things up to get a better sense of its power. For instance, we could imagine calling a whole host of alternate VCOVs to our base model.
+Now, I'll admit that the benefits of this workflow aren't super clear from my simple example yet. Though, we did cut down on copying-and-pasting of duplicate code and this automatically helps to minimize user error. (Remember: [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)!) But we can easily scale things up to get a better sense of its power. For instance, we could imagine calling a whole host of alternate VCOVs to our base model.
 
 ```{r sandwich4}
 ## Calculate the VCOV (SEs) under a range of different assumptions
@@ -92,7 +92,7 @@ lm_mods = lapply(vc, function(x) coeftest(m, vcov = x))
 msummary(lm_mods)
 ```
 
-If you're the type of person that prefers visual representation --- like me --- then printing a coefficient plot is equally easy with `modelsummary::modelplot()`. This creates a **ggplot2** object that can be further manipulated as needed. In the code chunk below, I'll demonstrate this fairly simply by flipping the plot orientation.
+If you're the type of person  --- like me --- that prefers visual representation, then printing a coefficient plot is equally easy with `modelsummary::modelplot()`. This creates a **ggplot2** object that can be further manipulated as needed. In the code chunk below, I'll demonstrate this fairly simply by flipping the plot orientation.
 
 ```{r sandwich_coefplot, message = FALSE}
 library(ggplot2)
@@ -249,6 +249,8 @@ The goal of this blog post has been to show you that there is often a better app
 What's not to like?
 
 **P.S.** There are a couple of other R libraries with support for on-the-fly SE adjustment, e.g. [clubSandwich](https://cran.r-project.org/web/packages/clubSandwich/index.html). Since I've used it as a counterfoil in the benchmark, I should add that `lfe::felm()` provides its own method for swapping out different SEs post-estimation; see [here](https://broom.tidymodels.org/reference/tidy.felm.html#examples). Similarly, I've focused on R because it's the software language that I use most often and --- as far as I am aware --- is the only one to provide methods for on-the-fly SE adjustment across a wide range of models. If anyone knows of equivalent methods or canned routines in other languages, please let me know in the comments.
+
+**P.P.S.** Look, I'm not saying it's necessarily "wrong" to specify your SEs in the model call. Particularly if you've already settled on a single VCOV to use. Then, by all means, use the convenience of  Stata's `, robust` syntax or the R equivalent `lm_robust()` (via the [**estimatr**](https://declaredesign.org/r/estimatr) package).
 
 [^1]: You can substitute with a regular *for* loop or `purrr::map()` if you prefer.
 

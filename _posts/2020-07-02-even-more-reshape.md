@@ -2,6 +2,7 @@
 title: "Even more reshape benchmarks"
 excerpt: "Giving the people what they want"
 tags: [reshape, r, stata, julia, python]
+toc: true
 comments: true
 ---
 

@@ -106,6 +106,7 @@ defaults:
       layout: single
       classes: wide
       author_profile: true
+      show_date: true
       read_time: true
       comments: true
       share: true

@@ -87,7 +87,7 @@ fwrite(d, '~/sparse-wide.csv')
 
 Next, run the Stata benchmarks.
 
-```
+```stata
 clear
 clear matrix
 timer clear

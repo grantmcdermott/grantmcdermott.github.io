@@ -92,7 +92,7 @@ b = microbenchmark(base_reshape(),
 
 ### Stata
 
-```
+```stata
 clear
 clear matrix
 timer clear

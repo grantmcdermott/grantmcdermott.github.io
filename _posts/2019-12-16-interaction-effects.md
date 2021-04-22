@@ -2,10 +2,12 @@
 title: "Marginal effects and interaction terms"
 excerpt: "Quickly get the full marginal effect of interaction terms in R (and other software)"
 tags: [interaction terms, marginal effects]
-# toc: true
+toc: true
 # toc_label: "Jump to:"
 comments: true
 ---
+
+## The trick
 
 I recently [tweeted](https://twitter.com/grant_mcdermott/status/1202084676439085056?s=20){:target="_blank"} one of my favourite R tricks for getting the full marginal effect(s) of interaction terms. The short version is that, instead of writing your model as `lm(y ~ f1 * x2)`, you write it as `lm(y ~ f1 / x2)`. Here's an example using everyone's favourite mtcars dataset.
 

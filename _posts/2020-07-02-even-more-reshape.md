@@ -2,7 +2,6 @@
 title: "Even more reshape benchmarks"
 excerpt: "Giving the people what they want"
 tags: [reshape, r, stata, julia, python]
-toc: true
 comments: true
 ---
 
@@ -50,7 +49,7 @@ Summarizing, here is each language represented by its fastest method.
 
 ## Code
 
-See my [previous post]({{ site.url }}/2020/06/30/reshape-benchmarks/) for the data generation and plotting code. (Remember to set `n = 1e8` for the large data benchmark.) For the sake of brevity, here is quick recap of the main reshaping functions that I use across the different languages and how I record timing.
+See my [previous post]({{ site.url }}/reshape-benchmarks/) for the data generation and plotting code. (Remember to set `n = 1e8` for the large data benchmark.) For the sake of brevity, here is quick recap of the main reshaping functions that I use across the different languages and how I record timing.
 
 ### R
 
@@ -101,7 +100,7 @@ set more off
 
 cd "Z:\home\grant\Documents\Projects\reshape-benchmarks"
 
-import delimited sparse_wide.csv
+import delimited "sparse-wide.csv"
 
 // Vanilla Stata
 preserve
@@ -156,7 +155,7 @@ outsheet using "reshape-results-stata.csv", replace
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv('sparse_wide.csv')
+df = pd.read_csv('sparse-wide.csv')
 result = %timeit -o df.melt(id_vars=['id', 'grp'])
 result_df = pd.DataFrame({'result':[np.median(result.timings)]})
 result_df.to_csv('reshape-results-python.csv')
@@ -167,7 +166,7 @@ result_df.to_csv('reshape-results-python.csv')
 ```jl
 using CSV, DataFrames, BenchmarkTools
 
-d = DataFrame(CSV.File("sparse_wide.csv"))
+d = DataFrame(CSV.File("sparse-wide.csv"))
 jl_stack = @benchmark stack(d, Not([:id, :grp])) evals=5
 CSV.write("reshape-results-julia.csv", DataFrame(result = median(jl_stack)))
 ```

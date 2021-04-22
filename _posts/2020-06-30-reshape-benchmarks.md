@@ -3,7 +3,6 @@ title: "Reshape benchmarks"
 excerpt: "Going wide to long with sparse data"
 tags: [reshape, r, stata, data.table, tidyverse, gtools]
 toc: true
-comments: true
 ---
 
 ## Motivation

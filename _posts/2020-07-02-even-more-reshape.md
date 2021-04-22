@@ -58,6 +58,7 @@ See my [previous post]({{ site.url }}/reshape-benchmarks/) for the data generati
 
 library(tidyverse)
 library(data.table)
+library(microbenchmark)
 
 # Data --------------------------------------------------------------------
 

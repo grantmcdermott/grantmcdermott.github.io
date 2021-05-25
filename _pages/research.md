@@ -11,10 +11,6 @@ header:
 
 ## Working papers
 
-"Sceptic priors and climate consensus." (Accepted, **<i>Climatic Change</i>**)
-
-*How much evidence would it take to convince climate sceptics that they are wrong? I explore this question within an empirical Bayesian framework. I consider a group of stylised sceptics and examine how these individuals rationally update their beliefs in the face of ongoing climate change. I find that available evidence in the form of instrumental climate data tends to overwhelm all but the most extreme priors. Most sceptics form updated beliefs about climate sensitivity that correspond closely to estimates from the scientific literature. However, belief convergence is a non-linear function of prior strength and it becomes increasingly difficult to convince the remaining pool of dissenters. I discuss the necessary conditions for consensus formation under Bayesian learning and show that apparent deviations from the Bayesian ideal can still be accommodated within the same conceptual framework. I argue that a generalized Bayesian model provides a bridge between competing theories of climate scepticism as a social phenomenon.* ([Paper](http://raw.githack.com/grantmcdermott/sceptic-priors/master/paper/sceptic/sceptic.pdf){:target="_blank"} and [SM](http://raw.githack.com/grantmcdermott/sceptic-priors/master/paper/SM/sceptic-SM.pdf){:target="_blank"}. [Code](https://github.com/grantmcdermott/sceptic-priors){:target="_blank"}.)
-
 "Hydro power. Market might."
 
 *A central tenet of economic theory is that market power induces deadweight loss. This claim rests on an assumption that is difficult to verify empirically. Namely, that dominant firms produce less than the social optimum. I provide evidence of such restrictive behaviour using a rich dataset of Norwegian hydropower firms. The research design exploits exogenous variation in market power, arising from transmission bottlenecks and the formation of localized electricity markets. The unique production traits of hydropower production further helps to avoid empirical complications associated with marginal cost estimation and endogenous variation in the supply mix. This allows me to identify the causal impact of market power on firm behaviour in a reduced-form setting that requires minimal assumptions. I show that gaining pivotal status can cause firms to withhold production by as much as a two to five percent. My results suggest that even nominally competitive markets are susceptible to strategic manipulation and welfare losses.* ([Paper]({{ site.url }}/papers/hydro.pdf){:target="_blank"}.)
@@ -38,6 +34,8 @@ header:
 
 
 ## Publications
+
+"Sceptic priors and climate consensus." Published in **<i>Climatic Change</i>**, 2021 (166:7). [Paper](https://rdcu.be/cle8u){:target="_blank"}. [Pre-print](https://grantmcdermott.com/papers/sceptic.pdf){:target="_blank"}. [Code](https://github.com/grantmcdermott/skeptic-priors){:target="_blank"}.
 
 "Alternate explanations for the blue paradox do not withstand statistical scrutiny." With Kyle C. Meng, Gavin G. McDonald and Christopher J. Costello. Published in **<i>Proceedings of the National Academy of Sciences</i>**, 115 (52), E12124–E12125, 2018. ([Paper](https://doi.org/10.1073/pnas.1818687115){:target="_blank"}. [Ungated](http://grantmcdermott.com/papers/mcdermott2019blueparadox-reply.pdf){:target="_blank"}. [Code](https://github.com/grantmcdermott/blueparadox){:target="_blank"}.)
 

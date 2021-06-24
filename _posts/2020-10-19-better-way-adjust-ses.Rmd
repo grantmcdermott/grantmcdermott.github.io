@@ -18,7 +18,9 @@ knitr::opts_chunk$set(cache = TRUE, dpi = 300, fig.width = 8, fig.height = 5)
 
 ## Motivation
 
-*A researcher has to adjust the standard errors (SEs) for a regression model that she has already run. Maybe this is to appease a journal referee. She needs to convince readers that she hasn't cherry-picked her results, after all. Or, maybe it's because she is busy iterating through the early stages of a project. She's still getting to grips with her data and wants to understand how sensitive her results are to different modeling assumptions.*
+Consider the following scenario:
+
+*A researcher has to adjust the standard errors (SEs) for a regression model that she has already run. Maybe this is to appease a journal referee. Or, maybe it's because she is busy iterating through the early stages of a project. She's still getting to grips with her data and wants to understand how sensitive her results are to different modeling assumptions.*
 
 Does that sound familiar? I believe it should, because something like that has happened to me on every single one of my empirical projects. I end up estimating multiple versions of the *same* underlying regression model &mdash; even putting them side-by-side in a regression table, where the only difference across columns is slight tweaks to the way that the SEs were calculated.
 
@@ -35,7 +37,9 @@ Let's see some examples.
 
 ## Example 1: **sandwich**
 
-To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the [**sandwich**](http://sandwich.r-forge.r-project.org/) package ([@Achim Zeilles](https://twitter.com/AchimZeileis) et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators &mdash; and thus SEs &mdash; for a wide array of model objects and classes. At the same time, **sandwich** just recently got its [own website](http://sandwich.r-forge.r-project.org/) to coincide with some cool new features. So it's worth exploring what that means for a modern empirical workflow. In the code that follows, I'm going to borrow liberally from the [introductory vignette](http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1). But I'll also tack on some additional tips and tricks that I use in my own workflow. (**UPDATE:** The vignette has now been [updated](http://sandwich.r-forge.r-project.org/news/#sandwich-3-0-1-unreleased) to include some of the suggestions from this post. Thanks Achim!)
+**UPDATE (2021-06-21):** You can now automate all of the steps that I show below with a _single_ line of code in the new version(s) of **modelsummary**. See [here](https://twitter.com/grant_mcdermott/status/1384366974558347267).
+
+To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the [**sandwich**](http://sandwich.r-forge.r-project.org/) package ([@Achim Zeilles](https://twitter.com/AchimZeileis) et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators &mdash; and thus SEs &mdash; for a wide array of model objects and classes. At the same time, **sandwich** just recently got its [own website](http://sandwich.r-forge.r-project.org/) to coincide with some cool new features. So it's worth exploring what that means for a modern empirical workflow. In the code that follows, I'm going to borrow liberally from the [introductory vignette](http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1). But I'll also tack on some additional tips and tricks that I use in my own workflow. (**UPDATE (2020-08-23):** The vignette has now been [updated](http://sandwich.r-forge.r-project.org/news/#sandwich-3-0-1-unreleased) to include some of the suggestions from this post. Thanks Achim!)
 
 Let's start by running a simple linear regression on some sample data; namely, the "PetersenCL" dataset that comes bundled with the package.
 
@@ -82,7 +86,7 @@ vc = list(
 
 You could, of course, print the `vc` list to screen now if you so wanted. But I want to go one small step further by showing you how easy it is to create a regression table that encapsulates all of these different models. In the next code chunk, I'm going to create a list of models by passing `vc` to an `lapply()` call.[^1] I'm then going to generate a regression table using `msummary()` from the excellent [**modelsummary**](https://vincentarelbundock.github.io/modelsummary) package ([@Vincent Arel-Bundock](https://twitter.com/VincentAB)).
 
-```{r sandwich5, message = FALSE}
+```{r sandwich5, message = FALSE, dependson = vc}
 library(modelsummary) ## For great-looking regression tables (among other things)
 
 ## Adjust our model SEs on-the-fly
@@ -94,7 +98,7 @@ msummary(lm_mods)
 
 If you're the type of person  --- like me --- that prefers visual representation, then printing a coefficient plot is equally easy with `modelsummary::modelplot()`. This creates a **ggplot2** object that can be further manipulated as needed. In the code chunk below, I'll demonstrate this fairly simply by flipping the plot orientation.
 
-```{r sandwich_coefplot, message = FALSE}
+```{r sandwich_coefplot, message = FALSE, dependson = lm_mods}
 library(ggplot2)
 
 modelplot(lm_mods, coef_omit = 'Interc') +
@@ -254,7 +258,7 @@ What's not to like?
 
 [^1]: You can substitute with a regular *for* loop or `purrr::map()` if you prefer.
 
-[^2]: You should read the package documentation for a full description, but very briefly: Valid `se` arguments are "standard", "white", "cluster", "twoway", "threeway" or "fourway". The `cluster` argument provides an alternative way to be explicit about which variables you want to cluster on. E.g. You would write `cluster = c('country', 'year')` instead of `se = 'twoway'`.
+[^2]: You should read the package documentation for a full description, but very briefly: Valid `se` arguments are "standard", "hetero", "cluster", "twoway", "threeway" or "fourway". The `cluster` argument provides an alternative way to be explicit about which variables you want to cluster on. E.g. You would write `cluster = c('country', 'year')` instead of `se = 'twoway'`.
 
 [^3]: Note that I'm going to use a `dep_tod / dep_delay` expansion on the RHS to get the [full marginal effect]({{ site.baseurl }}{% post_url 2019-12-16-interaction-effects %}) of the interaction terms. Don't worry too much about this if you haven't seen it before (click on the previous link if you want to learn more).
 
@@ -352,7 +356,7 @@ time_felm = (proc.time() - pt)[3]
 
 #### reghdfe
 
-```{stata reghdhe_ex_noeval, eval = FALSE}
+```stata
 clear
 clear matrix
 timer clear

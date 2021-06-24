@@ -16,7 +16,9 @@ tags:
 
 ## Motivation
 
-*A researcher has to adjust the standard errors (SEs) for a regression model that she has already run. Maybe this is to appease a journal referee. She needs to convince readers that she hasn't cherry-picked her results, after all. Or, maybe it's because she is busy iterating through the early stages of a project. She's still getting to grips with her data and wants to understand how sensitive her results are to different modeling assumptions.*
+Consider the following scenario:
+
+*A researcher has to adjust the standard errors (SEs) for a regression model that she has already run. Maybe this is to appease a journal referee. Or, maybe it's because she is busy iterating through the early stages of a project. She's still getting to grips with her data and wants to understand how sensitive her results are to different modeling assumptions.*
 
 Does that sound familiar? I believe it should, because something like that has happened to me on every single one of my empirical projects. I end up estimating multiple versions of the *same* underlying regression model &mdash; even putting them side-by-side in a regression table, where the only difference across columns is slight tweaks to the way that the SEs were calculated.
 
@@ -33,7 +35,9 @@ Let's see some examples.
 
 ## Example 1: **sandwich**
 
-To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the [**sandwich**](http://sandwich.r-forge.r-project.org/) package ([@Achim Zeilles](https://twitter.com/AchimZeileis) et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators &mdash; and thus SEs &mdash; for a wide array of model objects and classes. At the same time, **sandwich** just recently got its [own website](http://sandwich.r-forge.r-project.org/) to coincide with some cool new features. So it's worth exploring what that means for a modern empirical workflow. In the code that follows, I'm going to borrow liberally from the [introductory vignette](http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1). But I'll also tack on some additional tips and tricks that I use in my own workflow. (**UPDATE:** The vignette has now been [updated](http://sandwich.r-forge.r-project.org/news/#sandwich-3-0-1-unreleased) to include some of the suggestions from this post. Thanks Achim!)
+**UPDATE (2021-06-21):** You can now automate all of the steps that I show below with a _single_ line of code in the new version(s) of **modelsummary**. See [here](https://twitter.com/grant_mcdermott/status/1384366974558347267).
+
+To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the [**sandwich**](http://sandwich.r-forge.r-project.org/) package ([@Achim Zeilles](https://twitter.com/AchimZeileis) et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators &mdash; and thus SEs &mdash; for a wide array of model objects and classes. At the same time, **sandwich** just recently got its [own website](http://sandwich.r-forge.r-project.org/) to coincide with some cool new features. So it's worth exploring what that means for a modern empirical workflow. In the code that follows, I'm going to borrow liberally from the [introductory vignette](http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1). But I'll also tack on some additional tips and tricks that I use in my own workflow. (**UPDATE (2020-08-23):** The vignette has now been [updated](http://sandwich.r-forge.r-project.org/news/#sandwich-3-0-1-unreleased) to include some of the suggestions from this post. Thanks Achim!)
 
 Let's start by running a simple linear regression on some sample data; namely, the "PetersenCL" dataset that comes bundled with the package.
 
@@ -143,113 +147,113 @@ msummary(lm_mods)
  <thead>
   <tr>
    <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> Standard </th>
-   <th style="text-align:left;"> Sandwich (basic) </th>
-   <th style="text-align:left;"> Clustered </th>
-   <th style="text-align:left;"> Clustered (two-way) </th>
-   <th style="text-align:left;"> HC3 </th>
-   <th style="text-align:left;"> Andrews' kernel HAC </th>
-   <th style="text-align:left;"> Newey-West </th>
-   <th style="text-align:left;"> Bootstrap </th>
-   <th style="text-align:left;"> Bootstrap (clustered) </th>
+   <th style="text-align:center;"> Standard </th>
+   <th style="text-align:center;"> Sandwich (basic) </th>
+   <th style="text-align:center;"> Clustered </th>
+   <th style="text-align:center;"> Clustered (two-way) </th>
+   <th style="text-align:center;"> HC3 </th>
+   <th style="text-align:center;"> Andrews' kernel HAC </th>
+   <th style="text-align:center;"> Newey-West </th>
+   <th style="text-align:center;"> Bootstrap </th>
+   <th style="text-align:center;"> Bootstrap (clustered) </th>
   </tr>
  </thead>
 <tbody>
   <tr>
    <td style="text-align:left;"> (Intercept) </td>
-   <td style="text-align:left;"> 0.030 </td>
-   <td style="text-align:left;"> 0.030 </td>
-   <td style="text-align:left;"> 0.030 </td>
-   <td style="text-align:left;"> 0.030 </td>
-   <td style="text-align:left;"> 0.030 </td>
-   <td style="text-align:left;"> 0.030 </td>
-   <td style="text-align:left;"> 0.030 </td>
-   <td style="text-align:left;"> 0.030 </td>
-   <td style="text-align:left;"> 0.030 </td>
+   <td style="text-align:center;"> 0.030 </td>
+   <td style="text-align:center;"> 0.030 </td>
+   <td style="text-align:center;"> 0.030 </td>
+   <td style="text-align:center;"> 0.030 </td>
+   <td style="text-align:center;"> 0.030 </td>
+   <td style="text-align:center;"> 0.030 </td>
+   <td style="text-align:center;"> 0.030 </td>
+   <td style="text-align:center;"> 0.030 </td>
+   <td style="text-align:center;"> 0.030 </td>
   </tr>
   <tr>
    <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.028) </td>
-   <td style="text-align:left;"> (0.028) </td>
-   <td style="text-align:left;"> (0.067) </td>
-   <td style="text-align:left;"> (0.065) </td>
-   <td style="text-align:left;"> (0.028) </td>
-   <td style="text-align:left;"> (0.044) </td>
-   <td style="text-align:left;"> (0.066) </td>
-   <td style="text-align:left;"> (0.028) </td>
-   <td style="text-align:left;"> (0.061) </td>
+   <td style="text-align:center;"> (0.028) </td>
+   <td style="text-align:center;"> (0.028) </td>
+   <td style="text-align:center;"> (0.067) </td>
+   <td style="text-align:center;"> (0.065) </td>
+   <td style="text-align:center;"> (0.028) </td>
+   <td style="text-align:center;"> (0.044) </td>
+   <td style="text-align:center;"> (0.066) </td>
+   <td style="text-align:center;"> (0.028) </td>
+   <td style="text-align:center;"> (0.061) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> x </td>
-   <td style="text-align:left;"> 1.035 </td>
-   <td style="text-align:left;"> 1.035 </td>
-   <td style="text-align:left;"> 1.035 </td>
-   <td style="text-align:left;"> 1.035 </td>
-   <td style="text-align:left;"> 1.035 </td>
-   <td style="text-align:left;"> 1.035 </td>
-   <td style="text-align:left;"> 1.035 </td>
-   <td style="text-align:left;"> 1.035 </td>
-   <td style="text-align:left;"> 1.035 </td>
+   <td style="text-align:center;"> 1.035 </td>
+   <td style="text-align:center;"> 1.035 </td>
+   <td style="text-align:center;"> 1.035 </td>
+   <td style="text-align:center;"> 1.035 </td>
+   <td style="text-align:center;"> 1.035 </td>
+   <td style="text-align:center;"> 1.035 </td>
+   <td style="text-align:center;"> 1.035 </td>
+   <td style="text-align:center;"> 1.035 </td>
+   <td style="text-align:center;"> 1.035 </td>
   </tr>
   <tr>
-   <td style="text-align:left;">  </td>
-   <td style="text-align:left;"> (0.029) </td>
-   <td style="text-align:left;"> (0.028) </td>
-   <td style="text-align:left;"> (0.051) </td>
-   <td style="text-align:left;"> (0.054) </td>
-   <td style="text-align:left;"> (0.028) </td>
-   <td style="text-align:left;"> (0.035) </td>
-   <td style="text-align:left;"> (0.048) </td>
-   <td style="text-align:left;"> (0.029) </td>
-   <td style="text-align:left;"> (0.052) </td>
+   <td style="text-align:left;box-shadow: 0px 1px">  </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.029) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.028) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.051) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.054) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.028) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.035) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.048) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.029) </td>
+   <td style="text-align:center;box-shadow: 0px 1px"> (0.052) </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Num.Obs. </td>
-   <td style="text-align:left;"> 5000 </td>
-   <td style="text-align:left;"> 5000 </td>
-   <td style="text-align:left;"> 5000 </td>
-   <td style="text-align:left;"> 5000 </td>
-   <td style="text-align:left;"> 5000 </td>
-   <td style="text-align:left;"> 5000 </td>
-   <td style="text-align:left;"> 5000 </td>
-   <td style="text-align:left;"> 5000 </td>
-   <td style="text-align:left;"> 5000 </td>
+   <td style="text-align:center;"> 5000 </td>
+   <td style="text-align:center;"> 5000 </td>
+   <td style="text-align:center;"> 5000 </td>
+   <td style="text-align:center;"> 5000 </td>
+   <td style="text-align:center;"> 5000 </td>
+   <td style="text-align:center;"> 5000 </td>
+   <td style="text-align:center;"> 5000 </td>
+   <td style="text-align:center;"> 5000 </td>
+   <td style="text-align:center;"> 5000 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> AIC </td>
-   <td style="text-align:left;"> 21151.2 </td>
-   <td style="text-align:left;"> 21151.2 </td>
-   <td style="text-align:left;"> 21151.2 </td>
-   <td style="text-align:left;"> 21151.2 </td>
-   <td style="text-align:left;"> 21151.2 </td>
-   <td style="text-align:left;"> 21151.2 </td>
-   <td style="text-align:left;"> 21151.2 </td>
-   <td style="text-align:left;"> 21151.2 </td>
-   <td style="text-align:left;"> 21151.2 </td>
+   <td style="text-align:center;"> 21151.2 </td>
+   <td style="text-align:center;"> 21151.2 </td>
+   <td style="text-align:center;"> 21151.2 </td>
+   <td style="text-align:center;"> 21151.2 </td>
+   <td style="text-align:center;"> 21151.2 </td>
+   <td style="text-align:center;"> 21151.2 </td>
+   <td style="text-align:center;"> 21151.2 </td>
+   <td style="text-align:center;"> 21151.2 </td>
+   <td style="text-align:center;"> 21151.2 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> BIC </td>
-   <td style="text-align:left;"> 21170.8 </td>
-   <td style="text-align:left;"> 21170.8 </td>
-   <td style="text-align:left;"> 21170.8 </td>
-   <td style="text-align:left;"> 21170.8 </td>
-   <td style="text-align:left;"> 21170.8 </td>
-   <td style="text-align:left;"> 21170.8 </td>
-   <td style="text-align:left;"> 21170.8 </td>
-   <td style="text-align:left;"> 21170.8 </td>
-   <td style="text-align:left;"> 21170.8 </td>
+   <td style="text-align:center;"> 21170.8 </td>
+   <td style="text-align:center;"> 21170.8 </td>
+   <td style="text-align:center;"> 21170.8 </td>
+   <td style="text-align:center;"> 21170.8 </td>
+   <td style="text-align:center;"> 21170.8 </td>
+   <td style="text-align:center;"> 21170.8 </td>
+   <td style="text-align:center;"> 21170.8 </td>
+   <td style="text-align:center;"> 21170.8 </td>
+   <td style="text-align:center;"> 21170.8 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> Log.Lik. </td>
-   <td style="text-align:left;"> -10572.604 </td>
-   <td style="text-align:left;"> -10572.604 </td>
-   <td style="text-align:left;"> -10572.604 </td>
-   <td style="text-align:left;"> -10572.604 </td>
-   <td style="text-align:left;"> -10572.604 </td>
-   <td style="text-align:left;"> -10572.604 </td>
-   <td style="text-align:left;"> -10572.604 </td>
-   <td style="text-align:left;"> -10572.604 </td>
-   <td style="text-align:left;"> -10572.604 </td>
+   <td style="text-align:center;"> -10572.604 </td>
+   <td style="text-align:center;"> -10572.604 </td>
+   <td style="text-align:center;"> -10572.604 </td>
+   <td style="text-align:center;"> -10572.604 </td>
+   <td style="text-align:center;"> -10572.604 </td>
+   <td style="text-align:center;"> -10572.604 </td>
+   <td style="text-align:center;"> -10572.604 </td>
+   <td style="text-align:center;"> -10572.604 </td>
+   <td style="text-align:center;"> -10572.604 </td>
   </tr>
 </tbody>
 </table>
@@ -398,7 +402,7 @@ What's not to like?
 
 [^1]: You can substitute with a regular *for* loop or `purrr::map()` if you prefer.
 
-[^2]: You should read the package documentation for a full description, but very briefly: Valid `se` arguments are "standard", "white", "cluster", "twoway", "threeway" or "fourway". The `cluster` argument provides an alternative way to be explicit about which variables you want to cluster on. E.g. You would write `cluster = c('country', 'year')` instead of `se = 'twoway'`.
+[^2]: You should read the package documentation for a full description, but very briefly: Valid `se` arguments are "standard", "hetero", "cluster", "twoway", "threeway" or "fourway". The `cluster` argument provides an alternative way to be explicit about which variables you want to cluster on. E.g. You would write `cluster = c('country', 'year')` instead of `se = 'twoway'`.
 
 [^3]: Note that I'm going to use a `dep_tod / dep_delay` expansion on the RHS to get the [full marginal effect]({{ site.baseurl }}{% post_url 2019-12-16-interaction-effects %}) of the interaction terms. Don't worry too much about this if you haven't seen it before (click on the previous link if you want to learn more).
 
@@ -499,8 +503,7 @@ time_felm = (proc.time() - pt)[3]
 
 #### reghdfe
 
-
-{% highlight stata %}
+```stata
 clear
 clear matrix
 timer clear
@@ -537,5 +540,5 @@ gen elapsed = .
 set obs 1
 replace elapsed = r(t1) if _n == 1
 outsheet using "reghdfe-ex.csv", replace
-{% endhighlight %}
+```
 

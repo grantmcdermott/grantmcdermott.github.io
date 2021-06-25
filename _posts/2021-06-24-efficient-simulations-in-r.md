@@ -14,29 +14,29 @@ tags:
 
 ## Motivation
 
-Being able to code up efficient simulations is one of the most useful skills that you can develop as a social (data) scientist. Unfortunately, it's also something that's rarely taught in universities or textbooks.^[Ed Rubin and I are writing a [book](https://github.com/grantmcdermott/ds4e) that will attempt to fill this gap, among other things. Stay tuned!] This post will cover some general principles that I've adopted for writing fast simulation code in R.
+Being able to code up efficient simulations is one of the most useful skills that you can develop as a social (data) scientist. Unfortunately, it's also something that's rarely taught in universities or textbooks.^[1] This post will cover some general principles that I've adopted for writing fast simulation code in R.
 
 Now, I should clarify that the type of simulations that I, personally, am most interested in are related to _econometrics_. For example, Monte Carlo experiments to better understand when a particular estimator or regression specification does well (or poorly). The guidelines here should be considered accordingly and might not map well on to other domains (e.g. agent-based models or numerical computation). 
 
 ## Our example: Interaction effects in panel models
 
-I'm going to illustrate by replicating a simulation result in a paper that I really like: "Interaction effects in econometrics" by [Balli & Sørensen (2012)](https://www.uh.edu/~bsorense/Interaction_EE.pdf) (hereafter, **BS12**).
+I'm going to illustrate by replicating a simulation result in a paper that I really like: "Interaction effects in econometrics" by [Balli & Sørensen (2012)](https://www.uh.edu/~bsorense/Interaction_EE.pdf) (hereafter, **BS13**).
 
-BS12 does various things, but one result in particular has had a big impact on my own research. They show that empirical researchers working with panel data are well advised to demean any (continuous) variables that are going to be interacted in a regression. That is, rather than estimating the model in "level" terms...
+BS13 does various things, but one result in particular has had a big impact on my own research. They show that empirical researchers working with panel data are well advised to demean any (continuous) variables that are going to be interacted in a regression. That is, rather than estimating the model in "level" terms...
 
 $$
 Y_{it} = \mu_i + \beta_1X1_{it} + \beta_2X2_{it} + \beta_3X1_{it} \cdot X2_{it} + \epsilon_{it}
 $$
-... you should estimate the "demeaned" version instead^[In their notation, BS12 only demean the interacted terms on $\beta_3$. But demeaning the parent terms on $\beta_1$ and $\beta_2$ is functionally equivalent and, as we shall see later, more convenient when writing the code since we can use R's `*` expansion operator to concisely specify all of the terms.]
+... you should estimate the "demeaned" version instead^[2]
 
 $$
 Y_{it} = \beta_0 + \beta_1 (X1_{it} - \overline{X1}_{i.}) + \beta_2 (X2_{it} - \overline{X2}_{i.}) + \beta_3(X1_{it} - \overline{X1}_{i.}) \cdot (X2_{it} - \overline{X2}_{i.}) + \epsilon_{it}
 $$
 Here, $\overline{X1}_{i.}$ refers to mean value of variable $X1$ (e.g. GDP over time) for unit $i$ (e.g. country).
 
-We'll get to the simulations in a second, but BS12 describe the reasons for their recommendation in very intuitive terms. The super short version --- again, you really should read the paper --- is that the level model can pick up spurious trends in the case of varying slopes. The implications of this insight are fairly profound... if for no other reason that *so* many applied econometrics papers employ interaction terms in a panel setting.^[Got a difference-in-differences model uses twoway fixed-effects? Ya, that's just an interaction term in a panel setting. In fact, the demeaning point that BS12 are making here and actually draw an explicit comparison to later in the paper, is equivalent to the argument that we should control for unit-specific time trends in DiD models. The paper includes additional simulations demonstrating this equivalence, but I don't want to get sidetracked by that here.]
+We'll get to the simulations in a second, but BS13 describe the reasons for their recommendation in very intuitive terms. The super short version --- again, you really should read the paper --- is that the level model can pick up spurious trends in the case of varying slopes. The implications of this insight are fairly profound... if for no other reason that *so* many applied econometrics papers employ interaction terms in a panel setting.^[3]
 
-Okay, so a potentially big deal. But let's see a simulation and thereby get the ball rolling for this post. I'm going to run a simulation experiment that exactly mimics one in BS12 (see Table 3). We'll create a fake dataset where the true interaction is ZERO. However, the slope coefficient of one of the parent terms varies by unit (here: country). If BS12 is right, then including an interaction term in our model could accidentally result in a spurious, non-zero coefficient on this interaction term. The exact model is
+Okay, so a potentially big deal. But let's see a simulation and thereby get the ball rolling for this post. I'm going to run a simulation experiment that exactly mimics one in BS13 (see Table 3). We'll create a fake dataset where the true interaction is ZERO. However, the slope coefficient of one of the parent terms varies by unit (here: country). If BS13 is right, then including an interaction term in our model could accidentally result in a spurious, non-zero coefficient on this interaction term. The exact model is
 
 $$y_{it} = \alpha + x_{1,it} + 1.5x_{2,it} + \epsilon_{it}$$
 ### Data generating function
@@ -147,7 +147,7 @@ etable(mod_level, mod_dmean, se  = 'standard')
 
 Well, there you have it. The "level" model spuriously yields a statistically significant coefficient on the interaction term. In comparison, the "demeaned" version avoids this trap and also appears to more closely estimated the parent term coefficients.
 
-Okay. But to _really_ be sure, we should repeat our simulation many times. (BS12 do it 20,000 times...) And, so, we finally get to the main purpose of this post.
+Okay. But to _really_ be sure, we should repeat our simulation many times. (BS13 do it 20,000 times...) And, so, we finally get to the main purpose of this post.
 
 ## Principle 1: Trim the fat
 
@@ -155,7 +155,7 @@ Okay. But to _really_ be sure, we should repeat our simulation many times. (BS12
   
 The first key principle for writing efficient simulation code is to trim the fat as much as possible. Even small differences start to add up once you're repeating operations tens of thousands of times. For example, does it really make sense to use `fixest::feols()` for this example data? As much as I am a huge **fixest** stan, in this case I have to say... no. The package is optimised for high-dimensional fixed-effects, clustered errors, etc. Our toy dataset contains just one fixed-effect (comprising two levels) and we are ultimately only interested in extracting a single coefficient for our simulation. We don't even need to save the standard errors. Most of **fixest**'s extra features are essentially wasted. We could probably do better just by using a simple `lm()` call and specifying the country fixed-effect ("id") as a factor. However...
 
-Even `lm()` objects contain quite a lot of information (and take extra steps) that we don't need. We can simplify things even further by directly using the fitting function that `lm` calls underneath the hood. Specifically, the **`lm.fit()`** function. This requires a slightly different way of writing our regression model --- closer to matrix form --- but yields considerable speed gains. Here's a benchmark to demonstrate.
+Even `lm()` objects contain quite a lot of information (and take extra steps) that we don't need. We can simplify things even further by directly using the fitting function that `lm` calls underneath the hood. Specifically, the [**`lm.fit()`**](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lmfit.html) function. This requires a slightly different way of writing our regression model --- closer to matrix form --- but yields considerable speed gains. Here's a benchmark to demonstrate.
 
 
 {% highlight r %}
@@ -179,7 +179,7 @@ microbenchmark(
 ##  lm.fit  100.7  100.7  104.5  104.5  108.3  108.3     2  a
 {% endhighlight %}
 
-For this small dataset example, a regular `lm()` call is about five times faster than `feols()`... and `lm.fit()` is then a further ten times faster still. Now, we're talking microseconds here and the difference is not something you'd notice running a single regression. But... once you start running 20,000 of them, then those microseconds start to add up.^[Another thing is that `lm.fit()` produces a much more limited, but leaner return object. So we'll be taxing our computers' memories less.] Final thing, just to prove that we're getting the same coefficients:
+For this small dataset example, a regular `lm()` call is about five times faster than `feols()`... and `lm.fit()` is then a further ten times faster still. Now, we're talking microseconds here and the difference is not something you'd notice running a single regression. But... once you start running 20,000 of them, then those microseconds start to add up.^[4] Final thing, just to prove that we're getting the same coefficients:
 
 
 {% highlight r %}
@@ -193,7 +193,7 @@ coef(lm.fit(cbind(1, d$x1_dmean, d$x2_dmean, d$x1_dmean*d$x2_dmean, d$id), d$y))
 ##  3.16117  0.95435  1.55596  0.01993 -0.14978
 {% endhighlight %}
 
-Thee output is less visually appealing, but we can see the interaction term coefficient of `0.01993247` in the order in which it appeared (i.e. "x4"). This is the key coefficient that we'll be extracting in each of our simulation runs.^[You can also name the coefficients in the design matrix if you wanted to make it easier to reference by name. E.g. `coef(lm.fit(cbind('intercept' = 1, 'x1' = d$x1_dmean, 'x2' = d$x2_dmean, 'x1:x2' = d$x1_dmean*d$x2_dmean, 'id' = d$id), d$y))`.]
+Thee output is less visually appealing, but we can see the interaction term coefficient of `0.01993247` in the order in which it appeared (i.e. "x4"). This is the key coefficient that we'll be extracting in each of our simulation runs.^[5]
 
 
 ## Principle 2: Generate your data once
@@ -231,9 +231,9 @@ But any type of explicit iteration --- whether it is a `for()` loop or an `lappl
 
 Hadley and Garret's _R for Data Science_ book has a nice [chapter](https://r4ds.had.co.nz/many-models.html) on model nesting, and then Vincent has a cool [blog post](http://www.arelbundock.com/posts/datatable_nesting/) replicating the same workflow with data.table. But, really, the core idea is pretty simple: We can use the advanced data structure and functionality of tibbles or data.tables to run our simulations as grouped operations (i.e. by simulation ID). Just like we can group a data frame and then collapse down to (say) mean values, we can also group a data frame and then run a regression on each subgroup.
 
-Why would this be faster than explicit iteration? Well, basically it boils down to the fact that data.tables and tibbles provide an enhanced structure for returning complex objects (including list columns) and their grouped operations are highly optimised to run in (implicit) parallel at the C++ level.^[This basically all that vectorisation is; a loop return at the C(++) level.] The internal code of **data.table**, in particular, is just so insanely optimised that trying to beat it with some explicit parallel loop is a [fools errand](https://grantmcdermott.com/ds4e/parallel.html#library-source-code).
+Why would this be faster than explicit iteration? Well, basically it boils down to the fact that data.tables and tibbles provide an enhanced structure for returning complex objects (including list columns) and their grouped operations are highly optimised to run in (implicit) parallel at the C++ level.^[6] The internal code of **data.table**, in particular, is just so insanely optimised that trying to beat it with some explicit parallel loop is a [fools errand](https://grantmcdermott.com/ds4e/parallel.html#library-source-code).
 
-Okay, so let's see a benchmark. I'm going to compare three options for simulating 100 draws: 1) sequential iteration with `lapply()`, 2) explicit parallel iteration with `parallel::mclapply`, and 3) nested (implicit parallel) iteration. For the latter, I'll just grouping my dataset by simulation ID and then leveraging data.table's powerful `.SD` syntax.^[This will closely mimic a [related example](https://rdatatable.gitlab.io/data.table/articles/datatable-sd-usage.html#grouped-regression-1) in the data.table vignettes, which you can read more if you're interested to learn more.] Note further than I'm just going to run regular `lm()` calls rather than `lm.fit()` --- see Principle 1 --- because I want to keep things simple and familiar.
+Okay, so let's see a benchmark. I'm going to compare three options for simulating 100 draws: 1) sequential iteration with `lapply()`, 2) explicit parallel iteration with `parallel::mclapply`, and 3) nested (implicit parallel) iteration. For the latter, I'll just grouping my dataset by simulation ID and then leveraging data.table's powerful `.SD` syntax.^[7] Note further than I'm just going to run regular `lm()` calls rather than `lm.fit()` --- see Principle 1 --- because I want to keep things simple and familiar.
 
 
 {% highlight r %}
@@ -273,7 +273,7 @@ Okay, not a huge difference between the three options for this small benchmark. 
 
 ## Putting it all together
 
-Time to put everything together and run this thing. Like BS12, I'm going to simulate 20,000 runs. I'll print the time it takes to complete the full simulation at the bottom.
+Time to put everything together and run this thing. Like BS13, I'm going to simulate 20,000 runs. I'll print the time it takes to complete the full simulation at the bottom.
 
 
 {% highlight r %}
@@ -300,7 +300,7 @@ Sys.time() - tic
 
 And look at that. Just over 3 seconds to run the full 20k simulation!
 
-All that hard work deserves a nice plot, don't you think? Here we have replicated the key result in BS12, Table 3. Moral of the story: If you have an interaction effect in a panel setting (e.g. DiD), it's always worth demeaning your terms and double check-checking that your results don't change.
+All that hard work deserves a nice plot, don't you think? Here we have replicated the key result in BS13, Table 3. Moral of the story: If you have an interaction effect in a panel setting (e.g. DiD), it's always worth demeaning your terms and double check-checking that your results don't change.
 
 
 {% highlight r %}
@@ -318,3 +318,21 @@ legend("topright", col = c(scales::alpha(c('skyblue', 'red'), .5)), lwd = 10,
 {% endhighlight %}
 
 ![plot of chunk hist](/figure/posts/2021-06-24-efficient-simulations-in-r/hist-1.png)
+
+## References
+
+Balli, Hatice Ozer, and Bent E. Sørensen. "Interaction effects in econometrics." Empirical Economics 45, no. 1 (2013): 583-603. [Link](https://www.uh.edu/~bsorense/Interaction_EE.pdf)
+
+[^1]: Ed Rubin and I are writing a [book](https://github.com/grantmcdermott/ds4e) that will attempt to fill this gap, among other things. Stay tuned!
+
+[^2]: In their notation, BS13 only demean the interacted terms on $\beta_3$. But demeaning the parent terms on $\beta_1$ and $\beta_2$ is functionally equivalent and, as we shall see later, more convenient when writing the code since we can use R's `*` expansion operator to concisely specify all of the terms.
+
+[^3]: Got a difference-in-differences model uses twoway fixed-effects? Ya, that's just an interaction term in a panel setting. In fact, the demeaning point that BS13 are making here and actually draw an explicit comparison to later in the paper, is equivalent to the argument that we should control for unit-specific time trends in DiD models. The paper includes additional simulations demonstrating this equivalence, but I don't want to get sidetracked by that here.
+
+[^4]: Another thing is that `lm.fit()` produces a much more limited, but leaner return object. So we'll be taxing our computers' memories less.
+
+[^5]: You can also name the coefficients in the design matrix if you wanted to make it easier to reference by name. E.g. `coef(lm.fit(cbind('intercept' = 1, 'x1' = d$x1_dmean, 'x2' = d$x2_dmean, 'x1:x2' = d$x1_dmean*d$x2_dmean, 'id' = d$id), d$y))`.
+
+[^6]: This basically all that vectorisation is; a loop return at the C(++) level.
+
+[^7]: This will closely mimic a [related example](https://rdatatable.gitlab.io/data.table/articles/datatable-sd-usage.html#grouped-regression-1) in the data.table vignettes, which you can read more if you're interested to learn more.

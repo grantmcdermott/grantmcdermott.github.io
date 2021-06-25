@@ -21,7 +21,7 @@ Now, I should clarify that the type of simulations that I, personally, am most i
 
 ## Our example: Interaction effects in panel models
 
-I'm going to illustrate by replicating a simulation result in a paper that I really like: "Interaction effects in econometrics" by [Balli & Sørensen (2012)](https://www.uh.edu/~bsorense/Interaction_EE.pdf) (hereafter, **BS13**).
+I'm going to illustrate by replicating a simulation result in a paper that I really like: "Interaction effects in econometrics" by [Balli & Sørensen (2013)](https://www.uh.edu/~bsorense/Interaction_EE.pdf) (hereafter, **BS13**).
 
 BS13 does various things, but one result in particular has had a big impact on my own research. They show that empirical researchers working with panel data are well advised to demean any (continuous) variables that are going to be interacted in a regression. That is, rather than estimating the model in "level" terms...
 
@@ -145,9 +145,9 @@ etable(mod_level, mod_dmean, se  = 'standard')
 ## Within R2                       0.86761            0.86055
 {% endhighlight %}
 
-Well, there you have it. The "level" model spuriously yields a statistically significant coefficient on the interaction term. In comparison, the "demeaned" version avoids this trap and also appears to more closely estimated the parent term coefficients.
+Well, there you have it. The "level" model spuriously yields a statistically significant coefficient on the interaction term. In comparison, the "demeaned" version avoids this trap and also appears to have better estimated the parent term coefficients. 
 
-Okay. But to _really_ be sure, we should repeat our simulation many times. (BS13 do it 20,000 times...) And, so, we finally get to the main purpose of this post.
+Cool. But to _really_ be sure, we should repeat our simulation many times. (BS13 do it 20,000 times...) And, so, we now move on to the main purpose of this post: How do we write simulation code that efficiently completes tens of thousands of runs? Here follow some key principles that I try to bare in mind.
 
 ## Principle 1: Trim the fat
 
@@ -233,7 +233,7 @@ Hadley and Garret's _R for Data Science_ book has a nice [chapter](https://r4ds.
 
 Why would this be faster than explicit iteration? Well, basically it boils down to the fact that data.tables and tibbles provide an enhanced structure for returning complex objects (including list columns) and their grouped operations are highly optimised to run in (implicit) parallel at the C++ level.[^6] The internal code of **data.table**, in particular, is just so insanely optimised that trying to beat it with some explicit parallel loop is a [fools errand](https://grantmcdermott.com/ds4e/parallel.html#library-source-code).
 
-Okay, so let's see a benchmark. I'm going to compare three options for simulating 100 draws: 1) sequential iteration with `lapply()`, 2) explicit parallel iteration with `parallel::mclapply`, and 3) nested (implicit parallel) iteration. For the latter, I'll just grouping my dataset by simulation ID and then leveraging data.table's powerful `.SD` syntax.[^7] Note further than I'm just going to run regular `lm()` calls rather than `lm.fit()` --- see Principle 1 --- because I want to keep things simple and familiar.
+Okay, so let's see a benchmark. I'm going to compare three options for simulating 100 draws: 1) sequential iteration with `lapply()`, 2) explicit parallel iteration with `parallel::mclapply`, and 3) nested (implicit parallel) iteration. For the latter, I'm just grouping my dataset by simulation ID and then leveraging data.table's powerful `.SD` syntax.[^7] Note further than I'm just going to run regular `lm()` calls rather than `lm.fit()` --- see Principle 1 --- because I want to keep things simple and familiar for the moment.
 
 
 {% highlight r %}
@@ -269,7 +269,7 @@ microbenchmark(
 ##      nested  93.46  93.46  97.1   97.1 100.7 100.7     2 a
 {% endhighlight %}
 
-Okay, not a huge difference between the three options for this small benchmark. But --- trust me --- the difference will grow for the full simulation where we're comparing the level vs demeaned regressions with `lm.fit()`. There are also some other reasons why relying on **data.table** will help us here. For example, `parallel::mclapply()` relies on forking, which is only available on Linux or Mac. Sure, you could use a different package like **future.apply** to provide a parallel backend (PSOCK) for Windows, but that's going to be a bit slower. Really, the bottom line is that we can outsource all of that parallel overhead to **data.table** and it will automatically handle everything at the C(++) level. Winning.
+Okay, not a huge difference between the three options for this small benchmark. But --- trust me --- the difference will grow for the full simulation where we're comparing the level vs demeaned regressions with `lm.fit()`. There are also some other reasons why relying on **data.table** will help us here. For example, `parallel::mclapply()` relies on forking, which is [only available](https://grantmcdermott.com/ds4e/parallel.html#forking-vs-sockets) on Linux or Mac. Sure, you could use a different package like **future.apply** to provide a parallel backend (PSOCK) for Windows, but that's going to be a bit slower. Really, the bottom line is that we can outsource all of that parallel overhead to **data.table** and it will automatically handle everything at the C(++) level. Winning.
 
 ## Putting it all together
 
@@ -300,7 +300,7 @@ Sys.time() - tic
 
 And look at that. Just over 3 seconds to run the full 20k simulation!
 
-All that hard work deserves a nice plot, don't you think? Here we have replicated the key result in BS13, Table 3. Moral of the story: If you have an interaction effect in a panel setting (e.g. DiD), it's always worth demeaning your terms and double check-checking that your results don't change.
+All that hard work deserves a nice plot, don't you think? 
 
 
 {% highlight r %}
@@ -318,6 +318,8 @@ legend("topright", col = c(scales::alpha(c('skyblue', 'red'), .5)), lwd = 10,
 {% endhighlight %}
 
 ![plot of chunk hist](/figure/posts/2021-06-24-efficient-simulations-in-r/hist-1.png)
+
+Here we have replicated the key result in BS13, Table 3. Moral of the story: If you have an interaction effect in a panel setting (e.g. DiD!), it's always worth demeaning your terms and double check-checking that your results don't change.
 
 ## References
 

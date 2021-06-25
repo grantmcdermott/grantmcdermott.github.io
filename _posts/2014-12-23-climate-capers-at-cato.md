@@ -2,6 +2,8 @@
 title: "Climate capers at Cato"
 excerpt: "Dodgy statistics at the Cato Institute"
 tags: [Cato Institute, Climate Change, Econometrics, Facepalm]
+mathjax: true
+toc: true
 comments: true
 modified_time: '2014-12-30T20:35:55.984+01:00'
 thumbnail: http://2.bp.blogspot.com/-4Vz-R-g08ZY/VJkeKNZMVdI/AAAAAAAAArk/rGNZ3CnmNfg/s72-c/knappenberger%26michaels2014.png
@@ -19,7 +21,7 @@ Let's take closer look at their analysis, shall we?
 
 In essence, M&K have implemented a simple linear regression of temperature on a time trend,
 
-\begin{equation}<br />Temp_t = \alpha_0 + \beta_1 Trend + \epsilon_t.\end{equation}
+$$Temp_t = \alpha_0 + \beta_1 Trend + \epsilon_t.$$
 
 This is done recursively, starting from 2014 and incrementing backwards one year at a time until the sample extends to the middle of the 20th century. The key figure in their study is shown below and compares the estimated trend coefficient, $\hat{\beta_1}$, from a bunch of climate models (i.e. the [CMIP5 ensemble](http://cmip-pcmdi.llnl.gov/cmip5/){:target="_blank"}) with that obtained from observed global temperatures (i.e. the UK Met Office's [HadCRUT4 dataset](http://www.metoffice.gov.uk/hadobs/hadcrut4/data/current/download.html){:target="_blank"}).
 <img src="http://2.bp.blogspot.com/-4Vz-R-g08ZY/VJkeKNZMVdI/AAAAAAAAArk/rGNZ3CnmNfg/s1600/knappenberger%26michaels2014.png" title="" alt="M&K's key figure." style="display: block; margin: auto;" />

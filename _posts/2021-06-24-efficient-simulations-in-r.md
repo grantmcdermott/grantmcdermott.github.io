@@ -147,7 +147,7 @@ etable(mod_level, mod_dmean, se  = 'standard')
 
 Well, there you have it. The "level" model spuriously yields a statistically significant coefficient on the interaction term. In comparison, the "demeaned" version avoids this trap and also appears to have better estimated the parent term coefficients. 
 
-Cool. But to _really_ be sure, we should repeat our simulation many times. (BS13 do it 20,000 times...) And, so, we now move on to the main purpose of this post: How do we write simulation code that efficiently completes tens of thousands of runs? Here follow some key principles that I try to bare in mind.
+Cool. But to _really_ be sure, we should repeat our simulation many times. (BS13 do it 20,000 times...) And, so, we now move on to the main purpose of this post: How do we write simulation code that efficiently completes tens of thousands of runs? Here follow some key principles that I try to keep in mind.
 
 ## Principle 1: Trim the fat
 
@@ -300,7 +300,7 @@ Sys.time() - tic
 ## Time difference of 3.776 secs
 {% endhighlight %}
 
-And look at that. Just over 3 seconds to run the full 20k simulation!
+And look at that. Just over 3 seconds to run the full 20k simulation! (Can you beat that? Let me know in the comments...)
 
 All that hard work deserves a nice plot, don't you think? 
 
@@ -322,6 +322,19 @@ legend("topright", col = c(scales::alpha(c('skyblue', 'red'), .5)), lwd = 10,
 ![plot of chunk hist](/figure/posts/2021-06-24-efficient-simulations-in-r/hist-1.png)
 
 Here we have replicated the key result in BS13, Table 3. **Moral of the story:** If you have an interaction effect in a panel setting (e.g. DiD!), it's always worth demeaning your terms and double-checking that your results don't change.
+
+## Conclusion
+
+Being able to write efficient simulation code is a very valuable skill. In this post we have replicated an actual published result, incorporating three principles that have served me well:
+
+1. **Trim the fact.** (Subtitle: "`lm.fit()` is your friend")
+
+2. **Generate your data once** (Subtitle: "It’s much quicker to generate one large dataset than many small ones")
+
+3. **Try to avoid explicit iteration (even in parallel)** (Subtitle: Nest your simulations in a data.table or tibble)
+
+You don't have to adopt all of these principles to write your own efficient simulation code in R. There may even be cases where it's more efficient to do something else. But incorporating at least one or two of them will generally make your simulations much faster.
+
 
 ## References
 

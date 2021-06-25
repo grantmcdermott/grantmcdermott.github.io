@@ -337,4 +337,4 @@ Balli, Hatice Ozer, and Bent E. Sørensen. "Interaction effects in econometrics.
 
 [^5]: This basically all that vectorisation is; a loop implemented at the C(++) level.
 
-[^5]: This will closely mimic a [related example](https://rdatatable.gitlab.io/data.table/articles/datatable-sd-usage.html#grouped-regression-1) in the data.table vignettes, which you should read if you're interested to learn more.
+[^6]: This will closely mimic a [related example](https://rdatatable.gitlab.io/data.table/articles/datatable-sd-usage.html#grouped-regression-1) in the data.table vignettes, which you should read if you're interested to learn more.

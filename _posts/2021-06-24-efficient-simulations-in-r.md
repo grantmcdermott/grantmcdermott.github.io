@@ -321,7 +321,7 @@ legend("topright", col = c(scales::alpha(c('skyblue', 'red'), .5)), lwd = 10,
 
 ![plot of chunk hist](/figure/posts/2021-06-24-efficient-simulations-in-r/hist-1.png)
 
-Here we have replicated the key result in BS13, Table 3. Moral of the story: If you have an interaction effect in a panel setting (e.g. DiD!), it's always worth demeaning your terms and double check-checking that your results don't change.
+Here we have replicated the key result in BS13, Table 3. **Moral of the story:** If you have an interaction effect in a panel setting (e.g. DiD!), it's always worth demeaning your terms and double-checking that your results don't change.
 
 ## References
 

@@ -19,7 +19,8 @@ tags:
 
 Being able to code up efficient simulations is one of the most useful skills that you can develop as a social (data) scientist. Unfortunately, it's also something that's rarely taught in universities or textbooks.[^1] This post will cover some general principles that I've adopted for writing fast simulation code in R.
 
-Now, I should clarify that the type of simulations that I, personally, am most interested in are related to _econometrics_. For example, Monte Carlo experiments to better understand when a particular estimator or regression specification does well (or poorly). The guidelines here should be considered accordingly and might not map well on to other domains (e.g. agent-based models or numerical computation). 
+I should clarify that the type of simulations that I, personally, am most interested in are related to _econometrics_. For example, Monte Carlo experiments to better understand when a particular estimator or regression specification does well (or poorly). The guidelines here should be considered accordingly and might not map well on to other domains (e.g. agent-based models or numerical computation). 
+{: .notice--info}
 
 ## Our example: Interaction effects in panel models
 

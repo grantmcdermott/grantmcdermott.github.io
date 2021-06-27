@@ -378,25 +378,24 @@ setkey(d, sim)
 
 ## Collapse into a nested data.table (1 row per simulation), with matrix list columns
 d = d[, 
-	.(Y = list(y),
-		X_level = list(cbind(intercept = 1, x1 = x1, x2 = x2, 'x1:x2' = x1*x2, id = id)),
-		X_dmean = list(cbind(intercept = 1, x1 = x1_dmean, x2 = x2_dmean, 'x1:x2' = x1_dmean*x2_dmean, id = id))),
-	by = sim]
+      .(Y = list(y),
+        X_level = list(cbind(intercept = 1, x1 = x1, x2 = x2, 'x1:x2' = x1*x2, id = id)),
+        X_dmean = list(cbind(intercept = 1, x1 = x1_dmean, x2 = x2_dmean, 'x1:x2' = x1_dmean*x2_dmean, id = id))),
+      by = sim]
 
 ## Run our simulation
 tic = Sys.time()
-sims = 
-	d[, 
-		.(level = coef(lm.fit(.SD$X_level[[1]], .SD$Y[[1]]))['x1:x2'],
-			dmean = coef(lm.fit(.SD$X_dmean[[1]], .SD$Y[[1]]))['x1:x2']), 
-		by=sim]
+sims = d[, 
+         .(level = coef(lm.fit(.SD$X_level[[1]], .SD$Y[[1]]))['x1:x2'],
+           dmean = coef(lm.fit(.SD$X_dmean[[1]], .SD$Y[[1]]))['x1:x2']), 
+         by=sim]
 Sys.time() - tic
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Time difference of 2.703 secs
+## Time difference of 2.663 secs
 {% endhighlight %}
 
 And look at that. Just over 2 seconds to run the full 20k simulation! (Can you beat that? Let me know in the comments...)
@@ -424,9 +423,9 @@ Here we have replicated the key result in BS13, Table 3. **Moral of the story:**
 
 ## Conclusion
 
-Being able to write efficient simulation code is a very valuable skill. In this post we have replicated an actual published result, incorporating three principles that have served me well:
+Being able to write efficient simulation code is a very valuable skill. In this post we have replicated an actual published result, incorporating several principles that have served me well:
 
-1. **Trim the fat.** (Subtitle: `lm.fit()` is your friend.)
+1. **Trim the fat** (Subtitle: `lm.fit()` is your friend.)
 
 2. **Generate your data once** (Subtitle: It’s much quicker to generate one large dataset than many small ones)
 

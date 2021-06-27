@@ -15,6 +15,8 @@ tags:
 knitr::opts_chunk$set(cache = TRUE, dpi = 300, fig.width = 8, fig.height = 5)
 ```
 
+*UPDATE (Jun 26): Added Principle 4 and re-ran benchmark using matrices.*
+
 ## Motivation
 
 Being able to code up efficient simulations is one of the most useful skills that you can develop as a social (data) scientist. Unfortunately, it's also something that's rarely taught in universities or textbooks.[^1] This post will cover some general principles that I've adopted for writing fast simulation code in R.
@@ -115,9 +117,9 @@ Cool. But to _really_ be sure, we should repeat our simulation many times. (BS13
 
 **Subtitle: `lm.fit()` is your friend**
   
-The first key principle for writing efficient simulation code is to trim the fat as much as possible. Even small differences start to add up once you're repeating operations tens of thousands of times. For example, does it really make sense to use `fixest::feols()` for this example data? As much as I am a huge **fixest** stan, in this case I have to say... no. The package is optimised for high-dimensional fixed-effects, clustered errors, etc. Our toy dataset contains just one fixed-effect (comprising two levels) and we are ultimately only interested in extracting a single coefficient for our simulation. We don't even need to save the standard errors. Most of **fixest**'s extra features are essentially wasted. We could probably do better just by using a simple `lm()` call and specifying the country fixed-effect ("id") as a factor. However...
+The first key principle for writing efficient simulation code is to trim the fat as much as possible. Even small differences start to add up once you're repeating operations tens of thousands of times. For example, does it really make sense to use `fixest::feols()` for this example data? As much as I am a huge **fixest** stan, in this case I have to say... no. The package is optimised for high-dimensional fixed-effects, clustered errors, etc. Our toy dataset contains just one fixed-effect (comprising two levels) and we are ultimately only interested in extracting a single coefficient for our simulation. We don't even need to save the standard errors. Most of **fixest**'s extra features are essentially wasted. We could probably do better just by using a simple `lm()` call and specifying the country fixed-effect ("id") as a factor. 
 
-Even `lm()` objects contain quite a lot of information (and take extra steps) that we don't need. We can simplify things even further by directly using the fitting function that `lm` calls underneath the hood. Specifically, the [**`lm.fit()`**](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lmfit.html) function. This requires a slightly different way of writing our regression model --- closer to matrix form --- but yields considerable speed gains. Here's a benchmark to demonstrate.
+However, `lm()` objects still contain quite a lot of information (and invoke extra steps) that we don't need. We can simplify things even further by directly using the fitting function that `lm` calls underneath the hood. Specifically, the [**`lm.fit()`**](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/lmfit.html) function. This requires a slightly different way of writing our regression model --- closer to matrix form --- but yields considerable speed gains. Here's a benchmark to demonstrate.
 
 ```{r lm_fit}
 library(microbenchmark)
@@ -125,12 +127,12 @@ library(microbenchmark)
 microbenchmark(
   feols  = feols(y ~ x1_dmean * x2_dmean | id, d),
   lm     = lm(y ~ x1_dmean * x2_dmean + id, d),
-  lm.fit = lm.fit(cbind(1, d$x1_dmean, d$x2_dmean, d$x1_dmean*d$x2_dmean, as.factor(d$id)), d$y),
+  lm.fit = lm.fit(cbind(1, d$x1_dmean, d$x2_dmean, d$x1_dmean*d$x2_dmean, d$id), d$y),
   times  = 2
   )
 ```
 
-For this small dataset example, a regular `lm()` call is about five times faster than `feols()`... and `lm.fit()` is then a further ten times faster still. Now, we're talking microseconds here and the difference is not something you'd notice running a single regression. But... once you start running 20,000 of them, then those microseconds start to add up.[^4] Final thing, just to prove that we're getting the same coefficients:
+For this small dataset example, a regular `lm()` call is about five times faster than `feols()`... and `lm.fit()` is a further ten times faster still. Now, we're talking microseconds here and the difference is not something you'd notice running a single regression. But... once you start running 20,000 of them, then those microseconds start to add up.[^4] Final thing, just to prove that we're getting the same coefficients:
 
 ```{r lm_fit_coefs}
 coef(lm.fit(cbind(1, d$x1_dmean, d$x2_dmean, d$x1_dmean*d$x2_dmean, d$id), d$y))
@@ -166,7 +168,7 @@ But any type of explicit iteration --- whether it is a `for()` loop or an `lappl
 
 Hadley and Garret's _R for Data Science_ book has a nice [chapter](https://r4ds.had.co.nz/many-models.html) on model nesting, and then Vincent has a cool [blog post](http://www.arelbundock.com/posts/datatable_nesting/) replicating the same workflow with data.table. But, really, the core idea is pretty simple: We can use the advanced data structure and functionality of tibbles or data.tables to run our simulations as grouped operations (i.e. by simulation ID). Just like we can group a data frame and then collapse down to (say) mean values, we can also group a data frame and then run a regression on each subgroup.
 
-Why would this be faster than explicit iteration? Well, basically it boils down to the fact that data.tables and tibbles provide an enhanced structure for returning complex objects (including list columns) and their grouped operations are highly optimised to run in (implicit) parallel at the C++ level.[^5] The internal code of **data.table**, in particular, is just so insanely optimised that trying to beat it with some explicit parallel loop is a [fools errand](https://grantmcdermott.com/ds4e/parallel.html#library-source-code).
+Why would this be faster than explicit iteration? Well, basically it boils down to the fact that data.tables and tibbles provide an enhanced structure for returning complex objects (including list columns) and their grouped operations are highly optimised to run in (implicit) parallel at the C++ level.[^5] The internal code of **data.table**, in particular, is just so insanely optimised that trying to beat it with some explicit parallel loop is a [fool's errand](https://grantmcdermott.com/ds4e/parallel.html#library-source-code).
 
 Okay, so let's see a benchmark. I'm going to compare three options for simulating 100 draws: 1) sequential iteration with `lapply()`, 2) explicit parallel iteration with `parallel::mclapply`, and 3) nested (implicit parallel) iteration. For the latter, I'm just grouping my dataset by simulation ID and then leveraging data.table's powerful `.SD` syntax.[^6] Note further than I'm just going to run regular `lm()` calls rather than `lm.fit()` --- see Principle 1 --- because I want to keep things simple and familiar for the moment.
 
@@ -195,6 +197,51 @@ microbenchmark(
 
 Okay, not a huge difference between the three options for this small benchmark. But --- trust me --- the difference will grow for the full simulation where we're comparing the level vs demeaned regressions with `lm.fit()`. There are also some other reasons why relying on **data.table** will help us here. For example, `parallel::mclapply()` relies on forking, which is [only available](https://grantmcdermott.com/ds4e/parallel.html#forking-vs-sockets) on Linux or Mac. Sure, you could use a different package like **future.apply** to provide a parallel backend (PSOCK) for Windows, but that's going to be a bit slower. Really, the bottom line is that we can outsource all of that parallel overhead to **data.table** and it will automatically handle everything at the C(++) level. Winning.
 
+## Principle 4: Use matrices for an extra edge
+
+**Subtitle: Save your simulation from having to do extra conversion work**
+
+The primary array format of empirical work is the data frame. It's what we all use, really, so there's no point expanding on that. (TL;DR data frames are just very convenient for humans to work with and reason about.) However, regressions are run on _matrices_. Which is to say that when you run a regression in R --- and most other languages for that matter --- behind the scenes your input data frame is first converted to an equivalent matrix before any computation gets done. Matrices have several features that make them "faster" to compute on than data frames. For example, every element must be of the same type (say, numeric). But let's just agree that converting a data frame to a matrix requires at least some computational effort. Consider then what happens when we feed our `lm.fit()` function a pre-created design matrix, instead asking it to convert a bunch of data frame columns on the fly.
+
+```{r mat}
+set.seed(123)
+d = gen_data()
+
+X = cbind(intercept = 1, x1 = d$x1_dmean, x2 = d$x2_dmean, 'x1:x2' = d$x1_dmean*d$x2_dmean, id = d$id)
+Y = d$y
+
+microbenchmark(
+  lm.fit = lm.fit(cbind(1, d$x1_dmean, d$x2_dmean, d$x1_dmean*d$x2_dmean, d$id), d$y),
+  lm.fit_mat = lm.fit(X, Y),
+  times  = 5
+  )
+```
+
+We're splitting hairs at this point. I mean, what's 20 microseconds between friends? And, yet, these 20 microseconds translate to a roughly 40% improvement in relative terms. As I keep saying, even microseconds add up once you multiply them by a couple thousand.
+
+"Okay, Grant." I can already you you saying. "You just told us to use data.tables and now you're telling us to switch to matrices. Which is it, man?!" Well, remember what I said earlier about the enhanced structure that data.tables (and tibbles) offer us. We can easily create a list column of matrices inside a data.table (or tibble). We could have done this directly in the `gen_data()` function. But I'm going to leave that function as-is, and show you how simple it is to collapse columns of an existing data.table into a matrix list column. Once more we'll use a standard grouped operation --- where we are grouping by `sim` --- to do the work:
+
+```{r SD_mat}
+d = d[, 
+      .(Y = list(y),
+        X_level = list(cbind(intercept = 1, x1 = x1, x2 = x2, 'x1:x2' = x1_dmean*x2_dmean, id = id)),
+        X_dmean = list(cbind(intercept = 1, x1 = x1_dmean, x2 = x2_dmean, 'x1:x2' = x1_dmean*x2_dmean, id = id))),
+      by = sim]
+d
+```
+
+I know the printed output looks a little different, but the key thing to know is that each simulation is now represented by a single row. In this case, we only have one simulation, so our whole data table consists of just one row. Moreover, those fancy list columns contain all of the 500 panel observations --- in matrix form --- that we need run our regressions. To access whatever is inside one of the list columns, we "unnest" very simply by extracting the first element with brackets, i.e. `[[1]]`. For example, to extract the `Y` column of our single simulation dataset, we could do:
+
+```{r unnest}
+head(d$Y[[1]]) ## Just show the first few rows
+```
+
+If you'd like to know more about this approach, than I highly recommend Vincent's aforementioned [blog post](http://www.arelbundock.com/posts/datatable_nesting/) on the topic. The very last thing I'm going to show you here (since we'll soon be adapting it to run our full simulation), is how easily everything carries over to operations _inside_ a nested data table. In short, we just use the magic of `.SD` again:
+
+```{r unnest_SD}
+d[, head(.SD$Y[[1]]), by = sim]
+```
+
 ## Putting it all together
 
 Time to put everything together and run this thing. Like BS13, I'm going to simulate 20,000 runs. I'll print the time it takes to complete the full simulation at the bottom.
@@ -202,20 +249,30 @@ Time to put everything together and run this thing. Like BS13, I'm going to simu
 ```{r sim}
 set.seed(123)
 
+## Generate our large dataset of 20k simulations
 d = gen_data(2e4)
 
+## Optional: Set key for better collapse performance
+setkey(d, sim)
+
+## Collapse into a nested data.table (1 row per simulation), with matrix list columns
+d = d[, 
+	.(Y = list(y),
+		X_level = list(cbind(intercept = 1, x1 = x1, x2 = x2, 'x1:x2' = x1*x2, id = id)),
+		X_dmean = list(cbind(intercept = 1, x1 = x1_dmean, x2 = x2_dmean, 'x1:x2' = x1_dmean*x2_dmean, id = id))),
+	by = sim]
+
+## Run our simulation
 tic = Sys.time()
 sims = 
-  d[, 
-    .(level = coef(lm.fit(cbind(1, .SD$x1, .SD$x2, .SD$x1*.SD$x2, .SD$id), 
-                          .SD$y))['x4'],
-      demeaned = coef(lm.fit(cbind(1, .SD$x1_dmean, .SD$x2_dmean, .SD$x1_dmean*.SD$x2_dmean, .SD$id),
-                             .SD$y))['x4']), 
-    by = sim]
+	d[, 
+		.(level = coef(lm.fit(.SD$X_level[[1]], .SD$Y[[1]]))['x1:x2'],
+			dmean = coef(lm.fit(.SD$X_dmean[[1]], .SD$Y[[1]]))['x1:x2']), 
+		by=sim]
 Sys.time() - tic
 ```
 
-And look at that. Just over 3 seconds to run the full 20k simulation! (Can you beat that? Let me know in the comments...)
+And look at that. Just over 2 seconds to run the full 20k simulation! (Can you beat that? Let me know in the comments...)
 
 All that hard work deserves a nice plot, don't you think? 
 
@@ -227,7 +284,7 @@ hist(sims$level, col = scales::alpha('skyblue', .7), border=FALSE,
      xlim = c(-0.3, 0.2), 
      xlab = 'Coefficient values',
      sub = '(True value is zero)')
-hist(sims$demeaned, add=TRUE, col = scales::alpha('red', .5), border=FALSE)
+hist(sims$dmean, add=TRUE, col = scales::alpha('red', .5), border=FALSE)
 abline(v = 0, lty = 2)
 legend("topright", col = c(scales::alpha(c('skyblue', 'red'), .5)), lwd = 10,
        legend = c("Level", "Demeaned"))
@@ -239,13 +296,15 @@ Here we have replicated the key result in BS13, Table 3. **Moral of the story:**
 
 Being able to write efficient simulation code is a very valuable skill. In this post we have replicated an actual published result, incorporating three principles that have served me well:
 
-1. **Trim the fact.** (Subtitle: "`lm.fit()` is your friend")
+1. **Trim the fat.** (Subtitle: `lm.fit()` is your friend.)
 
-2. **Generate your data once** (Subtitle: "It’s much quicker to generate one large dataset than many small ones")
+2. **Generate your data once** (Subtitle: It’s much quicker to generate one large dataset than many small ones)
 
 3. **Try to avoid explicit iteration (even in parallel)** (Subtitle: Nest your simulations in a data.table or tibble)
 
-You don't have to adopt all of these principles to write your own efficient simulation code in R. There may even be cases where it's more efficient to do something else. But incorporating at least one or two of them will generally make your simulations much faster.
+4. **Use matrices for an extra edge** (Subtitle: Save your simulation from having to do extra conversion work)
+
+You certainly don't have to adopt all of these principles to write your own efficient simulation code in R. There may even be cases where it's more efficient to do something else. But I'm confident that incorporating at least one or two of them will generally make your simulations much faster.
 
 
 ## References
@@ -258,8 +317,8 @@ Balli, Hatice Ozer, and Bent E. Sørensen. "Interaction effects in econometrics.
 
 [^3]: Got a difference-in-differences model uses twoway fixed-effects? Ya, that's just an interaction term in a panel setting. In fact, the demeaning point that BS13 are making here and actually draw an explicit comparison to later in the paper, is equivalent to the argument that we should control for unit-specific time trends in DiD models. The paper includes additional simulations demonstrating this equivalence, but I don't want to get sidetracked by that here.
 
-[^4]: Another thing is that `lm.fit()` produces a much more limited, but leaner return object. So we'll be taxing our computers' memories less.
+[^4]: Another thing is that `lm.fit()` produces a much more limited, but leaner return object. We'll be taxing our computer's memory less as a result.
 
-[^5]: This basically all that vectorisation is; a loop implemented at the C(++) level.
+[^5]: That's basically all that vectorisation is; i.e. a loop implemented at the C(++) level.
 
 [^6]: This will closely mimic a [related example](https://rdatatable.gitlab.io/data.table/articles/datatable-sd-usage.html#grouped-regression-1) in the data.table vignettes, which you should read if you're interested to learn more.

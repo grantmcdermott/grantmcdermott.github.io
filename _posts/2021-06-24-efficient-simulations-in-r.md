@@ -195,10 +195,19 @@ coef(lm.fit(cbind(1, d$x1_dmean, d$x2_dmean, d$x1_dmean*d$x2_dmean, d$id), d$y))
 ##  3.16117  0.95435  1.55596  0.01993 -0.14978
 {% endhighlight %}
 
-The output is less visually appealing a regular regression summary, but we can see the interaction term coefficient of `0.01993247` in the order in which it appeared (i.e. "x4"). This is the key coefficient that we'll be extracting in each of our simulation runs.
+The output is less visually appealing a regular regression summary, but we can see the interaction term coefficient of `0.01993247` in the order in which it appeared (i.e. "x4"). FWIW, you can also name the coefficients in the design matrix if you wanted to make it easier to reference a coefficient by name. This is what I'll be doing in the full simulation right at the end.
 
-(FWIW, you can also name the coefficients in the design matrix if you wanted to make it easier to reference by name. E.g. `coef(lm.fit(cbind('intercept' = 1, 'x1' = d$x1_dmean, 'x2' = d$x2_dmean, 'x1:x2' = d$x1_dmean*d$x2_dmean, 'id' = d$id), d$y))`.)
 
+{% highlight r %}
+coef(lm.fit(cbind('intercept' = 1, 'x1' = d$x1_dmean, 'x2' = d$x2_dmean, 'x1:x2' = d$x1_dmean*d$x2_dmean, 'id' = d$id), d$y))
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## intercept        x1        x2     x1:x2        id 
+##   3.16117   0.95435   1.55596   0.01993  -0.14978
+{% endhighlight %}
 
 ## Principle 2: Generate your data once
 
@@ -225,19 +234,19 @@ microbenchmark(
 {% endhighlight %}
 
 
-## Principle 3: Try to avoid explicit iteration (even in parallel)
+## Principle 3: Go parallel or (better still) nest
 
-**Subtitle: Nest your simulations in a data.table or tibble**
+**Subtitle: Let data.table and co. handle the heavy lifting**
 
 The standard approach to coding up a simulation is to run everything as an iteration, either using a `for()` loop or an `lapply()` call. Experienced R programmers are probably reading this section right now and thinking, "Even better; run everything in parallel." And it's true. A Monte Carlo experiment like the one we're doing here is ideally suited to parallel implementation, because each individual simulation run is independent. It's a key reason why Monte Carlo experiments are such popular tools for teaching parallel programming concepts. ([Guilty as charged](https://grantmcdermott.com/ds4e/parallel.html#example-2-bootstrapping).)
 
-But any type of explicit iteration --- whether it is a `for()` loop or an `lapply()` call, whether it is run sequentially or in parallel --- runs up against the same problem as we saw in Principle 2. Specifically, it is slower than [vectorisation](https://grantmcdermott.com/ds4e/funcs-intro.html#vectorisation). So how can we run our simulations in vectorised fashion? Well, it turns out there is a pretty simple way that directly leverages Principle 2's idea of generating one large dataset: We _nest_ our simulations directly in our large **data.table** or **tibble**.
+But any type of explicit iteration --- whether it is a `for()` loop or an `lapply()` call, or whether it is run sequentially or in parallel --- runs up against the same problem as we saw in Principle 2. Specifically, it is slower than [vectorisation](https://grantmcdermott.com/ds4e/funcs-intro.html#vectorisation). So how can we run our simulations in vectorised fashion? Well, it turns out there is a pretty simple way that directly leverages Principle 2's idea of generating one large dataset: We _nest_ our simulations directly in our large **data.table** or **tibble**.
 
-Hadley and Garret's _R for Data Science_ book has a nice [chapter](https://r4ds.had.co.nz/many-models.html) on model nesting, and then Vincent has a cool [blog post](http://www.arelbundock.com/posts/datatable_nesting/) replicating the same workflow with data.table. But, really, the core idea is pretty simple: We can use the advanced data structure and functionality of tibbles or data.tables to run our simulations as grouped operations (i.e. by simulation ID). Just like we can group a data frame and then collapse down to (say) mean values, we can also group a data frame and then run a regression on each subgroup.
+Hadley and Garret's _R for Data Science_ book has a nice [chapter](https://r4ds.had.co.nz/many-models.html) on model nesting with tibbles, and then Vincent has a cool [blog post](http://www.arelbundock.com/posts/datatable_nesting/) replicating the same workflow with data.table. But, really, the core idea is pretty simple: We can use the advanced data structure and functionality of tibbles or data.tables to run our simulations as grouped operations (i.e. by simulation ID). In other words, just like we can group a data frame and then collapse down to (say) mean values, we can also group a data frame and then run a regression on each subgroup.
 
 Why would this be faster than explicit iteration? Well, basically it boils down to the fact that data.tables and tibbles provide an enhanced structure for returning complex objects (including list columns) and their grouped operations are highly optimised to run in (implicit) parallel at the C++ level.[^5] The internal code of **data.table**, in particular, is just so insanely optimised that trying to beat it with some explicit parallel loop is a [fool's errand](https://grantmcdermott.com/ds4e/parallel.html#library-source-code).
 
-Okay, so let's see a benchmark. I'm going to compare three options for simulating 100 draws: 1) sequential iteration with `lapply()`, 2) explicit parallel iteration with `parallel::mclapply`, and 3) nested (implicit parallel) iteration. For the latter, I'm just grouping my dataset by simulation ID and then leveraging data.table's powerful `.SD` syntax.[^6] Note further than I'm just going to run regular `lm()` calls rather than `lm.fit()` --- see Principle 1 --- because I want to keep things simple and familiar for the moment.
+Okay, so let's see a benchmark. I'm going to compare three options for simulating 100 draws: 1) sequential iteration with `lapply()`, 2) explicit parallel iteration with `parallel::mclapply`, and 3) nested (implicit parallel) iteration. For the latter, I'm simply grouping my dataset by simulation ID and then leveraging data.table's powerful [**`.SD`**](https://rdatatable.gitlab.io/data.table/articles/datatable-sd-usage.html) syntax.[^6] Note further than I'm going to run regular `lm()` calls rather than `lm.fit()` --- see Principle 1 --- because I want to keep things simple and familiar for the moment.
 
 
 {% highlight r %}
@@ -388,17 +397,17 @@ tic = Sys.time()
 sims = d[, 
          .(level = coef(lm.fit(.SD$X_level[[1]], .SD$Y[[1]]))['x1:x2'],
            dmean = coef(lm.fit(.SD$X_dmean[[1]], .SD$Y[[1]]))['x1:x2']), 
-         by=sim]
+         by = sim]
 Sys.time() - tic
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Time difference of 2.663 secs
+## Time difference of 2.669 secs
 {% endhighlight %}
 
-And look at that. Just over 2 seconds to run the full 20k simulation! (Can you beat that? Let me know in the comments...)
+And look at that. Just over 2 seconds to run the full 20k simulations! (Can you beat that? Let me know in the comments...)
 
 All that hard work deserves a nice plot, don't you think? 
 
@@ -429,11 +438,13 @@ Being able to write efficient simulation code is a very valuable skill. In this 
 
 2. **Generate your data once** (Subtitle: It’s much quicker to generate one large dataset than many small ones)
 
-3. **Try to avoid explicit iteration (even in parallel)** (Subtitle: Nest your simulations in a data.table or tibble)
+3. **Go parallel or (better still) nest** (Subtitle: Let data.table and co. handle the heavy lifting)
 
 4. **Use matrices for an extra edge** (Subtitle: Save your simulation from having to do extra conversion work)
 
 You certainly don't have to adopt all of these principles to write your own efficient simulation code in R. There may even be cases where it's more efficient to do something else. But I'm confident that incorporating at least one or two of them will generally make your simulations much faster.
+
+**P.S.** If you made it this far and still need convincing that simulations are awesome, watch John Rauser's incredible talk, "[*Statistics Without The Agonizing Pain*](https://www.youtube.com/watch?v=5Dnw46eC-0o)".
 
 
 ## References
@@ -444,7 +455,7 @@ Balli, Hatice Ozer, and Bent E. Sørensen. "Interaction effects in econometrics.
 
 [^2]: In their notation, BS13 only demean the interacted terms on $\beta_3$. But demeaning the parent terms on $\beta_1$ and $\beta_2$ is functionally equivalent and, as we shall see later, more convenient when writing the code since we can use R's `*` expansion operator to concisely specify all of the terms.
 
-[^3]: Got a difference-in-differences model uses twoway fixed-effects? Ya, that's just an interaction term in a panel setting. In fact, the demeaning point that BS13 are making here and actually draw an explicit comparison to later in the paper, is equivalent to the argument that we should control for unit-specific time trends in DiD models. The paper includes additional simulations demonstrating this equivalence, but I don't want to get sidetracked by that here.
+[^3]: Got a difference-in-differences model that uses twoway fixed-effects? Ya, that's just an interaction term in a panel setting. In fact, the demeaning point that BS13 are making here --- and actually draw an explicit comparison to later in the paper --- is equivalent to the argument that we should control for unit-specific time trends in DiD models. The paper includes additional simulations demonstrating this equivalence, but I don't want to get sidetracked by that here.
 
 [^4]: Another thing is that `lm.fit()` produces a much more limited, but leaner return object. We'll be taxing our computer's memory less as a result.
 

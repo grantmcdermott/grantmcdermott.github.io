@@ -235,7 +235,7 @@ microbenchmark(
 {% endhighlight %}
 
 
-## Principle 3: Go parallel or (better still) nest
+## Principle 3: Go parallel or nest
 
 **Subtitle: Let data.table and co. handle the heavy lifting**
 
@@ -245,7 +245,7 @@ But any type of explicit iteration --- whether it is a `for()` loop or an `lappl
 
 Hadley and Garret's _R for Data Science_ book has a nice [chapter](https://r4ds.had.co.nz/many-models.html) on model nesting with tibbles, and then Vincent has a cool [blog post](http://www.arelbundock.com/posts/datatable_nesting/) replicating the same workflow with data.table. But, really, the core idea is pretty simple: We can use the advanced data structure and functionality of tibbles or data.tables to run our simulations as grouped operations (i.e. by simulation ID). In other words, just like we can group a data frame and then collapse down to (say) mean values, we can also group a data frame and then run a regression on each subgroup.
 
-Why would this be faster than explicit iteration? Well, basically it boils down to the fact that data.tables and tibbles provide an enhanced structure for returning complex objects (including list columns) and their grouped operations are highly optimised to run in (implicit) parallel at the C++ level.[^5] The internal code of **data.table**, in particular, is just so insanely optimised that trying to beat it with some explicit parallel loop is a [fool's errand](https://grantmcdermott.com/ds4e/parallel.html#library-source-code).
+Why might this be faster than explicit parallel iteration? Well, basically it boils down to the fact that data.tables and tibbles provide an enhanced structure for returning complex objects (including list columns) and their grouped operations are highly optimised to run in (implicit) parallel at the C++ level.[^5] The internal code of **data.table**, in particular, is just so insanely optimised that trying to beat it with some explicit parallel loop can be a [fool's errand](https://grantmcdermott.com/ds4e/parallel.html#library-source-code).
 
 Okay, so let's see a benchmark. I'm going to compare three options for simulating 100 draws: 1) sequential iteration with `lapply()`, 2) explicit parallel iteration with `parallel::mclapply`, and 3) nested (implicit parallel) iteration. For the latter, I'm simply grouping my dataset by simulation ID and then leveraging data.table's powerful [**`.SD`**](https://rdatatable.gitlab.io/data.table/articles/datatable-sd-usage.html) syntax.[^6] Note further than I'm going to run regular `lm()` calls rather than `lm.fit()` --- see Principle 1 --- because I want to keep things simple and familiar for the moment.
 
@@ -283,7 +283,7 @@ microbenchmark(
 ##      nested  84.41  84.41  88.18  88.18  91.95  91.95     2  a
 {% endhighlight %}
 
-Okay, not a huge difference between the three options for this small benchmark. But --- trust me --- the difference will grow for the full simulation where we're comparing the level vs demeaned regressions with `lm.fit()`. There are also some other reasons why relying on **data.table** will help us here. For example, `parallel::mclapply()` relies on forking, which is [only available](https://grantmcdermott.com/ds4e/parallel.html#forking-vs-sockets) on Linux or Mac. Sure, you could use a different package like **future.apply** to provide a parallel backend (PSOCK) for Windows, but that's going to be a bit slower. Really, the bottom line is that we can outsource all of that parallel overhead to **data.table** and it will automatically handle everything at the C(++) level. Winning.
+Okay, not a huge difference between the three options for this small benchmark. ~~But --- trust me --- the difference will grow for the full simulation where we're comparing the level vs demeaned regressions with `lm.fit()`.~~ *UPDATE: Upon reflection, I'm not being quite fair to `mclapply()` here, because it is being penalised for overhead on a small example. But I definitely stand by my next point.* There are also some other reasons why relying on **data.table** will help us here. For example, `parallel::mclapply()` relies on forking, which is [only available](https://grantmcdermott.com/ds4e/parallel.html#forking-vs-sockets) on Linux or Mac. Sure, you could use a different package like **future.apply** to provide a parallel backend (PSOCK) for Windows, but that's going to be slower. Really, the bottom line is that we can outsource all of that parallel overhead to **data.table** and it will automatically handle everything at the C(++) level. Winning.
 
 ## Principle 4: Use matrices for an extra edge
 
@@ -439,7 +439,7 @@ Being able to write efficient simulation code is a very valuable skill. In this 
 
 2. **Generate your data once** (Subtitle: It’s much quicker to generate one large dataset than many small ones)
 
-3. **Go parallel or (better still) nest** (Subtitle: Let data.table and co. handle the heavy lifting)
+3. **Go parallel or nest** (Subtitle: Let data.table and co. handle the heavy lifting)
 
 4. **Use matrices for an extra edge** (Subtitle: Save your simulation from having to do extra conversion work)
 

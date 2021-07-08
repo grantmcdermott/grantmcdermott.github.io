@@ -408,7 +408,7 @@ Sys.time() - tic
 ## Time difference of 2.669 secs
 {% endhighlight %}
 
-And look at that. Just over 2 seconds to run the full 20k simulations! (Can you beat that? Let me know in the comments...)
+And look at that. Just over 2 seconds to run the full 20k simulations! (Can you beat that? Let me know in the comments... *UPDATE: Turns out you can thanks to the even faster `.lm.fit()` function. See follow-up post [here]({{ site.url }}/simulations-remix-turn-up-the-base).*)
 
 All that hard work deserves a nice plot, don't you think? 
 

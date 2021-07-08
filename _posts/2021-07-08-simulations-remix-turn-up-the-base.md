@@ -135,6 +135,6 @@ There you have it. Down to _less than a second_ for a simulation involving 40,00
 
 [^1]: In this house, we stan both R and Julia.
 
-[^2]: I think Dirk Eddelbuettel had mentioned to me, but I hadn't grokked the difference.
+[^2]: I think Dirk Eddelbuettel had mentioned it to me, but I hadn't grokked the difference.
 
 [^3]: Interestingly enough, this knitted R markdown version is a bit slower than when I run the script directly in my R console. But we're really splitting hairs now. (As an aside: I won't bother plotting the results, but you're welcome to run the simulation yourself and confirm that it yields the same insights as my previous post.)

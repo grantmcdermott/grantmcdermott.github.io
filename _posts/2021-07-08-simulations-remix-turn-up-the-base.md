@@ -3,7 +3,7 @@ title: 'Simulations remix: Turn up the base'
 excerpt: 'Faster still, with base R'
 date: '2021-07-08'
 slug: simulations-remix-turn-up-the-base
-toc: true
+toc: false
 mathjax: true
 tags:
   - R

@@ -61,11 +61,11 @@ library(margins)
 library(magrittr) ## for the pipe operator
 
 fit1 %>%
-	margins(
-		variables = "wt",
-		at = list(vs = "1", am = "1")
-		) %>%
-	summary()
+  margins(
+    variables = "wt",
+    at = list(vs = "1", am = "1")
+    ) %>%
+  summary()
 ```
 
 We now at least see that the full (average) marginal effect is **&minus;7.7676**. Still, while this approach works well in the present example, we can also begin to see some downsides. It requires extra coding steps and comes with its own specialised syntax. Moreover, underneath the hood, **margins** relies on a [numerical delta method](https://cran.r-project.org/web/packages/margins/vignettes/TechnicalDetails.pdf){:target="_blank"} that can dramatically increase computation time and memory use for even moderately sized real-world problems. (Is your dataset bigger than 1 GB? [Good luck](https://github.com/leeper/margins/issues/130){:target="_blank"}.) Another practical problem is that **margins** may not even support your model class. (See [here](https://github.com/leeper/margins/issues/101){:target="_blank"}.)
@@ -88,17 +88,17 @@ library(hrbrthemes) ## theme(s) I like
 
 ## Optional: A dictionary of "nice" coefficient names for our plot
 dict = c('am0:vs0:wt' = 'Manual\nStraight',
-				 'am0:vs1:wt' = 'Manual\nV-shaped',
-				 'am1:vs0:wt' = 'Automatic\nStraight',
-				 'am1:vs1:wt' = 'Automatic\nV-shaped')
+         'am0:vs1:wt' = 'Manual\nV-shaped',
+         'am1:vs0:wt' = 'Automatic\nStraight',
+         'am1:vs1:wt' = 'Automatic\nV-shaped')
 
 modelplot(fit2, coef_map = dict) +
 	geom_vline(xintercept = 0, col = "orange") +
 	labs(
-		x = "Marginal effect (Δ in MPG : Δ in '000 lbs)",
-		title = " Marginal effect of vehicle weight on MPG", 
-		subtitle = "Conditional on transmission type and engine shape"
-		) +
+	  x = "Marginal effect (Δ in MPG : Δ in '000 lbs)",
+	  title = " Marginal effect of vehicle weight on MPG", 
+	  subtitle = "Conditional on transmission type and engine shape"
+	  ) +
 	theme_ipsum() 
 ```
 

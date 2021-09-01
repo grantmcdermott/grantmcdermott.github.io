@@ -143,11 +143,11 @@ library(margins)
 library(magrittr) ## for the pipe operator
 
 fit1 %>%
-	margins(
-		variables = "wt",
-		at = list(vs = "1", am = "1")
-		) %>%
-	summary()
+  margins(
+    variables = "wt",
+    at = list(vs = "1", am = "1")
+    ) %>%
+  summary()
 {% endhighlight %}
 
 
@@ -208,25 +208,21 @@ library(hrbrthemes) ## theme(s) I like
 
 ## Optional: A dictionary of "nice" coefficient names for our plot
 dict = c('am0:vs0:wt' = 'Manual\nStraight',
-				 'am0:vs1:wt' = 'Manual\nV-shaped',
-				 'am1:vs0:wt' = 'Automatic\nStraight',
-				 'am1:vs1:wt' = 'Automatic\nV-shaped')
+         'am0:vs1:wt' = 'Manual\nV-shaped',
+         'am1:vs0:wt' = 'Automatic\nStraight',
+         'am1:vs1:wt' = 'Automatic\nV-shaped')
 
 modelplot(fit2, coef_map = dict) +
 	geom_vline(xintercept = 0, col = "orange") +
 	labs(
-		x = "Marginal effect (Δ in MPG : Δ in '000 lbs)",
-		title = " Marginal effect of vehicle weight on MPG", 
-		subtitle = "Conditional on transmission type and engine shape"
-		) +
+	  x = "Marginal effect (Δ in MPG : Δ in '000 lbs)",
+	  title = " Marginal effect of vehicle weight on MPG", 
+	  subtitle = "Conditional on transmission type and engine shape"
+	  ) +
 	theme_ipsum() 
 {% endhighlight %}
 
-
-
-{% highlight text %}
-## Error in map_omit_rename_estimates(tmp, coef_rename = coef_rename, coef_map = coef_map, : At least one of the term names in each model must appear in `coef_map`.
-{% endhighlight %}
+![plot of chunk fit2_coefplot](/figure/posts/2019-12-16-interaction-effects/fit2_coefplot-1.png)
 
 The above plot immediately makes clear how automatic transmission exacerbates the impact of vehicle weight on MPG. We also see that the conditional impact of engine shape is more ambiguous. In contrast, I invite you to produce an equivalent plot using our earlier `fit1` object and see if you can easily make sense of it. (I certainly can't.)
 
@@ -293,7 +289,26 @@ Okay, I confess: That last code chunk was a trick to see who was staying awake d
 
 {% highlight r %}
 library(mfx, quietly = TRUE)
+{% endhighlight %}
 
+
+
+{% highlight text %}
+## 
+## Attaching package: 'zoo'
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+{% endhighlight %}
+
+
+
+{% highlight r %}
 ## Broke
 logitmfx(am ~ vs * wt, mtcars2)
 {% endhighlight %}

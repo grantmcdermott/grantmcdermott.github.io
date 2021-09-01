@@ -93,13 +93,13 @@ dict = c('am0:vs0:wt' = 'Manual\nStraight',
          'am1:vs1:wt' = 'Automatic\nV-shaped')
 
 modelplot(fit2, coef_map = dict) +
-	geom_vline(xintercept = 0, col = "orange") +
-	labs(
-	  x = "Marginal effect (Δ in MPG : Δ in '000 lbs)",
-	  title = " Marginal effect of vehicle weight on MPG", 
-	  subtitle = "Conditional on transmission type and engine shape"
-	  ) +
-	theme_ipsum() 
+  geom_vline(xintercept = 0, col = "orange") +
+  labs(
+    x = "Marginal effect (Δ in MPG : Δ in '000 lbs)",
+    title = " Marginal effect of vehicle weight on MPG", 
+    subtitle = "Conditional on transmission type and engine shape"
+    ) +
+  theme_ipsum() 
 ```
 
 The above plot immediately makes clear how automatic transmission exacerbates the impact of vehicle weight on MPG. We also see that the conditional impact of engine shape is more ambiguous. In contrast, I invite you to produce an equivalent plot using our earlier `fit1` object and see if you can easily make sense of it. (I certainly can't.)
@@ -145,7 +145,7 @@ summary(glm(am ~ vs / wt, family = binomial, mtcars2))
 
 Okay, I confess: That last code chunk was a trick to see who was staying awake during statistics class. I mean, it will correctly sum the coefficient values. But we all know that the raw coefficient values on generalised linear models like logit cannot be interpreted as marginal effects, regardless of whether there are interactions or not. Instead, we need to convert them via an appropriate link function. In R, the [**mfx**](https://cran.r-project.org/web/packages/mfx/index.html){:target="_blank"} package will do this for us automatically. My real point, then, is to say that we can combine the link function (via **mfx**) and our syntax trick (in the case of interaction terms). This makes a surprisingly complicated problem much easier to handle.
 
-```{r mfx}
+```{r mfx, warning=FALSE, message=FALSE}
 library(mfx, quietly = TRUE)
 
 ## Broke

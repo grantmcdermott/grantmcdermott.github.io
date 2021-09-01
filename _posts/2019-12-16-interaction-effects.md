@@ -213,13 +213,13 @@ dict = c('am0:vs0:wt' = 'Manual\nStraight',
          'am1:vs1:wt' = 'Automatic\nV-shaped')
 
 modelplot(fit2, coef_map = dict) +
-	geom_vline(xintercept = 0, col = "orange") +
-	labs(
-	  x = "Marginal effect (Δ in MPG : Δ in '000 lbs)",
-	  title = " Marginal effect of vehicle weight on MPG", 
-	  subtitle = "Conditional on transmission type and engine shape"
-	  ) +
-	theme_ipsum() 
+  geom_vline(xintercept = 0, col = "orange") +
+  labs(
+    x = "Marginal effect (Δ in MPG : Δ in '000 lbs)",
+    title = " Marginal effect of vehicle weight on MPG", 
+    subtitle = "Conditional on transmission type and engine shape"
+    ) +
+  theme_ipsum() 
 {% endhighlight %}
 
 ![plot of chunk fit2_coefplot](/figure/posts/2019-12-16-interaction-effects/fit2_coefplot-1.png)
@@ -289,26 +289,7 @@ Okay, I confess: That last code chunk was a trick to see who was staying awake d
 
 {% highlight r %}
 library(mfx, quietly = TRUE)
-{% endhighlight %}
 
-
-
-{% highlight text %}
-## 
-## Attaching package: 'zoo'
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## The following objects are masked from 'package:base':
-## 
-##     as.Date, as.Date.numeric
-{% endhighlight %}
-
-
-
-{% highlight r %}
 ## Broke
 logitmfx(am ~ vs * wt, mtcars2)
 {% endhighlight %}

@@ -7,11 +7,11 @@ header:
 
 Here are some packages that I have written.
 
-- [**ggiplot**](https://www.grantmcdermott/ggiplo2) Plots ggplot2 equivalents of `fixest::iplot()`.
+- [**ggiplot**](https://www.grantmcdermott.com/ggiplo2) Plots ggplot2 equivalents of `fixest::iplot()`.
 - [**lecturenotes**](https://github.com/grantmcdermott/lecturenotes) A personalised R Markdown template that I use for writing my lecture notes and academic papers. Takes care of various inconsistencies that arise when you want to export (i.e. "knit") that same .Rmd file to both HTML and PDF.
-- [**lfe2fixest**](https://www.grantmcdermott/lfe2fixest) A package that automatically converts R scripts with `lfe:felm()` calls into their `fixest::feols()` equivalents.
-- [**parttree**](https://www.grantmcdermott/parttree) A package for visualizing decision tree partitions in R with ggplot2. Useful as a pedagogical tool, where learners are trying to understand how a decision tree partitioned the data.
-- [**ritest**](https://www.grantmcdermott/ritest) Conduct randomization inference on R model objects. A port of the `-ritest-` Stata routine by Simon Heß.
+- [**lfe2fixest**](https://www.grantmcdermott.com/lfe2fixest) A package that automatically converts R scripts with `lfe:felm()` calls into their `fixest::feols()` equivalents.
+- [**parttree**](https://grantmcdermott.com/parttree) A package for visualizing decision tree partitions in R with ggplot2. Useful as a pedagogical tool, where learners are trying to understand how a decision tree partitioned the data.
+- [**ritest**](https://www.grantmcdermott.com/ritest) Conduct randomization inference on R model objects. A port of the `-ritest-` Stata routine by Simon Heß.
 
 In addition to the above, I am a fairly active contributor to various open-source (mostly R) libraries. You can take a look at my [GitHub page](https://github.com/grantmcdermott) and I have also posted a fair number of [gists](https://gist.github.com/grantmcdermott) (often used to answer a question that someone asked me on Twitter). A random selection of other guides, scripts, and tools:
 

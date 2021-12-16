@@ -1,13 +1,9 @@
 ---
-title: Research
+#title: Research
 permalink: /research/
 header:
   image: /assets/images/moro-crop2.jpg
 ---
-
-**Fields:** Environmental and natural resource economics. Applied econometrics and data science. Uncertainty and Bayesian learning.
-
-**Interests:** Energy markets and climate change. Water management. Fisheries policy. The impact of environmental quality on market outcomes.
 
 ## Working papers
 

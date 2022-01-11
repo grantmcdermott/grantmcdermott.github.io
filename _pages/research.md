@@ -7,7 +7,7 @@ header:
 
 ## Working papers
 
-"Labor reallocation and remote work during COVID-19: Real-time evidence from GitHub." With B. Hansen. [Paper]({{ site.url }}/papers/covgit-plusSM.pdf){:target="_blank"}.
+"Labor reallocation and remote work during COVID-19: Real-time evidence from GitHub." With B. Hansen. NBER Working Paper no. [w29598](https://www.nber.org/papers/w29598){:target="_blank"}.
 
 "Hydro power. Market might." [Paper]({{ site.url }}/papers/hydro.pdf){:target="_blank"}.
 

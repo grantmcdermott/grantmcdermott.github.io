@@ -19,9 +19,9 @@ knitr::opts_chunk$set(cache = TRUE, dpi = 300, fig.width = 8, fig.height = 5)
 ## Motivation
 
 This blog post pulls together various tips and suggestions that I've left
-around the place. My main goal is to show you how **data.table** can be used
-in geospatial workflows, as well as some additional libraries for doing
-high-performance spatial work in R.
+around the place. My main goal is to show you some simple workflows that I use 
+for high-performance geospatial work in R, leaning on the **data.table** and 
+**geos** packages.
 
 If you're the type of person who likes to load everything at once, here are the
 R libraries and theme settings that I'll be using in this post. (Don't worry if
@@ -75,7 +75,7 @@ nc |>
   geom_sf()
 ```
 
-In the above code chunk, I'm using the powerful **dplyr** package to do a 
+In the above code chunk, I'm using **dplyr** to do a 
 grouped aggregation on our North Carolina data object. The aggregation itself is
 pretty silly---i.e. divide the state into two hemispheres---but the same idea
 extends to virtually all of **dplyr's** capabilities. It makes for a very 
@@ -88,7 +88,7 @@ about which of **dplyr** or **data.table** is
 better.[^2]
 But I think it's fair to say that the latter offers incredible 
 performance that makes it a must-use library for a lot of people, including
-myself. And yet it seems to me that many **data.table** users aren't aware that 
+myself. Yet it seems to me that many **data.table** users aren't aware that 
 you can use it for spatial operations in exactly the same way.
 
 If you're following along on your own computer, make sure to grab the 
@@ -117,8 +117,7 @@ grab the development version of **data.table** is that it "pretty prints" the
 columns by default. This not only includes the columns types and keys (if you've
 set any), but also the special `sfc_MULTIPLOYGON` list columns which is where
 the **sf** magic is hiding. It's a small cosmetic change that nonetheless
-underscores the integration between these two 
-packages.[^1]
+underscores the integration between these two packages.[^1]
 
 Just like we did with **dplyr** earlier, we can now do grouped spatial 
 operations on this object using **data.table**'s concise syntax:
@@ -132,13 +131,13 @@ nc_dt[,
   labs(caption = "Now brought to you by data.table")
 ```
 
-Okay, I'll admit that there are a few tiny tweaks we need to make to the plot
+Now, I'll admit that there are a few tiny tweaks we need to make to the plot
 call. Unlike with the non-**data.table** workflow, this time we have to specify
 the geometry aesthetic with `aes(geometry=geometry, ...)`. Otherwise,
 **ggplot2** won't know what do with this object. The other difference is that it
 doesn't automatically recognise the CRS (i.e. "NAD27"), so the projection is a
 little off. Again, however, that information is contained with the `geometry`
-column of our `nc_dt` object. It just requires that we provide this information
+column of our `nc_dt` object. It just requires that we provide the CRS
 to our plot call explicitly.
 
 ```{r dt_union_crs}
@@ -162,7 +161,7 @@ work too. Speaking of performance...
 
 As great as **sf** is, even its most ardent proponents will admit that it can
 drag a bit when it comes to large geospatial computations. Now that's not to say
-it is objectively "slow". But I've found it does lag behind **geopandas**, for example, 
+it is "slow". But I've found it does lag behind **geopandas**, for example, 
 once I start working with really big geospatial files. Luckily, there's a new
 kid in town that offers big performance gains and plays very well with the 
 workflow I demonstrated above.
@@ -190,11 +189,11 @@ microbenchmark(
 
 ```
 
-A couple of things worth noting. First, the executing functions are very similar 
-(`st_centroid()` vs `geos_centroid()`). Second, the **geos** command executes
-orders of magnitude faster than the **sf** equivalent. Third, we have to do an
-explicit `as_geos_geometry()` coercion before we can perform any **geos** 
-operations on the resulting object. 
+A couple of things worth noting. First, the **geos** centroid calculation
+completes _orders of magnitude_ faster than the **sf** equivalent. Second, the
+executing functions are very similar (`st_centroid()` vs `geos_centroid()`).
+Third, we have to do an explicit `as_geos_geometry()` coercion before we can
+perform any **geos** operations on the resulting object.
 
 That last point seems the most mundane. (_Why aren't you talking more about how
 crazy fast **geos** is?!_) But it's important since it underscores a key 
@@ -207,7 +206,7 @@ head(nc_geos)
 ```
 
 Gone are all those extra columns containing information about county names,
-FIPS codes, population numbers, etc. etc. We're just left the necessary 
+FIPS codes, population numbers, etc. etc. We're just left with the necessary 
 information to do high-performance spatial operations.
 
 ### Quick aside on plotting geos objects
@@ -275,7 +274,7 @@ nc_dt[,
   plot()
 ```
 
-Okay, this time around the translation from the equivalent **sf** code isn't as 
+This time around the translation from the equivalent **sf** code isn't as 
 direct. We have one step (`st_union()`) vs. two 
 (`geos_make_collection() |> geos_unary_union()`). The first `geo_unary_union()`
 step is clear enough. But it's the second `geos_make_collection()`step that's
@@ -323,9 +322,11 @@ microbenchmark(
 )
 ```
 
-**Result:** A 10x speed-up. Nice! While the dataset that we're using here is too
-small to notice in real-time, those same performance benefits will be evident 
-with big geospatial tasks too.
+**Result:** A 10x speed-up. Nice! While the toy dataset that we're using here is 
+too small to make those differences meaningful in practice, those same 
+performance benefits will carry over to big geospatial tasks too. Being able to 
+reduce your computation time by a factor of 10 (or 50) really makes a difference
+once you're talking minutes or hours.
 
 ## Conclusion
 

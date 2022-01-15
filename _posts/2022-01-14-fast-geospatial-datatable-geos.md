@@ -17,9 +17,9 @@ tags:
 ## Motivation
 
 This blog post pulls together various tips and suggestions that I've left
-around the place. My main goal is to show you how **data.table** can be used
-in geospatial workflows, as well as some additional libraries for doing
-high-performance spatial work in R.
+around the place. My main goal is to show you some simple workflows that I use 
+for high-performance geospatial work in R, leaning on the **data.table** and 
+**geos** packages.
 
 If you're the type of person who likes to load everything at once, here are the
 R libraries and theme settings that I'll be using in this post. (Don't worry if
@@ -95,7 +95,7 @@ nc |>
 
 ![plot of chunk dplyr_union](/figure/posts/2022-01-14-fast-geospatial-datatable-geos/dplyr_union-1.png)
 
-In the above code chunk, I'm using the powerful **dplyr** package to do a 
+In the above code chunk, I'm using **dplyr** to do a 
 grouped aggregation on our North Carolina data object. The aggregation itself is
 pretty silly---i.e. divide the state into two hemispheres---but the same idea
 extends to virtually all of **dplyr's** capabilities. It makes for a very 
@@ -108,7 +108,7 @@ about which of **dplyr** or **data.table** is
 better.[^2]
 But I think it's fair to say that the latter offers incredible 
 performance that makes it a must-use library for a lot of people, including
-myself. And yet it seems to me that many **data.table** users aren't aware that 
+myself. Yet it seems to me that many **data.table** users aren't aware that 
 you can use it for spatial operations in exactly the same way.
 
 If you're following along on your own computer, make sure to grab the 
@@ -149,8 +149,7 @@ grab the development version of **data.table** is that it "pretty prints" the
 columns by default. This not only includes the columns types and keys (if you've
 set any), but also the special `sfc_MULTIPLOYGON` list columns which is where
 the **sf** magic is hiding. It's a small cosmetic change that nonetheless
-underscores the integration between these two 
-packages.[^1]
+underscores the integration between these two packages.[^1]
 
 Just like we did with **dplyr** earlier, we can now do grouped spatial 
 operations on this object using **data.table**'s concise syntax:
@@ -167,13 +166,13 @@ nc_dt[,
 
 ![plot of chunk dt_union](/figure/posts/2022-01-14-fast-geospatial-datatable-geos/dt_union-1.png)
 
-Okay, I'll admit that there are a few tiny tweaks we need to make to the plot
+Now, I'll admit that there are a few tiny tweaks we need to make to the plot
 call. Unlike with the non-**data.table** workflow, this time we have to specify
 the geometry aesthetic with `aes(geometry=geometry, ...)`. Otherwise,
 **ggplot2** won't know what do with this object. The other difference is that it
 doesn't automatically recognise the CRS (i.e. "NAD27"), so the projection is a
 little off. Again, however, that information is contained with the `geometry`
-column of our `nc_dt` object. It just requires that we provide this information
+column of our `nc_dt` object. It just requires that we provide the CRS
 to our plot call explicitly.
 
 
@@ -200,7 +199,7 @@ work too. Speaking of performance...
 
 As great as **sf** is, even its most ardent proponents will admit that it can
 drag a bit when it comes to large geospatial computations. Now that's not to say
-it is objectively "slow". But I've found it does lag behind **geopandas**, for example, 
+it is "slow". But I've found it does lag behind **geopandas**, for example, 
 once I start working with really big geospatial files. Luckily, there's a new
 kid in town that offers big performance gains and plays very well with the 
 workflow I demonstrated above.
@@ -232,16 +231,16 @@ microbenchmark(
 
 {% highlight text %}
 ## Unit: microseconds
-##  expr    min     lq   mean median     uq    max neval cld
-##    sf 6683.6 6737.4 7079.3 7224.0 7357.4 7394.4     5   b
-##  geos  102.5  105.8  132.1  115.3  140.6  196.5     5  a
+##  expr    min   lq   mean median     uq    max neval cld
+##    sf 6585.6 6655 6780.3 6670.4 6756.7 7234.1     5   b
+##  geos  107.7  109  130.6  117.5  122.1  196.7     5  a
 {% endhighlight %}
 
-A couple of things worth noting. First, the executing functions are very similar 
-(`st_centroid()` vs `geos_centroid()`). Second, the **geos** command executes
-orders of magnitude faster than the **sf** equivalent. Third, we have to do an
-explicit `as_geos_geometry()` coercion before we can perform any **geos** 
-operations on the resulting object. 
+A couple of things worth noting. First, the **geos** centroid calculation
+completes _orders of magnitude_ faster than the **sf** equivalent. Second, the
+executing functions are very similar (`st_centroid()` vs `geos_centroid()`).
+Third, we have to do an explicit `as_geos_geometry()` coercion before we can
+perform any **geos** operations on the resulting object.
 
 That last point seems the most mundane. (_Why aren't you talking more about how
 crazy fast **geos** is?!_) But it's important since it underscores a key 
@@ -267,7 +266,7 @@ head(nc_geos)
 {% endhighlight %}
 
 Gone are all those extra columns containing information about county names,
-FIPS codes, population numbers, etc. etc. We're just left the necessary 
+FIPS codes, population numbers, etc. etc. We're just left with the necessary 
 information to do high-performance spatial operations.
 
 ### Quick aside on plotting geos objects
@@ -358,7 +357,7 @@ nc_dt[,
 
 ![plot of chunk geos_union](/figure/posts/2022-01-14-fast-geospatial-datatable-geos/geos_union-1.png)
 
-Okay, this time around the translation from the equivalent **sf** code isn't as 
+This time around the translation from the equivalent **sf** code isn't as 
 direct. We have one step (`st_union()`) vs. two 
 (`geos_make_collection() |> geos_unary_union()`). The first `geo_unary_union()`
 step is clear enough. But it's the second `geos_make_collection()`step that's
@@ -412,16 +411,18 @@ microbenchmark(
 
 {% highlight text %}
 ## Unit: milliseconds
-##       expr    min     lq   mean median     uq    max neval  cld
-##    sf_tidy 102.93 103.20 104.42 103.62 105.15 107.18     5    d
-##      sf_dt  95.79  96.81  97.33  96.90  96.90 100.24     5   c 
-##  geos_tidy  15.25  15.62  15.86  15.76  16.18  16.47     5  b  
-##    geos_dt  11.82  12.08  12.17  12.26  12.33  12.34     5 a
+##       expr   min    lq  mean median    uq    max neval  cld
+##    sf_tidy 97.38 97.51 99.09  98.08 98.69 103.77     5    d
+##      sf_dt 91.20 91.21 92.27  91.25 91.50  96.19     5   c 
+##  geos_tidy 14.85 15.03 15.13  15.05 15.34  15.35     5  b  
+##    geos_dt 11.38 11.40 11.48  11.43 11.45  11.75     5 a
 {% endhighlight %}
 
-**Result:** A 10x speed-up. Nice! While the dataset that we're using here is too
-small to notice in real-time, those same performance benefits will be evident 
-with big geospatial tasks too.
+**Result:** A 10x speed-up. Nice! While the toy dataset that we're using here is 
+too small to make those differences meaningful in practice, those same 
+performance benefits will carry over to big geospatial tasks too. Being able to 
+reduce your computation time by a factor of 10 (or 50) really makes a difference
+once you're talking minutes or hours.
 
 ## Conclusion
 

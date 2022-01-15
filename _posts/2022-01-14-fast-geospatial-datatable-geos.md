@@ -1,5 +1,5 @@
 ---
-title: Fast geospatial operations with data.table, geos & co.
+title: Fast geospatial tasks with data.table, geos & co.
 excerpt: 'Use all your favourites'
 date: '2022-01-14'
 slug: fast-geospatial-datatable-geos

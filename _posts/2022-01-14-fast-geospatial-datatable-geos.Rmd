@@ -54,7 +54,7 @@ package. You know, this one:
 library(sf)
 library(ggplot2)
 
-## Grab the North Carolina shapefile that come bundled with sf
+## Grab the North Carolina shapefile that comes bundled with sf
 nc_shapefile = system.file("shape/nc.shp", package = "sf")
 nc = st_read(nc_shapefile)
 
@@ -109,7 +109,7 @@ quick look at the first few rows and some columns.
 library(data.table)
 
 nc_dt = as.data.table(nc)
-nc[1:3, c('NAME', 'CNTY_ID', 'geometry')]
+nc_dt[1:3, c('NAME', 'CNTY_ID', 'geometry')]
 ```
 
 At this point, I have to briefly back up to say that the reason I wanted you to

@@ -54,7 +54,7 @@ package. You know, this one:
 library(sf)
 library(ggplot2)
 
-## Grab the North Carolina shapefile that come bundled with sf
+## Grab the North Carolina shapefile that comes bundled with sf
 nc_shapefile = system.file("shape/nc.shp", package = "sf")
 nc = st_read(nc_shapefile)
 {% endhighlight %}
@@ -131,21 +131,17 @@ quick look at the first few rows and some columns.
 library(data.table)
 
 nc_dt = as.data.table(nc)
-nc[1:3, c('NAME', 'CNTY_ID', 'geometry')]
+nc_dt[1:3, c('NAME', 'CNTY_ID', 'geometry')]
 {% endhighlight %}
 
 
 
 {% highlight text %}
-## Simple feature collection with 3 features and 2 fields
-## Geometry type: MULTIPOLYGON
-## Dimension:     XY
-## Bounding box:  xmin: -81.74 ymin: 36.23 xmax: -80.44 ymax: 36.59
-## Geodetic CRS:  NAD27
-##        NAME CNTY_ID                       geometry
-## 1      Ashe    1825 MULTIPOLYGON (((-81.47 36.2...
-## 2 Alleghany    1827 MULTIPOLYGON (((-81.24 36.3...
-## 3     Surry    1828 MULTIPOLYGON (((-80.46 36.2...
+##         NAME CNTY_ID                       geometry
+##       <char>   <num>             <sfc_MULTIPOLYGON>
+## 1:      Ashe    1825 MULTIPOLYGON (((-81.47 36.2...
+## 2: Alleghany    1827 MULTIPOLYGON (((-81.24 36.3...
+## 3:     Surry    1828 MULTIPOLYGON (((-80.46 36.2...
 {% endhighlight %}
 
 At this point, I have to briefly back up to say that the reason I wanted you to

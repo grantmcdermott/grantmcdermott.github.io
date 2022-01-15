@@ -39,7 +39,6 @@ library(geos)
 ## Plotting
 library(ggplot2)
 theme_set(theme_minimal())
-par(family = "HersheySans")
 
 ## Benchmarking
 library(microbenchmark)
@@ -53,18 +52,8 @@ package. You know, this one:
 
 {% highlight r %}
 library(sf)
-library(ggplot)
-{% endhighlight %}
+library(ggplot2)
 
-
-
-{% highlight text %}
-## Error in library(ggplot): there is no package called 'ggplot'
-{% endhighlight %}
-
-
-
-{% highlight r %}
 ## Grab the North Carolina shapefile that come bundled with sf
 nc_shapefile = system.file("shape/nc.shp", package = "sf")
 nc = st_read(nc_shapefile)
@@ -84,34 +73,13 @@ nc = st_read(nc_shapefile)
 
 
 {% highlight r %}
-## Take a quick look at the first few rows and some columns
-nc[1:3, c('NAME', 'CNTY_ID', 'geometry')]
-{% endhighlight %}
-
-
-
-{% highlight text %}
-## Simple feature collection with 3 features and 2 fields
-## Geometry type: MULTIPOLYGON
-## Dimension:     XY
-## Bounding box:  xmin: -81.74 ymin: 36.23 xmax: -80.44 ymax: 36.59
-## Geodetic CRS:  NAD27
-##        NAME CNTY_ID                       geometry
-## 1      Ashe    1825 MULTIPOLYGON (((-81.47 36.2...
-## 2 Alleghany    1827 MULTIPOLYGON (((-81.24 36.3...
-## 3     Surry    1828 MULTIPOLYGON (((-80.46 36.2...
-{% endhighlight %}
-
-
-
-{% highlight r %}
 ## Quick plot
 ggplot(nc) + geom_sf()
 {% endhighlight %}
 
 ![plot of chunk nc](/figure/posts/2022-01-14-fast-geospatial-datatable-geos/nc-1.png)
 
-The revolutionary idea of **sf** was (is) that that it allows you to treat 
+The revolutionary idea of **sf** was (is) that it allowed you to treat 
 spatial objects as regular data frames, so you can do things like this:
 
 
@@ -136,8 +104,9 @@ work in recent years.
 
 At the same time, there's another powerful data wrangling library in R: 
 **data.table**. This post is not going to rehash the (mostly pointless) debates 
-about which of **dplyr** or **data.table** is better.^[Use what you want
-people.] But I think it's fair to say that the latter offers incredible 
+about which of **dplyr** or **data.table** is 
+better.^[Use what you want people.] 
+But I think it's fair to say that the latter offers incredible 
 performance that makes it a must-use library for a lot of people, including
 myself. And yet it seems to me that many **data.table** users aren't aware that 
 you can use it for spatial operations in exactly the same way.
@@ -184,15 +153,8 @@ grab the development version of **data.table** is that it "pretty prints" the
 columns by default. This not only includes the columns types and keys (if you've
 set any), but also the special `sfc_MULTIPLOYGON` list columns which is where
 the **sf** magic is hiding. It's a small cosmetic change that nonetheless
-underscores the integration between these two packages.^[There are many other
-[killer
-features](https://rdatatable.gitlab.io/data.table/news/index.html#unreleased-data-table-v1-14-3-in-development-)
-that **data.table** v1.14.3 is set to introduce. I might write up a list of my
-favourites once the new version hits CRAN. In the meantime, if any DT devs are
-reading this, _please pretty please_ can we include these two PRs
-([1](https://github.com/Rdatatable/data.table/pull/4163),
-[2](https://github.com/Rdatatable/data.table/pull/4883)) into the next release
-before then.]
+underscores the integration between these two 
+packages.^[There are many other [killer features](https://rdatatable.gitlab.io/data.table/news/index.html#unreleased-data-table-v1-14-3-in-development-) that **data.table** v1.14.3 is set to introduce. I might write up a list of my favourites once the new version hits CRAN. In the meantime, if any DT devs are reading this, _please pretty please_ can we include these two PRs ([1](https://github.com/Rdatatable/data.table/pull/4163), [2](https://github.com/Rdatatable/data.table/pull/4883)) into the next release before then.]
 
 Just like we did with **dplyr** earlier, we can now do grouped spatial 
 operations on this object using **data.table**'s concise syntax:
@@ -211,7 +173,7 @@ nc_dt[,
 
 Okay, I'll admit that there are a few tiny tweaks we need to make to the plot
 call. Unlike with the non-**data.table** workflow, this time we have to specify
-the geometry aesthetic with `aes(geometry=geometry, ....)`. Otherwise,
+the geometry aesthetic with `aes(geometry=geometry, ...)`. Otherwise,
 **ggplot2** won't know what do with this object. The other difference is that it
 doesn't automatically recognise the CRS (i.e. "NAD27"), so the projection is a
 little off. Again, however, that information is contained with the `geometry`
@@ -232,25 +194,25 @@ last_plot() +
 ![plot of chunk dt_union_crs](/figure/posts/2022-01-14-fast-geospatial-datatable-geos/dt_union_crs-1.png)
 
 Plotting tweaks aside, I don't want to lose sight of the main point of this
-post, namely: **sf** and **data.table** play perfectly well with each other. You
+post, namely: **sf** and **data.table** play perfectly well together. You
 can do (grouped) spatial operations and aggregations inside the latter, exactly
-how you would any other data wrangling task. If you love **data.table's**
+how you would any other data wrangling task. So if you love **data.table's**
 performance and syntax, then by all means continue using it for your spatial
 work too. Speaking of performance...
 
 ## Speeding things up with geos
 
 As great as **sf** is, even its most ardent proponents will admit that it can
-drag a bit when it come to large geospatial computations. Not that it's 
-obviously "slow". But I've found it does lag behind **geopandas**, for example, 
-once I start working with really big geospatial files. Luckily, there's new
+drag a bit when it comes to large geospatial computations. Now that's not to say
+it is objectively "slow". But I've found it does lag behind **geopandas**, for example, 
+once I start working with really big geospatial files. Luckily, there's a new
 kid in town that offers big performance gains and plays very well with the 
 workflow I demonstrated above.
 
 Dewey Dunnington and Edzer Pebesma's
 [**geos**](https://paleolimbot.github.io/geos/index.html) package covers all of
 the same geospatial operations as **sf**. However, it directly wraps the 
-underlying `GEOS` API, which is all written in C and thus extremely performant.
+underlying `GEOS` API, which is all written in C and is thus extremely performant.
 Here's a simple example, where we calculate the centroid of each North Carolina
 county.
 
@@ -281,9 +243,9 @@ microbenchmark(
 
 A couple of things worth noting. First, the executing functions are very similar 
 (`st_centroid()` vs `geos_centroid()`). Second, the **geos** command executes
-orders of magnitude faster than the **sf** equivalent. Third, we have to convert
-to an explicit `as_geos_geometry` object before we can perform any **geos** 
-operations on it. 
+orders of magnitude faster than the **sf** equivalent. Third, we have to do an
+explicit `as_geos_geometry()` coercion before we can perform any **geos** 
+operations on the resulting object. 
 
 That last point seems the most mundane. (_Why aren't you talking more about how
 crazy fast **geos** is?!_) But it's important since it underscores a key 
@@ -349,10 +311,10 @@ Finally, we get to the _pièce de résistance_ of today's post. The fact that
 `as_geos_geometry()` creates a GEOS geometry (i.e. list) object---rather than
 preserving all of the data frame attributes---is a actually a good thing for our
 **data.table** workflow. Why? Well, because we can just include this GEOS
-geometry object as a regular column inside our data.table.^[Yes, yes. I know you 
-can include a (list) column of data frames within a data.table. But just bear 
-with me for the moment.] This means that you can do grouped spatial operations
-inside the data.table and thus **combine the power of data.table and geos**.
+geometry object as a regular column inside our 
+data.table.^[Yes, yes. I know you can include a (list) column of data frames within a data.table. But just bear with me for the moment.] 
+This means that you can do grouped spatial operations
+inside that data.table and thus **combine the power of data.table and geos**.
 
 (Same for tibbles, but we'll get to that.)
 
@@ -377,7 +339,7 @@ nc_dt[1:3, c('NAME', 'CNTY_ID', 'geo')] ## Print a few rows/columns
 {% endhighlight %}
 
 GEOS column in hand, we can manipulate or plot it directly from within the 
-data.table. For example:
+data.table. For example, we can recreate our previous centroid plot.
 
 
 {% highlight r %}
@@ -400,8 +362,8 @@ nc_dt[,
 
 ![plot of chunk geos_union](/figure/posts/2022-01-14-fast-geospatial-datatable-geos/geos_union-1.png)
 
-Okay, this time the translation from the equivalent **sf** code isn't as direct.
-We have one step (`st_union()`) vs. two 
+Okay, this time around the translation from the equivalent **sf** code isn't as 
+direct. We have one step (`st_union()`) vs. two 
 (`geos_make_collection() |> geos_unary_union()`). The first `geo_unary_union()`
 step is clear enough. But it's the second `geos_make_collection()`step that's
 key for our aggregating task. We have to tell **geos** to treat everything
@@ -412,9 +374,8 @@ pay for the resulting performance boost.
 Speaking of which, it's nearly time for some final benchmarks. The only extra
 thing I want to do first is, as promised, include a **tibble**/**dplyr**
 equivalent. The exact same concepts and benefits carry over here, for those of
-you that prefer the tidyverse syntax and workflow.^[The important thing is that
-you _explicitly_ convert it to a tibble. Leaving it as an **sf** object won't
-yield the same speed benefits.]
+you that prefer the tidyverse syntax and 
+workflow.^[The important thing is that you _explicitly_ convert it to a tibble. Leaving it as an **sf** object won't yield the same speed benefits.]
 
 
 {% highlight r %}

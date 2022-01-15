@@ -105,7 +105,7 @@ work in recent years.
 At the same time, there's another powerful data wrangling library in R: 
 **data.table**. This post is not going to rehash the (mostly pointless) debates 
 about which of **dplyr** or **data.table** is 
-better.^[Use what you want people.] 
+better.^[2]
 But I think it's fair to say that the latter offers incredible 
 performance that makes it a must-use library for a lot of people, including
 myself. And yet it seems to me that many **data.table** users aren't aware that 
@@ -154,7 +154,7 @@ columns by default. This not only includes the columns types and keys (if you've
 set any), but also the special `sfc_MULTIPLOYGON` list columns which is where
 the **sf** magic is hiding. It's a small cosmetic change that nonetheless
 underscores the integration between these two 
-packages.^[There are many other [killer features](https://rdatatable.gitlab.io/data.table/news/index.html#unreleased-data-table-v1-14-3-in-development-) that **data.table** v1.14.3 is set to introduce. I might write up a list of my favourites once the new version hits CRAN. In the meantime, if any DT devs are reading this, _please pretty please_ can we include these two PRs ([1](https://github.com/Rdatatable/data.table/pull/4163), [2](https://github.com/Rdatatable/data.table/pull/4883)) into the next release before then.]
+packages.^[1]
 
 Just like we did with **dplyr** earlier, we can now do grouped spatial 
 operations on this object using **data.table**'s concise syntax:
@@ -312,7 +312,7 @@ Finally, we get to the _pièce de résistance_ of today's post. The fact that
 preserving all of the data frame attributes---is a actually a good thing for our
 **data.table** workflow. Why? Well, because we can just include this GEOS
 geometry object as a regular column inside our 
-data.table.^[Yes, yes. I know you can include a (list) column of data frames within a data.table. But just bear with me for the moment.] 
+data.table.^[3] 
 This means that you can do grouped spatial operations
 inside that data.table and thus **combine the power of data.table and geos**.
 
@@ -375,7 +375,7 @@ Speaking of which, it's nearly time for some final benchmarks. The only extra
 thing I want to do first is, as promised, include a **tibble**/**dplyr**
 equivalent. The exact same concepts and benefits carry over here, for those of
 you that prefer the tidyverse syntax and 
-workflow.^[The important thing is that you _explicitly_ convert it to a tibble. Leaving it as an **sf** object won't yield the same speed benefits.]
+workflow.^[4]
 
 
 {% highlight r %}
@@ -442,3 +442,12 @@ high-performance benefits carry over to both ecosystems.
 PS. There are more exciting high-performance geospatial developments on the 
 way in R (as well as other languages) 
 like [geoarrow](https://github.com/paleolimbot/geoarrow).
+
+
+[^1]: There are many other [killer features](https://rdatatable.gitlab.io/data.table/news/index.html#unreleased-data-table-v1-14-3-in-development-) that **data.table** v1.14.3 is set to introduce. I might write up a list of my favourites once the new version hits CRAN. In the meantime, if any DT devs are reading this, _please pretty please_ can we include these two PRs ([1](https://github.com/Rdatatable/data.table/pull/4163), [2](https://github.com/Rdatatable/data.table/pull/4883)) into the next release before then.
+
+[^2]: Use what you want people.
+
+[^3]: Yes, yes. I know you can include a (list) column of data frames within a data.table. But just bear with me for the moment.
+
+[^4]: The important thing is that you _explicitly_ convert it to a tibble. Leaving it as an **sf** object won't yield the same speed benefits.

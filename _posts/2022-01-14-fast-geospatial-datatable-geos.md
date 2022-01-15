@@ -105,7 +105,7 @@ work in recent years.
 At the same time, there's another powerful data wrangling library in R: 
 **data.table**. This post is not going to rehash the (mostly pointless) debates 
 about which of **dplyr** or **data.table** is 
-better.^[2]
+better.[^2]
 But I think it's fair to say that the latter offers incredible 
 performance that makes it a must-use library for a lot of people, including
 myself. And yet it seems to me that many **data.table** users aren't aware that 
@@ -154,7 +154,7 @@ columns by default. This not only includes the columns types and keys (if you've
 set any), but also the special `sfc_MULTIPLOYGON` list columns which is where
 the **sf** magic is hiding. It's a small cosmetic change that nonetheless
 underscores the integration between these two 
-packages.^[1]
+packages.[^1]
 
 Just like we did with **dplyr** earlier, we can now do grouped spatial 
 operations on this object using **data.table**'s concise syntax:
@@ -312,7 +312,7 @@ Finally, we get to the _pièce de résistance_ of today's post. The fact that
 preserving all of the data frame attributes---is a actually a good thing for our
 **data.table** workflow. Why? Well, because we can just include this GEOS
 geometry object as a regular column inside our 
-data.table.^[3] 
+data.table.[^3] 
 This means that you can do grouped spatial operations
 inside that data.table and thus **combine the power of data.table and geos**.
 
@@ -375,7 +375,7 @@ Speaking of which, it's nearly time for some final benchmarks. The only extra
 thing I want to do first is, as promised, include a **tibble**/**dplyr**
 equivalent. The exact same concepts and benefits carry over here, for those of
 you that prefer the tidyverse syntax and 
-workflow.^[4]
+workflow.[^4]
 
 
 {% highlight r %}

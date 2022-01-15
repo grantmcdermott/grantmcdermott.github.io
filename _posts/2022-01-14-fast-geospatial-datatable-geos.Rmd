@@ -160,18 +160,18 @@ work too. Speaking of performance...
 ## Speeding things up with geos
 
 As great as **sf** is, even its most ardent proponents will admit that it can
-drag a bit when it comes to large geospatial computations. Now that's not to say
-it is "slow". But I've found it does lag behind **geopandas**, for example, 
-once I start working with really big geospatial files. Luckily, there's a new
-kid in town that offers big performance gains and plays very well with the 
-workflow I demonstrated above.
+drag a bit when it comes to big geospatial tasks. I don't want to imply that
+that it's "slow". But I've found that it does lag behind **geopandas**, for 
+example, when I'm doing heavy geospatial computation or working with really 
+large spatial files. Luckily, there's a new package in town that offers major 
+performance gains and plays very well with the workflow I demonstrated above.
 
 Dewey Dunnington and Edzer Pebesma's
 [**geos**](https://paleolimbot.github.io/geos/index.html) package covers all of
 the same geospatial operations as **sf**. However, it directly wraps the 
-underlying `GEOS` API, which is all written in C and is thus extremely performant.
-Here's a simple example, where we calculate the centroid of each North Carolina
-county.
+underlying `GEOS` API, which is all written in C and is thus extremely
+performant. Here's a simple example, where we calculate the centroid of each
+North Carolina county.
 
 ```{r centroid_bm}
 library(geos)           ## For geos operations  
@@ -276,12 +276,12 @@ nc_dt[,
 
 This time around the translation from the equivalent **sf** code isn't as 
 direct. We have one step (`st_union()`) vs. two 
-(`geos_make_collection() |> geos_unary_union()`). The first `geo_unary_union()`
-step is clear enough. But it's the second `geos_make_collection()`step that's
+(`geos_make_collection() |> geos_unary_union()`). The second `geo_unary_union()`
+step is clear enough. But it's the first `geos_make_collection()`step that's
 key for our aggregating task. We have to tell **geos** to treat everything
-within the same group (the `by = ` part) as a collective. This extra step 
-becomes very natural after you've done it a few times and is a small price to
-pay for the resulting performance boost. 
+within the same group (i.e. whatever is in `by = ...`) as a collective. This 
+extra step becomes very natural after you've done it a few times and is a small
+price to pay for the resulting performance boost.
 
 Speaking of which, it's nearly time for some final benchmarks. The only extra
 thing I want to do first is, as promised, include a **tibble**/**dplyr**

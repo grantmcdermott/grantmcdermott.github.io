@@ -237,13 +237,13 @@ Okay, back to the main post...
 ### Back to the data.table + geos workflow
 
 Finally, we get to the _pièce de résistance_ of today's post. The fact that 
-`as_geos_geometry()` creates a GEOS geometry (i.e. list) object---rather than
+`as_geos_geometry()` creates a GEOS geometry object---rather than
 preserving all of the data frame attributes---is a actually a good thing for our
-**data.table** workflow. Why? Well, because we can just include this GEOS
-geometry object as a regular column inside our 
-data.table.[^3] 
-This means that you can do grouped spatial operations
-inside that data.table and thus **combine the power of data.table and geos**.
+**data.table** workflow. Why? Well, because we can just include this
+geometry object as a list column inside our data.table.[^3] 
+In turn, this means you can treat spatial operations as you would any other 
+operation inside a data.table. You can aggregate by group, merge, compare, 
+and generally **combine the power of data.table and geos** as you see fit.
 
 (Same for tibbles, but we'll get to that.)
 

@@ -125,8 +125,8 @@ microbenchmark(
 {% highlight text %}
 ## Unit: milliseconds
 ##             expr    min     lq   mean median     uq    max neval
-##  sims_sequential 2471.1 2471.1 2471.1 2471.1 2471.1 2471.1     1
-##    sims_parallel  836.1  836.1  836.1  836.1  836.1  836.1     1
+##  sims_sequential 2278.4 2278.4 2278.4 2278.4 2278.4 2278.4     1
+##    sims_parallel  880.4  880.4  880.4  880.4  880.4  880.4     1
 {% endhighlight %}
 
 There you have it. Down to _less than a second_ for a simulation involving 40,000 regressions using only base R.[^3] On a laptop, no less. Just incredibly impressive. 

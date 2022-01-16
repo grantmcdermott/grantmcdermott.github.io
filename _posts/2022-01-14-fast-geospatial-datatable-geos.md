@@ -44,7 +44,7 @@ theme_set(theme_minimal())
 library(microbenchmark)
 {% endhighlight %}
 
-## data.table + sf workflows
+## data.table + sf workflow
 
 Everyone who does spatial work in R is familiar with the wonderful **sf**
 package. You know, this one:
@@ -104,8 +104,7 @@ work in recent years.
 
 At the same time, there's another powerful data wrangling library in R: 
 **data.table**. This post is not going to rehash the (mostly pointless) debates 
-about which of **dplyr** or **data.table** is 
-better.[^2]
+about which of **dplyr** or **data.table** is better.[^1]
 But I think it's fair to say that the latter offers incredible 
 performance that makes it a must-use library for a lot of people, including
 myself. Yet it seems to me that many **data.table** users aren't aware that 
@@ -149,7 +148,7 @@ grab the development version of **data.table** is that it "pretty prints" the
 columns by default. This not only includes the columns types and keys (if you've
 set any), but also the special `sfc_MULTIPLOYGON` list columns which is where
 the **sf** magic is hiding. It's a small cosmetic change that nonetheless
-underscores the integration between these two packages.[^1]
+underscores the integration between these two packages.[^2]
 
 Just like we did with **dplyr** earlier, we can now do grouped spatial 
 operations on this object using **data.table**'s concise syntax:
@@ -206,10 +205,11 @@ performance gains and plays very well with the workflow I demonstrated above.
 
 Dewey Dunnington and Edzer Pebesma's
 [**geos**](https://paleolimbot.github.io/geos/index.html) package covers all of
-the same geospatial operations as **sf**. However, it directly wraps the 
-underlying `GEOS` API, which is all written in C and is thus extremely
-performant. Here's a simple example, where we calculate the centroid of each
-North Carolina county.
+the same geospatial 
+[operations](https://paleolimbot.github.io/geos/reference/index.html) as **sf**. 
+But it does so by directly wrapping the underlying `GEOS` API, which is written 
+in C and is thus extremely performant. Here's a simple example, where we
+calculate the centroid of each North Carolina county.
 
 
 {% highlight r %}
@@ -300,7 +300,7 @@ ggplot() +
 
 Okay, back to the main post...
 
-### Back to the data.table + geos workflow
+### data.table + geos workflow
 
 Finally, we get to the _pièce de résistance_ of today's post. The fact that 
 `as_geos_geometry()` creates a GEOS geometry object---rather than
@@ -441,10 +441,20 @@ way in R (as well as other languages)
 like [geoarrow](https://github.com/paleolimbot/geoarrow).
 
 
-[^1]: There are many other [killer features](https://rdatatable.gitlab.io/data.table/news/index.html#unreleased-data-table-v1-14-3-in-development-) that **data.table** v1.14.3 is set to introduce. I might write up a list of my favourites once the new version hits CRAN. In the meantime, if any DT devs are reading this, _please pretty please_ can we include these two PRs ([1](https://github.com/Rdatatable/data.table/pull/4163), [2](https://github.com/Rdatatable/data.table/pull/4883)) into the next release before then.
+[^1]: Use what you want, people.
 
-[^2]: Use what you want people.
+[^2]: None of the actual _functionality_ that I show here requires the dev
+version of **data.table**. But I recommend downloading it regardless, since 
+v1.14.3 is set to introduce a bunch of other 
+[killer features](https://rdatatable.gitlab.io/data.table/news/index.html#unreleased-data-table-v1-14-3-in-development-). 
+I might write up a list of my favourites once the new version hits CRAN. In the
+meantime, if any DT devs are reading this, _please pretty please_ can we include
+these two PRs ([1](https://github.com/Rdatatable/data.table/pull/4163),
+[2](https://github.com/Rdatatable/data.table/pull/4883)) into the next release
+too.
 
-[^3]: Yes, yes. I know you can include a (list) column of data frames within a data.table. But just bear with me for the moment.
+[^3]: Yes, yes. I know you can include a (list) column of data frames within a
+data.table. But just bear with me for the moment.
 
-[^4]: The important thing is that you _explicitly_ convert it to a tibble. Leaving it as an **sf** object won't yield the same speed benefits.
+[^4]: The important thing is that you _explicitly_ convert it to a tibble.
+Leaving it as an **sf** object won't yield the same speed benefits.

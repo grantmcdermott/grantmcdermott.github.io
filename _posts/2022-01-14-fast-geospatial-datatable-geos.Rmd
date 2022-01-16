@@ -347,18 +347,8 @@ like [geoarrow](https://github.com/paleolimbot/geoarrow).
 
 [^1]: Use what you want, people.
 
-[^2]: None of the actual _functionality_ that I show here requires the dev
-version of **data.table**. But I recommend downloading it regardless, since 
-v1.14.3 is set to introduce a bunch of other 
-[killer features](https://rdatatable.gitlab.io/data.table/news/index.html#unreleased-data-table-v1-14-3-in-development-). 
-I might write up a list of my favourites once the new version hits CRAN. In the
-meantime, if any DT devs are reading this, _please pretty please_ can we include
-these two PRs ([1](https://github.com/Rdatatable/data.table/pull/4163),
-[2](https://github.com/Rdatatable/data.table/pull/4883)) into the next release
-too.
+[^2]: None of the actual _functionality_ that I show here requires the dev version of **data.table**. But I recommend downloading it regardless, since v1.14.3 is set to introduce a bunch of other [killer features](https://rdatatable.gitlab.io/data.table/news/index.html#unreleased-data-table-v1-14-3-in-development-). I might write up a list of my favourites once the new version hits CRAN. In the meantime, if any DT devs are reading this, _please pretty please_ can we include these two PRs ([1](https://github.com/Rdatatable/data.table/pull/4163), [2](https://github.com/Rdatatable/data.table/pull/4883)) into the next release too.
 
-[^3]: Yes, yes. I know you can include a (list) column of data frames within a
-data.table. But just bear with me for the moment.
+[^3]: Yes, yes. I know you can include a (list) column of data frames within a data.table. But just bear with me for the moment.
 
-[^4]: The important thing is that you _explicitly_ convert it to a tibble.
-Leaving it as an **sf** object won't yield the same speed benefits.
+[^4]: The important thing is that you _explicitly_ convert it to a tibble. Leaving it as an **sf** object won't yield the same speed benefits.

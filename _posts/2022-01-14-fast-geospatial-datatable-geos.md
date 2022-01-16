@@ -419,7 +419,7 @@ microbenchmark(
 {% endhighlight %}
 
 **Result:** A 10x speed-up. Nice! While the toy dataset that we're using here is 
-too small to make those differences meaningful in practice, those same 
+too small to make a meaningful difference in practice, those same 
 performance benefits will carry over to big geospatial tasks too. Being able to 
 reduce your computation time by a factor of 10 (or 50) really makes a difference
 once you're talking minutes or hours.

@@ -219,7 +219,7 @@ plot(nc_geos, col = "gray90")
 plot(geos_centroid(nc_geos), pch = 21, col = 'red', bg = 'red', add = TRUE)
 ```
 
-Actually, that's not quite true, since an alternative is convert it back into an
+Actually, that's not quite true, since an alternative is to convert it back into an
 **sf** object with `st_as_sf()` and then call **ggplot2**. This is particularly
 useful because you can hand off some heavy calculation to **geos** before
 bringing it back to **sf** for any additional functionality. Again, the 
@@ -245,7 +245,7 @@ In turn, this means you can treat spatial operations as you would any other
 operation inside a data.table. You can aggregate by group, merge, compare, 
 and generally **combine the power of data.table and geos** as you see fit.
 
-(Same for tibbles, but we'll get to that.)
+(The same is true for regular data frames and tibbles, but we'll get to that.)
 
 Let's prove that this idea works by creating a GEOS column in our data.table. 
 I'll creatively call this column `geo`, but really you could call it anything

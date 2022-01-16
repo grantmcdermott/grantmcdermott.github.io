@@ -18,8 +18,8 @@ tags:
 
 This blog post pulls together various tips and suggestions that I've left
 around the place. My main goal is to show you some simple workflows that I use 
-for high-performance geospatial work in R, leaning on the **data.table** and 
-**geos** packages.
+for high-performance geospatial work in R, leaning on the **data.table**, **sf** 
+and **geos** packages.
 
 If you're the type of person who likes to load everything at once, here are the
 R libraries and theme settings that I'll be using in this post. (Don't worry if
@@ -196,6 +196,14 @@ work too. Speaking of performance...
 
 ## Speeding things up with geos
 
+_**Update (2022-02-16):** As Roger Bivand 
+[points out](https://twitter.com/RogerBivand/status/1482691924561698817) on 
+Twitter, I'm not 
+comparing apples with apples in these examples. **geos** assumes planar
+("flat") geometries, whereas **sf** does the more complicated task of 
+calculating spherical ("curved") geometries. I've added a postscript at bottom
+of the post that corrects for this discrepancy. Please take a look._
+
 As great as **sf** is, even its most ardent proponents will admit that it can
 drag a bit when it comes to big geospatial tasks. I don't want to imply that
 that it's "slow". But I've found that it does lag behind **geopandas**, for 
@@ -205,7 +213,7 @@ performance gains and plays very well with the workflow I demonstrated above.
 
 Dewey Dunnington and Edzer Pebesma's
 [**geos**](https://paleolimbot.github.io/geos/index.html) package covers all of
-the same geospatial 
+the same basic geospatial 
 [operations](https://paleolimbot.github.io/geos/reference/index.html) as **sf**. 
 But it does so by directly wrapping the underlying `GEOS` API, which is written 
 in C and is thus extremely performant. Here's a simple example, where we
@@ -232,12 +240,12 @@ microbenchmark(
 {% highlight text %}
 ## Unit: microseconds
 ##  expr    min     lq   mean median     uq    max neval cld
-##    sf 7226.3 7257.5 7371.7 7330.4 7396.1 7648.4     5   b
-##  geos  115.8  130.6  157.3  130.9  158.3  251.1     5  a
+##    sf 6761.2 6922.5 7079.6 7117.1 7216.5 7380.8     5   b
+##  geos  104.9  124.3  138.9  130.2  142.2  192.6     5  a
 {% endhighlight %}
 
 A couple of things worth noting. First, the **geos** centroid calculation
-completes _orders of magnitude_ faster than the **sf** equivalent. Second, the
+completes orders of magnitude faster than the **sf** equivalent. Second, the
 executing functions are very similar (`st_centroid()` vs `geos_centroid()`).
 Third, we have to do an explicit `as_geos_geometry()` coercion before we can
 perform any **geos** operations on the resulting object.
@@ -304,7 +312,7 @@ Okay, back to the main post...
 
 Finally, we get to the _pièce de résistance_ of today's post. The fact that 
 `as_geos_geometry()` creates a GEOS geometry object---rather than
-preserving all of the data frame attributes---is a actually a good thing for our
+preserving all of the data frame attributes---is a good thing for our
 **data.table** workflow. Why? Well, because we can just include this
 geometry object as a list column inside our data.table.[^3] 
 In turn, this means you can treat spatial operations as you would any other 
@@ -412,17 +420,17 @@ microbenchmark(
 {% highlight text %}
 ## Unit: milliseconds
 ##       expr    min     lq   mean median     uq    max neval  cld
-##    sf_tidy 107.22 107.53 107.71 107.63 108.07 108.10     5    d
-##      sf_dt 100.89 101.18 101.98 101.23 103.04 103.55     5   c 
-##  geos_tidy  16.72  16.76  16.87  16.85  16.99  17.02     5  b  
-##    geos_dt  12.47  12.57  12.65  12.60  12.61  12.99     5 a
+##    sf_tidy 104.89 105.21 106.04 105.23 107.06 107.83     5    d
+##      sf_dt  98.14  98.25  98.38  98.49  98.51  98.52     5   c 
+##  geos_tidy  16.20  16.22  16.35  16.23  16.47  16.66     5  b  
+##    geos_dt  11.71  11.76  12.07  12.04  12.41  12.43     5 a
 {% endhighlight %}
 
 **Result:** A 10x speed-up. Nice! While the toy dataset that we're using here is 
 too small to make a meaningful difference in practice, those same 
 performance benefits will carry over to big geospatial tasks too. Being able to 
-reduce your computation time by a factor of 10 (or 50) really makes a difference
-once you're talking minutes or hours.
+reduce your computation time by a factor of 10 really makes a difference once 
+you're talking minutes or hours.
 
 ## Conclusion
 
@@ -435,11 +443,79 @@ that's your preferred workflow. Just remember to specify the geometry column.
 It integrates very well with both **data.table** and the **tidyverse**, and the 
 high-performance benefits carry over to both ecosystems.
 
+By the way, there are more exciting high-performance geospatial developments on 
+the way in R (as well as other languages) like
+[**geoarrow**](https://github.com/paleolimbot/geoarrow). We're lucky to have 
+these tools at our disposal.
 
-PS. There are more exciting high-performance geospatial developments on the 
-way in R (as well as other languages) 
-like [geoarrow](https://github.com/paleolimbot/geoarrow).
+### Postscript: planar vs spherical 
 
+_Note: This section was added on 2021-01-16._
+
+As noted earlier, the above benchmarks aren't comparing apples to apples, since
+**geos** assumes planar ("flat") geometries, whereas **sf** does the more 
+complicated task of calculating spherical ("curved") geometries. More on that
+[here](https://r-spatial.github.io/sf/articles/sf7.html) if you are interested.
+Below I repeat the same benchmarks, but with **sf** switched to using the
+same planar system. The upshot is that **geos** is still faster, but the gap
+narrows considerably. Again, we're also dealing with a very small dataset
+so I recommend benchmarking on your own datasets to avoid misleading overhead.
+
+
+{% highlight r %}
+## Turn off sf's spherical ("S2") backend
+sf_use_s2(FALSE)
+
+## Now redo our earlier benchmarks...
+
+## Centroid
+microbenchmark(
+  sf = nc$geometry |> st_centroid(),
+  geos = nc_geos |> geos_centroid(), 
+  times = 5
+  )
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Unit: microseconds
+##  expr    min     lq   mean median     uq    max neval cld
+##    sf 2565.9 2581.1 2867.6 2581.4 3240.9 3368.5     5   b
+##  geos  108.8  120.9  170.3  132.2  135.8  353.7     5  a
+{% endhighlight %}
+
+
+
+{% highlight r %}
+## Hemisphere aggregation
+microbenchmark(
+  sf_tidy = nc |>
+    group_by(region = ifelse(CNTY_ID<=1980, 'high', 'low')) |>
+    summarise(geometry = st_union(geometry)),
+  sf_dt = nc_dt[, 
+                .(geometry = st_union(geometry)), 
+                by = .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))],
+  geos_tidy = nc_tibble |>  
+    group_by(region = ifelse(CNTY_ID<=1980, 'high', 'low')) |>
+    summarise(geo = geos_unary_union(geos_make_collection(geo))),
+  geos_dt = nc_dt[,
+                  .(geo = geos_unary_union(geos_make_collection(geo))),
+                  by = .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))],
+  times = 5
+  )
+{% endhighlight %}
+
+
+
+{% highlight text %}
+## Unit: milliseconds
+##       expr   min    lq  mean median    uq   max neval cld
+##    sf_tidy 29.91 32.40 33.01  32.73 32.84 37.15     5   c
+##      sf_dt 19.40 20.58 22.46  22.09 24.40 25.82     5  b 
+##  geos_tidy 21.14 23.18 23.65  23.44 25.07 25.40     5  b 
+##    geos_dt 12.19 14.55 15.46  15.82 16.63 18.08     5 a
+{% endhighlight %}
 
 [^1]: Use what you want, people.
 

@@ -52,7 +52,7 @@ package. You know, this one:
 
 {% highlight r %}
 library(sf)
-library(ggplot2)
+library(ggplot2); theme_set(theme_minimal())
 
 ## Grab the North Carolina shapefile that comes bundled with sf
 nc_shapefile = system.file("shape/nc.shp", package = "sf")

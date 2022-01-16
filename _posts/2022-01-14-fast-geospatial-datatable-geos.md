@@ -231,9 +231,9 @@ microbenchmark(
 
 {% highlight text %}
 ## Unit: microseconds
-##  expr    min   lq   mean median     uq    max neval cld
-##    sf 6585.6 6655 6780.3 6670.4 6756.7 7234.1     5   b
-##  geos  107.7  109  130.6  117.5  122.1  196.7     5  a
+##  expr    min     lq   mean median     uq    max neval cld
+##    sf 7226.3 7257.5 7371.7 7330.4 7396.1 7648.4     5   b
+##  geos  115.8  130.6  157.3  130.9  158.3  251.1     5  a
 {% endhighlight %}
 
 A couple of things worth noting. First, the **geos** centroid calculation
@@ -350,7 +350,7 @@ And here's how we could replicate our earlier "hemisphere" plot:
 {% highlight r %}
 nc_dt[,
       .(geo = geo |> geos_make_collection() |> geos_unary_union()),
-      .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))
+      by = .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))
       ][, geo] |>
   plot()
 {% endhighlight %}
@@ -401,7 +401,7 @@ microbenchmark(
   
   geos_dt = nc_dt[,
                   .(geo = geos_unary_union(geos_make_collection(geo))),
-                  .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))],
+                  by = .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))],
   
   times = 5
 )
@@ -411,11 +411,11 @@ microbenchmark(
 
 {% highlight text %}
 ## Unit: milliseconds
-##       expr   min    lq  mean median    uq    max neval  cld
-##    sf_tidy 97.38 97.51 99.09  98.08 98.69 103.77     5    d
-##      sf_dt 91.20 91.21 92.27  91.25 91.50  96.19     5   c 
-##  geos_tidy 14.85 15.03 15.13  15.05 15.34  15.35     5  b  
-##    geos_dt 11.38 11.40 11.48  11.43 11.45  11.75     5 a
+##       expr    min     lq   mean median     uq    max neval  cld
+##    sf_tidy 107.22 107.53 107.71 107.63 108.07 108.10     5    d
+##      sf_dt 100.89 101.18 101.98 101.23 103.04 103.55     5   c 
+##  geos_tidy  16.72  16.76  16.87  16.85  16.99  17.02     5  b  
+##    geos_dt  12.47  12.57  12.65  12.60  12.61  12.99     5 a
 {% endhighlight %}
 
 **Result:** A 10x speed-up. Nice! While the toy dataset that we're using here is 

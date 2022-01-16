@@ -269,7 +269,7 @@ And here's how we could replicate our earlier "hemisphere" plot:
 ```{r geos_union}
 nc_dt[,
       .(geo = geo |> geos_make_collection() |> geos_unary_union()),
-      .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))
+      by = .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))
       ][, geo] |>
   plot()
 ```
@@ -316,7 +316,7 @@ microbenchmark(
   
   geos_dt = nc_dt[,
                   .(geo = geos_unary_union(geos_make_collection(geo))),
-                  .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))],
+                  by = .(region = ifelse(CNTY_ID<=1980, 'high', 'low'))],
   
   times = 5
 )

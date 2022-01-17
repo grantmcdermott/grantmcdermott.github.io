@@ -158,13 +158,11 @@ work too. Speaking of performance...
 
 ## Speeding things up with geos
 
-_**Update (2022-02-16):** As Roger Bivand 
-[points out](https://twitter.com/RogerBivand/status/1482691924561698817) on 
-Twitter, I'm not 
-comparing apples with apples in these examples. **geos** assumes planar
-("flat") geometries, whereas **sf** does the more complicated task of 
-calculating spherical ("curved") geometries. I've added a postscript at bottom
-of the post that corrects for this discrepancy. Please take a look._
+_**Update (2022-02-16):** The benchmarks in this section are a bit unfair, since 
+**geos** assumes planar ("flat") geometries, whereas **sf**  assumes spherical 
+("curved") geometries by default. See the
+[postscript](#postscript-planar-vs-spherical) at the bottom of this post, which 
+corrects for this discrepancy._
 
 As great as **sf** is, even its most ardent proponents will admit that it can
 drag a bit when it comes to big geospatial tasks. I don't want to imply that
@@ -355,14 +353,18 @@ these tools at our disposal.
 
 _Note: This section was added on 2021-01-16._
 
-As noted earlier, the above benchmarks aren't comparing apples to apples, since
+As Roger Bivand 
+[points out](https://twitter.com/RogerBivand/status/1482691924561698817) on 
+Twitter, I'm not truly comparing apples with apples in the above benchmarks. 
 **geos** assumes planar ("flat") geometries, whereas **sf** does the more 
 complicated task of calculating spherical ("curved") geometries. More on that
 [here](https://r-spatial.github.io/sf/articles/sf7.html) if you are interested.
-Below I repeat the same benchmarks, but with **sf** switched to using the
-same planar system. The upshot is that **geos** is still faster, but the gap
-narrows considerably. Again, we're also dealing with a very small dataset
-so I recommend benchmarking on your own datasets to avoid misleading overhead.
+Below I repeat these same benchmarks, but with **sf** switched to the same
+planar backend. The upshot is that **geos** is still faster, but the gap narrows
+considerably. A reminder that we're also dealing with a very small dataset, so I
+recommend benchmarking on your own datasets to avoid the influence of misleading
+overhead. But I stand by my comment that these differences persist at scale, 
+based on my own experiences and testing.
 
 ```{r s2_false, warning=FALSE, message=FALSE}
 ## Turn off sf's spherical ("S2") backend

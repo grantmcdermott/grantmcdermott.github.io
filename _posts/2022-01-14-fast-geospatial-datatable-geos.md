@@ -196,13 +196,11 @@ work too. Speaking of performance...
 
 ## Speeding things up with geos
 
-_**Update (2022-02-16):** As Roger Bivand 
-[points out](https://twitter.com/RogerBivand/status/1482691924561698817) on 
-Twitter, I'm not 
-comparing apples with apples in these examples. **geos** assumes planar
-("flat") geometries, whereas **sf** does the more complicated task of 
-calculating spherical ("curved") geometries. I've added a postscript at bottom
-of the post that corrects for this discrepancy. Please take a look._
+_**Update (2022-02-16):** The benchmarks in this section are a bit unfair, since 
+**geos** assumes planar ("flat") geometries, whereas **sf**  assumes spherical 
+("curved") geometries by default. See the
+[postscript](#postscript-planar-vs-spherical) at the bottom of this post, which 
+corrects for this discrepancy._
 
 As great as **sf** is, even its most ardent proponents will admit that it can
 drag a bit when it comes to big geospatial tasks. I don't want to imply that
@@ -240,8 +238,8 @@ microbenchmark(
 {% highlight text %}
 ## Unit: microseconds
 ##  expr    min     lq   mean median     uq    max neval cld
-##    sf 6761.2 6922.5 7079.6 7117.1 7216.5 7380.8     5   b
-##  geos  104.9  124.3  138.9  130.2  142.2  192.6     5  a
+##    sf 6789.2 6919.0 7155.8 7289.0 7364.3 7417.6     5   b
+##  geos  105.1  121.1  132.3  123.2  126.4  185.7     5  a
 {% endhighlight %}
 
 A couple of things worth noting. First, the **geos** centroid calculation
@@ -420,10 +418,10 @@ microbenchmark(
 {% highlight text %}
 ## Unit: milliseconds
 ##       expr    min     lq   mean median     uq    max neval  cld
-##    sf_tidy 104.89 105.21 106.04 105.23 107.06 107.83     5    d
-##      sf_dt  98.14  98.25  98.38  98.49  98.51  98.52     5   c 
-##  geos_tidy  16.20  16.22  16.35  16.23  16.47  16.66     5  b  
-##    geos_dt  11.71  11.76  12.07  12.04  12.41  12.43     5 a
+##    sf_tidy 105.02 105.11 105.59 105.68 106.04 106.10     5    d
+##      sf_dt  98.38  98.42  99.46  98.63  98.79 103.07     5   c 
+##  geos_tidy  15.73  16.07  16.75  16.29  16.71  18.97     5  b  
+##    geos_dt  12.25  12.26  12.43  12.31  12.36  12.94     5 a
 {% endhighlight %}
 
 **Result:** A 10x speed-up. Nice! While the toy dataset that we're using here is 
@@ -452,14 +450,18 @@ these tools at our disposal.
 
 _Note: This section was added on 2021-01-16._
 
-As noted earlier, the above benchmarks aren't comparing apples to apples, since
+As Roger Bivand 
+[points out](https://twitter.com/RogerBivand/status/1482691924561698817) on 
+Twitter, I'm not truly comparing apples with apples in the above benchmarks. 
 **geos** assumes planar ("flat") geometries, whereas **sf** does the more 
 complicated task of calculating spherical ("curved") geometries. More on that
 [here](https://r-spatial.github.io/sf/articles/sf7.html) if you are interested.
-Below I repeat the same benchmarks, but with **sf** switched to using the
-same planar system. The upshot is that **geos** is still faster, but the gap
-narrows considerably. Again, we're also dealing with a very small dataset
-so I recommend benchmarking on your own datasets to avoid misleading overhead.
+Below I repeat these same benchmarks, but with **sf** switched to the same
+planar backend. The upshot is that **geos** is still faster, but the gap narrows
+considerably. A reminder that we're also dealing with a very small dataset, so I
+recommend benchmarking on your own datasets to avoid the influence of misleading
+overhead. But I stand by my comment that these differences persist at scale, 
+based on my own experiences and testing.
 
 
 {% highlight r %}
@@ -481,8 +483,8 @@ microbenchmark(
 {% highlight text %}
 ## Unit: microseconds
 ##  expr    min     lq   mean median     uq    max neval cld
-##    sf 2565.9 2581.1 2867.6 2581.4 3240.9 3368.5     5   b
-##  geos  108.8  120.9  170.3  132.2  135.8  353.7     5  a
+##    sf 2436.0 2521.1 2641.2 2530.5 2539.6 3179.0     5   b
+##  geos  105.5  106.2  125.3  120.1  136.8  157.7     5  a
 {% endhighlight %}
 
 
@@ -511,10 +513,10 @@ microbenchmark(
 {% highlight text %}
 ## Unit: milliseconds
 ##       expr   min    lq  mean median    uq   max neval cld
-##    sf_tidy 29.91 32.40 33.01  32.73 32.84 37.15     5   c
-##      sf_dt 19.40 20.58 22.46  22.09 24.40 25.82     5  b 
-##  geos_tidy 21.14 23.18 23.65  23.44 25.07 25.40     5  b 
-##    geos_dt 12.19 14.55 15.46  15.82 16.63 18.08     5 a
+##    sf_tidy 26.20 30.53 32.46  31.70 33.77 40.09     5   c
+##      sf_dt 22.38 23.99 27.40  25.37 31.35 33.92     5  bc
+##  geos_tidy 16.21 19.91 23.02  23.48 27.32 28.20     5  b 
+##    geos_dt 11.88 13.00 14.44  14.51 16.12 16.67     5 a
 {% endhighlight %}
 
 [^1]: Use what you want, people.

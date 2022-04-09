@@ -13,6 +13,8 @@ Here are some packages that I have written.
 - [**parttree**](https://grantmcdermott.com/parttree) A package for visualizing decision tree partitions in R with ggplot2. Useful as a pedagogical tool, where learners are trying to understand how a decision tree partitioned the data.
 - [**ritest**](https://www.grantmcdermott.com/ritest) Conduct randomization inference on R model objects. A port of the `-ritest-` Stata routine by Simon Heß.
 
+I am a (co-)maintainer of various websites and webpages that collectively aim to improve the accessibility of data science software. These include the [CRAN Econometrics Task View](https://cran.r-project.org/web/views/Econometrics.html), Library of Statistical Techniques ([LOST](https://lost-stats.github.io/)), and [Stata2R](https://stata2r.github.io/).
+
 In addition to the above, I am a fairly active contributor to various open-source (mostly R) libraries. You can take a look at my [GitHub page](https://github.com/grantmcdermott) and I have also posted a fair number of [gists](https://gist.github.com/grantmcdermott) (often used to answer a question that someone asked me on Twitter). A random selection of other guides, scripts, and tools:
 
 - [**arch-tips**](https://github.com/grantmcdermott/arch-tips) A fairly detailed changelog and collection of customization tips for Arch Linux.

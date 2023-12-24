@@ -21,7 +21,7 @@ url: https://grantmcdermott.com
 
 # repository: grantmcdermott/grantmcdermott.github.io
 github: [metadata]
-email: grantmcd@uoregon.edu
+email: gmcd@amazon.com
 description: >- # this means to ignore newlines in the text below
   Grant McDermott's personal website.
 twitter_username: grant_mcdermott
@@ -66,15 +66,15 @@ author:
   name   : "Grant McDermott"
   avatar : "/assets/images/mcdermott400sq-s.jpg"
   bio    : 
-    Assistant Prof. at the University of Oregon. 
-    Interested in environmental economics & data science.
+    Principal Economist at Amazon. 
+    Interested in environmental economics, tech & data science.
   links:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://grantmcdermott.com"
     - label: "Email"
       icon: "fas fa-fw fa-envelope"
-      url: "mailto:grantmcd@uoregon.edu"
+      url: "mailto:gmcd@amazon.com"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/grant_mcdermott"

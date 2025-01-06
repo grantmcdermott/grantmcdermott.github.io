@@ -1,0 +1,30 @@
+project:
+  type: website
+website:
+  site-url: "https://grantmcdermott.com"
+  title: "Grant R. McDermott"
+  navbar:
+    left:
+      - text: Home
+        href: index.qmd
+      - research.qmd
+      - teaching.qmd
+      - text: Vita
+        href: https://grantmcdermott.com/vita/mcdermott-vita.pdf
+      - software.qmd
+      - blog.qmd
+    right:
+      - icon: github
+        href: https://github.com/grantmcdermott
+      - text: "{{< iconify fa6-brands:bluesky >}}"
+        href: https://bsky.app/profile/gmcd.bsky.social
+  favicon: favicon.ico
+  google-analytics: "UA-76482472-1"
+  # cookie-consent: true
+  open-graph: true
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+execute:
+  freeze: auto

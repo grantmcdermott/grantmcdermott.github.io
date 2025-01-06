@@ -1,0 +1,106 @@
+---
+title: "Centralised versus decentralised "
+description: "What is the energy future of sub-Saharan Africa?"
+date: '2015-06-17'
+slug: centralized-versus-decentralized
+toc: true
+categories: [energy, media]
+---
+
+I was quoted in a recent article about bringing power to
+sub-Saharan Africa: "[**How do you bring electricity to 620 million
+people?**](http://ensia.com/features/how-do-you-bring-electricity-to-620-million-people/)"
+The journalist, Tom Jackson, did a good job of summarising my position
+(although I am mildly annoyed that he didn't send me a copy before
+publication; something I asked for). That being said, some additional
+context never hurts and so I thought I'd publish my full email response
+to his questions.
+
+Two minor footnotes: First, this was framed as a "centralised versus
+decentralised" debate. There are of course many variations on the
+decentralisation theme. (Do you really mean distributed generation,
+rather than transmission? Does this include microgrids? Etc.) Given the
+way the questions were asked, I simply took it to mean the absence of a
+centralised electricity grid. Second, when I talk about first-best and
+second-best alternatives, I don't quite mean in the [strict economic
+sense](https://en.wikipedia.org/wiki/Theory_of_the_second_best) of
+optimality conditions. Rather, I am trying to convey the idea that one
+solution is only really better when the other is unavailable due to
+outside factors.
+
+**Why are grids still vital? Why is a functioning electricity grid
+necessary for economic growth?**
+
+These two questions are more or less the same, so I'll take them
+together. Large, centralised grids constitute the most efficient and
+cost-effective way of delivering (and consuming) electricity in modern
+economies. Not only are decentralised options substantially
+[more expensive and (generally) less
+reliable](https://stickmanscorral.blogspot.com/2013/10/why-functioning-electricity-grid-is.html),
+there's no intrinsic reason to believe that they will be better at
+[delivering a clean energy
+future.](https://energyathaas.wordpress.com/2015/05/04/is-the-future-of-electricity-generation-really-distributed/)
+
+**Is the centralised argument being lost in places like SA where the
+grid is so poor and not being improved?**
+
+I wouldn't say that South Africa's present electricity woes are the
+result of grid failure. Rather, the problem is primarily one of
+generation capacity and government mismanagement. On that note, the grid
+is the one component of the electricity system that is
+[best thought of as a "natural
+monopoly"](http://grantmcdermott.github.io/2012/11/18/natural-monopoly-electricity-sector).
+(The other components of the electricity value chain -- i.e. generation
+and distribution -- should then be left to competitive forces.) Your
+question highlights an irony. Eskom's mismanagement on the generation
+side (huge overspends and delays on the Medupi and Kusile power
+stations, etc.) are undermining confidence in its ability to manage a
+centralised grid, the one aspect that government can legitimately claim
+needs to be operated as a regulated monopoly.
+
+That all being said, [Eskom *is* falling
+behind](http://www.dailymaverick.co.za/article/2014-10-16-survivor-eskom-edition-in-two-easy-episodes/#.VWZj_E_ONBe)
+the required investment goals for maintaining an adequate grid
+infrastructure into the future. A deficient grid network has also
+constrained economic growth in many other developing countries, from
+Nigeria to India. And, yet, this is not to say that the decentralised
+alternative offers an intrinsically superior solution. A grid system
+remains the first-best option. Decentralised solutions are really a
+second-best option in the absence of the former. The distinction is
+crucial.
+
+**What role for de-centralised solutions?**
+
+I think that decentralised solutions will remain a second-best, niche
+alternative for the next few decades. There are several things that
+cause me to take this position, of which intermittency and local storage
+are probably the most pronounced. Now, there do happen to be a number of
+exciting developments on the storage issue, but nothing that I would
+expect to fundamentally change the equation. More to the point, I
+believe that the resilience of a decentralised generation system will
+fundamentally *require* a functioning grid. The increased intermittency
+and smaller scale of decentralised power production will necessitate
+excellent access to similar, small-scale generation in other regions.
+This can only be achieved through a robust grid network. (An example may
+help to make my point: Germany's much-fêted
+*Energiewende* was supposed to involve a fundamental shift towards the
+decentralised paradigm. What we've seen in practice, however, is that
+the [Germans are investing
+hugely](http://uk.reuters.com/article/2015/02/10/norway-germany-cable-idUKL5N0VK2PY20150210)
+in extending their inter-regional grid capacities to
+places like Norway, whose [hydropower resources
+offer](http://www.sciencedirect.com/science/article/pii/S096014811400072X)
+[the most cost-effective
+means](http://sciencenordic.com/norway-europe%E2%80%99s-cheapest-%E2%80%9Cbattery%E2%80%9D)
+of accommodating the intermittency of wind and solar.)
+ Similarly, the parallels that people inevitably draw between a
+dentralised electricity system and the communication sector (i.e. where
+fixed-line telephones were leap-frogged by cell phones) are misplaced.
+Beyond [various other
+differences](https://energyathaas.wordpress.com/2014/11/24/why-the-phrase-energy-leapfrogging-is-misleading/),
+cell phones networks are fundamentally centralised in nature: Cell phone
+towers are the grid equivalent of the modern-day communications sector.
+
+I should probably conclude by saying that I fully support
+experimentation with decentralised systems. I just wouldn't want to put
+my own money on it.

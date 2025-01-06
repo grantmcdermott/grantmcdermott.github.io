@@ -1,3 +1,3 @@
 # My website
 
-Built using Quarto
+Built using Quarto.

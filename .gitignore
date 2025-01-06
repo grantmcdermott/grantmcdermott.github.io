@@ -13,3 +13,10 @@ Gemfile.lock
 vendor/
 .Rproj.user
 *.Renviron
+
+# Quarto scaffolding
+/.quarto/
+/_site/
+
+# knitr and R markdown default cache directories
+**/*/*_cache/

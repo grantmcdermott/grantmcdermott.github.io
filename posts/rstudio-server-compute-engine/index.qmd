@@ -1,0 +1,11 @@
+---
+title: "RStudio Server on Google Compute Engine"
+description: "Say hello to cloud computing"
+date: "2017-05-30"
+categories: [data science, R, cloud]
+---
+
+**Update:** I've converted this blog post to a more detailed, two-part lecture
+in my
+_Data Science for Economists_](https://github.com/uo-ec607/lectures?tab=readme-ov-file#lectures)
+course. Please click on the link for this updated version.

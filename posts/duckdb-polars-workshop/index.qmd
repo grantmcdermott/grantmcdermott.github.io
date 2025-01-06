@@ -1,0 +1,42 @@
+---
+title: "DuckDB + Polars workshop"
+description: "Big data backends for R and Python"
+date: '2024-04-10'
+# toc: true
+categories: [R, Python, SQL, data science, workshops]
+---
+
+On May 22, I'll be be giving an online workshop entitled
+**(Pretty) big data wrangling with DuckDB and Polars**.
+
+Here is the description:
+
+> This workshop will introduce you to [DuckDB](https://duckdb.org/) and
+[Polars](https://github.com/pola-rs/polars), two data wrangling libraries at the
+frontier of high-performance computation. (See
+[benchmarks](https://duckdblabs.github.io/db-benchmark/).) In addition to being
+extremely fast and portable, both DuckDB and Polars provide user-friendly
+implementations across multiple languages. This makes them very well suited to
+production and applied research settings, without the overhead of tools like
+Spark. We will provide a variety of real-life examples in both R and Python,
+with the aim of getting participants up and running as quickly as possible. We
+will learn how wrangle datasets extending over several hundred million
+observations in a matter of seconds or less, using only our laptops. And we will
+learn how to scale to even larger contexts where the data exceeds our computers’
+RAM capacity. Finally, we will also discuss some complementary tools and how
+these can be integrated for an efficient end-to-end workflow (data I/O ->
+wrangling -> analysis).
+
+The attendance fee is 20 EUR/USD and all proceeds will be going towards aid
+organizations in Ukraine. Please see the
+[WFU website](https://sites.google.com/view/dariia-mykhailyshyna/main/r-workshops-for-ukraine#h.xc2x33lbfxln)
+for details.
+
+I'm pretty psyched about these tools and use them all the time in my own work.
+Please consider joining or sponsoring someone else. I promise to make it
+worthwile and you'll be contributing to a good cause at the same time.
+
+P.S. Workshop materials will be made available here:
+
+- Website: <https://grantmcdermott.com/duckdb-polars>
+- GitHub: <https://github.com/grantmcdermott/duckdb-polars>

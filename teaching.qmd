@@ -1,0 +1,22 @@
+---
+title: Teaching
+toc: true
+---
+
+Unless otherwise noted, all courses were taught at the University of Oregon's Department of Economics between 2017 and 2022.
+
+### Workshops
+
+*(Pretty) big data wrangling with DuckDB and Polars*, May 2024. ([Website](https://grantmcdermott.com/duckdb-polars). [GitHub](https://github.com/grantmcdermott/duckdb-polars).)
+
+### Graduate
+
+*Data Science for Economists*, EC 607. ([Syllabus](https://github.com/uo-ec607/syllabus/blob/master/syllabus.pdf). [Lectures](https://github.com/uo-ec607/lectures).)
+
+*Big Data in Economics*, EC 510. ([Syllabus](https://github.com/uo-ec510-2020-spring/syllabus/blob/master/syllabus.pdf). [Lectures](https://github.com/uo-ec510-2020-spring/lectures).)
+
+### Undergraduate
+
+*Environmental Economics*, EC 434. ([Syllabus](%7B%7B%20site.url%20%7D%7D/assets/docs/teaching/ec434-syllabus.pdf).)
+
+*Intermediate Microeconomic Theory*, EC 311. ([Syllabus](%7B%7B%20site.url%20%7D%7D/assets/docs/teaching/ec311-syllabus.pdf).)

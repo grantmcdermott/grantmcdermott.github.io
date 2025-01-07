@@ -1,5 +1,5 @@
 ---
-title: "Hello Quarto"
+title: "Hello, Quarto"
 description: "Finally migrating from Jekyll"
 date: "2025-01-06"
 toc: false
@@ -20,15 +20,15 @@ frameworks once a decade. Speaking of which...
 
 Migrating was more painful than I'd anticipated. Not _terrible_, but not
 seamless either. The main paint points involved manually converting my old blog
-posts into the requisite Quarto `posts/<slug>/index.qmd` format (and fixing
-hyperlinks), and then getting the GitHub Actions CI deployment to run properly.
-RE: the former, I've decided to only pull in the more recent blog posts.
-("Recent" being a relative concept, since I've hardly any new posts from the
-last few years; partly due to Jekyll headaches.) Perhaps I'll find the strength
-to convert those early posts too, although I doubt that anyone really needs to
-hear the ramblings of an early 2010s graduate student at this point. OTOH I'm
-reliably informed that blogging is making a comeback, so who knows? RE: the
-latter, the main issue appears to have been an existing `gh-pages` cache. My
+posts into the requisite Quarto `posts/<slug>/index.qmd` format (plus re-running
+code and fixing hyperlinks), and then getting the GitHub Actions CI deployment
+to run properly.  RE: the former, I've decided to only pull in the more recent
+blog posts. ("Recent" being a relative concept, since I've hardly any new posts
+from the last few years; partly due to Jekyll headaches.) Perhaps I'll find the
+strength to convert those early posts too, although I doubt that anyone really
+needs to hear the ramblings of an early 2010s graduate student at this point.
+OTOH I'm reliably informed that blogging is making a comeback, so who knows? RE:
+the latter, the main issue appears to have been an existing `gh-pages` cache. My
 problem was similar to
 [this one](https://github.com/quarto-dev/quarto-cli/discussions/7460), although I
 finally fixed it by deleting my `gh-pages` branch and old deployment point, and

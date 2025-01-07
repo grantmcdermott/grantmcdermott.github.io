@@ -7,16 +7,16 @@ categories:
   - media
 ---
 
-If you're reading this, it means that I successfully managed to migrate my
-website over to Quarto. The previous Jekyll-based framework had served me well
-for almost a decade, but the wheels were starting to come off (or, at least
+If you're reading this, it means that I successfully migrated my website over to
+[Quarto](https://quarto.org/). The previous Jekyll-based framework had served me
+well for almost a decade, but the wheels were starting to come off (or, at least
 seize up). Bizantine Ruby version requirements and incompatible security
-patches? Time to move on.  successfully
+patches? Time to move on. 
 
-I've been using [Quarto](https://quarto.org/) for many of my _ad hoc_ projects
-and it's a pleasure to use. More importantly, it seems to have enough momentum
-behind that it's going to be around for a long time yet. I can only muster the
-energy to change website frameworks once a decade. Speaking of which...
+I've been using Quarto for many of my _ad hoc_ projects and it's a pleasure to
+use. More importantly, it seems to have enough momentum behind that it's going
+to be around for a long time yet. I can only muster the energy to change website
+frameworks once a decade. Speaking of which...
 
 Migrating was more painful than I'd anticipated. Not _terrible_, but not
 seamless either. The main paint points involved manually converting my old blog

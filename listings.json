@@ -1,0 +1,25 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/duckdb-polars-workshop/index.html",
+      "/posts/fast-geospatial-datatable-geos/index.html",
+      "/posts/efficient-simulations-r-base-remix/index.html",
+      "/posts/efficient-simulations-r/index.html",
+      "/posts/better-way-adjust-ses/index.html",
+      "/posts/even-more-reshape/index.html",
+      "/posts/reshape-benchmarks/index.html",
+      "/posts/interaction-effects/index.html",
+      "/posts/quackchat/index.html",
+      "/posts/recent-radio-interviews/index.html",
+      "/posts/blue-paradox-pnas/index.html",
+      "/posts/science-bycatch/index.html",
+      "/posts/aere-gfw-gee/index.html",
+      "/posts/rstudio-server-compute-engine/index.html",
+      "/posts/quick-thoughts-brexit/index.html",
+      "/posts/weak-zar-trade-deficit/index.html",
+      "/posts/centralised-versus-decentralised/index.html",
+      "/posts/climate-capers-at-cato/index.html"
+    ]
+  }
+]

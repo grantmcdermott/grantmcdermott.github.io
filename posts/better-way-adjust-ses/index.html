@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Grant McDermott">
+<meta name="dcterms.date" content="2020-10-19">
+<meta name="description" content="On the fly, for the win.">
+
+<title>A better way to adjust your standard errors – Grant R. McDermott</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-76482472-1', 'auto');
+
+ga('send', {
+  hitType: 'pageview',
+  'anonymizeIp': true,
+});
+</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="A better way to adjust your standard errors – Grant R. McDermott">
+<meta property="og:description" content="On the fly, for the win.">
+<meta property="og:site_name" content="Grant R. McDermott">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Grant R. McDermott</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../research.html"> 
+<span class="menu-text">Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../teaching.html"> 
+<span class="menu-text">Teaching</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://grantmcdermott.com/vita/mcdermott-vita.pdf"> 
+<span class="menu-text">Vita</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../software.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/grantmcdermott"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app/profile/gmcd.bsky.social"> 
+<span class="menu-text"><iconify-icon role="img" inline="" icon="fa6-brands:bluesky" aria-label="Icon bluesky from fa6-brands Iconify.design set." title="Icon bluesky from fa6-brands Iconify.design set."></iconify-icon></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">A better way to adjust your standard errors</h1>
+                  <div>
+        <div class="description">
+          On the fly, for the win.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Stata</div>
+                <div class="quarto-category">econometrics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Grant McDermott </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 19, 2020</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#example-1-sandwich" id="toc-example-1-sandwich" class="nav-link" data-scroll-target="#example-1-sandwich">Example 1: <strong>sandwich</strong></a></li>
+  <li><a href="#example-2-fixest" id="toc-example-2-fixest" class="nav-link" data-scroll-target="#example-2-fixest">Example 2: fixest</a>
+  <ul class="collapse">
+  <li><a href="#benchmarking" id="toc-benchmarking" class="nav-link" data-scroll-target="#benchmarking">Benchmarking</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices">Appendices</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Flight data download and prep</a></li>
+  <li><a href="#benchmark-other" id="toc-benchmark-other" class="nav-link" data-scroll-target="#benchmark-other">Benchmarking code for other methods</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>Consider the following scenario:</p>
+<p><em>A researcher has to adjust the standard errors (SEs) for a regression model that she has already run. Maybe this is to appease a journal referee. Or, maybe it’s because she is busy iterating through the early stages of a project. She’s still getting to grips with her data and wants to understand how sensitive her results are to different modeling assumptions.</em></p>
+<p>Does that sound familiar? I believe it should, because something like that has happened to me on every single one of my empirical projects. I end up estimating multiple versions of the <em>same</em> underlying regression model — even putting them side-by-side in a regression table, where the only difference across columns is slight tweaks to the way that the SEs were calculated.</p>
+<p>Confronted by this task, I’m willing to bet that most people do the following:</p>
+<ul>
+<li>Run their model under one SE specification (e.g.&nbsp;iid).</li>
+<li>Re-run their model a second time under another SE specification (e.g.&nbsp;HC robust).</li>
+<li>Re-run their model a third time under yet another SE specification (e.g.&nbsp;clustered).</li>
+<li>Etc.</li>
+</ul>
+<p>While this is fine as far as it goes, I’m here to tell you that there’s a better way. Rather than re-running your model multiple times, I’m going to advocate that you run your model only <strong>once</strong> and then adjust SEs on the backend as needed. This approach — what I’ll call “on-the-fly” SE adjustment — is not only safer, it’s much faster too.</p>
+<p>Let’s see some examples.</p>
+</section>
+<section id="example-1-sandwich" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-sandwich">Example 1: <strong>sandwich</strong></h2>
+<p>To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the <a href="http://sandwich.r-forge.r-project.org/"><strong>sandwich</strong></a> package (<a href="https://twitter.com/AchimZeileis"><span class="citation" data-cites="Achim">@Achim</span> Zeilles</a> et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators — and thus SEs — for a wide array of model objects and classes. At the same time, <strong>sandwich</strong> just recently got its <a href="http://sandwich.r-forge.r-project.org/">own website</a> to coincide with some cool new features. So it’s worth exploring what that means for a modern empirical workflow. In the code that follows, I’m going to borrow liberally from the <a href="http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1">introductory vignette</a>. But I’ll also tack on some additional tips and tricks that I use in my own workflow. (<strong>UPDATE (2020-08-23):</strong> The vignette has now been <a href="http://sandwich.r-forge.r-project.org/news/#sandwich-3-0-1-unreleased">updated</a> to include some of the suggestions from this post. Thanks Achim!)</p>
+<p>Let’s start by running a simple linear regression on some sample data; namely, the “PetersenCL” dataset that comes bundled with the package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">'PetersenCL'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> PetersenCL)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x, data = PetersenCL)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-6.7611 -1.3680 -0.0166  1.3387  8.6779 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  0.02968    0.02836   1.047    0.295    
+x            1.03483    0.02858  36.204   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.005 on 4998 degrees of freedom
+Multiple R-squared:  0.2078,    Adjusted R-squared:  0.2076 
+F-statistic:  1311 on 1 and 4998 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<p>Our simple model above assumes that the errors are <a href="https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables">iid</a>. But we can adjust these SEs by calling one of the many alternate VCOV estimators provided by <strong>sandwich</strong>. For example, to get a robust, or heteroscedasticity-consistent (“HC3”), VCOV matrix we’d use:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcovHC</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              (Intercept)             x
+(Intercept)  8.046458e-04 -1.155095e-05
+x           -1.155095e-05  8.072475e-04</code></pre>
+</div>
+</div>
+<p>To actually substitute the robust VCOV into our original model — so that we can print it in a nice regression table and perform statistical inference — we pair <strong>sandwich</strong> with its companion package, <strong>lmtest</strong>. The workhorse function here is <code>lmtest::coeftest</code> and, as we can see, this yields an object that is similar to a standard model summary in R.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(m, <span class="at">vcov =</span> vcovHC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+t test of coefficients:
+
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 0.029680   0.028366  1.0463   0.2955    
+x           1.034833   0.028412 36.4223   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>To recap: We ran our base <code>m</code> model just the once and then adjusted for robust SEs on the backend using <strong>sandwich</strong>/<strong>coeftest</strong>.</p>
+<p>Now, I’ll admit that the benefits of this workflow aren’t super clear from my simple example yet. Though, we did cut down on copying-and-pasting of duplicate code and this automatically helps to minimize user error. (Remember: <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>!) But we can easily scale things up to get a better sense of its power. For instance, we could imagine calling a whole host of alternate VCOVs to our base model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate the VCOV (SEs) under a range of different assumptions</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vc <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Standard"</span>              <span class="ot">=</span> <span class="fu">vcov</span>(m),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sandwich (basic)"</span>      <span class="ot">=</span> <span class="fu">sandwich</span>(m),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Clustered"</span>             <span class="ot">=</span> <span class="fu">vcovCL</span>(m, <span class="at">cluster =</span> <span class="sc">~</span> firm),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Clustered (two-way)"</span>   <span class="ot">=</span> <span class="fu">vcovCL</span>(m, <span class="at">cluster =</span> <span class="sc">~</span> firm <span class="sc">+</span> year),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"HC3"</span>                   <span class="ot">=</span> <span class="fu">vcovHC</span>(m),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Andrews' kernel HAC"</span>   <span class="ot">=</span> <span class="fu">kernHAC</span>(m),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Newey-West"</span>            <span class="ot">=</span> <span class="fu">NeweyWest</span>(m),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bootstrap"</span>             <span class="ot">=</span> <span class="fu">vcovBS</span>(m),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bootstrap (clustered)"</span> <span class="ot">=</span> <span class="fu">vcovBS</span>(m, <span class="at">cluster =</span> <span class="sc">~</span> firm)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You could, of course, print the <code>vc</code> list to screen now if you so wanted. But I want to go one small step further by showing you how easy it is to create a regression table that encapsulates all of these different models. In the next code chunk, I’m going to create a list of models by passing <code>vc</code> to an <code>lapply()</code> call.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> I’m then going to generate a regression table using <code>msummary()</code> from the excellent <a href="https://vincentarelbundock.github.io/modelsummary"><strong>modelsummary</strong></a> package (<a href="https://twitter.com/VincentAB"><span class="citation" data-cites="Vincent">@Vincent</span> Arel-Bundock</a>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary) <span class="do">## For great-looking regression tables (among other things)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Adjust our model SEs on-the-fly</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>lm_mods <span class="ot">=</span> <span class="fu">lapply</span>(vc, <span class="cf">function</span>(x) <span class="fu">coeftest</span>(m, <span class="at">vcov =</span> x))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Print the regression table</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(lm_mods)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_plf46hx8sqkqqoffwj0v(i, j, css_id) {
+          var table = document.getElementById("tinytable_plf46hx8sqkqqoffwj0v");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_plf46hx8sqkqqoffwj0v');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_plf46hx8sqkqqoffwj0v(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_plf46hx8sqkqqoffwj0v");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 7, j: 1 }, { i: 7, j: 8 }, { i: 7, j: 6 }, { i: 7, j: 3 }, { i: 7, j: 2 }, { i: 7, j: 7 }, { i: 7, j: 5 }, { i: 7, j: 4 }, { i: 7, j: 9 },  ], css_id: 'tinytable_css_w4dtb01mo8yi6987v7c1',}, 
+          { positions: [ { i: 4, j: 0 },  ], css_id: 'tinytable_css_w0nip72do6zsselzv4ts',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_r207j4pwlsl1jduqim4q',}, 
+          { positions: [ { i: 0, j: 1 }, { i: 0, j: 6 }, { i: 0, j: 5 }, { i: 0, j: 3 }, { i: 0, j: 8 }, { i: 0, j: 7 }, { i: 0, j: 4 }, { i: 0, j: 2 }, { i: 0, j: 9 },  ], css_id: 'tinytable_css_q1yvepq6892u9tuad1b7',}, 
+          { positions: [ { i: 2, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 2 }, { i: 1, j: 5 }, { i: 5, j: 2 }, { i: 1, j: 1 }, { i: 1, j: 6 }, { i: 3, j: 1 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 6, j: 1 }, { i: 6, j: 6 }, { i: 5, j: 3 }, { i: 1, j: 2 }, { i: 1, j: 7 }, { i: 3, j: 2 }, { i: 1, j: 4 }, { i: 2, j: 4 }, { i: 6, j: 2 }, { i: 6, j: 7 }, { i: 5, j: 4 }, { i: 6, j: 4 }, { i: 1, j: 8 }, { i: 3, j: 3 }, { i: 3, j: 8 }, { i: 2, j: 5 }, { i: 6, j: 3 }, { i: 6, j: 8 }, { i: 5, j: 5 }, { i: 6, j: 5 }, { i: 1, j: 9 }, { i: 3, j: 4 }, { i: 3, j: 9 }, { i: 2, j: 6 }, { i: 3, j: 6 }, { i: 6, j: 9 }, { i: 5, j: 6 }, { i: 2, j: 7 }, { i: 3, j: 7 }, { i: 3, j: 5 }, { i: 5, j: 7 }, { i: 2, j: 8 }, { i: 5, j: 9 }, { i: 5, j: 8 }, { i: 2, j: 9 },  ], css_id: 'tinytable_css_q08iazhxbqupj2ocg4mw',}, 
+          { positions: [ { i: 4, j: 8 }, { i: 4, j: 9 }, { i: 4, j: 7 }, { i: 4, j: 5 }, { i: 4, j: 3 }, { i: 4, j: 2 }, { i: 4, j: 6 }, { i: 4, j: 4 }, { i: 4, j: 1 },  ], css_id: 'tinytable_css_miz6vqx5twcd5hb4ayw0',}, 
+          { positions: [ { i: 7, j: 0 },  ], css_id: 'tinytable_css_ig3blizzpen97jp2akic',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_2866lgp746plb3ipn84n',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_plf46hx8sqkqqoffwj0v(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_w4dtb01mo8yi6987v7c1, .table th.tinytable_css_w4dtb01mo8yi6987v7c1 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_w0nip72do6zsselzv4ts, .table th.tinytable_css_w0nip72do6zsselzv4ts { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_r207j4pwlsl1jduqim4q, .table th.tinytable_css_r207j4pwlsl1jduqim4q { text-align: left; }
+      .table td.tinytable_css_q1yvepq6892u9tuad1b7, .table th.tinytable_css_q1yvepq6892u9tuad1b7 { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_q08iazhxbqupj2ocg4mw, .table th.tinytable_css_q08iazhxbqupj2ocg4mw { text-align: center; }
+      .table td.tinytable_css_miz6vqx5twcd5hb4ayw0, .table th.tinytable_css_miz6vqx5twcd5hb4ayw0 { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_ig3blizzpen97jp2akic, .table th.tinytable_css_ig3blizzpen97jp2akic { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_2866lgp746plb3ipn84n, .table th.tinytable_css_2866lgp746plb3ipn84n { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_plf46hx8sqkqqoffwj0v" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Standard</th>
+                <th scope="col">Sandwich (basic)</th>
+                <th scope="col">Clustered</th>
+                <th scope="col">Clustered (two-way)</th>
+                <th scope="col">HC3</th>
+                <th scope="col">Andrews' kernel HAC</th>
+                <th scope="col">Newey-West</th>
+                <th scope="col">Bootstrap</th>
+                <th scope="col">Bootstrap (clustered)</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>(Intercept)</td>
+                  <td>0.030  </td>
+                  <td>0.030  </td>
+                  <td>0.030  </td>
+                  <td>0.030  </td>
+                  <td>0.030  </td>
+                  <td>0.030  </td>
+                  <td>0.030  </td>
+                  <td>0.030  </td>
+                  <td>0.030  </td>
+                </tr>
+                <tr>
+                  <td>           </td>
+                  <td>(0.028)</td>
+                  <td>(0.028)</td>
+                  <td>(0.067)</td>
+                  <td>(0.065)</td>
+                  <td>(0.028)</td>
+                  <td>(0.044)</td>
+                  <td>(0.066)</td>
+                  <td>(0.031)</td>
+                  <td>(0.075)</td>
+                </tr>
+                <tr>
+                  <td>x          </td>
+                  <td>1.035  </td>
+                  <td>1.035  </td>
+                  <td>1.035  </td>
+                  <td>1.035  </td>
+                  <td>1.035  </td>
+                  <td>1.035  </td>
+                  <td>1.035  </td>
+                  <td>1.035  </td>
+                  <td>1.035  </td>
+                </tr>
+                <tr>
+                  <td>           </td>
+                  <td>(0.029)</td>
+                  <td>(0.028)</td>
+                  <td>(0.051)</td>
+                  <td>(0.054)</td>
+                  <td>(0.028)</td>
+                  <td>(0.035)</td>
+                  <td>(0.048)</td>
+                  <td>(0.029)</td>
+                  <td>(0.056)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.   </td>
+                  <td>5000   </td>
+                  <td>5000   </td>
+                  <td>5000   </td>
+                  <td>5000   </td>
+                  <td>5000   </td>
+                  <td>5000   </td>
+                  <td>5000   </td>
+                  <td>5000   </td>
+                  <td>5000   </td>
+                </tr>
+                <tr>
+                  <td>AIC        </td>
+                  <td>31141.2</td>
+                  <td>31141.2</td>
+                  <td>31141.2</td>
+                  <td>31141.2</td>
+                  <td>31141.2</td>
+                  <td>31141.2</td>
+                  <td>31141.2</td>
+                  <td>31141.2</td>
+                  <td>31141.2</td>
+                </tr>
+                <tr>
+                  <td>BIC        </td>
+                  <td>63714.1</td>
+                  <td>63714.1</td>
+                  <td>63714.1</td>
+                  <td>63714.1</td>
+                  <td>63714.1</td>
+                  <td>63714.1</td>
+                  <td>63714.1</td>
+                  <td>63714.1</td>
+                  <td>63714.1</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<p>If you’re the type of person — like me — that prefers visual representation, then printing a coefficient plot is equally easy with <code>modelsummary::modelplot()</code>. This creates a <strong>ggplot2</strong> object that can be further manipulated as needed. In the code chunk below, I’ll demonstrate this fairly simply by flipping the plot orientation.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">modelplot</span>(lm_mods, <span class="at">coef_omit =</span> <span class="st">'Interc'</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/sandwich_coefplot-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And there you have it: An intuitive and helpful comparison across a host of specifications, even though we only “ran” the underlying model once. Simple!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>UPDATE (June 2021):</strong> You can now automate all of the steps that I show above in newer versions of <strong>modelsummary</strong>, thanks to the incredibly flexible <code>vcov</code> argument. See the documentation <a href="https://modelsummary.com/articles/modelsummary.html#vcov-robust-ses">here</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(m, <span class="at">vcov =</span> vc)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelplot</span>(m, <span class="at">vcov =</span> vc, <span class="at">coef_omit =</span> <span class="st">'Interc'</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>()</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># etc.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="example-2-fixest" class="level2">
+<h2 class="anchored" data-anchor-id="example-2-fixest">Example 2: fixest</h2>
+<p>While <strong>sandwich</strong> covers a wide range of model classes in R, it’s important to know that a number of libraries provide their own specialised methods for on-the-fly SE adjustment. The one that I want to show you for this second example is the <a href="https://github.com/lrberge/fixest"><strong>fixest</strong></a> package (<a href="https://twitter.com/lrberge"><span class="citation" data-cites="Laurent">@Laurent</span> Bergé</a>).</p>
+<p>If you follow me on Twitter or have read my lecture notes, you already know that I am a huge fan of this package. It’s very elegantly designed and provides an insanely fast way to estimate high-dimensional fixed effects models. More importantly for today’s post, <strong>fixest</strong> offers automatic support for on-the-fly SE adjustment. We only need to run our model once and can then adjust the SEs on the backend via a call to <code>summary(..., vcov = 'vcov_type')</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>To demonstrate, I’m going to run some regressions on a subsample of the well-known RITA air traffic data. I’ve already downloaded the dataset from <a href="https://packages.revolutionanalytics.com/datasets/">Revolution Analytics</a> and prepped it for the narrow purposes of this blog post. (See the <a href="#data">data appendix</a> below for code.) All told we’re looking at 9 variables extending over approximately 1.8 million rows. So, not “big” data by any stretch of the imagination, but my regressions should take at least a few seconds to run on most computers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>air <span class="ot">=</span> <span class="fu">fread</span>(<span class="st">'~/air.csv'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>air</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          year month day_of_week tail_num origin_airport_id dest_airport_id
+         &lt;int&gt; &lt;int&gt;       &lt;int&gt;   &lt;char&gt;             &lt;int&gt;           &lt;int&gt;
+      1:  2012     1           3   N320AA             12478           12892
+      2:  2012     1           5   N327AA             12478           12892
+      3:  2012     1           4   N329AA             12892           12478
+      4:  2012     1           5   N336AA             12478           12892
+      5:  2012     1           7   N323AA             12478           12892
+     ---                                                                   
+1844063:  2011     1           1   N904FJ             14107           15376
+1844064:  2011     1           1   N7305V             14262           14107
+1844065:  2011     1           1   N922FJ             14683           11057
+1844066:  2011     1           1   N935LR             14698           14107
+1844067:  2011     1           1   N932LR             15376           14107
+         arr_delay dep_delay dep_tod
+             &lt;int&gt;     &lt;int&gt;  &lt;char&gt;
+      1:       -34         4     am2
+      2:         2        -2     am2
+      3:        -6        -5     am2
+      4:       -32        -9     am2
+      5:        -7        -6     am2
+     ---                            
+1844063:        -7        -1     pm2
+1844064:        -3         0     pm1
+1844065:       -10        -4     pm2
+1844066:        11         0     pm1
+1844067:        30        -5     am2</code></pre>
+</div>
+</div>
+<p>The actual regression that I’m going to run on these data is somewhat uninspired: Namely, how does arrival delay depend on departure delay, conditional on the time of day?<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> I’ll throw in a bunch of fixed effects to make the computation a bit more interesting/intensive, but it’s fairly standard stuff. Note that I am running a linear fixed effect model by calling <code>fixest::feols()</code>.</p>
+<p>But, really, I don’t want you to get sidetrack by the regression details. The main thing I want to focus your attention on is the fact that I’m only going run the base model <em>once</em>, i.e.&nbsp;for <code>mod1</code>. Then, I’m going to adjust the SE for two more models, <code>mod2</code> and <code>mod3</code>, on the fly via respective <code>summary()</code> calls.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Start timer; we'll use for benchmarking later</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>pt <span class="ot">=</span> <span class="fu">proc.time</span>()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Run the model once and once only!</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="do">## By default, fixest::feols will cluster the SEs by the first FE (here: month)</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">=</span> <span class="fu">feols</span>(arr_delay <span class="sc">~</span> dep_tod <span class="sc">/</span> dep_delay <span class="sc">|</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>               month <span class="sc">+</span> year <span class="sc">+</span> day_of_week <span class="sc">+</span> origin_airport_id <span class="sc">+</span> dest_airport_id, </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">data =</span> air)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Adjust SEs on the fly: two-way cluster</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">=</span> <span class="fu">summary</span>(mod1, <span class="at">vcov =</span> <span class="sc">~</span>month <span class="sc">+</span> origin_airport_id)</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Adjust SEs on the fly: three-way cluster. Note that we can even include</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="do">## cluster vars (e.g. tail_num) that weren't present in the original regression</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">=</span> <span class="fu">summary</span>(mod1, <span class="at">vcov =</span> <span class="sc">~</span>month <span class="sc">+</span> origin_airport_id <span class="sc">+</span> tail_num)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Stop timer and save results</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>time_feols <span class="ot">=</span> (<span class="fu">proc.time</span>() <span class="sc">-</span> pt)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Before I get to benchmarking, how about a quick coefficient plot? I’ll use <code>modelsummary::modelplot()</code> again, focusing only on the key “time of day × departure delay” interaction terms.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>feols_mods <span class="ot">=</span> <span class="fu">list</span>(mod1, mod2, mod3)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">modelplot</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  feols_mods, </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">coef_map =</span> <span class="fu">c</span>(<span class="st">'dep_todam1:dep_delay'</span> <span class="ot">=</span> <span class="st">'Midnight × Dep. delay'</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">'dep_todam2:dep_delay'</span> <span class="ot">=</span> <span class="st">'Morning × Dep. delay'</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">'dep_todpm1:dep_delay'</span> <span class="ot">=</span> <span class="st">'Afternoon × Dep. delay'</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">'dep_todpm2:dep_delay'</span> <span class="ot">=</span> <span class="st">'Evening × Dep. delay'</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">'Dependent variable: Arrival delay'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/fixest_coefplot-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="benchmarking" class="level3">
+<h3 class="anchored" data-anchor-id="benchmarking">Benchmarking</h3>
+<p>Great, it worked. But did it save time? To answer this question I’ve benchmarked against three other methods:</p>
+<ul>
+<li><code>feols()</code>, again from the <strong>fixest</strong> package, but this time with each of the three models run separately.</li>
+<li><code>felm()</code> from the <strong>lfe</strong> package.</li>
+<li><code>reghdfe</code> from the <strong>reghdfe</strong> package (Stata).</li>
+</ul>
+<p>You can find the benchmarking code for these other methods in the <a href="#benchmark-other">appendix</a>. (Please let me know if you spot any errors.) In the interests of brevity, here are the results.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/benchmark-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>There are several takeaways from this exercise. For example, <code>fixest::feols()</code> is the fastest method even if you are (inefficiently) re-running the models separately. But — yet again and once more, dear friends — the key thing that I want to emphasise is the <em>additional</em> time savings brought on by adjusting the SEs on the fly. Indeed, we can see that the on-the-fly <code>feols</code> approach only takes a third of the time (approximately) that it does to run the models separately. This means that <strong>fixest</strong> is recomputing the SEs for models 2 and 3 pretty much instantaneously.</p>
+<p>To add one last thing about benchmarking, the absolute difference in model run times was not <em>that</em> huge for this particular exercise. There’s maybe two minutes separating the fastest and slowest methods. (Then again, not trivial either…) But if you are like me and find yourself estimating models where each run takes many minutes or hours, or even days and weeks, then the time savings are literally exponential.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>There comes a point in almost every empirical project where you have to estimate multiple versions of the same model. Which is to say, the only difference between these multiple versions is how the standard errors were calculated: robust, clustered, etc. Maybe you’re trying to satisfy a referee request before publication. Or, maybe you’re trying to understand how sensitive your results are to different modeling assumptions.</p>
+<p>The goal of this blog post has been to show you that there is often a better approach than manually re-running multiple iterations of your model. Instead, I advocate that you run the model <em>once</em> and then adjust your standard errors on the backend, as needed. This “on-the-fly” approach will save you a ton of time if you are working with big datasets. Even if you aren’t working with big data, you will minimize copying and pasting of duplicate code. All of which will help to make your code more readable and cut down on potential errors.</p>
+<p>What’s not to like?</p>
+<p><strong>P.S.</strong> There are a couple of other R libraries with support for on-the-fly SE adjustment, e.g.&nbsp;<a href="https://cran.r-project.org/web/packages/clubSandwich/index.html">clubSandwich</a>. Since I’ve used it as a counterfoil in the benchmark, I should add that <code>lfe::felm()</code> provides its own method for swapping out different SEs post-estimation; see <a href="https://broom.tidymodels.org/reference/tidy.felm.html#examples">here</a>. Similarly, I’ve focused on R because it’s the software language that I use most often and — as far as I am aware — is the only one to provide methods for on-the-fly SE adjustment across a wide range of models. If anyone knows of equivalent methods or canned routines in other languages, please let me know in the comments.</p>
+<p><strong>P.P.S.</strong> Look, I’m not saying it’s necessarily “wrong” to specify your SEs in the model call. Particularly if you’ve already settled on a single VCOV to use. Then, by all means, use the convenience of Stata’s <code>, robust</code> syntax or the R equivalent <code>lm_robust()</code> (via the <a href="https://declaredesign.org/r/estimatr"><strong>estimatr</strong></a> package).</p>
+</section>
+<section id="appendices" class="level2">
+<h2 class="anchored" data-anchor-id="appendices">Appendices</h2>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data">Flight data download and prep</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">path.expand</span>(<span class="st">'~/air.csv'</span>))) {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Download and extract the data</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  URL <span class="ot">=</span> <span class="st">'https://packages.revolutionanalytics.com/datasets/AirlineSubsetCsv.tar.gz'</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  dest_file <span class="ot">=</span> <span class="fu">path.expand</span>(<span class="st">'~/AirlineSubsetCsv.tar.gz'</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">download.file</span>(URL, dest_file, <span class="at">mode =</span> <span class="st">"wb"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">untar</span>(dest_file, <span class="at">exdir =</span> <span class="fu">path.expand</span>(<span class="st">'~'</span>))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Bind together and do some data cleaning</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(data.table)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  csvs <span class="ot">=</span> <span class="fu">list.files</span>(<span class="fu">path.expand</span>(<span class="st">'~/AirlineSubsetCsv/'</span>), <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  air <span class="ot">=</span> <span class="fu">rbindlist</span>(<span class="fu">lapply</span>(csvs, fread))</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(air) <span class="ot">=</span> <span class="fu">tolower</span>(<span class="fu">names</span>(air))</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  int_vars <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'arr_delay'</span>, <span class="st">'dep_delay'</span>, <span class="st">'dep_time'</span>, <span class="st">'arr_time'</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  air[, (int_vars) <span class="sc">:</span><span class="er">=</span> <span class="fu">lapply</span>(.SD, as.integer), .SDcols <span class="ot">=</span> int_vars]</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Create a departure 'time of day' factor variable, dividing the day in four</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="do">## quarters</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  air[, dep_tod <span class="sc">:</span><span class="er">=</span> <span class="fu">fcase</span>(dep_time <span class="sc">&lt;=</span> <span class="dv">600</span>, <span class="st">'am1'</span>,</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>                         dep_time <span class="sc">&lt;=</span> <span class="dv">1200</span>, <span class="st">'am2'</span>,</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>                         dep_time <span class="sc">&lt;=</span> <span class="dv">1800</span>, <span class="st">'pm1'</span>,</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>                         dep_time <span class="sc">&gt;</span> <span class="dv">1800</span>, <span class="st">'pm2'</span>)]</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Subset</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  air <span class="ot">=</span> air[<span class="sc">!</span><span class="fu">is.na</span>(arr_delay), </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>            .(year, month, day_of_week, tail_num, origin_airport_id, </span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>              dest_airport_id, arr_delay, dep_delay, dep_tod)]</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Write to disk</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fwrite</span>(air, <span class="fu">path.expand</span>(<span class="st">'~/air.csv'</span>))</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Clean up</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.remove</span>(<span class="fu">c</span>(dest_file, csvs))</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.remove</span>(<span class="fu">path.expand</span>(<span class="st">'~/AirlineSubsetCsv/'</span>)) <span class="do">## empty dir too</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="benchmark-other" class="level3">
+<h3 class="anchored" data-anchor-id="benchmark-other">Benchmarking code for other methods</h3>
+<section id="fixest-separate-models" class="level4">
+<h4 class="anchored" data-anchor-id="fixest-separate-models">fixest (separate models)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(fixest) ## Already loaded</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>pt <span class="ot">=</span> <span class="fu">proc.time</span>()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>mod1a <span class="ot">=</span> <span class="fu">feols</span>(arr_delay <span class="sc">~</span> dep_tod <span class="sc">/</span> dep_delay <span class="sc">|</span> </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                month <span class="sc">+</span> year <span class="sc">+</span> day_of_week <span class="sc">+</span> origin_airport_id <span class="sc">+</span> dest_airport_id,    </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> air)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>mod2a <span class="ot">=</span> <span class="fu">summary</span>(</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(arr_delay <span class="sc">~</span> dep_tod <span class="sc">/</span> dep_delay <span class="sc">|</span> </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>          month <span class="sc">+</span> year <span class="sc">+</span> day_of_week <span class="sc">+</span> origin_airport_id <span class="sc">+</span> dest_airport_id,          </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> air), </span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster =</span> <span class="fu">c</span>(<span class="st">'month'</span>, <span class="st">'origin_airport_id'</span>)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>mod3a <span class="ot">=</span> <span class="fu">summary</span>(</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(arr_delay <span class="sc">~</span> dep_tod <span class="sc">/</span> dep_delay <span class="sc">|</span> </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>          month <span class="sc">+</span> year <span class="sc">+</span> day_of_week <span class="sc">+</span> origin_airport_id <span class="sc">+</span> dest_airport_id,          </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> air), </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster =</span> <span class="fu">c</span>(<span class="st">'month'</span>, <span class="st">'origin_airport_id'</span>, <span class="st">'tail_num'</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>time_feols_sep <span class="ot">=</span> (<span class="fu">proc.time</span>() <span class="sc">-</span> pt)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="lfe" class="level4">
+<h4 class="anchored" data-anchor-id="lfe">lfe</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lfe)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>pt <span class="ot">=</span> <span class="fu">proc.time</span>()</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>est1 <span class="ot">=</span> <span class="fu">felm</span>(arr_delay <span class="sc">~</span> dep_tod <span class="sc">/</span> dep_delay <span class="sc">|</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>               month <span class="sc">+</span> year <span class="sc">+</span> day_of_week <span class="sc">+</span> origin_airport_id <span class="sc">+</span> dest_airport_id <span class="sc">|</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>             month, </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> air)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>est2 <span class="ot">=</span> <span class="fu">felm</span>(arr_delay <span class="sc">~</span> dep_tod <span class="sc">/</span> dep_delay <span class="sc">|</span> </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>               month <span class="sc">+</span> year <span class="sc">+</span> day_of_week <span class="sc">+</span> origin_airport_id <span class="sc">+</span> dest_airport_id <span class="sc">|</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>             month <span class="sc">+</span> origin_airport_id, </span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> air)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>est3 <span class="ot">=</span> <span class="fu">felm</span>(arr_delay <span class="sc">~</span> dep_tod <span class="sc">/</span> dep_delay <span class="sc">|</span> </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>               month <span class="sc">+</span> year <span class="sc">+</span> day_of_week <span class="sc">+</span> origin_airport_id <span class="sc">+</span> dest_airport_id <span class="sc">|</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>             month <span class="sc">+</span> origin_airport_id <span class="sc">+</span> tail_num, </span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> air)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>time_felm <span class="ot">=</span> (<span class="fu">proc.time</span>() <span class="sc">-</span> pt)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reghdfe" class="level4">
+<h4 class="anchored" data-anchor-id="reghdfe">reghdfe</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> <span class="fu">matrix</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">timer</span> <span class="kw">clear</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">more</span> <span class="kw">off</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>cd <span class="st">"Z:\home\grant"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>import delimited air.csv</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Encode strings as numeric factors (Stata struggles with the former)</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="kw">encode</span> tail_num, <span class="kw">generate</span>(tail_num2)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="kw">encode</span> dep_tod, <span class="kw">generate</span>(dep_tod2)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">// Start timer and run regs</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="kw">timer</span> <span class="kw">on</span> 1</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> reghdfe arr_delay i.dep_tod2 i.dep_tod2#c.dep_delay, <span class="co">///</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  absorb(<span class="fu">month</span> <span class="fu">year</span> day_of_week origin_airport_id dest_airport_id) <span class="co">///</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="kw">cluster</span>(<span class="fu">month</span>)</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> reghdfe arr_delay i.dep_tod2 i.dep_tod2#c.dep_delay, <span class="co">///</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  absorb(<span class="fu">month</span> <span class="fu">year</span> day_of_week origin_airport_id dest_airport_id) <span class="co">///</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">cluster</span>(<span class="fu">month</span> origin_airport_id)</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> reghdfe arr_delay i.dep_tod2 i.dep_tod2#c.dep_delay, <span class="co">///</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  absorb(<span class="fu">month</span> <span class="fu">year</span> day_of_week origin_airport_id dest_airport_id) <span class="co">///</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">cluster</span>(<span class="fu">month</span> origin_airport_id tail_num2)</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="kw">timer</span> <span class="kw">off</span> 1</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co">// Export time</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> <span class="dt">_all</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> elapsed = .</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">obs</span> 1</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> elapsed = <span class="fu">r</span>(t1) <span class="kw">if</span> <span class="dt">_n</span> == 1</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="kw">outsheet</span> <span class="kw">using</span> <span class="st">"air-reghdfe.csv"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>You can substitute with a regular <em>for</em> loop or <code>purrr::map()</code> if you prefer.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>See the <a href="https://lrberge.github.io/fixest/articles/fixest_walkthrough.html#the-vcov-argument">package documentation</a> for details about valid <code>vcov</code> arguments (e.g., “iid”, “hc1”, “twoway”, “threeway”, etc.)<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Note that I’m going to use a <code>dep_tod / dep_delay</code> expansion on the RHS to get the <a href="../interaction-effects">full marginal effect</a> of the interaction terms. Don’t worry too much about this if you haven’t seen it before (click on the previous link if you want to learn more).<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/grantmcdermott\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

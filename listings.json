@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/blog.html",
+    "listing": "/posts/index.html",
     "items": [
       "/posts/hello-quarto/index.html",
       "/posts/duckdb-polars-workshop/index.html",

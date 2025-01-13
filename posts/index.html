@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="">
 
 <title>Blog – Grant R. McDermott</title>
 <style>
@@ -23,26 +24,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./favicon.ico" rel="icon">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c75bcb89907db7808f0349b764a1a524.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../favicon.ico" rel="icon">
+<script src="../site_libs/quarto-listing/list.min.js"></script>
+<script src="../site_libs/quarto-listing/quarto-listing.js"></script>
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c75bcb89907db7808f0349b764a1a524.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -81,7 +82,8 @@ ul.task-list li input[type="checkbox"] {
 
     const options = {
       valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
+      page: 10,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
       searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
     };
 
@@ -144,7 +146,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 <meta property="og:title" content="Blog – Grant R. McDermott">
 <meta property="og:site_name" content="Grant R. McDermott">
 </head>
@@ -156,7 +158,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Grant R. McDermott</span>
     </a>
   </div>
@@ -167,15 +169,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./research.html"> 
+    <a class="nav-link" href="../research/index.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./teaching.html"> 
+    <a class="nav-link" href="../teaching/index.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
@@ -183,11 +185,11 @@ window.Quarto = {
 <span class="menu-text">Vita</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./software.html"> 
+    <a class="nav-link" href="../software/index.html"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link active" href="../posts/index.html" aria-current="page"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -244,18 +246,18 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWVkaWE=" data-listing-date-sort="1736121600000" data-listing-file-modified-sort="1736216050171" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="260">
+<div class="quarto-post image-right" data-index="0" data-categories="bWVkaWE=" data-listing-date-sort="1736121600000" data-listing-file-modified-sort="1736803270849" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="260">
 <div class="thumbnail">
-<p><a href="./posts/hello-quarto/index.html" class="no-external"></a></p><a href="./posts/hello-quarto/index.html" class="no-external">
+<p><a href="../posts/hello-quarto/index.html" class="no-external"></a></p><a href="../posts/hello-quarto/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/hello-quarto/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/hello-quarto/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/hello-quarto/index.html" class="no-external">Hello, Quarto</a>
+<a href="../posts/hello-quarto/index.html" class="no-external">Hello, Quarto</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/hello-quarto/index.html" class="no-external"></a>
+<a href="../posts/hello-quarto/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('bWVkaWE='); return false;">
@@ -263,11 +265,11 @@ media
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/hello-quarto/index.html" class="no-external">Finally migrating from Jekyll</a>
+<a href="../posts/hello-quarto/index.html" class="no-external">Finally migrating from Jekyll</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/hello-quarto/index.html" class="no-external">
+<a href="../posts/hello-quarto/index.html" class="no-external">
 <div class="listing-date">
 Jan 6, 2025
 </div>
@@ -277,18 +279,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="UiUyQ1B5dGhvbiUyQ1NRTCUyQ2RhdGElMjBzY2llbmNlJTJDd29ya3Nob3Bz" data-listing-date-sort="1712707200000" data-listing-file-modified-sort="1736216050150" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="227">
+<div class="quarto-post image-right" data-index="1" data-categories="UiUyQ1B5dGhvbiUyQ1NRTCUyQ2RhdGElMjBzY2llbmNlJTJDd29ya3Nob3Bz" data-listing-date-sort="1712707200000" data-listing-file-modified-sort="1736803270828" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="227">
 <div class="thumbnail">
-<p><a href="./posts/duckdb-polars-workshop/index.html" class="no-external"></a></p><a href="./posts/duckdb-polars-workshop/index.html" class="no-external">
+<p><a href="../posts/duckdb-polars-workshop/index.html" class="no-external"></a></p><a href="../posts/duckdb-polars-workshop/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/duckdb-polars-workshop/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/duckdb-polars-workshop/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/duckdb-polars-workshop/index.html" class="no-external">DuckDB + Polars workshop</a>
+<a href="../posts/duckdb-polars-workshop/index.html" class="no-external">DuckDB + Polars workshop</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/duckdb-polars-workshop/index.html" class="no-external"></a>
+<a href="../posts/duckdb-polars-workshop/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
@@ -308,11 +310,11 @@ workshops
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/duckdb-polars-workshop/index.html" class="no-external">Big data backends for R and Python</a>
+<a href="../posts/duckdb-polars-workshop/index.html" class="no-external">Big data backends for R and Python</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/duckdb-polars-workshop/index.html" class="no-external">
+<a href="../posts/duckdb-polars-workshop/index.html" class="no-external">
 <div class="listing-date">
 Apr 10, 2024
 </div>
@@ -322,18 +324,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="UiUyQ2dlb3NwYXRpYWwlMkNkYXRhJTIwc2NpZW5jZQ==" data-listing-date-sort="1642118400000" data-listing-file-modified-sort="1736216050153" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2213">
+<div class="quarto-post image-right" data-index="2" data-categories="UiUyQ2dlb3NwYXRpYWwlMkNkYXRhJTIwc2NpZW5jZQ==" data-listing-date-sort="1642118400000" data-listing-file-modified-sort="1736803270831" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2213">
 <div class="thumbnail">
-<p><a href="./posts/fast-geospatial-datatable-geos/index.html" class="no-external"></a></p><a href="./posts/fast-geospatial-datatable-geos/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/fast-geospatial-datatable-geos/index_files/figure-html/nc-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/fast-geospatial-datatable-geos/index.html" class="no-external"></a></p>
+<p><a href="../posts/fast-geospatial-datatable-geos/index.html" class="no-external"></a></p><a href="../posts/fast-geospatial-datatable-geos/index.html" class="no-external">
+<p class="card-img-top"><img src="fast-geospatial-datatable-geos/index_files/figure-html/nc-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/fast-geospatial-datatable-geos/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/fast-geospatial-datatable-geos/index.html" class="no-external">Fast geospatial tasks with data.table, geos &amp; co.</a>
+<a href="../posts/fast-geospatial-datatable-geos/index.html" class="no-external">Fast geospatial tasks with data.table, geos &amp; co.</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/fast-geospatial-datatable-geos/index.html" class="no-external"></a>
+<a href="../posts/fast-geospatial-datatable-geos/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
@@ -347,11 +349,11 @@ data science
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/fast-geospatial-datatable-geos/index.html" class="no-external">Use all your favourites</a>
+<a href="../posts/fast-geospatial-datatable-geos/index.html" class="no-external">Use all your favourites</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/fast-geospatial-datatable-geos/index.html" class="no-external">
+<a href="../posts/fast-geospatial-datatable-geos/index.html" class="no-external">
 <div class="listing-date">
 Jan 14, 2022
 </div>
@@ -361,18 +363,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="UiUyQ2Vjb25vbWV0cmljcyUyQ2RhdGElMjBzY2llbmNl" data-listing-date-sort="1625702400000" data-listing-file-modified-sort="1736216050150" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1295">
+<div class="quarto-post image-right" data-index="3" data-categories="UiUyQ2Vjb25vbWV0cmljcyUyQ2RhdGElMjBzY2llbmNl" data-listing-date-sort="1625702400000" data-listing-file-modified-sort="1736803270828" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1295">
 <div class="thumbnail">
-<p><a href="./posts/efficient-simulations-r-base-remix/index.html" class="no-external"></a></p><a href="./posts/efficient-simulations-r-base-remix/index.html" class="no-external">
+<p><a href="../posts/efficient-simulations-r-base-remix/index.html" class="no-external"></a></p><a href="../posts/efficient-simulations-r-base-remix/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/efficient-simulations-r-base-remix/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/efficient-simulations-r-base-remix/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/efficient-simulations-r-base-remix/index.html" class="no-external">Simulations remix: Turn up the base</a>
+<a href="../posts/efficient-simulations-r-base-remix/index.html" class="no-external">Simulations remix: Turn up the base</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/efficient-simulations-r-base-remix/index.html" class="no-external"></a>
+<a href="../posts/efficient-simulations-r-base-remix/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
@@ -386,11 +388,11 @@ data science
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/efficient-simulations-r-base-remix/index.html" class="no-external">Faster still, with base R.</a>
+<a href="../posts/efficient-simulations-r-base-remix/index.html" class="no-external">Faster still, with base R.</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/efficient-simulations-r-base-remix/index.html" class="no-external">
+<a href="../posts/efficient-simulations-r-base-remix/index.html" class="no-external">
 <div class="listing-date">
 Jul 8, 2021
 </div>
@@ -400,18 +402,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="UiUyQ2Vjb25vbWV0cmljcyUyQ2RhdGElMjBzY2llbmNl" data-listing-date-sort="1624492800000" data-listing-file-modified-sort="1736216050150" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3698">
+<div class="quarto-post image-right" data-index="4" data-categories="UiUyQ2Vjb25vbWV0cmljcyUyQ2RhdGElMjBzY2llbmNl" data-listing-date-sort="1624492800000" data-listing-file-modified-sort="1736803270828" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3698">
 <div class="thumbnail">
-<p><a href="./posts/efficient-simulations-r/index.html" class="no-external"></a></p><a href="./posts/efficient-simulations-r/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/efficient-simulations-r/index_files/figure-html/hist-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/efficient-simulations-r/index.html" class="no-external"></a></p>
+<p><a href="../posts/efficient-simulations-r/index.html" class="no-external"></a></p><a href="../posts/efficient-simulations-r/index.html" class="no-external">
+<p class="card-img-top"><img src="efficient-simulations-r/index_files/figure-html/hist-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/efficient-simulations-r/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/efficient-simulations-r/index.html" class="no-external">Efficient simulations in R</a>
+<a href="../posts/efficient-simulations-r/index.html" class="no-external">Efficient simulations in R</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/efficient-simulations-r/index.html" class="no-external"></a>
+<a href="../posts/efficient-simulations-r/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
@@ -425,11 +427,11 @@ data science
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/efficient-simulations-r/index.html" class="no-external">Better, faster, stronger.</a>
+<a href="../posts/efficient-simulations-r/index.html" class="no-external">Better, faster, stronger.</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/efficient-simulations-r/index.html" class="no-external">
+<a href="../posts/efficient-simulations-r/index.html" class="no-external">
 <div class="listing-date">
 Jun 24, 2021
 </div>
@@ -439,18 +441,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="UiUyQ1N0YXRhJTJDZWNvbm9tZXRyaWNz" data-listing-date-sort="1603065600000" data-listing-file-modified-sort="1736216050144" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3538">
+<div class="quarto-post image-right" data-index="5" data-categories="UiUyQ1N0YXRhJTJDZWNvbm9tZXRyaWNz" data-listing-date-sort="1603065600000" data-listing-file-modified-sort="1736803270823" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3538">
 <div class="thumbnail">
-<p><a href="./posts/better-way-adjust-ses/index.html" class="no-external"></a></p><a href="./posts/better-way-adjust-ses/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/better-way-adjust-ses/index_files/figure-html/sandwich_coefplot-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/better-way-adjust-ses/index.html" class="no-external"></a></p>
+<p><a href="../posts/better-way-adjust-ses/index.html" class="no-external"></a></p><a href="../posts/better-way-adjust-ses/index.html" class="no-external">
+<p class="card-img-top"><img src="better-way-adjust-ses/index_files/figure-html/sandwich_coefplot-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/better-way-adjust-ses/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/better-way-adjust-ses/index.html" class="no-external">A better way to adjust your standard errors</a>
+<a href="../posts/better-way-adjust-ses/index.html" class="no-external">A better way to adjust your standard errors</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/better-way-adjust-ses/index.html" class="no-external"></a>
+<a href="../posts/better-way-adjust-ses/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
@@ -464,11 +466,11 @@ econometrics
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/better-way-adjust-ses/index.html" class="no-external">On the fly, for the win.</a>
+<a href="../posts/better-way-adjust-ses/index.html" class="no-external">On the fly, for the win.</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/better-way-adjust-ses/index.html" class="no-external">
+<a href="../posts/better-way-adjust-ses/index.html" class="no-external">
 <div class="listing-date">
 Oct 19, 2020
 </div>
@@ -478,18 +480,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDU3RhdGElMkNKdWxpYSUyQ1B5dGhvbg==" data-listing-date-sort="1593648000000" data-listing-file-modified-sort="1736216050151" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="822">
+<div class="quarto-post image-right" data-index="6" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDU3RhdGElMkNKdWxpYSUyQ1B5dGhvbg==" data-listing-date-sort="1593648000000" data-listing-file-modified-sort="1736803270830" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="822">
 <div class="thumbnail">
-<p><a href="./posts/even-more-reshape/index.html" class="no-external"></a></p><a href="./posts/even-more-reshape/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/even-more-reshape/reshape-benchmarks2-all.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/even-more-reshape/index.html" class="no-external"></a></p>
+<p><a href="../posts/even-more-reshape/index.html" class="no-external"></a></p><a href="../posts/even-more-reshape/index.html" class="no-external">
+<p class="card-img-top"><img src="even-more-reshape/reshape-benchmarks2-all.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/even-more-reshape/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/even-more-reshape/index.html" class="no-external">Even more reshape benchmarks</a>
+<a href="../posts/even-more-reshape/index.html" class="no-external">Even more reshape benchmarks</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/even-more-reshape/index.html" class="no-external"></a>
+<a href="../posts/even-more-reshape/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">
@@ -509,11 +511,11 @@ Python
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/even-more-reshape/index.html" class="no-external">Giving the people what they want</a>
+<a href="../posts/even-more-reshape/index.html" class="no-external">Giving the people what they want</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/even-more-reshape/index.html" class="no-external">
+<a href="../posts/even-more-reshape/index.html" class="no-external">
 <div class="listing-date">
 Jul 2, 2020
 </div>
@@ -523,18 +525,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="UiUyQ1N0YXRhJTJDZGF0YSUyMHNjaWVuY2U=" data-listing-date-sort="1593475200000" data-listing-file-modified-sort="1736216050172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1178">
+<div class="quarto-post image-right" data-index="7" data-categories="UiUyQ1N0YXRhJTJDZGF0YSUyMHNjaWVuY2U=" data-listing-date-sort="1593475200000" data-listing-file-modified-sort="1736803270851" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1178">
 <div class="thumbnail">
-<p><a href="./posts/reshape-benchmarks/index.html" class="no-external"></a></p><a href="./posts/reshape-benchmarks/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/reshape-benchmarks/reshape-benchmarks-defaults.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/reshape-benchmarks/index.html" class="no-external"></a></p>
+<p><a href="../posts/reshape-benchmarks/index.html" class="no-external"></a></p><a href="../posts/reshape-benchmarks/index.html" class="no-external">
+<p class="card-img-top"><img src="reshape-benchmarks/reshape-benchmarks-defaults.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/reshape-benchmarks/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/reshape-benchmarks/index.html" class="no-external">Reshape benchmarks</a>
+<a href="../posts/reshape-benchmarks/index.html" class="no-external">Reshape benchmarks</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/reshape-benchmarks/index.html" class="no-external"></a>
+<a href="../posts/reshape-benchmarks/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
@@ -548,11 +550,11 @@ data science
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/reshape-benchmarks/index.html" class="no-external">Going wide to long with sparse data</a>
+<a href="../posts/reshape-benchmarks/index.html" class="no-external">Going wide to long with sparse data</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/reshape-benchmarks/index.html" class="no-external">
+<a href="../posts/reshape-benchmarks/index.html" class="no-external">
 <div class="listing-date">
 Jun 30, 2020
 </div>
@@ -562,18 +564,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="ZWNvbm9tZXRyaWNzJTJDUg==" data-listing-date-sort="1576454400000" data-listing-file-modified-sort="1736216050171" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1761">
+<div class="quarto-post image-right" data-index="8" data-categories="ZWNvbm9tZXRyaWNzJTJDUg==" data-listing-date-sort="1576454400000" data-listing-file-modified-sort="1736803270849" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1761">
 <div class="thumbnail">
-<p><a href="./posts/interaction-effects/index.html" class="no-external"></a></p><a href="./posts/interaction-effects/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/interaction-effects/index_files/figure-html/fit2_coefplot-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/interaction-effects/index.html" class="no-external"></a></p>
+<p><a href="../posts/interaction-effects/index.html" class="no-external"></a></p><a href="../posts/interaction-effects/index.html" class="no-external">
+<p class="card-img-top"><img src="interaction-effects/index_files/figure-html/fit2_coefplot-1.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/interaction-effects/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/interaction-effects/index.html" class="no-external">Marginal effects and interaction terms</a>
+<a href="../posts/interaction-effects/index.html" class="no-external">Marginal effects and interaction terms</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/interaction-effects/index.html" class="no-external"></a>
+<a href="../posts/interaction-effects/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('ZWNvbm9tZXRyaWNz'); return false;">
@@ -584,11 +586,11 @@ R
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/interaction-effects/index.html" class="no-external">Quickly get the full marginal effect of interaction terms in R (and other software)</a>
+<a href="../posts/interaction-effects/index.html" class="no-external">Quickly get the full marginal effect of interaction terms in R (and other software)</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/interaction-effects/index.html" class="no-external">
+<a href="../posts/interaction-effects/index.html" class="no-external">
 <div class="listing-date">
 Dec 16, 2019
 </div>
@@ -598,18 +600,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="ZmlzaGVyaWVzJTJDdGFsa3M=" data-listing-date-sort="1536796800000" data-listing-file-modified-sort="1736216050172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="82">
+<div class="quarto-post image-right" data-index="9" data-categories="ZmlzaGVyaWVzJTJDdGFsa3M=" data-listing-date-sort="1536796800000" data-listing-file-modified-sort="1736803270851" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="82">
 <div class="thumbnail">
-<p><a href="./posts/quackchat/index.html" class="no-external"></a></p><a href="./posts/quackchat/index.html" class="no-external">
+<p><a href="../posts/quackchat/index.html" class="no-external"></a></p><a href="../posts/quackchat/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/quackchat/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/quackchat/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/quackchat/index.html" class="no-external">QuackChat slides</a>
+<a href="../posts/quackchat/index.html" class="no-external">QuackChat slides</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/quackchat/index.html" class="no-external"></a>
+<a href="../posts/quackchat/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('ZmlzaGVyaWVz'); return false;">
@@ -620,11 +622,11 @@ talks
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/quackchat/index.html" class="no-external">If it talks like a duck…</a>
+<a href="../posts/quackchat/index.html" class="no-external">If it talks like a duck…</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/quackchat/index.html" class="no-external">
+<a href="../posts/quackchat/index.html" class="no-external">
 <div class="listing-date">
 Sep 13, 2018
 </div>
@@ -634,18 +636,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="bWVkaWElMkNmaXNoZXJpZXM=" data-listing-date-sort="1536537600000" data-listing-file-modified-sort="1736216050172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="73">
+<div class="quarto-post image-right" data-index="10" data-categories="bWVkaWElMkNmaXNoZXJpZXM=" data-listing-date-sort="1536537600000" data-listing-file-modified-sort="1736803270851" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="73">
 <div class="thumbnail">
-<p><a href="./posts/recent-radio-interviews/index.html" class="no-external"></a></p><a href="./posts/recent-radio-interviews/index.html" class="no-external">
+<p><a href="../posts/recent-radio-interviews/index.html" class="no-external"></a></p><a href="../posts/recent-radio-interviews/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/recent-radio-interviews/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/recent-radio-interviews/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/recent-radio-interviews/index.html" class="no-external">Some recent radio interviews</a>
+<a href="../posts/recent-radio-interviews/index.html" class="no-external">Some recent radio interviews</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/recent-radio-interviews/index.html" class="no-external"></a>
+<a href="../posts/recent-radio-interviews/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('bWVkaWE='); return false;">
@@ -656,11 +658,11 @@ fisheries
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/recent-radio-interviews/index.html" class="no-external">Yes I have an accent</a>
+<a href="../posts/recent-radio-interviews/index.html" class="no-external">Yes I have an accent</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/recent-radio-interviews/index.html" class="no-external">
+<a href="../posts/recent-radio-interviews/index.html" class="no-external">
 <div class="listing-date">
 Sep 10, 2018
 </div>
@@ -670,18 +672,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="cmVzZWFyY2glMkNmaXNoZXJpZXMlMkNyZXByb2R1Y2liaWxpdHk=" data-listing-date-sort="1535500800000" data-listing-file-modified-sort="1736216050149" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="851">
+<div class="quarto-post image-right" data-index="11" data-categories="cmVzZWFyY2glMkNmaXNoZXJpZXMlMkNyZXByb2R1Y2liaWxpdHk=" data-listing-date-sort="1535500800000" data-listing-file-modified-sort="1736803270827" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="851">
 <div class="thumbnail">
-<p><a href="./posts/blue-paradox-pnas/index.html" class="no-external"></a></p><a href="./posts/blue-paradox-pnas/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/blue-paradox-pnas/blueparadox-figure3.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/blue-paradox-pnas/index.html" class="no-external"></a></p>
+<p><a href="../posts/blue-paradox-pnas/index.html" class="no-external"></a></p><a href="../posts/blue-paradox-pnas/index.html" class="no-external">
+<p class="card-img-top"><img data-src="blue-paradox-pnas/blueparadox-figure3.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/blue-paradox-pnas/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/blue-paradox-pnas/index.html" class="no-external">The Blue Paradox published in PNAS</a>
+<a href="../posts/blue-paradox-pnas/index.html" class="no-external">The Blue Paradox published in PNAS</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/blue-paradox-pnas/index.html" class="no-external"></a>
+<a href="../posts/blue-paradox-pnas/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('cmVzZWFyY2g='); return false;">
@@ -695,11 +697,11 @@ reproducibility
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/blue-paradox-pnas/index.html" class="no-external">Fishers go all in while the going’s good</a>
+<a href="../posts/blue-paradox-pnas/index.html" class="no-external">Fishers go all in while the going’s good</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/blue-paradox-pnas/index.html" class="no-external">
+<a href="../posts/blue-paradox-pnas/index.html" class="no-external">
 <div class="listing-date">
 Aug 29, 2018
 </div>
@@ -709,18 +711,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="cmVzZWFyY2glMkNmaXNoZXJpZXMlMkNSJTJDcmVwcm9kdWNpYmlsaXR5" data-listing-date-sort="1521158400000" data-listing-file-modified-sort="1736216050176" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="764">
+<div class="quarto-post image-right" data-index="12" data-categories="cmVzZWFyY2glMkNmaXNoZXJpZXMlMkNSJTJDcmVwcm9kdWNpYmlsaXR5" data-listing-date-sort="1521158400000" data-listing-file-modified-sort="1736803270856" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="764">
 <div class="thumbnail">
-<p><a href="./posts/science-bycatch/index.html" class="no-external"></a></p><a href="./posts/science-bycatch/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/science-bycatch/bycatch-fig-4.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/science-bycatch/index.html" class="no-external"></a></p>
+<p><a href="../posts/science-bycatch/index.html" class="no-external"></a></p><a href="../posts/science-bycatch/index.html" class="no-external">
+<p class="card-img-top"><img data-src="science-bycatch/bycatch-fig-4.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/science-bycatch/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/science-bycatch/index.html" class="no-external">Bycatch paper published in Science</a>
+<a href="../posts/science-bycatch/index.html" class="no-external">Bycatch paper published in Science</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/science-bycatch/index.html" class="no-external"></a>
+<a href="../posts/science-bycatch/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('cmVzZWFyY2g='); return false;">
@@ -737,11 +739,11 @@ reproducibility
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/science-bycatch/index.html" class="no-external">Reforming global fisheries has important collateral benefits</a>
+<a href="../posts/science-bycatch/index.html" class="no-external">Reforming global fisheries has important collateral benefits</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/science-bycatch/index.html" class="no-external">
+<a href="../posts/science-bycatch/index.html" class="no-external">
 <div class="listing-date">
 Mar 16, 2018
 </div>
@@ -751,18 +753,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="d29ya3Nob3BzJTJDY2xvdWQlMkNnZW9zcGF0aWFsJTJDZmlzaGVyaWVzJTJDY2xpbWF0ZQ==" data-listing-date-sort="1499299200000" data-listing-file-modified-sort="1736216050144" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="174">
+<div class="quarto-post image-right" data-index="13" data-categories="d29ya3Nob3BzJTJDY2xvdWQlMkNnZW9zcGF0aWFsJTJDZmlzaGVyaWVzJTJDY2xpbWF0ZQ==" data-listing-date-sort="1499299200000" data-listing-file-modified-sort="1736803270823" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="174">
 <div class="thumbnail">
-<p><a href="./posts/aere-gfw-gee/index.html" class="no-external"></a></p><a href="./posts/aere-gfw-gee/index.html" class="no-external">
+<p><a href="../posts/aere-gfw-gee/index.html" class="no-external"></a></p><a href="../posts/aere-gfw-gee/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/aere-gfw-gee/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/aere-gfw-gee/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/aere-gfw-gee/index.html" class="no-external">Intro to Global Fishing Watch and Google Earth Engine</a>
+<a href="../posts/aere-gfw-gee/index.html" class="no-external">Intro to Global Fishing Watch and Google Earth Engine</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/aere-gfw-gee/index.html" class="no-external"></a>
+<a href="../posts/aere-gfw-gee/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('d29ya3Nob3Bz'); return false;">
@@ -782,11 +784,11 @@ climate
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/aere-gfw-gee/index.html" class="no-external">My slides from AERE2017</a>
+<a href="../posts/aere-gfw-gee/index.html" class="no-external">My slides from AERE2017</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/aere-gfw-gee/index.html" class="no-external">
+<a href="../posts/aere-gfw-gee/index.html" class="no-external">
 <div class="listing-date">
 Jul 6, 2017
 </div>
@@ -796,18 +798,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDY2xvdWQ=" data-listing-date-sort="1496102400000" data-listing-file-modified-sort="1736216050173" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25">
+<div class="quarto-post image-right" data-index="14" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDY2xvdWQ=" data-listing-date-sort="1496102400000" data-listing-file-modified-sort="1736803270852" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25">
 <div class="thumbnail">
-<p><a href="./posts/rstudio-server-compute-engine/index.html" class="no-external"></a></p><a href="./posts/rstudio-server-compute-engine/index.html" class="no-external">
+<p><a href="../posts/rstudio-server-compute-engine/index.html" class="no-external"></a></p><a href="../posts/rstudio-server-compute-engine/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/rstudio-server-compute-engine/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/rstudio-server-compute-engine/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/rstudio-server-compute-engine/index.html" class="no-external">RStudio Server on Google Compute Engine</a>
+<a href="../posts/rstudio-server-compute-engine/index.html" class="no-external">RStudio Server on Google Compute Engine</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/rstudio-server-compute-engine/index.html" class="no-external"></a>
+<a href="../posts/rstudio-server-compute-engine/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('ZGF0YSUyMHNjaWVuY2U='); return false;">
@@ -821,11 +823,11 @@ cloud
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/rstudio-server-compute-engine/index.html" class="no-external">Say hello to cloud computing</a>
+<a href="../posts/rstudio-server-compute-engine/index.html" class="no-external">Say hello to cloud computing</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/rstudio-server-compute-engine/index.html" class="no-external">
+<a href="../posts/rstudio-server-compute-engine/index.html" class="no-external">
 <div class="listing-date">
 May 30, 2017
 </div>
@@ -835,18 +837,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="ZWNvbm9taWNzJTJDbWVkaWElMkN0cmFkZSUyQ2N1cnJlbmNpZXM=" data-listing-date-sort="1466726400000" data-listing-file-modified-sort="1736216050172" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="492">
+<div class="quarto-post image-right" data-index="15" data-categories="ZWNvbm9taWNzJTJDbWVkaWElMkN0cmFkZSUyQ2N1cnJlbmNpZXM=" data-listing-date-sort="1466726400000" data-listing-file-modified-sort="1736803270851" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="492">
 <div class="thumbnail">
-<p><a href="./posts/quick-thoughts-brexit/index.html" class="no-external"></a></p><a href="./posts/quick-thoughts-brexit/index.html" class="no-external">
+<p><a href="../posts/quick-thoughts-brexit/index.html" class="no-external"></a></p><a href="../posts/quick-thoughts-brexit/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/quick-thoughts-brexit/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/quick-thoughts-brexit/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/quick-thoughts-brexit/index.html" class="no-external">Quick thoughts on Brexit</a>
+<a href="../posts/quick-thoughts-brexit/index.html" class="no-external">Quick thoughts on Brexit</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/quick-thoughts-brexit/index.html" class="no-external"></a>
+<a href="../posts/quick-thoughts-brexit/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('ZWNvbm9taWNz'); return false;">
@@ -863,11 +865,11 @@ currencies
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/quick-thoughts-brexit/index.html" class="no-external">How relevant is the Norwegian experience?</a>
+<a href="../posts/quick-thoughts-brexit/index.html" class="no-external">How relevant is the Norwegian experience?</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/quick-thoughts-brexit/index.html" class="no-external">
+<a href="../posts/quick-thoughts-brexit/index.html" class="no-external">
 <div class="listing-date">
 Jun 24, 2016
 </div>
@@ -877,18 +879,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="ZWNvbm9taWNzJTJDZW5lcmd5JTJDbWVkaWElMkN0cmFkZQ==" data-listing-date-sort="1462060800000" data-listing-file-modified-sort="1736216050176" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="958">
+<div class="quarto-post image-right" data-index="16" data-categories="ZWNvbm9taWNzJTJDZW5lcmd5JTJDbWVkaWElMkN0cmFkZQ==" data-listing-date-sort="1462060800000" data-listing-file-modified-sort="1736803270856" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="958">
 <div class="thumbnail">
-<p><a href="./posts/weak-zar-trade-deficit/index.html" class="no-external"></a></p><a href="./posts/weak-zar-trade-deficit/index.html" class="no-external">
+<p><a href="../posts/weak-zar-trade-deficit/index.html" class="no-external"></a></p><a href="../posts/weak-zar-trade-deficit/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/weak-zar-trade-deficit/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/weak-zar-trade-deficit/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/weak-zar-trade-deficit/index.html" class="no-external">Do weak currencies lead to trade deficits?</a>
+<a href="../posts/weak-zar-trade-deficit/index.html" class="no-external">Do weak currencies lead to trade deficits?</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/weak-zar-trade-deficit/index.html" class="no-external"></a>
+<a href="../posts/weak-zar-trade-deficit/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('ZWNvbm9taWNz'); return false;">
@@ -905,11 +907,11 @@ trade
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/weak-zar-trade-deficit/index.html" class="no-external">Spoiler: Correlation != causation</a>
+<a href="../posts/weak-zar-trade-deficit/index.html" class="no-external">Spoiler: Correlation != causation</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/weak-zar-trade-deficit/index.html" class="no-external">
+<a href="../posts/weak-zar-trade-deficit/index.html" class="no-external">
 <div class="listing-date">
 May 1, 2016
 </div>
@@ -919,18 +921,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-categories="ZW5lcmd5JTJDbWVkaWE=" data-listing-date-sort="1434499200000" data-listing-file-modified-sort="1736216050149" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="641">
+<div class="quarto-post image-right" data-index="17" data-categories="ZW5lcmd5JTJDbWVkaWE=" data-listing-date-sort="1434499200000" data-listing-file-modified-sort="1736803270828" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="641">
 <div class="thumbnail">
-<p><a href="./posts/centralised-versus-decentralised/index.html" class="no-external"></a></p><a href="./posts/centralised-versus-decentralised/index.html" class="no-external">
+<p><a href="../posts/centralised-versus-decentralised/index.html" class="no-external"></a></p><a href="../posts/centralised-versus-decentralised/index.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/centralised-versus-decentralised/index.html" class="no-external"></a></p>
+</a><p><a href="../posts/centralised-versus-decentralised/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/centralised-versus-decentralised/index.html" class="no-external">Centralised versus decentralised</a>
+<a href="../posts/centralised-versus-decentralised/index.html" class="no-external">Centralised versus decentralised</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/centralised-versus-decentralised/index.html" class="no-external"></a>
+<a href="../posts/centralised-versus-decentralised/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('ZW5lcmd5'); return false;">
@@ -941,11 +943,11 @@ media
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/centralised-versus-decentralised/index.html" class="no-external">What is the energy future of sub-Saharan Africa?</a>
+<a href="../posts/centralised-versus-decentralised/index.html" class="no-external">What is the energy future of sub-Saharan Africa?</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/centralised-versus-decentralised/index.html" class="no-external">
+<a href="../posts/centralised-versus-decentralised/index.html" class="no-external">
 <div class="listing-date">
 Jun 17, 2015
 </div>
@@ -955,18 +957,18 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-categories="Y2xpbWF0ZQ==" data-listing-date-sort="1419897600000" data-listing-file-modified-sort="1736216050149" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1064">
+<div class="quarto-post image-right" data-index="18" data-categories="Y2xpbWF0ZQ==" data-listing-date-sort="1419897600000" data-listing-file-modified-sort="1736803270828" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1064">
 <div class="thumbnail">
-<p><a href="./posts/climate-capers-at-cato/index.html" class="no-external"></a></p><a href="./posts/climate-capers-at-cato/index.html" class="no-external">
-<p class="card-img-top"><img src="posts/climate-capers-at-cato/knappenberger&michaels2014.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/climate-capers-at-cato/index.html" class="no-external"></a></p>
+<p><a href="../posts/climate-capers-at-cato/index.html" class="no-external"></a></p><a href="../posts/climate-capers-at-cato/index.html" class="no-external">
+<p class="card-img-top"><img data-src="climate-capers-at-cato/knappenberger&michaels2014.png"  class="thumbnail-image card-img"/></p>
+</a><p><a href="../posts/climate-capers-at-cato/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
 <h3 class="no-anchor listing-title">
-<a href="./posts/climate-capers-at-cato/index.html" class="no-external">Climate capers at Cato</a>
+<a href="../posts/climate-capers-at-cato/index.html" class="no-external">Climate capers at Cato</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/climate-capers-at-cato/index.html" class="no-external"></a>
+<a href="../posts/climate-capers-at-cato/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Y2xpbWF0ZQ=='); return false;">
@@ -974,11 +976,11 @@ climate
 </div>
 </div>
 <div class="listing-description">
-<a href="./posts/climate-capers-at-cato/index.html" class="no-external">Dodgy statistics at the Cato Institute</a>
+<a href="../posts/climate-capers-at-cato/index.html" class="no-external">Dodgy statistics at the Cato Institute</a>
 </div>
 </div>
 <div class="metadata">
-<a href="./posts/climate-capers-at-cato/index.html" class="no-external">
+<a href="../posts/climate-capers-at-cato/index.html" class="no-external">
 <div class="listing-date">
 Dec 30, 2014
 </div>
@@ -992,6 +994,9 @@ Grant McDermott
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

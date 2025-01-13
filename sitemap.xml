@@ -1,99 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://grantmcdermott.com/teaching.html</loc>
-    <lastmod>2025-01-07T02:14:10.176Z</lastmod>
+    <loc>https://grantmcdermott.com/research/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.856Z</lastmod>
   </url>
   <url>
     <loc>https://grantmcdermott.com/posts/rstudio-server-compute-engine/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.173Z</lastmod>
+    <lastmod>2025-01-13T21:21:10.852Z</lastmod>
   </url>
   <url>
     <loc>https://grantmcdermott.com/posts/even-more-reshape/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.151Z</lastmod>
+    <lastmod>2025-01-13T21:21:10.830Z</lastmod>
   </url>
   <url>
-    <loc>https://grantmcdermott.com/posts/reshape-benchmarks/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.172Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/better-way-adjust-ses/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/aere-gfw-gee/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.144Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/duckdb-polars-workshop/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.150Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/recent-radio-interviews/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.172Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/efficient-simulations-r/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.150Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/hello-quarto/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.171Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/quackchat/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.172Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/software.html</loc>
-    <lastmod>2025-01-07T02:14:10.176Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/blog.html</loc>
-    <lastmod>2025-01-07T02:14:10.143Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/research.html</loc>
-    <lastmod>2025-01-07T02:14:10.176Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/efficient-simulations-r-base-remix/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.150Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/blue-paradox-pnas/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.149Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/interaction-effects/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.171Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/quick-thoughts-brexit/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.172Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/science-bycatch/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.176Z</lastmod>
-  </url>
-  <url>
-    <loc>https://grantmcdermott.com/posts/centralised-versus-decentralised/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.149Z</lastmod>
+    <loc>https://grantmcdermott.com/posts/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.849Z</lastmod>
   </url>
   <url>
     <loc>https://grantmcdermott.com/posts/weak-zar-trade-deficit/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.176Z</lastmod>
+    <lastmod>2025-01-13T21:21:10.856Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/centralised-versus-decentralised/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.828Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/science-bycatch/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.856Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/quick-thoughts-brexit/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.851Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/interaction-effects/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.849Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/blue-paradox-pnas/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.827Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/efficient-simulations-r-base-remix/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.828Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/software/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.856Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/teaching/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.856Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/quackchat/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.851Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/hello-quarto/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.849Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/efficient-simulations-r/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.828Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/recent-radio-interviews/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.851Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/duckdb-polars-workshop/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.828Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/aere-gfw-gee/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.823Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/better-way-adjust-ses/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.823Z</lastmod>
+  </url>
+  <url>
+    <loc>https://grantmcdermott.com/posts/reshape-benchmarks/index.html</loc>
+    <lastmod>2025-01-13T21:21:10.851Z</lastmod>
   </url>
   <url>
     <loc>https://grantmcdermott.com/posts/climate-capers-at-cato/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.149Z</lastmod>
+    <lastmod>2025-01-13T21:21:10.828Z</lastmod>
   </url>
   <url>
     <loc>https://grantmcdermott.com/posts/fast-geospatial-datatable-geos/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.153Z</lastmod>
+    <lastmod>2025-01-13T21:21:10.831Z</lastmod>
   </url>
   <url>
     <loc>https://grantmcdermott.com/index.html</loc>
-    <lastmod>2025-01-07T02:14:10.143Z</lastmod>
+    <lastmod>2025-01-13T21:21:10.822Z</lastmod>
   </url>
 </urlset>

@@ -7,12 +7,13 @@ website:
     left:
       - text: Home
         href: index.qmd
-      - research.qmd
-      - teaching.qmd
+      - research/index.qmd
+      - teaching/index.qmd
       - text: Vita
         href: https://grantmcdermott.com/vita/mcdermott-vita.pdf
-      - software.qmd
-      - blog.qmd
+      - software/index.qmd
+      - text: Blog
+        href: posts/index.qmd
     right:
       - icon: github
         href: https://github.com/grantmcdermott

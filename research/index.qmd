@@ -5,7 +5,11 @@ toc: true
 
 ## Working papers
 
-"Dangerous Waters: The Economic Toll of Piracy on Maritime Shipping" With Renato Molina, Juan Carlos Villaseñor-Derbez, and Gavin G. McDonald. CESifo Working Paper No. [11077](https://www.cesifo.org/en/publications/2024/working-paper/dangerous-waters-economic-toll-piracy-maritime-shipping). Latest draft available [here](https://renatomolinah.com/assets/docs/piracy.pdf).
+"Fast and user-friendly econometrics estimations: the R package `fixest`." With Laurent Berge and Kyle Butts. Arxiv [2601.21749](https://doi.org/10.48550/arXiv.2601.21749). _Under review._
+
+"The Economic and Environmental Cost of Pirate Avoidance." With Renato Molina, Juan Carlos Villaseñor-Derbez, and Gavin G. McDonald. CESifo Working Paper No. [11077](https://www.cesifo.org/en/publications/2024/working-paper/dangerous-waters-economic-toll-piracy-maritime-shipping). Latest draft available [here](https://renatomolinah.com/assets/docs/piracy.pdf). _Under review._
+
+"AI Search." With Christopher J. Costello, Michel DeLara, and Michael B. Ward. _Draft available soon_.
 
 "Labor reallocation and remote work during COVID-19: Real-time evidence from GitHub." With B. Hansen. NBER Working Paper no. [w29598](https://www.nber.org/papers/w29598).
 
@@ -23,7 +27,6 @@ toc: true
 <br>
 -->
 
-"The value of mass information." With Christopher J. Costello and Michael B. Ward.
 
 <!--
 *A broad class of economic decision problems involves searching over a collection of uncertain research leads. Existing search theory informs the efficient search over this pool using available information. But in many cases, the researcher has the opportunity to collect new information en masse, e.g. with a search engine or scientific framework, that will benefit the search. We derive the value of this type of bulk information, determine the general properties that render it large or small, and calculate its implications for economic innovation. We show that changes to the underlying characteristics of different search problems can yield surprising results. For example, more lucrative end-prizes can actually reduce the value of information, while the possibility of better information often suppresses innovation.*

@@ -7,7 +7,7 @@ Here is a collection of software tools that I have written and serve as primary 
 
 ### R packages
 
-- [**dbreg**](https://github.com/grantmcdermott/dbreg) Fast regressions on database backends.
+- [**dbreg**](https://grantmcdermott.com/dbreg/) Fast regressions on database backends.
 - [**etwfe**](https://www.grantmcdermott.com/etwfe/) Convenience functions for Extended Two-Way Fixed Effect regressions.
 - [**ggfixest**](https://www.grantmcdermott.com/ggfixest/) Dedicated `ggplot2` methods for `fixest` objects.
 - [**lfe2fixest**](https://www.grantmcdermott.com/lfe2fixest) Convert `lfe` calls into their `fixest` equivalents.

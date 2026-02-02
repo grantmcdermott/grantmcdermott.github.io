@@ -20,3 +20,4 @@ vendor/
 
 # knitr and R markdown default cache directories
 **/*/*_cache/
+**/*.quarto_ipynb

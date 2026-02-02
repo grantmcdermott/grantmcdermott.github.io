@@ -1,0 +1,34 @@
+---
+title: "tinyplot talk"
+description: "useR! 2025"
+date: "2025-10-31"
+toc: false
+categories:
+  - R
+  - talks
+---
+
+Back in August, I had the pleasure of attending [useR!
+2025](https://user2025.r-project.org/) at Duke. This was both my first useR!
+conference and first time visiting the Carolinas; two things I've been meaning
+to tick off.
+
+I presented on **tinyplot** ([link](https://grantmcdermott.com/tinyplot/)), the
+lightweight R vizualisation library that's consumed most of my open-source dev
+time over the last year and a half. I'm unreasonably pleased with the whole
+thing _tbqh_ and doubly pleased to see the enthusiastic uptake by parts of the R
+community. Still, I'm often asked why bother investing all that time, given the
+existence of **ggplot2** (which I too am a massive fan of). My useR! talk
+provides the necessary context to answer that question. Alongside many examples,
+I explain why I started working on **tinyplot** in the first place, what niche
+it is trying to fill, and what its unique features are.
+
+The video of my talk has just been published, so feel free to take a look if
+you've ever wanted to learn a bit more about **tinyplot**. (Also: please have
+pity on the tall people in your life, who are forced to stare directly into the
+projector lights.)
+
+{{< video https://www.youtube.com/embed/MOB-QS-vMeY >}}
+
+P.S. The slides for my talk are available on the **tinyplot**
+[website](https://grantmcdermott.com/tinyplot/vignettes/useR2025/useR2025.html).

@@ -23,8 +23,8 @@ about:
 
 ---
 
-I am a Principal Economist at Amazon, having recently returned to the private sector after an extended period in academia.
+I am a Principal Economist at Amazon, having returned to the private sector after an extended period in academia.
 
-My professional interests are a mix of tech and environmental topics, with an emphasis on empirical tools and computation, especially in big data settings.
+My professional interests are a mix of tech and environmental topics, with an emphasis on empirical tools and computation, especially in big data settings. Most of my time these days is spent thinking about AI—measuring the impact on business outcomes and also identifying opportunities where it can bring durable, long-term value.
 
-Much of my spare time is dedicated to various open-source software (OSS) projects. I am an advocate for open and reproducible science, and view OSS as the most effective and democratic means for delivering these outcomes.
+In my spare time, I maintain and contribute to a variety open-source software projects. I am an advocate for open and reproducible science, and view open-source as the most effective and democratic means for delivering these outcomes.

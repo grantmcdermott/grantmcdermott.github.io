@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Grant McDermott">
+<meta name="dcterms.date" content="2025-10-31">
+<meta name="description" content="useR! 2025">
 
-<title>Software – Grant R. McDermott</title>
+<title>tinyplot talk – Grant R. McDermott</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,26 +26,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../favicon.ico" rel="icon">
-<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../favicon.ico" rel="icon">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -86,20 +89,20 @@ ga('send', {
 </script>
 
 
-<link rel="stylesheet" href="../styles.css">
-<meta property="og:title" content="Software – Grant R. McDermott">
-<meta property="og:description" content="">
+<link rel="stylesheet" href="../../styles.css">
+<meta property="og:title" content="tinyplot talk – Grant R. McDermott">
+<meta property="og:description" content="useR! 2025">
 <meta property="og:site_name" content="Grant R. McDermott">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Grant R. McDermott</span>
     </a>
   </div>
@@ -110,15 +113,15 @@ ga('send', {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../research/index.html"> 
+    <a class="nav-link" href="../../research/index.html"> 
 <span class="menu-text">Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../teaching/index.html"> 
+    <a class="nav-link" href="../../teaching/index.html"> 
 <span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
@@ -126,11 +129,11 @@ ga('send', {
 <span class="menu-text">Vita</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../software/index.html" aria-current="page"> 
+    <a class="nav-link" href="../../software/index.html"> 
 <span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../posts/index.html"> 
+    <a class="nav-link" href="../../posts/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
 </ul>
@@ -152,90 +155,61 @@ ga('send', {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">tinyplot talk</h1>
+                  <div>
+        <div class="description">
+          useR! 2025
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">talks</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Grant McDermott </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 31, 2025</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#r-packages" id="toc-r-packages" class="nav-link active" data-scroll-target="#r-packages">R packages</a></li>
-  <li><a href="#quarto-r-markdown" id="toc-quarto-r-markdown" class="nav-link" data-scroll-target="#quarto-r-markdown">Quarto / R Markdown</a></li>
-  <li><a href="#websites" id="toc-websites" class="nav-link" data-scroll-target="#websites">Websites</a></li>
-  <li><a href="#miscellaneous" id="toc-miscellaneous" class="nav-link" data-scroll-target="#miscellaneous">Miscellaneous</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Software</h1>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
+<p>Back in August, I had the pleasure of attending <a href="https://user2025.r-project.org/">useR! 2025</a> at Duke. This was both my first useR! conference and first time visiting the Carolinas; two things I’ve been meaning to tick off.</p>
+<p>I presented on <strong>tinyplot</strong> (<a href="https://grantmcdermott.com/tinyplot/">link</a>), the lightweight R vizualisation library that’s consumed most of my open-source dev time over the last year and a half. I’m unreasonably pleased with the whole thing <em>tbqh</em> and doubly pleased to see the enthusiastic uptake by parts of the R community. Still, I’m often asked why bother investing all that time, given the existence of <strong>ggplot2</strong> (which I too am a massive fan of). My useR! talk provides the necessary context to answer that question. Alongside many examples, I explain why I started working on <strong>tinyplot</strong> in the first place, what niche it is trying to fill, and what its unique features are.</p>
+<p>The video of my talk has just been published, so feel free to take a look if you’ve ever wanted to learn a bit more about <strong>tinyplot</strong>. (Also: please have pity on the tall people in your life, who are forced to stare directly into the projector lights.)</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/MOB-QS-vMeY" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>P.S. The slides for my talk are available on the <strong>tinyplot</strong> <a href="https://grantmcdermott.com/tinyplot/vignettes/useR2025/useR2025.html">website</a>.</p>
 
 
-<p>Here is a collection of software tools that I have written and serve as primary maintainer for.</p>
-<section id="r-packages" class="level3">
-<h3 class="anchored" data-anchor-id="r-packages">R packages</h3>
-<ul>
-<li><a href="https://grantmcdermott.com/dbreg/"><strong>dbreg</strong></a> Fast regressions on database backends.</li>
-<li><a href="https://www.grantmcdermott.com/etwfe/"><strong>etwfe</strong></a> Convenience functions for Extended Two-Way Fixed Effect regressions.</li>
-<li><a href="https://www.grantmcdermott.com/ggfixest/"><strong>ggfixest</strong></a> Dedicated <code>ggplot2</code> methods for <code>fixest</code> objects.</li>
-<li><a href="https://www.grantmcdermott.com/lfe2fixest"><strong>lfe2fixest</strong></a> Convert <code>lfe</code> calls into their <code>fixest</code> equivalents.</li>
-<li><a href="https://grantmcdermott.com/parttree/"><strong>parttree</strong></a> Visualize 2-D decision tree partitions.</li>
-<li><a href="https://www.grantmcdermott.com/ritest/"><strong>ritest</strong></a> Fast randomization inference on R model objects.</li>
-<li><a href="https://grantmcdermott.com/tinyplot/"><strong>tinyplot</strong></a> Lightweight extension of the base R graphics system.</li>
-</ul>
-<p>In addition to the above, I am a fairly active contributor to other R packages for which I am not the primary maintainer. You can take a look at the activity log on my <a href="https://github.com/grantmcdermott">GitHub page</a> for more. Finally, I have also posted a number of <a href="https://gist.github.com/grantmcdermott">gists</a> over the years, usually after being nerd-sniped by some prompt on social media. Examples include a (fast) <a href="https://gist.github.com/grantmcdermott/7d8f9ea20d2bbf54d3366f5a72482ad9">Bayesian bootstrap</a>, <a href="https://gist.github.com/apoorvalal/db934b9b9b8ec849c5aac914a6a2ca57?permalink_comment_id=4064285#gistcomment-4064285">stacked regression</a>, etc.</p>
-</section>
-<section id="quarto-r-markdown" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-r-markdown">Quarto / R Markdown</h3>
-<ul>
-<li><a href="https://github.com/grantmcdermott/quarto-revealjs-clean"><strong>revealjs-clean</strong></a> A minimal and elegant presentation theme for Quarto reveal.js.</li>
-<li><a href="https://grantmcdermott.com/lecturenotes"><strong>lecturenotes</strong></a> A personalised R Markdown template for writing lecture notes and academic papers. (2023 update: I recommend switching to Quarto instead of R Markdown.)</li>
-</ul>
-</section>
-<section id="websites" class="level3">
-<h3 class="anchored" data-anchor-id="websites">Websites</h3>
-<p>I am a (co-)maintainer of various websites and webpages that collectively aim to improve the accessibility of data science software. These include:</p>
-<ul>
-<li><a href="https://cran.r-project.org/web/views/Econometrics.html"><strong>CRAN Econometrics Task View</strong></a></li>
-<li><a href="https://asjadnaqvi.github.io/DiD/"><strong>DiD</strong></a> (Difference-in-Differences)</li>
-<li><a href="https://lost-stats.github.io/"><strong>LOST</strong></a> (Library of Statistical Techniques)</li>
-<li><a href="https://stata2r.github.io/"><strong>Stata2R</strong></a></li>
-</ul>
-</section>
-<section id="miscellaneous" class="level3">
-<h3 class="anchored" data-anchor-id="miscellaneous">Miscellaneous</h3>
-<p>A random selection of other guides, scripts, and tools:</p>
-<ul>
-<li><a href="https://github.com/grantmcdermott/arch-tips"><strong>arch-tips</strong></a> A fairly detailed changelog and collection of customization tips for Arch Linux.</li>
-<li><a href="https://github.com/grantmcdermott/mixtape_learnr-ff/"><strong>Causal Inference: The Mixtape (Fast Forward ed.)</strong></a> A lean ’n mean reworking of the code accompanying <em>The Mixtape</em> book, which focuses on performance and concision (both the code itself and package dependencies).</li>
-<li><a href="https://github.com/grantmcdermott/codespaces-r2u"><strong>codespaces-r2u</strong></a> A minimal(ish) Codespaces environment for R. Provides a fully-functioning R environment up in the cloud (running on GitHub servers) at the click of a button.</li>
-<li><a href="https://github.com/grantmcdermott/containerit-demo"><strong>containerit-demo</strong></a> Simple demo for automating a Docker image build from your R environment, using the neat containerit package.</li>
-<li><a href="https://gist.github.com/grantmcdermott/fa3c90179f7b5613dcf267745bf07081"><strong>hidpi.sh</strong></a> Shell script for fixing HiDPI scaling issues on Linux. Good for automating an otherwise laborious process following system or library updates.</li>
-<li><a href="https://grantmcdermott.shinyapps.io/open-access-fishery/"><strong>open-access-fishery</strong></a> An interactive Shiny app for exploring open-access fishery dynamics. Good for an introductory resource economics class.</li>
-<li><a href="https://github.com/grantmcdermott/renv-rspm"><strong>renv-rspm</strong></a> An example repo that demonstrates my recommonded approach to creating reproducible environments in R. Includes a video link. (Update: This approach should be enabled automatically with the latest release of )</li>
-<li><a href="https://github.com/grantmcdermott/tikzexamples"><strong>tikz-examples</strong></a> Some examples of how to draw TikZ and PGFPlots figures in LaTeX, with a focus on environmental economics topics (e.g.&nbsp;a negative externality with deadweight loss).</li>
-</ul>
-
-
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

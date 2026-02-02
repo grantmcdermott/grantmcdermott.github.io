@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -36,14 +36,15 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -131,7 +132,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -233,7 +234,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(19)</span></div><div class="category" data-category="Y2xpbWF0ZQ==">climate <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y2xvdWQ=">cloud <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y3VycmVuY2llcw==">currencies <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YSUyMHNjaWVuY2U=">data science <span class="quarto-category-count">(7)</span></div><div class="category" data-category="ZWNvbm9tZXRyaWNz">econometrics <span class="quarto-category-count">(4)</span></div><div class="category" data-category="ZWNvbm9taWNz">economics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZW5lcmd5">energy <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZmlzaGVyaWVz">fisheries <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Z2Vvc3BhdGlhbA==">geospatial <span class="quarto-category-count">(2)</span></div><div class="category" data-category="SnVsaWE=">Julia <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWVkaWE=">media <span class="quarto-category-count">(5)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(10)</span></div><div class="category" data-category="cmVwcm9kdWNpYmlsaXR5">reproducibility <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cmVzZWFyY2g=">research <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U1FM">SQL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U3RhdGE=">Stata <span class="quarto-category-count">(3)</span></div><div class="category" data-category="dGFsa3M=">talks <span class="quarto-category-count">(1)</span></div><div class="category" data-category="dHJhZGU=">trade <span class="quarto-category-count">(2)</span></div><div class="category" data-category="d29ya3Nob3Bz">workshops <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(20)</span></div><div class="category" data-category="Y2xpbWF0ZQ==">climate <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y2xvdWQ=">cloud <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y3VycmVuY2llcw==">currencies <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZGF0YSUyMHNjaWVuY2U=">data science <span class="quarto-category-count">(7)</span></div><div class="category" data-category="ZWNvbm9tZXRyaWNz">econometrics <span class="quarto-category-count">(4)</span></div><div class="category" data-category="ZWNvbm9taWNz">economics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZW5lcmd5">energy <span class="quarto-category-count">(2)</span></div><div class="category" data-category="ZmlzaGVyaWVz">fisheries <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Z2Vvc3BhdGlhbA==">geospatial <span class="quarto-category-count">(2)</span></div><div class="category" data-category="SnVsaWE=">Julia <span class="quarto-category-count">(1)</span></div><div class="category" data-category="bWVkaWE=">media <span class="quarto-category-count">(5)</span></div><div class="category" data-category="UHl0aG9u">Python <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(11)</span></div><div class="category" data-category="cmVwcm9kdWNpYmlsaXR5">reproducibility <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cmVzZWFyY2g=">research <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U1FM">SQL <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U3RhdGE=">Stata <span class="quarto-category-count">(3)</span></div><div class="category" data-category="dGFsa3M=">talks <span class="quarto-category-count">(2)</span></div><div class="category" data-category="dHJhZGU=">trade <span class="quarto-category-count">(2)</span></div><div class="category" data-category="d29ya3Nob3Bz">workshops <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -247,7 +248,39 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="bWVkaWE=" data-listing-date-sort="1736121600000" data-listing-file-modified-sort="1756332086833" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="260">
+<div class="quarto-post image-right" data-index="0" data-categories="UiUyQ3RhbGtz" data-listing-date-sort="1761868800000" data-listing-file-modified-sort="1770006791335" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="188">
+<div class="thumbnail"><a href="../posts/useR2025/index.html" class="no-external">
+
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="../posts/useR2025/index.html" class="no-external">tinyplot talk</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('dGFsa3M='); return false;">talks</div>
+
+</div>
+<div class="delink listing-description"><a href="../posts/useR2025/index.html" class="no-external">
+<p>useR! 2025</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="../posts/useR2025/index.html" class="no-external">
+<div class="listing-date">
+Oct 31, 2025
+</div>
+<div class="listing-author">
+Grant McDermott
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="bWVkaWE=" data-listing-date-sort="1736121600000" data-listing-file-modified-sort="1770006791330" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="260">
 <div class="thumbnail"><a href="../posts/hello-quarto/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -277,7 +310,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="UiUyQ1B5dGhvbiUyQ1NRTCUyQ2RhdGElMjBzY2llbmNlJTJDd29ya3Nob3Bz" data-listing-date-sort="1712707200000" data-listing-file-modified-sort="1756332086812" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="227">
+<div class="quarto-post image-right" data-index="2" data-categories="UiUyQ1B5dGhvbiUyQ1NRTCUyQ2RhdGElMjBzY2llbmNlJTJDd29ya3Nob3Bz" data-listing-date-sort="1712707200000" data-listing-file-modified-sort="1770006791309" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="227">
 <div class="thumbnail"><a href="../posts/duckdb-polars-workshop/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -315,7 +348,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="UiUyQ2dlb3NwYXRpYWwlMkNkYXRhJTIwc2NpZW5jZQ==" data-listing-date-sort="1642118400000" data-listing-file-modified-sort="1756332086815" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2213">
+<div class="quarto-post image-right" data-index="3" data-categories="UiUyQ2dlb3NwYXRpYWwlMkNkYXRhJTIwc2NpZW5jZQ==" data-listing-date-sort="1642118400000" data-listing-file-modified-sort="1770006791312" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2213">
 <div class="thumbnail"><a href="../posts/fast-geospatial-datatable-geos/index.html" class="no-external">
 
 <p class="card-img-top"><img src="fast-geospatial-datatable-geos/index_files/figure-html/nc-1.png"  class="thumbnail-image card-img"/></p>
@@ -349,7 +382,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="UiUyQ2Vjb25vbWV0cmljcyUyQ2RhdGElMjBzY2llbmNl" data-listing-date-sort="1625702400000" data-listing-file-modified-sort="1756332086812" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1295">
+<div class="quarto-post image-right" data-index="4" data-categories="UiUyQ2Vjb25vbWV0cmljcyUyQ2RhdGElMjBzY2llbmNl" data-listing-date-sort="1625702400000" data-listing-file-modified-sort="1770006791309" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1295">
 <div class="thumbnail"><a href="../posts/efficient-simulations-r-base-remix/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -383,7 +416,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="UiUyQ2Vjb25vbWV0cmljcyUyQ2RhdGElMjBzY2llbmNl" data-listing-date-sort="1624492800000" data-listing-file-modified-sort="1756332086812" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3698">
+<div class="quarto-post image-right" data-index="5" data-categories="UiUyQ2Vjb25vbWV0cmljcyUyQ2RhdGElMjBzY2llbmNl" data-listing-date-sort="1624492800000" data-listing-file-modified-sort="1770006791309" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3698">
 <div class="thumbnail"><a href="../posts/efficient-simulations-r/index.html" class="no-external">
 
 <p class="card-img-top"><img src="efficient-simulations-r/index_files/figure-html/hist-1.png"  class="thumbnail-image card-img"/></p>
@@ -417,7 +450,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="UiUyQ1N0YXRhJTJDZWNvbm9tZXRyaWNz" data-listing-date-sort="1603065600000" data-listing-file-modified-sort="1756332086807" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3538">
+<div class="quarto-post image-right" data-index="6" data-categories="UiUyQ1N0YXRhJTJDZWNvbm9tZXRyaWNz" data-listing-date-sort="1603065600000" data-listing-file-modified-sort="1770006791303" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="18" data-listing-word-count-sort="3538">
 <div class="thumbnail"><a href="../posts/better-way-adjust-ses/index.html" class="no-external">
 
 <p class="card-img-top"><img src="better-way-adjust-ses/index_files/figure-html/sandwich_coefplot-1.png"  class="thumbnail-image card-img"/></p>
@@ -451,7 +484,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDU3RhdGElMkNKdWxpYSUyQ1B5dGhvbg==" data-listing-date-sort="1593648000000" data-listing-file-modified-sort="1756332086813" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="822">
+<div class="quarto-post image-right" data-index="7" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDU3RhdGElMkNKdWxpYSUyQ1B5dGhvbg==" data-listing-date-sort="1593648000000" data-listing-file-modified-sort="1770006791310" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="822">
 <div class="thumbnail"><a href="../posts/even-more-reshape/index.html" class="no-external">
 
 <p class="card-img-top"><img src="even-more-reshape/reshape-benchmarks2-all.png"  class="thumbnail-image card-img"/></p>
@@ -489,7 +522,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="UiUyQ1N0YXRhJTJDZGF0YSUyMHNjaWVuY2U=" data-listing-date-sort="1593475200000" data-listing-file-modified-sort="1756332086835" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1178">
+<div class="quarto-post image-right" data-index="8" data-categories="UiUyQ1N0YXRhJTJDZGF0YSUyMHNjaWVuY2U=" data-listing-date-sort="1593475200000" data-listing-file-modified-sort="1770006791331" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1178">
 <div class="thumbnail"><a href="../posts/reshape-benchmarks/index.html" class="no-external">
 
 <p class="card-img-top"><img src="reshape-benchmarks/reshape-benchmarks-defaults.png"  class="thumbnail-image card-img"/></p>
@@ -523,7 +556,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="ZWNvbm9tZXRyaWNzJTJDUg==" data-listing-date-sort="1576454400000" data-listing-file-modified-sort="1756332086833" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1761">
+<div class="quarto-post image-right" data-index="9" data-categories="ZWNvbm9tZXRyaWNzJTJDUg==" data-listing-date-sort="1576454400000" data-listing-file-modified-sort="1770006791330" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1761">
 <div class="thumbnail"><a href="../posts/interaction-effects/index.html" class="no-external">
 
 <p class="card-img-top"><img src="interaction-effects/index_files/figure-html/fit2_coefplot-1.png"  class="thumbnail-image card-img"/></p>
@@ -555,7 +588,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="ZmlzaGVyaWVzJTJDdGFsa3M=" data-listing-date-sort="1536796800000" data-listing-file-modified-sort="1756332086834" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="82">
+<div class="quarto-post image-right" data-index="10" data-categories="ZmlzaGVyaWVzJTJDdGFsa3M=" data-listing-date-sort="1536796800000" data-listing-file-modified-sort="1770006791331" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="82">
 <div class="thumbnail"><a href="../posts/quackchat/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -587,7 +620,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="bWVkaWElMkNmaXNoZXJpZXM=" data-listing-date-sort="1536537600000" data-listing-file-modified-sort="1756332086834" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="73">
+<div class="quarto-post image-right" data-index="11" data-categories="bWVkaWElMkNmaXNoZXJpZXM=" data-listing-date-sort="1536537600000" data-listing-file-modified-sort="1770006791331" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="73">
 <div class="thumbnail"><a href="../posts/recent-radio-interviews/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -619,7 +652,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="cmVzZWFyY2glMkNmaXNoZXJpZXMlMkNyZXByb2R1Y2liaWxpdHk=" data-listing-date-sort="1535500800000" data-listing-file-modified-sort="1756332086811" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="851">
+<div class="quarto-post image-right" data-index="12" data-categories="cmVzZWFyY2glMkNmaXNoZXJpZXMlMkNyZXByb2R1Y2liaWxpdHk=" data-listing-date-sort="1535500800000" data-listing-file-modified-sort="1770006791308" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="851">
 <div class="thumbnail"><a href="../posts/blue-paradox-pnas/index.html" class="no-external">
 
 <p class="card-img-top"><img data-src="blue-paradox-pnas/blueparadox-figure3.png"  class="thumbnail-image card-img"/></p>
@@ -653,7 +686,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="cmVzZWFyY2glMkNmaXNoZXJpZXMlMkNSJTJDcmVwcm9kdWNpYmlsaXR5" data-listing-date-sort="1521158400000" data-listing-file-modified-sort="1756332086838" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="764">
+<div class="quarto-post image-right" data-index="13" data-categories="cmVzZWFyY2glMkNmaXNoZXJpZXMlMkNSJTJDcmVwcm9kdWNpYmlsaXR5" data-listing-date-sort="1521158400000" data-listing-file-modified-sort="1770006791335" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="764">
 <div class="thumbnail"><a href="../posts/science-bycatch/index.html" class="no-external">
 
 <p class="card-img-top"><img data-src="science-bycatch/bycatch-fig-4.png"  class="thumbnail-image card-img"/></p>
@@ -689,7 +722,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="d29ya3Nob3BzJTJDY2xvdWQlMkNnZW9zcGF0aWFsJTJDZmlzaGVyaWVzJTJDY2xpbWF0ZQ==" data-listing-date-sort="1499299200000" data-listing-file-modified-sort="1756332086806" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="174">
+<div class="quarto-post image-right" data-index="14" data-categories="d29ya3Nob3BzJTJDY2xvdWQlMkNnZW9zcGF0aWFsJTJDZmlzaGVyaWVzJTJDY2xpbWF0ZQ==" data-listing-date-sort="1499299200000" data-listing-file-modified-sort="1770006791303" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="174">
 <div class="thumbnail"><a href="../posts/aere-gfw-gee/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -727,7 +760,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDY2xvdWQ=" data-listing-date-sort="1496102400000" data-listing-file-modified-sort="1756332086836" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25">
+<div class="quarto-post image-right" data-index="15" data-categories="ZGF0YSUyMHNjaWVuY2UlMkNSJTJDY2xvdWQ=" data-listing-date-sort="1496102400000" data-listing-file-modified-sort="1770006791332" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="25">
 <div class="thumbnail"><a href="../posts/rstudio-server-compute-engine/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -761,7 +794,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="ZWNvbm9taWNzJTJDbWVkaWElMkN0cmFkZSUyQ2N1cnJlbmNpZXM=" data-listing-date-sort="1466726400000" data-listing-file-modified-sort="1756332086834" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="492">
+<div class="quarto-post image-right" data-index="16" data-categories="ZWNvbm9taWNzJTJDbWVkaWElMkN0cmFkZSUyQ2N1cnJlbmNpZXM=" data-listing-date-sort="1466726400000" data-listing-file-modified-sort="1770006791331" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="492">
 <div class="thumbnail"><a href="../posts/quick-thoughts-brexit/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -797,7 +830,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="ZWNvbm9taWNzJTJDZW5lcmd5JTJDbWVkaWElMkN0cmFkZQ==" data-listing-date-sort="1462060800000" data-listing-file-modified-sort="1756332086838" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="958">
+<div class="quarto-post image-right" data-index="17" data-categories="ZWNvbm9taWNzJTJDZW5lcmd5JTJDbWVkaWElMkN0cmFkZQ==" data-listing-date-sort="1462060800000" data-listing-file-modified-sort="1770006791335" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="958">
 <div class="thumbnail"><a href="../posts/weak-zar-trade-deficit/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -833,7 +866,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-categories="ZW5lcmd5JTJDbWVkaWE=" data-listing-date-sort="1434499200000" data-listing-file-modified-sort="1756332086811" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="641">
+<div class="quarto-post image-right" data-index="18" data-categories="ZW5lcmd5JTJDbWVkaWE=" data-listing-date-sort="1434499200000" data-listing-file-modified-sort="1770006791308" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="641">
 <div class="thumbnail"><a href="../posts/centralised-versus-decentralised/index.html" class="no-external">
 
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -865,7 +898,7 @@ Grant McDermott
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-categories="Y2xpbWF0ZQ==" data-listing-date-sort="1419897600000" data-listing-file-modified-sort="1756332086811" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1064">
+<div class="quarto-post image-right" data-index="19" data-categories="Y2xpbWF0ZQ==" data-listing-date-sort="1419897600000" data-listing-file-modified-sort="1770006791308" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1064">
 <div class="thumbnail"><a href="../posts/climate-capers-at-cato/index.html" class="no-external">
 
 <p class="card-img-top"><img data-src="climate-capers-at-cato/knappenberger&michaels2014.png"  class="thumbnail-image card-img"/></p>
@@ -952,13 +985,14 @@ Grant McDermott
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

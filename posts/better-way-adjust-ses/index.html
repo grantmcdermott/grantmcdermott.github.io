@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,14 +71,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../favicon.ico" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -280,11 +281,11 @@ ga('send', {
 <p>To the best of my knowledge, on-the-fly SE adjustment was introduced to R by the <a href="http://sandwich.r-forge.r-project.org/"><strong>sandwich</strong></a> package (<a href="https://twitter.com/AchimZeileis"><span class="citation" data-cites="Achim">@Achim</span> Zeilles</a> et al.) This package has been around for well over a decade and is incredibly versatile, providing an object-orientated framework for recomputing variance-covariance (VCOV) matrix estimators — and thus SEs — for a wide array of model objects and classes. At the same time, <strong>sandwich</strong> just recently got its <a href="http://sandwich.r-forge.r-project.org/">own website</a> to coincide with some cool new features. So it’s worth exploring what that means for a modern empirical workflow. In the code that follows, I’m going to borrow liberally from the <a href="http://sandwich.r-forge.r-project.org/articles/sandwich.html#illustrations-1">introductory vignette</a>. But I’ll also tack on some additional tips and tricks that I use in my own workflow. (<strong>UPDATE (2020-08-23):</strong> The vignette has now been <a href="http://sandwich.r-forge.r-project.org/news/#sandwich-3-0-1-unreleased">updated</a> to include some of the suggestions from this post. Thanks Achim!)</p>
 <p>Let’s start by running a simple linear regression on some sample data; namely, the “PetersenCL” dataset that comes bundled with the package.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sandwich)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">'PetersenCL'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> PetersenCL)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -308,7 +309,7 @@ F-statistic:  1311 on 1 and 4998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p>Our simple model above assumes that the errors are <a href="https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables">iid</a>. But we can adjust these SEs by calling one of the many alternate VCOV estimators provided by <strong>sandwich</strong>. For example, to get a robust, or heteroscedasticity-consistent (“HC3”), VCOV matrix we’d use:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcovHC</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vcovHC</span>(m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>              (Intercept)             x
 (Intercept)  8.046458e-04 -1.155095e-05
@@ -317,9 +318,9 @@ x           -1.155095e-05  8.072475e-04</code></pre>
 </div>
 <p>To actually substitute the robust VCOV into our original model — so that we can print it in a nice regression table and perform statistical inference — we pair <strong>sandwich</strong> with its companion package, <strong>lmtest</strong>. The workhorse function here is <code>lmtest::coeftest</code> and, as we can see, this yields an object that is similar to a standard model summary in R.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(m, <span class="at">vcov =</span> vcovHC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(m, <span class="at">vcov =</span> vcovHC)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 t test of coefficients:
@@ -334,7 +335,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>To recap: We ran our base <code>m</code> model just the once and then adjusted for robust SEs on the backend using <strong>sandwich</strong>/<strong>coeftest</strong>.</p>
 <p>Now, I’ll admit that the benefits of this workflow aren’t super clear from my simple example yet. Though, we did cut down on copying-and-pasting of duplicate code and this automatically helps to minimize user error. (Remember: <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>!) But we can easily scale things up to get a better sense of its power. For instance, we could imagine calling a whole host of alternate VCOVs to our base model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate the VCOV (SEs) under a range of different assumptions</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate the VCOV (SEs) under a range of different assumptions</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vc <span class="ot">=</span> <span class="fu">list</span>(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Standard"</span>              <span class="ot">=</span> <span class="fu">vcov</span>(m),</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sandwich (basic)"</span>      <span class="ot">=</span> <span class="fu">sandwich</span>(m),</span>
@@ -345,17 +346,17 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Newey-West"</span>            <span class="ot">=</span> <span class="fu">NeweyWest</span>(m),</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bootstrap"</span>             <span class="ot">=</span> <span class="fu">vcovBS</span>(m),</span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Bootstrap (clustered)"</span> <span class="ot">=</span> <span class="fu">vcovBS</span>(m, <span class="at">cluster =</span> <span class="sc">~</span> firm)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>You could, of course, print the <code>vc</code> list to screen now if you so wanted. But I want to go one small step further by showing you how easy it is to create a regression table that encapsulates all of these different models. In the next code chunk, I’m going to create a list of models by passing <code>vc</code> to an <code>lapply()</code> call.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> I’m then going to generate a regression table using <code>msummary()</code> from the excellent <a href="https://vincentarelbundock.github.io/modelsummary"><strong>modelsummary</strong></a> package (<a href="https://twitter.com/VincentAB"><span class="citation" data-cites="Vincent">@Vincent</span> Arel-Bundock</a>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary) <span class="do">## For great-looking regression tables (among other things)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary) <span class="do">## For great-looking regression tables (among other things)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Adjust our model SEs on-the-fly</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>lm_mods <span class="ot">=</span> <span class="fu">lapply</span>(vc, <span class="cf">function</span>(x) <span class="fu">coeftest</span>(m, <span class="at">vcov =</span> x))</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Print the regression table</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(lm_mods)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(lm_mods)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <!-- preamble start -->
 
@@ -552,10 +553,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <p>If you’re the type of person — like me — that prefers visual representation, then printing a coefficient plot is equally easy with <code>modelsummary::modelplot()</code>. This creates a <strong>ggplot2</strong> object that can be further manipulated as needed. In the code chunk below, I’ll demonstrate this fairly simply by flipping the plot orientation.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">modelplot</span>(lm_mods, <span class="at">coef_omit =</span> <span class="st">'Interc'</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -577,10 +578,10 @@ Note
 <div class="callout-body-container callout-body">
 <p><strong>UPDATE (June 2021):</strong> You can now automate all of the steps that I show above in newer versions of <strong>modelsummary</strong>, thanks to the incredibly flexible <code>vcov</code> argument. See the documentation <a href="https://modelsummary.com/articles/modelsummary.html#vcov-robust-ses">here</a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(m, <span class="at">vcov =</span> vc)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">msummary</span>(m, <span class="at">vcov =</span> vc)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">modelplot</span>(m, <span class="at">vcov =</span> vc, <span class="at">coef_omit =</span> <span class="st">'Interc'</span>) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coord_flip</span>()</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># etc.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># etc.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -591,10 +592,10 @@ Note
 <p>If you follow me on Twitter or have read my lecture notes, you already know that I am a huge fan of this package. It’s very elegantly designed and provides an insanely fast way to estimate high-dimensional fixed effects models. More importantly for today’s post, <strong>fixest</strong> offers automatic support for on-the-fly SE adjustment. We only need to run our model once and can then adjust the SEs on the backend via a call to <code>summary(..., vcov = 'vcov_type')</code>.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>To demonstrate, I’m going to run some regressions on a subsample of the well-known RITA air traffic data. I’ve already downloaded the dataset from <a href="https://packages.revolutionanalytics.com/datasets/">Revolution Analytics</a> and prepped it for the narrow purposes of this blog post. (See the <a href="#data">data appendix</a> below for code.) All told we’re looking at 9 variables extending over approximately 1.8 million rows. So, not “big” data by any stretch of the imagination, but my regressions should take at least a few seconds to run on most computers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>air <span class="ot">=</span> <span class="fu">fread</span>(<span class="st">'~/air.csv'</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>air</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>air</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          year month day_of_week tail_num origin_airport_id dest_airport_id
          &lt;int&gt; &lt;int&gt;       &lt;int&gt;   &lt;char&gt;             &lt;int&gt;           &lt;int&gt;
@@ -627,7 +628,7 @@ Note
 <p>The actual regression that I’m going to run on these data is somewhat uninspired: Namely, how does arrival delay depend on departure delay, conditional on the time of day?<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> I’ll throw in a bunch of fixed effects to make the computation a bit more interesting/intensive, but it’s fairly standard stuff. Note that I am running a linear fixed effect model by calling <code>fixest::feols()</code>.</p>
 <p>But, really, I don’t want you to get sidetrack by the regression details. The main thing I want to focus your attention on is the fact that I’m only going run the base model <em>once</em>, i.e.&nbsp;for <code>mod1</code>. Then, I’m going to adjust the SE for two more models, <code>mod2</code> and <code>mod3</code>, on the fly via respective <code>summary()</code> calls.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Start timer; we'll use for benchmarking later</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>pt <span class="ot">=</span> <span class="fu">proc.time</span>()</span>
@@ -646,11 +647,11 @@ Note
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">=</span> <span class="fu">summary</span>(mod1, <span class="at">vcov =</span> <span class="sc">~</span>month <span class="sc">+</span> origin_airport_id <span class="sc">+</span> tail_num)</span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Stop timer and save results</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>time_feols <span class="ot">=</span> (<span class="fu">proc.time</span>() <span class="sc">-</span> pt)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>time_feols <span class="ot">=</span> (<span class="fu">proc.time</span>() <span class="sc">-</span> pt)[<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Before I get to benchmarking, how about a quick coefficient plot? I’ll use <code>modelsummary::modelplot()</code> again, focusing only on the key “time of day × departure delay” interaction terms.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>feols_mods <span class="ot">=</span> <span class="fu">list</span>(mod1, mod2, mod3)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>feols_mods <span class="ot">=</span> <span class="fu">list</span>(mod1, mod2, mod3)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">modelplot</span>(</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  feols_mods, </span>
@@ -659,7 +660,7 @@ Note
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>               <span class="st">'dep_todpm1:dep_delay'</span> <span class="ot">=</span> <span class="st">'Afternoon × Dep. delay'</span>,</span>
 <span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">'dep_todpm2:dep_delay'</span> <span class="ot">=</span> <span class="st">'Evening × Dep. delay'</span>)</span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">'Dependent variable: Arrival delay'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">'Dependent variable: Arrival delay'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -703,7 +704,7 @@ Note
 <section id="data" class="level3">
 <h3 class="anchored" data-anchor-id="data">Flight data download and prep</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">path.expand</span>(<span class="st">'~/air.csv'</span>))) {</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(<span class="fu">path.expand</span>(<span class="st">'~/air.csv'</span>))) {</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Download and extract the data</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  URL <span class="ot">=</span> <span class="st">'https://packages.revolutionanalytics.com/datasets/AirlineSubsetCsv.tar.gz'</span></span>
@@ -737,7 +738,7 @@ Note
 <span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>  <span class="do">## Clean up</span></span>
 <span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.remove</span>(<span class="fu">c</span>(dest_file, csvs))</span>
 <span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.remove</span>(<span class="fu">path.expand</span>(<span class="st">'~/AirlineSubsetCsv/'</span>)) <span class="do">## empty dir too</span></span>
-<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="benchmark-other" class="level3">
@@ -745,7 +746,7 @@ Note
 <section id="fixest-separate-models" class="level4">
 <h4 class="anchored" data-anchor-id="fixest-separate-models">fixest (separate models)</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(fixest) ## Already loaded</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># library(fixest) ## Already loaded</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>pt <span class="ot">=</span> <span class="fu">proc.time</span>()</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>mod1a <span class="ot">=</span> <span class="fu">feols</span>(arr_delay <span class="sc">~</span> dep_tod <span class="sc">/</span> dep_delay <span class="sc">|</span> </span>
@@ -763,13 +764,13 @@ Note
 <span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> air), </span>
 <span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">cluster =</span> <span class="fu">c</span>(<span class="st">'month'</span>, <span class="st">'origin_airport_id'</span>, <span class="st">'tail_num'</span>)</span>
 <span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>time_feols_sep <span class="ot">=</span> (<span class="fu">proc.time</span>() <span class="sc">-</span> pt)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>time_feols_sep <span class="ot">=</span> (<span class="fu">proc.time</span>() <span class="sc">-</span> pt)[<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="lfe" class="level4">
 <h4 class="anchored" data-anchor-id="lfe">lfe</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lfe)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lfe)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>pt <span class="ot">=</span> <span class="fu">proc.time</span>()</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>est1 <span class="ot">=</span> <span class="fu">felm</span>(arr_delay <span class="sc">~</span> dep_tod <span class="sc">/</span> dep_delay <span class="sc">|</span> </span>
@@ -787,13 +788,13 @@ Note
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span> <span class="sc">|</span></span>
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>             month <span class="sc">+</span> origin_airport_id <span class="sc">+</span> tail_num, </span>
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">data =</span> air)</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>time_felm <span class="ot">=</span> (<span class="fu">proc.time</span>() <span class="sc">-</span> pt)[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>time_felm <span class="ot">=</span> (<span class="fu">proc.time</span>() <span class="sc">-</span> pt)[<span class="dv">3</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="reghdfe" class="level4">
 <h4 class="anchored" data-anchor-id="reghdfe">reghdfe</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> <span class="fu">matrix</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="kw">timer</span> <span class="kw">clear</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">more</span> <span class="kw">off</span></span>
@@ -828,7 +829,7 @@ Note
 <span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> elapsed = .</span>
 <span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">obs</span> 1</span>
 <span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> elapsed = <span class="fu">r</span>(t1) <span class="kw">if</span> <span class="dt">_n</span> == 1</span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="kw">outsheet</span> <span class="kw">using</span> <span class="st">"air-reghdfe.csv"</span>, <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="kw">outsheet</span> <span class="kw">using</span> <span class="st">"air-reghdfe.csv"</span>, <span class="kw">replace</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -896,13 +897,14 @@ Note
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

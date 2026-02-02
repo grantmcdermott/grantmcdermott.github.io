@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,14 +71,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../favicon.ico" rel="icon">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -278,7 +279,7 @@ Note
 <p>This blog post pulls together various tips and suggestions that I’ve left around the place. My main goal is to show you some simple workflows that I use for high-performance geospatial work in R, leaning on the <strong>data.table</strong>, <strong>sf</strong> and <strong>geos</strong> packages.</p>
 <p>If you’re the type of person who likes to load everything at once, here are the R libraries and theme settings that I’ll be using in this post. (Don’t worry if not: I’ll be loading them again in the relevant sections below to underscore why I’m calling a specific library.)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Data wrangling</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Data wrangling</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -291,19 +292,19 @@ Note
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Benchmarking</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(microbenchmark)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(microbenchmark)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="data.table-sf-workflow" class="level2">
 <h2 class="anchored" data-anchor-id="data.table-sf-workflow">data.table + sf workflow</h2>
 <p>Everyone who does spatial work in R is familiar with the wonderful <strong>sf</strong> package. You know, this one:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2); <span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Grab the North Carolina shapefile that comes bundled with sf</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>nc_shapefile <span class="ot">=</span> <span class="fu">system.file</span>(<span class="st">"shape/nc.shp"</span>, <span class="at">package =</span> <span class="st">"sf"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>nc <span class="ot">=</span> <span class="fu">st_read</span>(nc_shapefile)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>nc <span class="ot">=</span> <span class="fu">st_read</span>(nc_shapefile)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Reading layer `nc' from data source `/usr/lib/R/library/sf/shape/nc.shp' using driver `ESRI Shapefile'
 Simple feature collection with 100 features and 14 fields
@@ -312,8 +313,8 @@ Dimension:     XY
 Bounding box:  xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
 Geodetic CRS:  NAD27</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Quick plot</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nc) <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Quick plot</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nc) <span class="sc">+</span> <span class="fu">geom_sf</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -324,13 +325,13 @@ Geodetic CRS:  NAD27</code></pre>
 </div>
 <p>The revolutionary idea of <strong>sf</strong> was (is) that it allowed you to treat spatial objects as regular data frames, so you can do things like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>nc <span class="sc">|&gt;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(<span class="at">region =</span> <span class="fu">ifelse</span>(CNTY_ID<span class="sc">&lt;=</span><span class="dv">1980</span>, <span class="st">'high'</span>, <span class="st">'low'</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">geometry =</span> <span class="fu">st_union</span>(geometry)) <span class="sc">|&gt;</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill=</span>region)) <span class="sc">+</span> </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -347,7 +348,7 @@ Geodetic CRS:  NAD27</code></pre>
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-data.table v1.15.0+
+<span class="screen-reader-only">Tip</span>data.table v1.15.0+
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -356,10 +357,10 @@ data.table v1.15.0+
 </div>
 <p>Okay, let’s create a “data.table” version of our <code>nc</code> object and take a quick look at the first few rows and some columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>nc_dt <span class="ot">=</span> <span class="fu">as.data.table</span>(nc)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>nc_dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">'NAME'</span>, <span class="st">'CNTY_ID'</span>, <span class="st">'geometry'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>nc_dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">'NAME'</span>, <span class="st">'CNTY_ID'</span>, <span class="st">'geometry'</span>)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        NAME CNTY_ID                       geometry
       &lt;char&gt;   &lt;num&gt;             &lt;sfc_MULTIPOLYGON&gt;
@@ -371,7 +372,7 @@ data.table v1.15.0+
 <p>At this point, I have to briefly back up to say that the reason I wanted you to grab a newer version of <strong>data.table</strong> is that it “pretty prints” the columns by default. This not only includes the columns types and keys (if you’ve set any), but also the special <code>sfc_MULTIPLOYGON</code> list columns which is where the <strong>sf</strong> magic is hiding. It’s a small cosmetic change that nonetheless underscores the integration between these two packages.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>Just like we did with <strong>dplyr</strong> earlier, we can now do grouped spatial operations on this object using <strong>data.table</strong>’s concise syntax:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bb <span class="ot">=</span> <span class="fu">st_bbox</span>(nc) <span class="co"># https://github.com/Rdatatable/data.table/issues/6707</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bb <span class="ot">=</span> <span class="fu">st_bbox</span>(nc) <span class="co"># https://github.com/Rdatatable/data.table/issues/6707</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>nc_dt[</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  ,</span>
@@ -381,7 +382,7 @@ data.table v1.15.0+
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">geometry=</span>geometry, <span class="at">fill=</span>region)) <span class="sc">+</span> </span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> bb[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)], <span class="at">ylim =</span> bb[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)]) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Now brought to you by data.table"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Now brought to you by data.table"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -392,13 +393,13 @@ data.table v1.15.0+
 </div>
 <p>Now, I’ll admit that there are a few tweaks we need to make to the plot call. Unlike with the non-<strong>data.table</strong> workflow, this time we have to specify the geometry aesthetic with <code>aes(geometry=geometry, ...)</code>. Otherwise, <strong>ggplot2</strong> won’t know what do with this object. The other difference is that it doesn’t automatically recognise the CRS (i.e.&nbsp;“NAD27”), so the projection is a little off. Again, however, that information is contained with the <code>geometry</code> column of our <code>nc_dt</code> object. It just requires that we provide the CRS to our plot call explicitly.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Grab CRS from the geometry column</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Grab CRS from the geometry column</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>crs <span class="ot">=</span> <span class="fu">st_crs</span>(nc_dt<span class="sc">$</span>geometry)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Update our previous plot</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">last_plot</span>() <span class="sc">+</span> </span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim =</span> bb[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>)], <span class="at">ylim =</span> bb[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>)], <span class="at">crs =</span> crs) <span class="sc">+</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Now with the right projection too"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">caption =</span> <span class="st">"Now with the right projection too"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Coordinate system already present. Adding new coordinate system, which will
 replace the existing one.</code></pre>
@@ -419,7 +420,7 @@ replace the existing one.</code></pre>
 <p>As great as <strong>sf</strong> is, even its most ardent proponents will admit that it can drag a bit when it comes to big geospatial tasks. I don’t want to imply that that it’s “slow”. But I’ve found that it does lag behind <strong>geopandas</strong>, for example, when I’m doing heavy geospatial computation or working with really large spatial files. Luckily, there’s a new package in town that offers major performance gains and plays very well with the workflow I demonstrated above.</p>
 <p>Dewey Dunnington and Edzer Pebesma’s <a href="https://paleolimbot.github.io/geos/index.html"><strong>geos</strong></a> package covers all of the same basic geospatial <a href="https://paleolimbot.github.io/geos/reference/index.html">operations</a> as <strong>sf</strong>. But it does so by directly wrapping the underlying <code>GEOS</code> API, which is written in C and is thus extremely performant. Here’s a simple example, where we calculate the centroid of each North Carolina county.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geos)           <span class="do">## For geos operations  </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geos)           <span class="do">## For geos operations  </span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(microbenchmark) <span class="do">## For benchmarking</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Create a geos geometry object</span></span>
@@ -430,7 +431,7 @@ replace the existing one.</code></pre>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sf =</span> nc<span class="sc">$</span>geometry <span class="sc">|&gt;</span> <span class="fu">st_centroid</span>(),</span>
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">geos =</span> nc_geos <span class="sc">|&gt;</span> <span class="fu">geos_centroid</span>(), </span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="dv">2</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
  expr      min       lq      mean    median       uq      max neval cld
@@ -441,7 +442,7 @@ replace the existing one.</code></pre>
 <p>A couple of things worth noting. First, the <strong>geos</strong> centroid calculation completes orders of magnitude faster than the <strong>sf</strong> equivalent. Second, the executing functions are very similar (<code>st_centroid()</code> vs <code>geos_centroid()</code>). Third, we have to do an explicit <code>as_geos_geometry()</code> coercion before we can perform any <strong>geos</strong> operations on the resulting object.</p>
 <p>That last point seems the most mundane. (<em>Why aren’t you talking more about how crazy fast <strong>geos</strong> is?!</em>) But it’s important since it underscores a key difference between the two packages and why the developers view them as complements. Unlike <strong>sf</strong>, which treats spatial objects as data frames, <strong>geos</strong> only preserves the geometry attributes. Take a look:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nc_geos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(nc_geos)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;geos_geometry[6] with CRS=NAD27&gt;
 [1] &lt;MULTIPOLYGON [-81.741 36.234...-81.240 36.590]&gt;
@@ -457,8 +458,8 @@ replace the existing one.</code></pre>
 <h3 class="anchored" data-anchor-id="quick-aside-on-plotting-geos-objects">Quick aside on plotting geos objects</h3>
 <p>Because we’ve dropped all of the <strong>sf</strong> / data frame attributes, we can’t use <strong>ggplot2</strong> to plot anymore. But we can use the base R plotting method:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nc_geos, <span class="at">col =</span> <span class="st">"gray90"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">geos_centroid</span>(nc_geos), <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">bg =</span> <span class="st">'red'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nc_geos, <span class="at">col =</span> <span class="st">"gray90"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">geos_centroid</span>(nc_geos), <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">bg =</span> <span class="st">'red'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -469,10 +470,10 @@ replace the existing one.</code></pre>
 </div>
 <p>Actually, that’s not quite true, since an alternative is to convert it back into an <strong>sf</strong> object with <code>st_as_sf()</code> and then call <strong>ggplot2</strong>. This is particularly useful because you can hand off some heavy calculation to <strong>geos</strong> before bringing it back to <strong>sf</strong> for any additional functionality. Again, the developers of these packages designed them to act as complements.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc) <span class="sc">+</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> nc_geos <span class="sc">|&gt;</span> <span class="fu">geos_centroid</span>() <span class="sc">|&gt;</span> <span class="fu">st_as_sf</span>(), </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -489,8 +490,8 @@ replace the existing one.</code></pre>
 <p>(The same is true for regular data frames and tibbles, but we’ll get to that.)</p>
 <p>Let’s prove that this idea works by creating a GEOS column in our data.table. I’ll creatively call this column <code>geo</code>, but really you could call it anything you want (including overwriting the existing <code>geometry</code> column).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nc_dt[, geo <span class="sc">:</span><span class="er">=</span> <span class="fu">as_geos_geometry</span>(geometry)]</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>nc_dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">'NAME'</span>, <span class="st">'CNTY_ID'</span>, <span class="st">'geo'</span>)] <span class="do">## Print a few rows/columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>nc_dt[, geo <span class="sc">:</span><span class="er">=</span> <span class="fu">as_geos_geometry</span>(geometry)]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>nc_dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="fu">c</span>(<span class="st">'NAME'</span>, <span class="st">'CNTY_ID'</span>, <span class="st">'geo'</span>)] <span class="do">## Print a few rows/columns</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        NAME CNTY_ID                                              geo
       &lt;char&gt;   &lt;num&gt;                                  &lt;geos_geometry&gt;
@@ -501,8 +502,8 @@ replace the existing one.</code></pre>
 </div>
 <p>GEOS column in hand, we can manipulate or plot it directly from within the data.table. For example, we can recreate our previous centroid plot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nc_dt[, geo], <span class="at">col =</span> <span class="st">"gray90"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nc_dt[, <span class="fu">geos_centroid</span>(geo)], <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">bg =</span> <span class="st">'red'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nc_dt[, geo], <span class="at">col =</span> <span class="st">"gray90"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nc_dt[, <span class="fu">geos_centroid</span>(geo)], <span class="at">pch =</span> <span class="dv">21</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">bg =</span> <span class="st">'red'</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -513,12 +514,12 @@ replace the existing one.</code></pre>
 </div>
 <p>And here’s how we could replicate our earlier “hemisphere” plot:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>nc_dt[</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>nc_dt[</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  ,</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">geo =</span> geo <span class="sc">|&gt;</span> <span class="fu">geos_make_collection</span>() <span class="sc">|&gt;</span> <span class="fu">geos_unary_union</span>()),</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  by <span class="ot">=</span> .(<span class="at">region =</span> <span class="fu">ifelse</span>(CNTY_ID<span class="sc">&lt;=</span><span class="dv">1980</span>, <span class="st">'high'</span>, <span class="st">'low'</span>))</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>][, geo] <span class="sc">|&gt;</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -530,15 +531,15 @@ replace the existing one.</code></pre>
 <p>This time around the translation from the equivalent <strong>sf</strong> code isn’t as direct. We have one step (<code>st_union()</code>) vs.&nbsp;two (<code>geos_make_collection() |&gt; geos_unary_union()</code>). The second <code>geo_unary_union()</code> step is clear enough. But it’s the first <code>geos_make_collection()</code>step that’s key for our aggregating task. We have to tell <strong>geos</strong> to treat everything within the same group (i.e.&nbsp;whatever is in <code>by = ...</code>) as a collective. This extra step becomes very natural after you’ve done it a few times and is a small price to pay for the resulting performance boost.</p>
 <p>Speaking of which, it’s nearly time for some final benchmarks. The only extra thing I want to do first is, as promised, include a <strong>tibble</strong>/<strong>dplyr</strong> equivalent. The exact same concepts and benefits carry over here, for those of you that prefer the tidyverse syntax and workflow.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>nc_tibble <span class="ot">=</span> tibble<span class="sc">::</span><span class="fu">as_tibble</span>(nc) <span class="sc">|&gt;</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">geo =</span> <span class="fu">as_geos_geometry</span>(geometry))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>nc_tibble <span class="ot">=</span> tibble<span class="sc">::</span><span class="fu">as_tibble</span>(nc) <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">geo =</span> <span class="fu">as_geos_geometry</span>(geometry))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="benchmarks" class="level3">
 <h3 class="anchored" data-anchor-id="benchmarks">Benchmarks</h3>
 <p>For this final set of benchmarks, I’m going to horserace the same grouped aggregation that we’ve been using throughout.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">microbenchmark</span>(</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sf_tidy =</span> nc <span class="sc">|&gt;</span></span>
 <span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(<span class="at">region =</span> <span class="fu">ifelse</span>(CNTY_ID<span class="sc">&lt;=</span><span class="dv">1980</span>, <span class="st">'high'</span>, <span class="st">'low'</span>)) <span class="sc">|&gt;</span></span>
@@ -561,7 +562,7 @@ replace the existing one.</code></pre>
 <span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  ],</span>
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="dv">2</span></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
       expr      min       lq     mean   median       uq      max neval  cld
@@ -587,7 +588,7 @@ replace the existing one.</code></pre>
 <p><em>Note: This section was added on 2021-01-16.</em></p>
 <p>As Roger Bivand <a href="https://twitter.com/RogerBivand/status/1482691924561698817">points out</a> on Twitter, I’m not truly comparing apples with apples in the above benchmarks. <strong>geos</strong> assumes planar (“flat”) geometries, whereas <strong>sf</strong> does the more complicated task of calculating spherical (“curved”) geometries. More on that <a href="https://r-spatial.github.io/sf/articles/sf7.html">here</a> if you are interested. Below I repeat these same benchmarks, but with <strong>sf</strong> switched to the same planar backend. The upshot is that <strong>geos</strong> is still faster, but the gap narrows considerably. A reminder that we’re also dealing with a very small dataset, so I recommend benchmarking on your own datasets to avoid the influence of misleading overhead. But I stand by my comment that these differences persist at scale, based on my own experiences and testing.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Turn off sf's spherical ("S2") backend</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Turn off sf's spherical ("S2") backend</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sf_use_s2</span>(<span class="cn">FALSE</span>)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Now redo our earlier benchmarks...</span></span>
@@ -597,14 +598,14 @@ replace the existing one.</code></pre>
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sf =</span> nc<span class="sc">$</span>geometry <span class="sc">|&gt;</span> <span class="fu">st_centroid</span>(),</span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">geos =</span> nc_geos <span class="sc">|&gt;</span> <span class="fu">geos_centroid</span>(), </span>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="dv">2</span></span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: microseconds
  expr      min       lq      mean    median       uq      max neval cld
    sf 2163.516 2163.516 2451.2185 2451.2185 2738.921 2738.921     2  a 
  geos  106.383  106.383  124.3305  124.3305  142.278  142.278     2   b</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Hemisphere aggregation</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Hemisphere aggregation</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">microbenchmark</span>(</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sf_tidy =</span> nc <span class="sc">|&gt;</span></span>
@@ -629,7 +630,7 @@ replace the existing one.</code></pre>
 <span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="dv">2</span></span>
 <span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Unit: milliseconds
       expr      min       lq     mean   median       uq      max neval cld
@@ -705,13 +706,14 @@ replace the existing one.</code></pre>
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

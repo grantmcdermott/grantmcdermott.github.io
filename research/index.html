@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.27">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -33,14 +33,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="../favicon.ico" rel="icon">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -189,7 +190,9 @@ ga('send', {
 
 <section id="working-papers" class="level2">
 <h2 class="anchored" data-anchor-id="working-papers">Working papers</h2>
-<p>“Dangerous Waters: The Economic Toll of Piracy on Maritime Shipping” With Renato Molina, Juan Carlos Villaseñor-Derbez, and Gavin G. McDonald. CESifo Working Paper No.&nbsp;<a href="https://www.cesifo.org/en/publications/2024/working-paper/dangerous-waters-economic-toll-piracy-maritime-shipping">11077</a>. Latest draft available <a href="https://renatomolinah.com/assets/docs/piracy.pdf">here</a>.</p>
+<p>“Fast and user-friendly econometrics estimations: the R package <code>fixest</code>.” With Laurent Berge and Kyle Butts. Arxiv <a href="https://doi.org/10.48550/arXiv.2601.21749">2601.21749</a>. <em>Under review.</em></p>
+<p>“The Economic and Environmental Cost of Pirate Avoidance.” With Renato Molina, Juan Carlos Villaseñor-Derbez, and Gavin G. McDonald. CESifo Working Paper No.&nbsp;<a href="https://www.cesifo.org/en/publications/2024/working-paper/dangerous-waters-economic-toll-piracy-maritime-shipping">11077</a>. Latest draft available <a href="https://renatomolinah.com/assets/docs/piracy.pdf">here</a>. <em>Under review.</em></p>
+<p>“AI Search.” With Christopher J. Costello, Michel DeLara, and Michael B. Ward. <em>Draft available soon</em>.</p>
 <p>“Labor reallocation and remote work during COVID-19: Real-time evidence from GitHub.” With B. Hansen. NBER Working Paper no. <a href="https://www.nber.org/papers/w29598">w29598</a>.</p>
 <p>“Hydro power. Market might.” <a href="{{ site.url }}/papers/hydro.pdf">Paper</a>.</p>
 <!--
@@ -202,7 +205,6 @@ ga('send', {
 </details>
 <br>
 -->
-<p>“The value of mass information.” With Christopher J. Costello and Michael B. Ward.</p>
 <!--
 *A broad class of economic decision problems involves searching over a collection of uncertain research leads. Existing search theory informs the efficient search over this pool using available information. But in many cases, the researcher has the opportunity to collect new information en masse, e.g. with a search engine or scientific framework, that will benefit the search. We derive the value of this type of bulk information, determine the general properties that render it large or small, and calculate its implications for economic innovation. We show that changes to the underlying characteristics of different search problems can yield surprising results. For example, more lucrative end-prizes can actually reduce the value of information, while the possibility of better information often suppresses innovation.*
 -->
@@ -277,13 +279,14 @@ ga('send', {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

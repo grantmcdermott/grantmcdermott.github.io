@@ -2,6 +2,7 @@
   {
     "listing": "/posts/index.html",
     "items": [
+      "/posts/useR2025/index.html",
       "/posts/hello-quarto/index.html",
       "/posts/duckdb-polars-workshop/index.html",
       "/posts/fast-geospatial-datatable-geos/index.html",
